@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../../../css/crud.css">
-     <link rel="shortcut icon " href="../../../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
+    <link rel="shortcut icon" href="../../../img/Favicon1.png"> <!-- Favicon -->
 </head>
 <body>
     <header class="header__home">
@@ -17,16 +17,16 @@
     <div class="container__crud">
         <main class="container">
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
-            
+
             <!-- Nombre del programa -->
-            <p><span>Nombre del programa</span> <br><br>Análisis y desarrollo de software<br><br></p>
+            <p class="program-title"><span>Nombre del programa:</span> <br>Análisis y desarrollo de software</p>
             
             <!-- Descripción debajo del nombre del programa -->
-            <p class="program-description"><br>Este programa está diseñado para formar profesionales en el <br>
-                campo del análisis y desarrollo de software, <br>con una formación integral en programación y diseño de sistemas.</p>
-            
+            <p class="program-description">Este programa está diseñado para formar profesionales en el 
+                campo del análisis y desarrollo de software, con una formación integral en programación y diseño de sistemas.</p>
+
             <!-- Habilidades adquiridas -->
-            <p><strong>Habilidades adquiridas:</strong></p>
+            <p class="skills-title"><strong>Habilidades adquiridas:</strong></p>
             <div class="skills-text">
                 <p>Desarrollo de aplicaciones web y móviles.</p>
                 <p>Conocimiento en lenguajes de programación como Java, Python, JavaScript, entre otros.</p>
@@ -37,13 +37,15 @@
                 <p>Trabajo en equipo y gestión de proyectos ágiles.</p>
             </div>
 
-            <p><span>Código</span> 228118</p>
-            <p><span>Versión</span> 1</p>
-            <p><span>Ficha</span> 2896365</p>
-            <p><span>Tipo de programa</span> Tecnólogo</p>
-            <p><span>Número de aprendices</span> 21</p>
-            <p><span>Fecha de finalización</span> 02/03/2026</p>
-            
+            <!-- Información adicional -->
+            <p><span>Código:</span> 228118</p>
+            <p><span>Versión:</span> 1</p>
+            <p><span>Ficha:</span> 2896365</p>
+            <p><span>Tipo de programa:</span> Tecnólogo</p>
+            <p><span>Número de aprendices:</span> 21</p>
+            <p><span>Fecha de finalización:</span> 02/03/2026</p>
+
+            <!-- Botones CRUD -->
             <div class="buttons__container">
                 <a href="ProgramaEdit.html" class="buttons__crud">Actualizar</a>
                 <button class="buttons__crud">Listar</button>
@@ -52,20 +54,19 @@
                 <a href="Gestion_Programa.html" class="buttons__crud">Volver</a>
             </div>
 
+            <!-- Modal de Confirmación -->
             <div id="custom-confirm" class="modal">
                 <div class="modal-content">
                     <h1>Inhabilitar</h1>
                     <p>Una vez el usuario esté inhabilitado no podrá sufrir cambios hasta que el mismo sea habilitado nuevamente. ¿Está seguro?</p>
                     <div class="buttons__disable">
-                        <!-- Botón de "Cancelar" con la función onclick vinculada a closeConfirm() -->
                         <button class="cancel-button" onclick="closeConfirm()">Cancelar</button>
-                        <!-- Botón de "Inhabilitar" -->
                         <button id="confirm-yes" class="disable-button">Inhabilitar</button>
                     </div>
                 </div>
             </div>
         </main>
     </div>
-    <script src="../../../js/script.js"></script> <!-- Agregar el JavaScript para el menú -->
+    <script src="../../../js/script.js"></script>
 </body>
 </html>
