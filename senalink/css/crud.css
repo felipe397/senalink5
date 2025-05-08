@@ -60,12 +60,13 @@ p{
   text-align: center;
 }
 .container {
-  background-color: white;
+  background-color: var(--white);
   padding: 4rem;
   border-radius: 0.8rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);    
+  
 
-}
+} 
 .container__crud--disable{
   height: 100%;
   display: flex;
@@ -219,11 +220,11 @@ td {
   }
 }
 
-
-
-
 footer p{
     text-align: center;
     padding: 0px;
     color:var(--black);
 }
+
+
+
