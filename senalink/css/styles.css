@@ -290,3 +290,8 @@ button{
         width: 100%; /* Adjust width for smaller screens */
     }
 }
+footer p{
+    text-align: center;
+    padding: 0px;
+    color:var(--black);
+}

@@ -367,3 +367,9 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+footer p{
+    text-align: center;
+    padding: 0px;
+    color:var(--black);
+}

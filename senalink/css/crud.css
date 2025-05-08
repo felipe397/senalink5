@@ -218,3 +218,12 @@ td {
     grid-template-columns: repeat(2,1fr);
   }
 }
+
+
+
+
+footer p{
+    text-align: center;
+    padding: 0px;
+    color:var(--black);
+}
