@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -16,13 +16,33 @@
     <div class="container__crud">
         <main class="container">
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
-            <p><span>Nombre del programa</span> Análisis y desarrollo de software</p>
+            
+            <!-- Nombre del programa -->
+            <p><span>Nombre del programa</span> <br><br>Análisis y desarrollo de software<br><br></p>
+            
+            <!-- Descripción debajo del nombre del programa -->
+            <p class="program-description"><br>Este programa está diseñado para formar profesionales en el <br>
+                campo del análisis y desarrollo de software, <br>con una formación integral en programación y diseño de sistemas.</p>
+            
+            <!-- Habilidades adquiridas -->
+            <p><strong>Habilidades adquiridas:</strong></p>
+            <div class="skills-text">
+                <p>Desarrollo de aplicaciones web y móviles.</p>
+                <p>Conocimiento en lenguajes de programación como Java, Python, JavaScript, entre otros.</p>
+                <p>Diseño y administración de bases de datos.</p>
+                <p>Capacidad de análisis de requisitos y especificaciones de sistemas.</p>
+                <p>Uso de herramientas de control de versiones como Git.</p>
+                <p>Pruebas de software y control de calidad.</p>
+                <p>Trabajo en equipo y gestión de proyectos ágiles.</p>
+            </div>
+
             <p><span>Código</span> 228118</p>
             <p><span>Versión</span> 1</p>
             <p><span>Ficha</span> 2896365</p>
             <p><span>Tipo de programa</span> Tecnólogo</p>
             <p><span>Número de aprendices</span> 21</p>
-            <p><span>Fecha de terminación</span> 02/03/2026</p>
+            <p><span>Fecha de finalización</span> 02/03/2026</p>
+            
             <div class="buttons__container">
                 <a href="ProgramaEdit.html" class="buttons__crud">Actualizar</a>
                 <button class="buttons__crud">Listar</button>
@@ -30,12 +50,15 @@
                 <a href="ProgramaReport.html" class="buttons__crud">Reporte</a>
                 <a href="Gestion_Programa.html" class="buttons__crud">Volver</a>
             </div>
+
             <div id="custom-confirm" class="modal">
                 <div class="modal-content">
                     <h1>Inhabilitar</h1>
                     <p>Una vez el usuario esté inhabilitado no podrá sufrir cambios hasta que el mismo sea habilitado nuevamente. ¿Está seguro?</p>
                     <div class="buttons__disable">
+                        <!-- Botón de "Cancelar" con la función onclick vinculada a closeConfirm() -->
                         <button class="cancel-button" onclick="closeConfirm()">Cancelar</button>
+                        <!-- Botón de "Inhabilitar" -->
                         <button id="confirm-yes" class="disable-button">Inhabilitar</button>
                     </div>
                 </div>
