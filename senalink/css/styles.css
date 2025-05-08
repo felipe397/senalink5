@@ -216,9 +216,10 @@ button{
 .cardh {
     background-color: var(--white); /* Set background color */
     border-radius: 1rem; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     padding: 2rem; /* Adequate padding */
     transition: transform 0.3s; /* Smooth transition for hover effect */
+    border-radius: 0.8rem;
+    border: 0.2rem solid rgba(0, 48, 77); 
 }
 
 .cardh:hover {
