@@ -23,13 +23,13 @@
             <form action="../../controllers/UsuarioController.php" method="POST">
                 <div class="inputs__container">
                     <input class="input-field" name="nit" placeholder="Número NIT" type="text" required/>
-                    <input class="input-field" name="nombre_empresa" placeholder="Nombre de la empresa" type="text" required/>
+                    <input class="input-field" name="nombre_empresa" placeholder="Nombre de la empresa" required>
                     <input class="input-field" name="telefono" placeholder="Número telefónico" type="text" required/>
                     <input class="input-field" name="correo" placeholder="Correo electrónico" type="email" required/>
                     <input class="input-field" name="direccion" placeholder="Dirección" type="text" required/>
                     <input class="input-field" name="actividad_economica" placeholder="Actividad económica" type="text" required/>
                     <input class="input-field" name="contrasena" placeholder="Contraseña" type="password" required/>
-                    <input type="hidden" name="rol" value="Empresa"/>
+                    <input class="input-field" type="hidden" name="rol" value="empresa" required/>
                 </div>
 
                 <div class="buttons__container">

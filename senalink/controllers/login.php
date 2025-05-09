@@ -1,59 +1,46 @@
 <?php
-require_once '../Config/conexion.php'; // Asegúrate de que esta ruta sea correcta
 session_start();
+require_once '../config/conexion.php'; // Asegúrate que esta es la ruta correcta
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $correo = $_POST['correo'] ?? '';
-    $contrasena = $_POST['contrasena'] ?? '';
-    $rol = $_POST['rol'] ?? ''; // El rol es enviado como campo oculto desde los formularios de login
+$conn = Conexion::conectar();
 
-    // Verificar si los campos están completos
-    if (empty($correo) || empty($contrasena)) {
-        echo 'Por favor ingrese correo y contraseña.';
-        exit();
-    }
+$rol = $_POST['rol'];
+$contrasena = $_POST['contrasena'];
 
-    try {
-        // Buscar el usuario en la base de datos según el correo y el rol
-        $sql = 'SELECT * FROM usuarios WHERE correo = :correo AND rol = :rol AND estado = "activo"';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute(['correo' => $correo, 'rol' => $rol]);
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+if ($rol === 'Empresa') {
+    $nit = $_POST['nit'];
+    $query = "SELECT * FROM usuarios WHERE nit = :identificador AND rol = 'empresa'";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':identificador', $nit);
+} else {
+    $correo = $_POST['correo'];
+    $query = "SELECT * FROM usuarios WHERE correo = :identificador AND rol = :rol";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':identificador', $correo);
+    $stmt->bindParam(':rol', $rol);
+}
 
-        // Validar existencia del usuario y su contraseña
-        if ($usuario && password_verify($contrasena, $usuario['contrasena'])) {
-            // Establecer sesión
-            $_SESSION['user_id'] = $usuario['id'];
-            $_SESSION['correo'] = $usuario['correo'];
-            $_SESSION['rol'] = $usuario['rol'];
+$stmt->execute();
+$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Redirigir según el rol
-            switch ($usuario['rol']) {
-                case 'SuperAdmin':
-                case 'AdminSENA':
-                    header('Location: ../html/Administrador/Home.html');
-                    break;
-                case 'Empresa':
-                    header('Location: ../html/Empresa/Home.html');
-                    break;
-                default:
-                    echo 'Rol no permitido.';
-                    exit();
-            }
-            exit();
-        } else {
-            echo 'Usuario o contraseña incorrectos.';
-            exit();
+if ($usuario) {
+    if (password_verify($contrasena, $usuario['contrasena'])) {
+        $_SESSION['id'] = $usuario['nit'];
+        $_SESSION['rol'] = $usuario['rol'];
+
+        // Redirección según el rol
+        if ($rol === 'Empresa') {
+            header("Location: ../html/Empresa/Home.html");
+        } elseif ($rol === 'admin') {
+            header("Location: admin/inicio.php");
+        } elseif ($rol === 'superadmin') {
+            header("Location: superadmin/inicio.php");
         }
-
-    } catch (PDOException $e) {
-        echo "Error de base de datos: " . $e->getMessage();
+        exit();
+    } else {
+        echo "Contraseña incorrecta.";
     }
 } else {
-    echo "Método no permitido.";
+    echo "Usuario no encontrado.";
 }
 ?>
-
-
-
-

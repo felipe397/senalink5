@@ -1,42 +1,69 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-  SenaLink Login
-  </title>
+  <title>SenaLink Login</title>
   <link href="../../css/Inputs.css" rel="stylesheet"/>
-  <link rel="shortcut icon " href="../../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
+  <link rel="shortcut icon" href="../../img/Favicon1.png">
 </head>
 <body>
   <div class="container__main">
     <main class="container">
-      <img src="../../img/logo-proyecto1.png" alt="logo__Senalink"  class="logo__senalink">
+      <img src="../../img/logo-proyecto1.png" alt="logo__Senalink" class="logo__senalink">
 
-    <!-- FORMULARIO DE LOGIN -->
-    <form action="../../controllers/login.php" method="POST">
-      <input name="correo" placeholder="Correo de empresa" type="email" required/>
-      <input name="contrasena" placeholder="Contraseña" type="password" required/>
-      <input type="hidden" name="rol" value="Empresa"/>
-      <button type="submit">
-        Iniciar Sesion
-      </button>
-    </form>
-    <a href="Forgot.html">
-      ¿Olvidó su contraseña?
-    </a>
-    <div class="profiles__container">
-      <a href="CreateEmpresa.html">
-        Crear cuenta
-      </a>
-    </div>
+      <!-- FORMULARIO DE LOGIN -->
+      <form action="../../controllers/login.php" method="POST">
+        
+        <!-- Campo de correo -->
+        <div id="correoGroup">
+          <input name="correo" placeholder="Correo" type="email" />
+        </div>
+
+        <!-- Campo de NIT -->
+        <div id="nitGroup" style="display: none;">
+          <input name="nit" placeholder="NIT de empresa" type="text" />
+        </div>
+
+        <!-- Campo común: contraseña -->
+        <input name="contrasena" placeholder="Contraseña" type="password" required/>
+        <!-- Rol seleccionado -->
+        <select name="rol" id="rol" class="select_container--rol" onchange="toggleFields()" required >
+          <option value="empresa">Empresa</option>
+          <option value="admin">Admin SENA</option>
+          <option value="superadmin">Super Admin</option>
+        </select>
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+
+      <a href="Forgot.html">¿Olvidó su contraseña?</a>
+
+      <div class="profiles__container">
+        <a href="CreateEmpresa.html">Crear cuenta</a>
+      </div>
     </main>
   </div>
- </body>
-</html>
- <footer>
-    <p>@ Todos los derechos reservados.SenaLink</p>
+
+  <footer>
+    <p>@ Todos los derechos reservados. SenaLink</p>
   </footer>
+
+  <script>//funcion para cambiar de rol en el login
+function toggleFields() {
+    const rol = document.querySelector('select[name="rol"]').value;
+    const correoGroup = document.getElementById('correoGroup');
+    const nitGroup = document.getElementById('nitGroup');
+
+    if (rol === 'empresa') {
+    nitGroup.style.display = 'block';
+    correoGroup.style.display = 'none';
+    } else {
+    nitGroup.style.display = 'none';
+    correoGroup.style.display = 'block';
+    }
+}
+window.onload = toggleFields;
+</script>
+  
 </body>
 </html>
-

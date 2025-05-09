@@ -5,74 +5,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener datos del formulario
     $correo         = $_POST['correo'] ?? '';
     $contrasena     = $_POST['contrasena'] ?? '';
-    $rol            = $_POST['rol'] ?? 'Empresa';
+    $rol            = $_POST['rol'] ?? '';
     $estado         = 'Activo';
     $fecha_creacion = date('Y-m-d H:i:s');
 
-    // Para AdminSENA y SuperAdmin (requiere nickname)
-    $nickname        = $_POST['nickname'] ?? '';
-    $nombres         = $_POST['nombres'] ?? '';
-    $apellidos       = $_POST['apellidos'] ?? '';
 
-    // Para Empresa (no requiere nickname)
-    $nit             = $_POST['nit'] ?? '';
+    // Solo para rol Empresa
+    $nit                 = $_POST['nit'] ?? '';
     $actividad_economica = $_POST['actividad_economica'] ?? '';
-    $direccion       = $_POST['direccion'] ?? '';
-    $nombre_empresa  = $_POST['nombre_empresa'] ?? '';
-    $telefono        = $_POST['telefono'] ?? '';
+    $direccion           = $_POST['direccion'] ?? '';
+    $nombre_empresa      = $_POST['nombre_empresa'] ?? '';
+    $telefono            = $_POST['telefono'] ?? '';
 
-    // Validación básica de campos obligatorios
+    // Validación básica
     $errores = [];
 
-    // Validación general de correo y contraseña
     if (!$correo || !$contrasena) {
         $errores[] = "Correo y contraseña son obligatorios.";
     }
 
-    // Validaciones específicas según el rol
     if ($rol === 'SuperAdmin' || $rol === 'AdminSENA') {
-        if (!$nickname || !$nombres || !$apellidos) {
-            $errores[] = "Nickname, nombres y apellidos son obligatorios para este rol.";
+        if (!$nombres || !$apellidos) {
+            $errores[] = "Nombres y apellidos son obligatorios para este rol.";
         }
-    } elseif ($rol === 'Empresa') {
+    } elseif ($rol === 'empresa') {
         if (!$nit || !$nombre_empresa || !$telefono || !$direccion || !$actividad_economica) {
             $errores[] = "Todos los campos de empresa son obligatorios.";
         }
     }
 
-    // Si hay errores, detener ejecución
     if (!empty($errores)) {
         echo implode("<br>", $errores);
         exit;
     }
 
-    // Validar duplicados
+    // Validaciones únicas
     if (UsuarioModel::existeCorreo($correo)) {
         echo "Este correo ya está registrado.";
         exit;
     }
 
-    // Solo validar nickname si es SuperAdmin o AdminSENA
-    if ($rol === 'SuperAdmin' || $rol === 'AdminSENA') {
-        if ($nickname && UsuarioModel::existeNickname($nickname)) {
-            echo "Este nickname ya existe.";
-            exit;
-        }
-    }
-
-    if ($nit && UsuarioModel::existeNIT($nit)) {
+    if ($rol === 'empresa' && $nit && UsuarioModel::existeNIT($nit)) {
         echo "Este NIT ya está registrado.";
         exit;
     }
 
-    // Hashear la contraseña
+    // Hashear contraseña
     $hashedPassword = password_hash($contrasena, PASSWORD_BCRYPT);
 
-    // Crear el array de datos completo (sin nulls)
+    // Crear el array de datos (sin nickname)
     $datos = [
-        'nombres'             => $nombres,
-        'apellidos'           => $apellidos,
-        'nickname'            => $rol === 'SuperAdmin' || $rol === 'AdminSENA' ? $nickname : '',  // Solo asignar nickname si es AdminSENA o SuperAdmin
         'correo'              => $correo,
         'contrasena'          => $hashedPassword,
         'rol'                 => $rol,
@@ -97,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 case 'AdminSENA':
                     header('Location: ../html/Administrador/index_funcionario.html');
                     break;
-                case 'Empresa':
+                case 'empresa':
                     header('Location: ../html/Empresa/index.html');
                     break;
             }

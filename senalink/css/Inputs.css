@@ -4,6 +4,8 @@
     font-size: 62.5%; /* Hack permite trabajar con rem */
     box-sizing: border-box;
     margin: 0;
+    padding: 0;
+    height: 100%;
   }
   
   /* Global Styles */
@@ -16,8 +18,6 @@
     font-family: var(--h4-font-family);
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
     height: 100%;
   }
   
@@ -101,8 +101,10 @@
 
   /* Container Styles */
 .container__main {
-  height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center; /* Esto centra verticalmente */
+  height: 100%;
 }
 
 .container {
@@ -116,20 +118,28 @@
    border-radius: 0.8rem;
   box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);  
 }
- 
-  .select_container{
-    width: 100%;
+.profiles__container{
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+.select_container{
+    width: 50%;
     height: 5.6rem;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 1rem ;
+    margin: 1rem 0;
     border: 1px solid var(--Secundary-800);
     font-size: var(--h4-font-size);
-    border-radius: 10rem;
-  }
-
-  .option {
-    border-radius: 10rem;
-    } 
+    border-radius: 1rem;
+}
+.select_container--rol{
+    width: 12rem;
+    height: 5.6rem;
+    border: 1px solid var(--Secundary-800);
+    font-size: var(--h4-font-size);
+    border-radius: 1rem;
+    margin: auto;
+}
 
   button{
     width: 100%;
@@ -188,9 +198,8 @@
     font-size: var(--h4-font-size);
     display: block;
     text-decoration: none;
-    margin: 0 auto;
-    margin-bottom: 2rem;
-    
+    text-align: center;
+    margin: auto;
   }
   
 
@@ -218,11 +227,7 @@
     
 }
 
-.profiles__container{
-  display: flex;
-  justify-content: center;
-  margin: 0;
-}
+
 
 @media (max-width: 768px) {
   .header__login {
