@@ -7,7 +7,7 @@ $conn = Conexion::conectar();
 $rol = $_POST['rol'];
 $contrasena = $_POST['contrasena'];
 
-if ($rol === 'Empresa') {
+if ($rol === 'empresa') {
     $nit = $_POST['nit'];
     $query = "SELECT * FROM usuarios WHERE nit = :identificador AND rol = 'empresa'";
     $stmt = $conn->prepare($query);
@@ -25,16 +25,16 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($usuario) {
     if (password_verify($contrasena, $usuario['contrasena'])) {
-        $_SESSION['id'] = $usuario['nit'];
+        $_SESSION['id_usuario'] = $usuario['id'];
         $_SESSION['rol'] = $usuario['rol'];
 
         // Redirección según el rol
-        if ($rol === 'Empresa') {
+        if ($rol === 'empresa') {
             header("Location: ../html/Empresa/Home.html");
         } elseif ($rol === 'admin') {
             header("Location: admin/inicio.php");
-        } elseif ($rol === 'superadmin') {
-            header("Location: superadmin/inicio.php");
+        } elseif ($rol === 'super_admin') {
+            header("Location: ../html/Super_Admin/Home.html");
         }
         exit();
     } else {

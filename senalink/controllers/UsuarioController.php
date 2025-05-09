@@ -49,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Este NIT ya está registrado.";
         exit;
     }
-
     // Hashear contraseña
     $hashedPassword = password_hash($contrasena, PASSWORD_BCRYPT);
 
@@ -80,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Location: ../html/Administrador/index_funcionario.html');
                     break;
                 case 'empresa':
-                    header('Location: ../html/Empresa/index.html');
+                    header('Location: ../html/index.html');
                     break;
             }
             exit;
