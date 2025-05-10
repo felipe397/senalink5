@@ -35,4 +35,3 @@ function confirmInhabilitar(redirectUrl) {
         document.getElementById('custom-confirm').style.display = 'none'; // Cierra la ventana
     };
 }
-

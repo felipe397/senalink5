@@ -1,6 +1,5 @@
 <?php
 require_once '../models/UsuarioModel.php';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener datos del formulario
     $correo         = $_POST['correo'] ?? '';
@@ -91,5 +90,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error al procesar la solicitud: " . $e->getMessage();
         exit;
     }
+
+
 }
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'listarEmpresas') {
+    $empresas = UsuarioModel::listarEmpresas();
+    header('Content-Type: application/json');
+    echo json_encode($empresas);
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'detalleEmpresa' && isset($_GET['id'])) {
+    $empresa = UsuarioModel::obtenerEmpresaPorId($_GET['id']);
+    header('Content-Type: application/json');
+    echo json_encode($empresa);
+    exit;
+}
+
 ?>

@@ -62,5 +62,23 @@ class UsuarioModel {
     } catch (PDOException $e) {
         throw new Exception("Error en la base de datos: " . $e->getMessage());
     }
+    
 }
+public static function listarEmpresas() {
+    $db = Conexion::conectar();
+    $stmt = $db->prepare("SELECT id, nombre_empresa,nit FROM usuarios WHERE rol = 'empresa'");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+public static function obtenerEmpresaPorId($id) {
+    $db = Conexion::conectar();
+    $stmt = $db->prepare("SELECT * FROM usuarios WHERE id = :id AND rol = 'empresa'");
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+}
+
+?>
