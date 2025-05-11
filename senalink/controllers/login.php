@@ -29,11 +29,12 @@ if ($usuario) {
         $_SESSION['rol'] = $usuario['rol'];
 
         // Redirección según el rol
-        if ($rol === 'empresa') {
+        if ($rol === 'Empresas') {
             header("Location: ../html/Empresa/Home.html");
-        } elseif ($rol === 'admin') {
-            header("Location: admin/inicio.php");
-        } elseif ($rol === 'super_admin') {
+        } elseif ($rol === 'AdminSENA') {
+            header("Location: ../html/Super_Admin/Home.html");
+        } elseif ($rol === 'SuperAdmin') {
+            // Redirigir a la página de inicio del Super Admin
             header("Location: ../html/Super_Admin/Home.html");
         }
         exit();

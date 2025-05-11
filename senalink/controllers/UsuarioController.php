@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fecha_creacion = date('Y-m-d H:i:s');
 
 
-    // Solo para rol Empresa
+    // Solo para rol Empresas
     $nit                 = $_POST['nit'] ?? '';
     $actividad_economica = $_POST['actividad_economica'] ?? '';
     $direccion           = $_POST['direccion'] ?? '';
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$nombres || !$apellidos) {
             $errores[] = "Nombres y apellidos son obligatorios para este rol.";
         }
-    } elseif ($rol === 'empresa') {
+    } elseif ($rol === 'Empresas') {
         if (!$nit || !$nombre_empresa || !$telefono || !$direccion || !$actividad_economica) {
             $errores[] = "Todos los campos de empresa son obligatorios.";
         }
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    if ($rol === 'empresa' && $nit && UsuarioModel::existeNIT($nit)) {
+    if ($rol === 'Empresas' && $nit && UsuarioModel::existeNIT($nit)) {
         echo "Este NIT ya está registrado.";
         exit;
     }
@@ -72,12 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($resultado) {
             switch ($rol) {
                 case 'SuperAdmin':
-                    header('Location: ../html/Super_Admin/index.html');
+                    header('Location: ../html/index.html');
                     break;
                 case 'AdminSENA':
-                    header('Location: ../html/Administrador/index_funcionario.html');
+                    header('Location: ../html/index.html');
                     break;
-                case 'empresa':
+                case 'Empresas':
                     header('Location: ../html/index.html');
                     break;
             }
