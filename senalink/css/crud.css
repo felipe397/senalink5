@@ -45,7 +45,22 @@ p{
     background-color: var(--primary-950);
     max-width: 100%; /* Make logos responsive */
     height: auto; /* Maintain aspect ratio */
+    
 }
+.linea-naranja {
+    background-color: var(--secundary-2-900);
+    height: 1rem;
+    width: 100%;
+    margin: 0 auto 1rem;
+    border-radius: 0;
+    padding: 0;
+    max-width: 100%;
+}
+
+
+
+
+
 .header__report{
   margin:0 auto;
 }
