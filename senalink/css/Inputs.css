@@ -19,8 +19,6 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    display: flex;
-    flex-direction: column;
   }
   
   /* Links */
@@ -83,6 +81,16 @@
     padding: 10px 20px; /* Add padding for spacing */
     background-color: var(--primary-950);
 }
+.linea-naranja {
+    background-color: var(--secundary-2-900);
+    height: 1rem;
+    width: 100%;
+    margin: 0 auto 1rem;
+    border-radius: 0;
+    padding: 0;
+    max-width: 100%;
+}
+
 
 
 
@@ -102,7 +110,12 @@
 
 
   /* Container Styles */
-
+.container__main {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Esto centra verticalmente */
+  height: 100%;
+}
 
 .container {
   background-color: white;
@@ -196,6 +209,7 @@
   
   .icons {
     padding: 0 2rem;
+    margin-left: auto;
   }
 
   .code__container {
@@ -216,8 +230,6 @@
     
 }
 
-
-
 @media (max-width: 768px) {
   .header__login {
       flex-direction: column; 
@@ -229,11 +241,13 @@
     height: 4.8rem; 
   }
 }
-
 footer {
-    background-color: var(--Secundary-950);
-    color: white;
+    margin-top: 1rem;
     text-align: center;
-    padding: 1rem;
-    justify-self: end;
+    color: var(--black);
+}
+
+footer p {
+    margin: 0;
+    padding: 0;
 }

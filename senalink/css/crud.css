@@ -18,7 +18,6 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 /* Links */
@@ -45,6 +44,22 @@ p{
     background-color: var(--primary-950);
     max-width: 100%; /* Make logos responsive */
     height: auto; /* Maintain aspect ratio */
+    
+}
+
+.linea-naranja {
+    background-color: var(--secundary-2-900);
+    height: 1rem;
+    width: 100%;
+    margin: 0 auto 1rem;
+    border-radius: 0;
+    padding: 0;
+    max-width: 100%;
+}
+
+
+.icons{
+  margin-left: auto;
 }
 .header__report{
   margin:0 auto;
@@ -52,19 +67,17 @@ p{
 .logo__senalink{
   height: 6rem;
 }
-.container__crud{
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+
 .container {
   background-color: var(--white);
   padding: 4rem;
   border-radius: 0.8rem;
   box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1); 
-  margin-top: 10rem;   
+  margin-top: 3.5rem;
+  margin-bottom: 2.1rem;
+  max-width: 70rem;
+  align-self: center;
+  text-align: center;
   
 
 } 
@@ -230,5 +243,9 @@ footer p{
     color:var(--black);
 }
 
-
-
+.footer__progform {
+  margin-top: 1rem;
+    text-align: center;
+    color: var(--black);
+    justify-items: end;
+}
