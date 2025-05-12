@@ -23,11 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errores[] = "Correo y contraseña son obligatorios.";
     }
 
-    if ($rol === 'SuperAdmin' || $rol === 'AdminSENA') {
+    if ($rol === 'super_admin' || $rol === 'AdminSENA') {
         if (!$nombres || !$apellidos) {
             $errores[] = "Nombres y apellidos son obligatorios para este rol.";
         }
-    } elseif ($rol === 'Empresas') {
+    } elseif ($rol === 'empresa') {
         if (!$nit || !$nombre_empresa || !$telefono || !$direccion || !$actividad_economica) {
             $errores[] = "Todos los campos de empresa son obligatorios.";
         }
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    if ($rol === 'Empresas' && $nit && UsuarioModel::existeNIT($nit)) {
+    if ($rol === 'empresa' && $nit && UsuarioModel::existeNIT($nit)) {
         echo "Este NIT ya está registrado.";
         exit;
     }
@@ -71,13 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($resultado) {
             switch ($rol) {
-                case 'SuperAdmin':
+                case 'super_admin':
                     header('Location: ../html/index.html');
                     break;
                 case 'AdminSENA':
                     header('Location: ../html/index.html');
                     break;
-                case 'Empresas':
+                case 'empresa':
                     header('Location: ../html/index.html');
                     break;
             }

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-05-2025 a las 20:49:18
+-- Tiempo de generación: 12-05-2025 a las 21:43:06
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -154,10 +154,9 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombres` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
-  `nickname` varchar(50) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
-  `rol` enum('SuperAdmin','AdminSENA','Otro') NOT NULL,
+  `rol` enum('empresa','AdminSENA','super_admin') DEFAULT NULL,
   `estado` enum('Activo','Suspendido','Desactivado') DEFAULT 'Activo',
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `nit` varchar(20) NOT NULL,
@@ -166,6 +165,14 @@ CREATE TABLE `usuarios` (
   `nombre_empresa` varchar(255) NOT NULL,
   `telefono` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `actividad_economica`, `direccion`, `nombre_empresa`, `telefono`) VALUES
+(1, '', '', '1@gmail.com', '$2y$10$hz6Xe5TdZkcdqsj5sEtiUOH75JR8nWghDKvvNscc17VJdn8FuKmiu', 'empresa', 'Activo', '2025-05-13 02:01:23', '12345', '1', '1', '1', '1'),
+(5, 'Breiner', 'Chica', 'breiner.chica@admin.com', '$2y$10$ScH0cKEThw.c5d4psnw8xeMXmuvD6/Mpq4Zf8aPlZdFsPdG.nJ0r6', 'super_admin', 'Activo', '2025-05-12 19:14:01', '', '', 'Calle 123', '', '3001234567');
 
 --
 -- Índices para tablas volcadas
@@ -215,7 +222,6 @@ ALTER TABLE `reportes_usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nickname` (`nickname`),
   ADD UNIQUE KEY `correo` (`correo`),
   ADD UNIQUE KEY `nit` (`nit`);
 
@@ -263,7 +269,7 @@ ALTER TABLE `reportes_usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
