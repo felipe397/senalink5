@@ -212,6 +212,7 @@ button{
     display: flex;
     flex-direction: column;
     width: 70%;
+    margin-top: 4rem;
 }
 .cardh {
     background-color: var(--white); /* Set background color */
@@ -219,7 +220,8 @@ button{
     padding: 2rem; /* Adequate padding */
     transition: transform 0.3s; /* Smooth transition for hover effect */
     border-radius: 0.8rem;
-    border: 0.2rem solid rgba(0, 48, 77); 
+    border: 0.3rem solid rgba(0, 48, 77); 
+    margin: 1rem;
 }
 
 .cardh:hover {
