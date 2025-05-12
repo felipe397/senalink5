@@ -212,6 +212,7 @@ button{
     display: flex;
     flex-direction: column;
     width: 70%;
+    margin-top: 4rem;
 }
 .cardh {
     background-color: var(--white); /* Set background color */
