@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("senalink5/senalink/controllers/UsuarioController.php?action=listarEmpresas")
+    fetch("../../../controllers/UsuarioController.php?action=listarEmpresas")
         .then(response => response.json())
         .then(empresas => {
             const container = document.querySelector(".cardh__container");
