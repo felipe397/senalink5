@@ -116,7 +116,8 @@
   text-align: center;
   margin:auto;
   border-radius: 0.8rem;
-  box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);  
+  box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
+  margin-top: 4rem; 
 }
 .profiles__container{
   display: flex;
@@ -235,4 +236,5 @@ footer p{
     text-align: center;
     padding: 0px;
     color:var(--black);
+    margin-top: 10rem;
 }
