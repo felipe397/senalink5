@@ -316,8 +316,10 @@ button{
         width: 100%; /* Adjust width for smaller screens */
     }
 }
-footer p{
+footer {
+    background-color: var(--Secundary-950);
+    color: white;
     text-align: center;
-    padding: 0px;
-    color:var(--black);
+    padding: 1rem;
+    justify-self: end;
 }
