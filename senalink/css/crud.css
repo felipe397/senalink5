@@ -46,6 +46,7 @@ p{
     height: auto; /* Maintain aspect ratio */
     
 }
+
 .linea-naranja {
     background-color: var(--secundary-2-900);
     height: 1rem;
@@ -57,9 +58,9 @@ p{
 }
 
 
-
-
-
+.icons{
+  margin-left: auto;
+}
 .header__report{
   margin:0 auto;
 }
