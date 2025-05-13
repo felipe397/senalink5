@@ -34,14 +34,14 @@ class UsuarioModel {
         $rol = $datos['rol'];
 
         // Solo usamos nombre_empresa si el rol es Empresa
-        $nombre_empresa = ($rol === 'empresa') ? $datos['nombre_empresa'] ?? null : null;
+        $razon_social = ($rol === 'empresa') ? $datos['razon_social'] ?? null : null;
 
         $sql = "INSERT INTO usuarios (
                     correo, contrasena, rol, estado, fecha_creacion,
-                    nit, actividad_economica, direccion, nombre_empresa, telefono
+                    nit, direccion, razon_social, telefono,representante_legal,tipo_empresa
                 ) VALUES (
                     :correo, :contrasena, :rol, :estado, :fecha_creacion,
-                    :nit, :actividad_economica, :direccion, :nombre_empresa, :telefono
+                    :nit, :direccion, :razon_social, :telefono,:representante_legal,:tipo_empresa
                 )";
 
         $stmt = $db->prepare($sql);
@@ -53,10 +53,12 @@ class UsuarioModel {
         $stmt->bindValue(':estado', $datos['estado']);
         $stmt->bindValue(':fecha_creacion', $datos['fecha_creacion']);
         $stmt->bindValue(':nit', $datos['nit']);
-        $stmt->bindValue(':actividad_economica', $datos['actividad_economica']);
+        $stmt->bindValue(':tipo_empresa', $datos['tipo_empresa']);
         $stmt->bindValue(':direccion', $datos['direccion']);
-        $stmt->bindValue(':nombre_empresa', $nombre_empresa);
+        $stmt->bindValue(':razon_social', $razon_social);
         $stmt->bindValue(':telefono', $datos['telefono']);
+        $stmt->bindValue(':representante_legal', $datos['representante_legal']);
+        $stmt->bindValue(':tipo_empresa', $datos['tipo_empresa']);
 
         return $stmt->execute();
     } catch (PDOException $e) {
@@ -66,7 +68,7 @@ class UsuarioModel {
 }
 public static function listarEmpresas() {
     $db = Conexion::conectar();
-    $stmt = $db->prepare("SELECT id, nombre_empresa,nit FROM usuarios WHERE rol = 'empresa'");
+    $stmt = $db->prepare("SELECT id, razon_social,nit FROM usuarios WHERE rol = 'empresa'");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

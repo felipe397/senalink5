@@ -15,41 +15,49 @@
         <img class="icons" src="../../../icon/account_circle_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Account Icon">
     </header>
     <div class="linea-naranja"></div>
+    <main class="container">
+        <!-- Logo del proyecto -->
+        <div class="logo__container">
+            <img src="../../../img/logo-proyecto1.png" alt="SenaLink Logo" class="logo__senalink" />
+        </div>
 
-        <main class="container">
-            <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
-            
-            <!-- Contenedor de datos dinámicos -->
-            <p><span>Numero NIT</span> <span id="nit"></span></p>
-            <p><span>Representante legal</span> <span id="representante"></span></p>
-            <p><span>Razón social</span> <span id="razon-social"></span></p>
-            <p><span>Razón comercial</span> <span id="razon-comercial"></span></p>
-            <p><span>Numero telefónico</span> <span id="telefono"></span></p>
-            <p><span>Correo electrónico</span> <span id="correo"></span></p>
-            <p><span>Ubicación</span> <span id="ubicacion"></span></p>
-            <p><span>Tipo de empresa</span> <span id="tipo-empresa"></span></p>
-            <p><span>Estado</span> <span id="estado"></span></p>
+        <!-- Información de la empresa -->
+        <section class="empresa__info">
+            <p><strong>NIT:</strong> <span id="nit"></span></p>
+            <p><strong>Representante legal:</strong> <span id="representante"></span></p>
+            <p><strong>Razón social:</strong> <span id="razon-social"></span></p>
+            <p><strong>Número telefónico:</strong> <span id="telefono"></span></p>
+            <p><strong>Correo electrónico:</strong> <span id="correo"></span></p>
+            <p><strong>Ubicación:</strong> <span id="ubicacion"></span></p>
+            <p><strong>Tipo de empresa:</strong> <span id="tipo-empresa"></span></p>
+            <p><strong>Estado:</strong> <span id="estado"></span></p>
+        </section>
 
-            <div class="buttons__container">
-                <a href="EmpresaEdit.html" class="buttons__crud">Actualizar</a>
-                <a href="" class="buttons__crud">Listar</a>
-                <button onclick="confirmInhabilitar('EmpresaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
-                <a href="EmpresaReport.html" class="buttons__crud">Reporte</a>
-                <a href="Gestion_Empresa.html" class="buttons__crud">Volver</a>
+        <!-- Botones de acciones -->
+        <div class="buttons__container">
+            <a href="EmpresaEdit.html" class="buttons__crud">Actualizar</a>
+            <a href="#" class="buttons__crud">Listar</a>
+            <button onclick="confirmInhabilitar('EmpresaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
+            <a href="EmpresaReport.html" class="buttons__crud">Reporte</a>
+            <a href="Gestion_Empresa.html" class="buttons__crud">Volver</a>
+        </div>
+
+        <!-- Modal de confirmación -->
+        <div id="custom-confirm" class="modal">
+            <div class="modal-content">
+            <h1>Inhabilitar</h1>
+            <p>
+                Una vez el usuario esté inhabilitado no podrá sufrir cambios hasta que sea habilitado nuevamente.
+                ¿Está seguro?
+            </p>
+            <div class="buttons__disable">
+                <button class="cancel-button">Cancelar</button>
+                <button id="confirm-yes" class="disable-button">Inhabilitar</button>
             </div>
-
-            <div id="custom-confirm" class="modal">
-                <div class="modal-content">
-                    <h1>Inhabilitar</h1>
-                    <p>Una vez el usuario este inhabilitado no podrá sufrir cambios hasta que el mismo sea habilitado nuevamente ¿Esta seguro?</p>
-                    <div class="buttons__disable">
-                        <button class="cancel-button">Cancelar</button>
-                        <button id="confirm-yes" class="disable-button">Inhabilitar</button>
-                    </div>
-                </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
+
 
     <script src="../../../js/script.js"></script>
     <script>
@@ -70,12 +78,11 @@
                     document.querySelector('p:nth-of-type(1) span').textContent = data.nit; // Muestra el NIT
                     document.querySelector('p:nth-of-type(2) span').textContent = data.representante_legal; // Representante Legal
                     document.querySelector('p:nth-of-type(3) span').textContent = data.razon_social; // Razón Social
-                    document.querySelector('p:nth-of-type(4) span').textContent = data.razon_comercial; // Razón Comercial
-                    document.querySelector('p:nth-of-type(5) span').textContent = data.telefono; // Teléfono
-                    document.querySelector('p:nth-of-type(6) span').textContent = data.correo; // Correo Electrónico
-                    document.querySelector('p:nth-of-type(7) span').textContent = data.ubicacion; // Ubicación
-                    document.querySelector('p:nth-of-type(8) span').textContent = data.tipo_empresa; // Tipo de Empresa
-                    document.querySelector('p:nth-of-type(9) span').textContent = data.estado; // Estado
+                    document.querySelector('p:nth-of-type(4) span').textContent = data.telefono; // Teléfono
+                    document.querySelector('p:nth-of-type(5) span').textContent = data.correo; // Correo Electrónico
+                    document.querySelector('p:nth-of-type(6) span').textContent = data.direccion; // Ubicación
+                    document.querySelector('p:nth-of-type(7) span').textContent = data.tipo_empresa; // Tipo de Empresa
+                    document.querySelector('p:nth-of-type(8) span').textContent = data.estado; // Estado
                 }
             })
             .catch(error => {

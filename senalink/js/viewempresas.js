@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 card.innerHTML = `
                     <a href="Empresa.html?id=${empresa.id}">
                         <div class="card-text">
-                            <h2 class="card-title">${empresa.nombre_empresa}</h2>
+                            <h2 class="card-title">${empresa.razon_social}</h2>
                             <p class="card-subtitle">${empresa.nit}</p>
                         </div>
                     </a>

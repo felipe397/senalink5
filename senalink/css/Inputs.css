@@ -18,6 +18,10 @@
     font-family: var(--h4-font-family);
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100%;
   }
   
@@ -74,47 +78,47 @@
     cursor: pointer;
 }
 .header__login {
-    display: flex; /* Use flexbox for layout */
-    justify-content: space-between; /* Space between logos */
-    align-items: center; /* Center logos vertically */
-    width: 100%;
-    padding: 10px 20px; /* Add padding for spacing */
-    background-color: var(--primary-950);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  height: 7rem;
+  background-color: var(--primary-950);
+  width: 100%;
+  position: fixed;
+  top: 0;
 }
+
+.header__left{
+  display: flex;
+  flex: 1;
+
+}
+.header__center,
+.header__right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  max-height: 4rem;
+  width: auto;
+}
+
+.logo__senalink{
+  height: 6rem;
+  max-width: 100%;
+}
+
+/* Para evitar que el logo de la izquierda empuje al del centro, todos los contenedores tienen el mismo tamaño (flex: 1) */
+
 .linea-naranja {
     background-color: var(--secundary-2-900);
     height: 1rem;
     width: 100%;
-    margin: 0 auto 1rem;
-    border-radius: 0;
-    padding: 0;
-    max-width: 100%;
-}
-
-
-
-
-.header__login .logo__senalink {
-  margin: 0 auto; 
-  height: 4rem;
-}
-
-.header__login .logo__sena {
-  margin-left: 1rem;
-  height: 4.8rem; 
-}
-.logo__senalink{
-  margin: 1rem 0;
-  height: 6rem;
-}
-
-
-  /* Container Styles */
-.container__main {
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Esto centra verticalmente */
-  height: 100%;
+    position: fixed;
+    top: 7rem;
 }
 
 .container {
@@ -125,9 +129,8 @@
   width: 50rem;
   border-radius: 0.8rem;
   box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
-  margin-top: 4rem; 
-  align-self: center;
   text-align: center;
+  max-width: 100%;
 }
 .profiles__container{
   display: flex;
@@ -219,6 +222,7 @@
     text-align: center;
 }
 
+
 .code__container input[type="code"] {
     width: 5rem; /* Set a fixed width for each input */
     height: 5rem; /* Set a fixed height for each input */
@@ -232,22 +236,19 @@
 
 @media (max-width: 768px) {
   .header__login {
-      flex-direction: column; 
-      align-items: center; 
+    height: 11rem;
+    flex-direction: column; 
+    align-items: center; 
   }
   .header__login .logo__sena {
     margin-left: 1rem;
     margin-bottom: 2rem;
     height: 4.8rem; 
   }
-}
-footer {
+  .linea-naranja{
+    top: 11rem;
+  }
+  .logo{
     margin-top: 1rem;
-    text-align: center;
-    color: var(--black);
-}
-
-footer p {
-    margin: 0;
-    padding: 0;
+  }
 }

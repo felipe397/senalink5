@@ -11,9 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Solo para rol Empresas
     $nit                 = $_POST['nit'] ?? '';
-    $actividad_economica = $_POST['actividad_economica'] ?? '';
+    $representante_legal = $_POST['representante_legal'] ?? '';
+    $tipo_empresa        = $_POST['tipo_empresa'] ?? '';
     $direccion           = $_POST['direccion'] ?? '';
-    $nombre_empresa      = $_POST['nombre_empresa'] ?? '';
+    $razon_social        = $_POST['razon_social'] ?? '';
     $telefono            = $_POST['telefono'] ?? '';
 
     // Validación básica
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errores[] = "Nombres y apellidos son obligatorios para este rol.";
         }
     } elseif ($rol === 'empresa') {
-        if (!$nit || !$nombre_empresa || !$telefono || !$direccion || !$actividad_economica) {
+        if (!$nit || !$razon_social || !$telefono || !$direccion || !$tipo_empresa) {
             $errores[] = "Todos los campos de empresa son obligatorios.";
         }
     }
@@ -59,9 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'estado'              => $estado,
         'fecha_creacion'      => $fecha_creacion,
         'nit'                 => $nit,
-        'actividad_economica' => $actividad_economica,
+        'representante_legal' => $representante_legal,
+        'tipo_empresa'        => $tipo_empresa,
         'direccion'           => $direccion,
-        'nombre_empresa'      => $nombre_empresa,
+        'razon_social'        => $razon_social,
         'telefono'            => $telefono
     ];
 
