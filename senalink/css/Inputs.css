@@ -6,6 +6,7 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    background-color: var(--primary-50);
   }
   
   /* Global Styles */
@@ -113,8 +114,8 @@
 
 /* Para evitar que el logo de la izquierda empuje al del centro, todos los contenedores tienen el mismo tamaño (flex: 1) */
 
-.linea-azul {
-    background-color: var(--Secundary-950);
+.linea-verde {
+    background-color: var(--primary-600);
     height: 1rem;
     width: 100%;
     position: fixed;
