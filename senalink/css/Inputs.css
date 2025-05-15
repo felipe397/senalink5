@@ -252,3 +252,12 @@
     margin-top: 1rem;
   }
 }
+
+footer {
+    background-color: var(--Secundary-950);
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
