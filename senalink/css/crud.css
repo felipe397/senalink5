@@ -71,6 +71,13 @@ p{
 .logo__senalink{
   height: 6rem;
 }
+.linea-verde {
+    background-color: var(--primary-600);
+    height: 1rem;
+    width: 100%;
+    position: fixed;
+    top: 7rem;
+}
 
 .container {
   background-color: var(--white);
@@ -234,6 +241,9 @@ td {
   .buttons__container--disable{
     display: grid;
     grid-template-columns: repeat(2,1fr);
+  }
+  .linea-verde{
+    top: 11rem;
   }
 }
 footer {
