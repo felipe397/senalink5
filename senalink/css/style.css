@@ -123,6 +123,13 @@ button{
   transform: translate(-50%, -50%);
 }
 
+.linea-verde {
+    background-color: var(--primary-600);
+    height: 1rem;
+    width: 100%;
+    position: fixed;
+    top: 7rem;
+}
 
 /* Container Styles */
 .container {
@@ -346,6 +353,10 @@ span{
   button {
       width: 100%; /* Botones ocupan el ancho completo */
   }
+
+  .linea-verde{
+    top: 11rem;
+  }
 }
 
 @media (max-width: 576px) {
@@ -359,6 +370,9 @@ span{
 
   .container {
       padding: 10px; /* Reduce aún más el padding en móviles */
+  }
+  .linea-verde{
+    top: 11rem;
   }
 }
 

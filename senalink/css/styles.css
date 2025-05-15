@@ -41,6 +41,14 @@ button{
     max-width: 100%; /* Make logos responsive */
     height: auto; /* Maintain aspect ratio */
 }
+
+.linea-verde {
+    background-color: var(--primary-600);
+    height: 1rem;
+    width: 100%;
+    position: fixed;
+    top: 7rem;
+}
 /* Main Content */
 .main__content {
     display: flex;
@@ -301,6 +309,10 @@ button{
         height: 100%;
     }
 
+    .linea-verde{
+    top: 11rem;
+    }
+
     .cards {
         grid-template-columns: repeat(1, 1fr); /* Adjust grid for smaller screens */
     }
@@ -312,6 +324,9 @@ button{
 @media (max-width: 768px) {
     .slider-frame {
         width: 100%; /* Adjust width for smaller screens */
+    }
+    .linea-verde{
+    top: 11rem;
     }
 }
 footer {
