@@ -88,20 +88,12 @@ p{
     font-size: var(--h4-font-size);
     border-radius: 0.4rem;
 }
-.container__crud--disable{
-  height: 100%;
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-  text-align: center;
-  margin-top: 4rem;
-}
 .container--disable {
   background-color:var(--Gray-200);
-  padding: 4rem;
+  padding: 8rem;
   border-radius: 0.8rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-   border-radius: 0.8rem;
+  border-radius: 0.8rem;
   box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1); 
 }
 .table-container {
