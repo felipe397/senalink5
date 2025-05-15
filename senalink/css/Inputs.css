@@ -113,8 +113,8 @@
 
 /* Para evitar que el logo de la izquierda empuje al del centro, todos los contenedores tienen el mismo tamaño (flex: 1) */
 
-.linea-naranja {
-    background-color: var(--secundary-2-900);
+.linea-azul {
+    background-color: var(--Secundary-950);
     height: 1rem;
     width: 100%;
     position: fixed;
@@ -245,7 +245,7 @@
     margin-bottom: 2rem;
     height: 4.8rem; 
   }
-  .linea-naranja{
+  .linea-azul{
     top: 11rem;
   }
   .logo{
