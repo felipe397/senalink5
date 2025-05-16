@@ -19,8 +19,6 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    justify-content: center;
-    align-items: center;
 }
 
 /* Links */
@@ -43,20 +41,15 @@ p{
     padding: 1rem 2rem; /* Add padding for spacing */
     background-color: var(--primary-950);
     max-width: 100%; /* Make logos responsive */
-    position: fixed;
-    top: 0;
 }
 
 .linea-verde {
     background-color: var(--primary-600);
     height: 1rem;
     width: 100%;
-    margin: 0 auto 1rem;
     border-radius: 0;
     padding: 0;
     max-width: 100%;
-    position: fixed;
-    top: 4.8rem;
 }
 
 
@@ -83,13 +76,24 @@ p{
 }
 
 .container {
-  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  margin: 1rem;
+} 
+.container__crud{
+  background-color: white;
   padding: 4rem;
   border-radius: 0.8rem;
-  box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1); 
-  max-width: 70rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  width: 60rem;
+  border-radius: 0.8rem;
+  box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
   text-align: center;
-} 
+  max-width: 100%;
+}
 .select_container{
     width: 100%;
     height: 5.6rem;
@@ -254,11 +258,16 @@ td {
     grid-template-columns: repeat(2,1fr);
   }
 }
-footer {
+.footer__crud {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  height: 100%;
+}
+footer{
     background-color: var(--Secundary-950);
     color: white;
     text-align: center;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    padding: 1rem;
 }

@@ -15,48 +15,50 @@
         <img class="icons" src="../../../icon/account_circle_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Account Icon">
     </header>
     <div class="linea-verde"></div>
-    <main class="container">
-        <!-- Logo del proyecto -->
-        <div class="logo__container">
-            <img src="../../../img/logo-proyecto1.png" alt="SenaLink Logo" class="logo__senalink" />
-        </div>
-
-        <!-- Información de la empresa -->
-        <section class="empresa__info">
-            <p><strong>NIT:</strong> <span id="nit"></span></p>
-            <p><strong>Representante legal:</strong> <span id="representante"></span></p>
-            <p><strong>Razón social:</strong> <span id="razon-social"></span></p>
-            <p><strong>Número telefónico:</strong> <span id="telefono"></span></p>
-            <p><strong>Correo electrónico:</strong> <span id="correo"></span></p>
-            <p><strong>Ubicación:</strong> <span id="ubicacion"></span></p>
-            <p><strong>Tipo de empresa:</strong> <span id="tipo-empresa"></span></p>
-            <p><strong>Estado:</strong> <span id="estado"></span></p>
-        </section>
-
-        <!-- Botones de acciones -->
-        <div class="buttons__container">
-            <a href="EmpresaEdit.html" class="buttons__crud">Actualizar</a>
-            <a href="#" class="buttons__crud">Listar</a>
-            <button onclick="confirmInhabilitar('EmpresaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
-            <a href="EmpresaReport.html" class="buttons__crud">Reporte</a>
-            <a href="Gestion_Empresa.html" class="buttons__crud">Volver</a>
-        </div>
-
-        <!-- Modal de confirmación -->
-        <div id="custom-confirm" class="modal">
-            <div class="modal-content">
-            <h1>Inhabilitar</h1>
-            <p>
-                Una vez el usuario esté inhabilitado no podrá sufrir cambios hasta que sea habilitado nuevamente.
-                ¿Está seguro?
-            </p>
-            <div class="buttons__disable">
-                <button class="cancel-button">Cancelar</button>
-                <button id="confirm-yes" class="disable-button">Inhabilitar</button>
+    <div class="container">
+        <main class="container__crud">
+            <!-- Logo del proyecto -->
+            <div class="logo__container">
+                <img src="../../../img/logo-proyecto1.png" alt="SenaLink Logo" class="logo__senalink" />
             </div>
+
+            <!-- Información de la empresa -->
+            <section class="empresa__info">
+                <p><strong>NIT:</strong> <span id="nit"></span></p>
+                <p><strong>Representante legal:</strong> <span id="representante"></span></p>
+                <p><strong>Razón social:</strong> <span id="razon-social"></span></p>
+                <p><strong>Número telefónico:</strong> <span id="telefono"></span></p>
+                <p><strong>Correo electrónico:</strong> <span id="correo"></span></p>
+                <p><strong>Ubicación:</strong> <span id="ubicacion"></span></p>
+                <p><strong>Tipo de empresa:</strong> <span id="tipo-empresa"></span></p>
+                <p><strong>Estado:</strong> <span id="estado"></span></p>
+            </section>
+
+            <!-- Botones de acciones -->
+            <div class="buttons__container">
+                <a href="EmpresaEdit.html" class="buttons__crud">Actualizar</a>
+                <a href="#" class="buttons__crud">Listar</a>
+                <button onclick="confirmInhabilitar('EmpresaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
+                <a href="EmpresaReport.html" class="buttons__crud">Reporte</a>
+                <a href="Gestion_Empresa.html" class="buttons__crud">Volver</a>
             </div>
-        </div>
-    </main>
+
+            <!-- Modal de confirmación -->
+            <div id="custom-confirm" class="modal">
+                <div class="modal-content">
+                <h1>Inhabilitar</h1>
+                <p>
+                    Una vez el usuario esté inhabilitado no podrá sufrir cambios hasta que sea habilitado nuevamente.
+                    ¿Está seguro?
+                </p>
+                <div class="buttons__disable">
+                    <button class="cancel-button">Cancelar</button>
+                    <button id="confirm-yes" class="disable-button">Inhabilitar</button>
+                </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
 
     <script src="../../../js/script.js"></script>
@@ -92,8 +94,11 @@
 });
 
     </script>
+<div class="footer__crud">
+    <footer>
+        <p>@ Todos los derechos reservados.SenaLink</p>
+    </footer>
+</div>
 </body>
 </html>
-<footer>
-    <p>@ Todos los derechos reservados.SenaLink</p>
-  </footer>
+
