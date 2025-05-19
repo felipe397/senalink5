@@ -93,6 +93,7 @@ p{
   box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
   text-align: center;
   max-width: 100%;
+  margin-top: 6rem;
 }
 .select_container{
     width: 100%;
@@ -270,4 +271,5 @@ footer{
     text-align: center;
     width: 100%;
     padding: 1rem;
+    margin-top: 7rem;
 }
