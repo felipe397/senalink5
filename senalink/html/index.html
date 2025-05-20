@@ -26,14 +26,20 @@
         </div>
 
         <!-- Campo común: contraseña -->
-        <input name="contrasena" placeholder="Contraseña" type="password" required/>
+          <div class="box__password">
+            <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" required />
+            <button type="button" id="togglePassword">
+              <img class="icon__pass" id="viewPassword" src="../img/icons8-eye-24.png" alt="Ver contraseña">
+            </button>
+          </div>
+
         <!-- Rol seleccionado -->
         <select name="rol" id="rol" class="select_container" onchange="toggleFields()" required >
           <option value="empresa">Empresa</option>
           <option value="admin">Admin SENA</option>
           <option value="super_admin">Super Admin</option>
         </select>
-        <button type="submit">Iniciar Sesión</button>
+        <button type="submit" class="login__button">Iniciar Sesión</button>
       </form>
 
       <a href="Forgot.html">¿Olvidó su contraseña?</a>
@@ -43,25 +49,7 @@
       </div>
     </main>
   </div>
-  <script>//funcion para cambiar de rol en el login
-function toggleFields() {
-    const rol = document.querySelector('select[name="rol"]').value;
-    const correoGroup = document.getElementById('correoGroup');
-    const nitGroup = document.getElementById('nitGroup');
-    const CrearUsu = document.getElementById('Crear');
-
-    if (rol === 'empresa') {
-    nitGroup.style.display = 'block';
-    correoGroup.style.display = 'none';
-    CrearUsu.style.display = 'block';
-    } else {
-    nitGroup.style.display = 'none';
-    correoGroup.style.display = 'block';
-    CrearUsu.style.display = 'none';
-    }
-}
-window.onload = toggleFields;
-</script>
-
+  <script src="../js/changerol.js"></script>
+<script src="../js/viewpassword.js"></script>
 </body>
 </html>
