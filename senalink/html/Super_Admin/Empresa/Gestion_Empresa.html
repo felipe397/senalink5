@@ -1,53 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>SenaLink - Empresas</title>
-  <!-- Tus enlaces a fuentes, CSS y favicon -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined…"/>
+  
+  <!-- Enlace a Google Fonts para Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap"/>
+  
+  <!-- Enlace a Font Awesome para los íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- Tu archivo CSS -->
   <link rel="stylesheet" href="../../../css/styles.css"> 
+  
+  <!-- Favicon -->
   <link rel="shortcut icon" href="../../../img/Favicon1.png">
 </head>
 <body>
     <header class="header__home">
-        <button id="menu-toggle" class="menu-toggle">
-            <img src="../../../icon/menu_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Menu Icon" />
+        <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">
+            <img src="../../../icon/menu_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Ícono de menú" />
         </button>
-        <img class="icons" src="../../../icon/account_circle_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Account Icon">
+        <img class="icons" src="../../../icon/account_circle_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Ícono de cuenta de usuario">
     </header>
     
     <nav id="menu" class="menu">
         <div class="menu__logo">
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink">
         </div>
-    <ul class="menu__list">
-        <li class="menu__item"><a href="Gestion_Empresa.html" class="menu__link">Empresas</a></li>
-        <li class="menu__item"><a href="../Programa_Formacion/Gestion_Programa.html" class="menu__link">Programa de formacion</a></li>
-        <li class="menu__item"><a href="../Formulario.html" class="menu__link">Diagnostico</a></li>
-        <li class="menu__item"><a href="CreateEmpresa.html" class="menu__link">Crear Programa</a></li>
-        <li class="menu__item"><a href="../Home.html" class="menu__link">Volver</a></li>
-    </ul>
+        <ul class="menu__list">
+            <li class="menu__item"><a href="Gestion_Empresa.html" class="menu__link">Empresas</a></li>
+            <li class="menu__item"><a href="../Programa_Formacion/Gestion_Programa.html" class="menu__link">Programa de formación</a></li>
+            <li class="menu__item"><a href="../Formulario.html" class="menu__link">Diagnóstico</a></li>
+            <li class="menu__item"><a href="CreateEmpresa.html" class="menu__link">Crear Programa</a></li>
+            <li class="menu__item"><a href="../Home.html" class="menu__link">Volver</a></li>
+        </ul>
     </nav>
 
-  <main class="main__content">
-    <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
-    
-    <section class="search-container">
-      <input type="text" placeholder="Buscar..." id="input-buscar">
-      <i class="fas fa-search search-icon"></i>
-    </section>
-    
-    <section class="cardh__container" id="cardh__container">
-      <!-- Aquí irán las tarjetas generadas -->
-    </section>
-  </main>
-
+ <main class="main__content">
+        <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
+        
+        <section class="search-container">
+            <input type="text" placeholder="Buscar...">
+            <i class="fas fa-search search-icon"></i>
+        </section>
+        
+        <section class="cardh__container">
+            <article class="cardh">
+                <a href="Empresa.html">
+                    <div class="card-text">
+                        <h2 class="card-title">Empresa ejemplo</h2>
+                        <p class="card-subtitle">Ciudad-departamento</p>
+                    </div>
+                </a>
+            </article>
+            
+            <article class="cardh">
+                <div class="card-text">
+                    <h2 class="card-title">Empresa ejemplo</h2>
+                    <p class="card-subtitle">Ciudad-departamento</p>
+                </div>
+            </article>
+            
+            <article class="cardh">
+                <div class="card-text">
+                    <h2 class="card-title">Empresa ejemplo</h2>
+                    <p class="card-subtitle">Ciudad-departamento</p>
+                </div>
+            </article>
+            
+            <article class="cardh">
+                <div class="card-text">
+                    <h2 class="card-title">Empresa ejemplo</h2>
+                    <p class="card-subtitle">Ciudad-departamento</p>
+                </div>
+            </article>
+            
+            <article class="cardh">
+                <div class="card-text">
+                    <h2 class="card-title">Empresa ejemplo</h2>
+                    <p class="card-subtitle">Ciudad-departamento</p>
+                </div>
+            </article>
+            
+            <article class="cardh">
+                <div class="card-text">
+                    <h2 class="card-title">Empresa ejemplo</h2>
+                    <p class="card-subtitle">Ciudad-departamento</p>
+                </div>
+            </article>
+            
+            <article class="cardh">
+                <div class="card-text">
+                    <h2 class="card-title">Empresa ejemplo</h2>
+                    <p class="card-subtitle">Ciudad-departamento</p>
+                </div>
+            </article>
+            
+            <article class="cardh">
+                <div class="card-text">
+                    <h2 class="card-title">Empresa ejemplo</h2>
+                    <p class="card-subtitle">Ciudad-departamento</p>
+                </div>
+            </article>
+        </section>
+    </main>
 
   <script src="../../../js/script.js"></script>
   <script src="../../../js/viewempresas.js"></script>
-    <footer>
-        <p>@ Todos los derechos reservados. SenaLink</p>
-    </footer>
+
+  <footer>
+    <p>@ Todos los derechos reservados. SenaLink</p>
+  </footer>
 </body>
 </html>
+
+
+
+
+
