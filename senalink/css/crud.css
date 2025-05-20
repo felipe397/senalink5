@@ -65,6 +65,7 @@ p{
   width: auto;
 }
 
+
 .header__home img:first-of-type {
   order: 2; 
   cursor: pointer;
