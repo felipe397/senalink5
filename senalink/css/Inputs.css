@@ -124,6 +124,7 @@
   min-height: 100%;
   flex-direction: column;
   margin: -10rem 0 -10rem 0;
+  margin-top: 0.3rem;
 }
 .container__forms{
   background-color: white;
@@ -140,6 +141,8 @@
   background-color: white;
   padding: 4rem;
   border-radius: 0.8rem;
+  margin-top: 3rem;
+  margin-bottom: 14rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   width: 60rem;
   border-radius: 0.8rem;
