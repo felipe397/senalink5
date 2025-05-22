@@ -32,9 +32,7 @@ button{
     padding: 1.2rem 2.4rem;
 }
 
-p{
-  margin-inline: 1rem;
-}
+
 .header__login {
   display: flex;
   justify-content: center;
@@ -126,6 +124,17 @@ p{
   max-width: 100%;
   margin-top: 1.1rem;
   margin-bottom: 0.4rem;
+}
+
+.p-container{
+  text-align: left;
+}
+
+.skills-text {
+  list-style-position: inside; /* Las viñetas quedan dentro del contenido */
+  padding-left: 0;             /* Quita sangría por defecto */
+  text-align: left;            /* Alinea el texto a la izquierda */
+  margin-left: 0;              /* Elimina margen izquierdo si lo hay */
 }
 
 .select_container{
