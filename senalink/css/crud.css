@@ -295,7 +295,8 @@ td {
   .form__buttons{
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 4rem;
+    border-radius: 2rem;
   }
 .inputs__container{
   display: grid;
