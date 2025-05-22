@@ -298,6 +298,8 @@ td {
     gap: 4rem;
     border-radius: 2rem;
   }
+
+
 .inputs__container{
   display: grid;
   grid-template-columns: repeat(2,1fr);
