@@ -56,3 +56,39 @@
 <script src="../js/viewpassword.js"></script>
 </body>
 </html>
+
+
+
+
+
+<!-- FORMULARIO DE REGISTRO -->
+                <form action="../../controllers/UsuarioController.php" method="POST">
+                    <div class="inputs__container">
+                        <input class="input-field" name="nit" placeholder="Número NIT" type="text" required/>
+                        <input class="input-field" name="representante_legal" placeholder="Representante legal" type="text" required/>
+                        <input class="input-field" name="razon_social" placeholder="Razon social" type="text" required/>
+                        <input class="input-field" name="telefono" placeholder="Número telefónico" type="text" required/>
+                        <input class="input-field" name="correo" placeholder="Correo electrónico" type="email" required/>
+                        <input class="input-field" name="direccion" placeholder="Dirección" type="text" required/>
+                        <select class="select_container" name="tipo_empresa">
+                            <option selected disabled>Sector Económico</option>
+                            <option>Agrícola</option>
+                            <option>Industrial</option>
+                            <option>Servicios</option> 
+                        </select>
+                        <input class="input-field" name="contrasena" placeholder="Contraseña" type="password" required/>
+                        <input class="input-field" type="hidden" name="rol" value="empresa" required/>
+                    </div>
+
+                    <div class="buttons__container">
+                        <button type="submit" class="buttons__crud">Crear</button>
+                        <a href="../index.html" class="buttons__crud">Volver</a>
+                    </div>
+                </form>
+            </main>
+        </div>
+ <footer>
+    <p>@ Todos los derechos reservados.SenaLink</p>
+  </footer>
+</body>
+</html>
