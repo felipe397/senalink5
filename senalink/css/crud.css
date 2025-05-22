@@ -129,6 +129,10 @@ button{
   text-align: left;
 }
 
+.cuestionario-container{
+  text-align: left;
+}
+
 .skills-text {
   list-style-position: inside; /* Las viñetas quedan dentro del contenido */
   padding-left: 0;             /* Quita sangría por defecto */
@@ -291,8 +295,11 @@ td {
   .form__buttons{
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 4rem;
+    border-radius: 2rem;
   }
+
+
 .inputs__container{
   display: grid;
   grid-template-columns: repeat(2,1fr);
@@ -326,6 +333,6 @@ footer{
     width: 100%;
     padding: 1rem;
 }
-.container_p{
+.p-container{
   text-align: left;
 }
