@@ -129,6 +129,10 @@ button{
   text-align: left;
 }
 
+.cuestionario-container{
+  text-align: left;
+}
+
 .skills-text {
   list-style-position: inside; /* Las viñetas quedan dentro del contenido */
   padding-left: 0;             /* Quita sangría por defecto */
