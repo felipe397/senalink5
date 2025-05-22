@@ -178,6 +178,7 @@ th, td {
 th {
   background-color: var(--Secundary-900);
   color:var(--white);
+  text-align: center;
 }
 
 td {
