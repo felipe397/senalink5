@@ -130,8 +130,6 @@
   align-items: center;
 }
 .imglogin{
-  width: 70%;
-  height: 70%;
   object-fit: cover;
 }
 .container__forms{
