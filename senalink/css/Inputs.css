@@ -100,9 +100,9 @@
   align-items: center;
 }
 
-.logo {
-  max-height: 4000rem;
-  width: auto;
+.logo__sena {
+    height: 4.8rem; 
+    justify-content: center;
 }
 
 .logo__senalink{
@@ -117,14 +117,22 @@
     height: 1rem;
     width: 100%;
 }
+
 .container{
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100%;
-  flex-direction: column;
-  margin: -10rem 0 -10rem 0;
-  margin-top: 0.3rem;
+  height: 100%;
+}
+.left_side{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imglogin{
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
 }
 .container__forms{
   background-color: white;
@@ -141,14 +149,13 @@
   background-color: white;
   padding: 4rem;
   border-radius: 0.8rem;
-  margin-top: 3rem;
-  margin-bottom: 14rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   width: 60rem;
   border-radius: 0.8rem;
   box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
   text-align: center;
   max-width: 100%;
+  max-height: 100%;
 }
 .container__forms--login {
   background-color: white;
@@ -159,8 +166,6 @@
   border-radius: 0.8rem;
   box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
   text-align: center;
-  max-width: 100%;
-  max-height: 100%;
 }
 .profiles__container{
   display: flex;
@@ -189,6 +194,18 @@
     margin-top: 2rem;
     padding: 1.2rem 2.4rem;
 }
+.btn {
+  margin: 1rem;
+  border: 1px solid #ccc;
+  font-size: var(--h4-font-size);
+  cursor: pointer;
+  border-radius: 0.4rem;
+  height: 4rem;
+  background-color:var(--Secundary-950);
+  color:var(--white);
+  padding: 1.2rem 2.4rem;
+}
+
 .box__password {
   position: relative;
   display: flex;
@@ -288,6 +305,7 @@
   .header__login {
     flex-direction: column; 
     align-items: center; 
+    height: 11rem;
   }
   .header__login .logo__sena {
     margin-left: 1rem;
@@ -297,11 +315,12 @@
   .linea-verde{
     top: 11rem;
   }
-  .logo{
-    margin-top: 1rem;
+  .left_side{
+    display: none;
   }
 }
-
+@media (max-width: 768px) {
+}
 footer {
     background-color: var(--Secundary-950);
     color: white;

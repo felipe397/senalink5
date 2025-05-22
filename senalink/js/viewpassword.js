@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Opcional: cambia el ícono según el estado
     eyeIcon.src = isPassword 
-      ? "../img/icons8-invisible-24.png" // imagen de ojo cerrado
-      : "../img/icons8-eye-24.png";      // imagen de ojo abierto
+      ? "../img/icons8-eye-24.png" // imagen de ojo abierto
+      : "../img/icons8-invisible-24.png";      // imagen de ojo cerrado
   });
 });

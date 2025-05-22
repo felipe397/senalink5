@@ -35,21 +35,45 @@ button{
 p{
   margin-inline: 1rem;
 }
+.header__login {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 5.8rem;
+  padding: 0 1rem;
+  background-color: var(--primary-950);
+  width: 100%;
+}
 
+.header__left{
+  display: flex;
+  align-items: center;
+  flex: 1;
 
-.header__home {
-    width: 100%;
-    height: 4.8rem;
-    padding: 1rem 2rem; /* Add padding for spacing */
-    background-color: var(--primary-950);
-    max-width: 100%; /* Make logos responsive */
+}
+.header__center,
+.header__right {
+  flex: 1;
+  display: flex;
+  justify-items:start;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo__sena {
+    height: 4.8rem; 
+    justify-content: center;
+}
+
+.logo__senalink{
+  height: 4rem;
+  max-width: 100%;
 }
 
 .linea-verde {
     background-color: var(--primary-600);
     height: 1rem;
     width: 100%;
-    border-radius: 0;
     padding: 0;
     max-width: 100%;
 }
@@ -86,24 +110,22 @@ p{
 
 .container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100%;
-  margin: 1rem;
-} 
-.container__crud{
+  padding: 2rem; /* Esto evita que el contenido se pegue a los bordes */
+  flex: 1;
+}
+
+.container__crud {
   background-color: white;
   padding: 4rem;
   border-radius: 0.8rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-  width: 60rem;
-  border-radius: 0.8rem;
-  box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
+  box-shadow: 0.5rem 0.5rem 2rem rgba(0, 48, 77, 1);
   text-align: center;
+  width: 60rem;
   max-width: 100%;
-  margin-top: 6rem;
 }
+
 .select_container{
     width: 100%;
     height: 5.6rem;
@@ -113,38 +135,39 @@ p{
     font-size: var(--h4-font-size);
     border-radius: 0.4rem;
 }
-.container__crud--disable{
-  height: 100%;
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-  text-align: center;
-  margin-top: 4rem;
-}
 .container--disable {
-  background-color:var(--Gray-200);
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.container__crud--disable{
+  background-color: var(--Gray-200);
   padding: 4rem;
   border-radius: 0.8rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  width: 60rem;
   border-radius: 0.8rem;
-  box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1); 
+  box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
+  text-align: center;
+  max-width: 100%;
+  max-height: 100%;
+}
+table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .table-container {
-  width: 50rem;
-  margin-top: 10rem;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: hidden;
   padding: 1rem;
   
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse; /* Elimina el espacio entre celdas */
-  display: flex;
-}
+
 
 th, td {
   padding: 10px;
@@ -164,14 +187,22 @@ td {
 }
 .table{
   display: flex;
-  margin:  0;
   justify-content: center;
+  align-items: center;
+  flex: 1;
 }
-.content-wrapper {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
+.btn__report {
+  width: 100%;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  font-size: var(--h4-font-size);
+  cursor: pointer;
+  border-radius: 0.4rem;
+  height: 4rem;
+  background-color:var(--Secundary-950);
+  color:var(--white);
+  padding: 1.2rem 2.4rem;
 }
 
   
@@ -180,11 +211,12 @@ td {
   .buttons__container{
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
   }
   .buttons__crud{
     height: 4rem;
-    margin-bottom: 6rem;
+    margin-top: 2rem;
     padding: 1.2rem 2.4rem;
     background-color: var(--Secundary-950);
     color: white;
@@ -275,12 +307,9 @@ td {
     display: grid;
     grid-template-columns: repeat(2,1fr);
   }
-}
-.footer__crud {
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  height: 100%;
+  .container {
+    width: 90%; /* o 90%, según tu gusto */
+  }
 }
 footer{
     background-color: var(--Secundary-950);
@@ -288,5 +317,4 @@ footer{
     text-align: center;
     width: 100%;
     padding: 1rem;
-    margin-top: 7rem;
 }
