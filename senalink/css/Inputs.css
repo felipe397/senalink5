@@ -158,15 +158,83 @@
   max-height: 100%;
 }
 .container__forms--login {
+  position: relative;
   background-color: white;
   padding: 4rem;
   border-radius: 0.8rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0.5rem 0.5rem 2rem rgba(0, 48, 77, 1);
   width: 50rem;
-  border-radius: 0.8rem;
-  box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
   text-align: center;
+  overflow: hidden;
 }
+/* Línea animada única */
+.border-line {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #00cfff;
+  filter: drop-shadow(0 0 6px #00cfff);
+  animation: traceBorder 4s linear infinite;
+}
+
+/* Animación continua */
+@keyframes traceBorder {
+  0% {
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+  }
+  25% {
+    width: 100%;
+    height: 2px;
+  }
+  26% {
+    width: 2px;
+    top: 0;
+    left: 100%;
+    height: 0;
+  }
+  50% {
+    top: 100%;
+    left: 100%;
+    height: 100%;
+  }
+  51% {
+    top: 100%;
+    left: 100%;
+    height: 2px;
+    width: 0;
+  }
+  75% {
+    width: 100%;
+    left: 0;
+    top: 100%;
+  }
+  76% {
+    height: 0;
+    top: 100%;
+    left: 0;
+    width: 2px;
+  }
+  100% {
+
+
+
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+}
+
+
+/* Mejora rendimiento de animaciones */
+* {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+
 .profiles__container{
   display: flex;
   justify-content: center;
@@ -256,10 +324,6 @@
   
   .form__buttons{
     display: flex;
-  }
-  .container button {
-
-  
   }
   
   .container a {
