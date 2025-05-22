@@ -165,72 +165,82 @@
   text-align: center;
   overflow: hidden;
 }
-/* Línea animada única */
-.border-line {
+/* Base para cada línea */
+/* Línea general */
+.line {
   position: absolute;
-  width: 2px;
-  height: 2px;
   background: #00cfff;
-  filter: drop-shadow(0 0 6px #00cfff);
-  animation: traceBorder 4s linear infinite;
+  filter: drop-shadow(0 0 5px #00cfff) drop-shadow(0 0 10px #00cfff);
+  opacity: 0;
 }
 
-/* Animación continua */
-@keyframes traceBorder {
-  0% {
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-  }
-  25% {
-    width: 100%;
-    height: 2px;
-  }
-  26% {
-    width: 2px;
-    top: 0;
-    left: 100%;
-    height: 0;
-  }
-  50% {
-    top: 100%;
-    left: 100%;
-    height: 100%;
-  }
-  51% {
-    top: 100%;
-    left: 100%;
-    height: 2px;
-    width: 0;
-  }
-  75% {
-    width: 100%;
-    left: 0;
-    top: 100%;
-  }
-  76% {
-    height: 0;
-    top: 100%;
-    left: 0;
-    width: 2px;
-  }
-  100% {
+/* Línea arriba */
+.line-top {
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  animation: lineTop 4s linear infinite;
+}
 
+@keyframes lineTop {
+  0%   { width: 0; opacity: 1; }
+  20%  { width: 100%; opacity: 1; }
+  25%  { opacity: 0; }
+  100% { opacity: 0; width: 100%; }
+}
 
+/* Línea derecha */
+.line-right {
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 0;
+  animation: lineRight 4s linear infinite;
+}
 
-    height: 100%;
-    top: 0;
-    left: 0;
-  }
+@keyframes lineRight {
+  0%, 24%  { height: 0; opacity: 0; }
+  25%      { opacity: 1; }
+  45%      { height: 100%; opacity: 1; }
+  50%      { opacity: 0; }
+  100%     { opacity: 0; height: 100%; }
+}
+
+/* Línea abajo */
+.line-bottom {
+  bottom: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  animation: lineBottom 4s linear infinite;
+}
+
+@keyframes lineBottom {
+  0%, 49%  { width: 0; opacity: 0; }
+  50%      { opacity: 1; }
+  70%      { width: 100%; opacity: 1; }
+  75%      { opacity: 0; }
+  100%     { opacity: 0; width: 100%; }
+}
+
+/* Línea izquierda */
+.line-left {
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  animation: lineLeft 4s linear infinite;
+}
+
+@keyframes lineLeft {
+  0%, 74%  { height: 0; opacity: 0; }
+  75%      { opacity: 1; }
+  95%      { height: 100%; opacity: 1; }
+  100%     { opacity: 0; height: 100%; }
 }
 
 
-/* Mejora rendimiento de animaciones */
-* {
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
 
 
 .profiles__container{
