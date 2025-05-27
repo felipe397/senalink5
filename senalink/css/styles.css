@@ -43,7 +43,11 @@ button{
     max-width: 100%; /* Make logos responsive */
     height: auto; /* Maintain aspect ratio */
 }
-
+.account__button{
+    background: none;
+    border: none;
+    padding: 0;
+}
 .linea-verde {
     background-color: var(--primary-600);
     height: 1rem;
