@@ -167,6 +167,10 @@
   color: white;
 }
 
+a{
+  color: var(--white);
+}
+
 .btn.edit:hover {
   background-color: var(--Secundary-950);;
 }
