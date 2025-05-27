@@ -336,3 +336,10 @@ footer{
 .p-container{
   text-align: left;
 }
+
+.linea-azul-difuminada {
+
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(to top, rgb(0, 48, 77) 1px, transparent 50%);
+}

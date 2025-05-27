@@ -339,3 +339,10 @@ footer {
     justify-self: end;
     width: 100%;
 }
+
+.linea-azul-difuminada {
+
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(to top, rgb(0, 48, 77) 1px, transparent 50%);
+}
