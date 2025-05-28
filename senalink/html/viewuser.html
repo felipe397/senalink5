@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Iglesia Vida y Esperanza A.D</title>
-  <link rel="stylesheet" href="../../css/viewuser.css" />
+  <link rel="stylesheet" href="../css/viewuser.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
 <header class="header">
   <div class="header__left">
-    <img src="../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
+    <img src="../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
   </div>
 
   <div class="header__center">
@@ -25,7 +25,7 @@
   <div class="linea-verde"></div>
   <main class="main">
         <div class="card">
-          <img src="../../img/logo-proyecto1.png"class="logo__Senalink">
+          <img src="../img/logo-proyecto1.png"class="logo__Senalink">
           <div class="user-avatar">
               <i class="fas fa-user"></i>
           </div>
@@ -44,12 +44,13 @@
           </div>
           <div class="actions">
             <button class="btn edit">Editar</button>
-            <button class="btn edit"><a href="../Super_Admin/Home.html">Volver</button></a>
+            <button onclick="goBack()" class="btn edit">Volver</button>
             
           </div>
       </div>
   </main>
      <div class="linea-azul-difuminada"></div>
+    <script src="../js/backbutton.js"></script>
   <footer>
     <p>@ Todos los derechos reservados. SenaLink</p>
   </footer>
