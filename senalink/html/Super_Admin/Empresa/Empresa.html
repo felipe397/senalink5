@@ -61,7 +61,7 @@
                     ¿Está seguro?
                 </p>
                 <div class="buttons__disable">
-                    <button class="cancel-button">Cancelar</button>
+                    <button id="confirm-no" class="cancel-button">Cancelar</button>
                     <button id="confirm-yes" class="disable-button">Inhabilitar</button>
                 </div>
                 </div>
@@ -78,7 +78,7 @@
 
     if (empresaId) {
         // Hacer una solicitud GET al backend para obtener los detalles de la empresa
-        fetch(`http://localhost/senalink5/senalink/controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
+        fetch(`http://localhost/senalink5/senalink5/senalink/controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
             .then(response => response.json())
             .then(data => {
                 // Verificar si el servidor devolvió un error
