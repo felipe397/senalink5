@@ -33,6 +33,17 @@ button{
 }
 
 
+.btn.edit {
+  background-color: var(--Secundary-950);
+  color: white;
+}
+
+
+.btn.edit:hover {
+  background-color: var(--Secundary-950);;
+}
+
+
 .header__login {
   display: flex;
   justify-content: center;

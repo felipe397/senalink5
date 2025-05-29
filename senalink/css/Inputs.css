@@ -283,6 +283,16 @@
   padding: 1.2rem 2.4rem;
 }
 
+.btn.edit {
+  background-color: var(--Secundary-950);
+  color: white;
+}
+
+
+.btn.edit:hover {
+  background-color: var(--Secundary-950);;
+}
+
 .box__password {
   position: relative;
   display: flex;
