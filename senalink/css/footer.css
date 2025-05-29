@@ -1,10 +1,12 @@
 .sector-empleo {
     padding: 0.7rem 1.7rem;
-    background-color: var(--alternate-background);
+    background-color: #04324d;
 }
 
 .sector-empleo__text {
     margin: auto;
+    max-width: var(--web-margin);
+    color: var(--color-info);
     display: flex;
     gap: 0.625rem;
     justify-items: center;
@@ -13,6 +15,7 @@
 
 .entidades {
     margin: auto;
+    max-width: var(--web-margin);
     display: grid;
     grid-template-columns: 1.88fr repeat(4, 1fr);
     gap: 24px;
@@ -88,7 +91,6 @@
 .more-information__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    justify-items: end;
 }
 
 .more-information__item {
@@ -171,12 +173,17 @@
 .footer__redes {
     display: flex;
     gap: 15px;
+    margin: 2rem 0;
 }
-
+.footer__redes--content{
+    flex-direction: column;
+    text-align: center;
+}
 .footer__redes-text {
     font-size: 14px;
     text-decoration: none;
 }
+
 
 .footer__terminos {
     display: flex;
