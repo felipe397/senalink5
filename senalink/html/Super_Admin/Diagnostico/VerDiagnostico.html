@@ -44,7 +44,7 @@
                 <a href="ListarDiagnostico.html" class="buttons__crud">Listar</a>
                 <button onclick="confirmInhabilitar('DiagnosticoInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
                 <a href="DiagnosticoReport.html" class="buttons__crud">Reporte</a>
-                <a href="../Formulario.html" class="buttons__crud">Volver</a>
+                <button onclick="goBack()" class="btn edit">Volver</button>
                 <div id="custom-confirm" class="modal">
                     <div class="modal-content">
                         <h1>Inhabilitar</h1>
@@ -59,7 +59,7 @@
         </main>
     </div>
     <script src="../../../js/script.js"></script> <!-- Agregar el JavaScript para el menú -->
-</body>
+    <script src="../../../js/backbutton.js"></script>
 </html>
 <footer>
     <p>@ Todos los derechos reservados.SenaLink</p>
