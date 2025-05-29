@@ -37,7 +37,7 @@ img{
     overflow: clip;
 }
 .gov{
-    background-color: #3366cc;
+    background-color: var(--Secundary-950);
 }
 .gov__container{
     margin: auto;
