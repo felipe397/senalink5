@@ -33,6 +33,17 @@ button{
 }
 
 
+.btn.edit {
+  background-color: var(--Secundary-950);
+  color: white;
+}
+
+
+.btn.edit:hover {
+  background-color: var(--Secundary-950);;
+}
+
+
 .header__login {
   display: flex;
   justify-content: center;
@@ -114,7 +125,7 @@ button{
 }
 
 .container__crud {
-  background-color: white;
+  background-color: var(--white);
   padding: 4rem;
   border-radius: 0.8rem;
   box-shadow: 0.5rem 0.5rem 2rem rgba(0, 48, 77, 1);
@@ -173,7 +184,7 @@ table {
   justify-content: center;
 }
 .table-container {
-  background-color: #fff;
+  background-color: var(--white);
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 1rem;
@@ -234,7 +245,7 @@ td {
     margin-top: 2rem;
     padding: 1.2rem 2.4rem;
     background-color: var(--Secundary-950);
-    color: white;
+    color: var(--white);
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -255,7 +266,7 @@ td {
   }
   
   .modal-content {
-    background-color: white;
+    background-color: var(--white);
     margin: 15% auto; /* Centra la ventana */
     padding: 20px;
     border: 1px solid #888;
@@ -284,7 +295,7 @@ td {
   }
   .disable-button {
     background-color: #1a3d5d;
-    color: #fff;
+    color: var(--white);
   }
   
   span{
@@ -328,7 +339,7 @@ td {
 }
 footer{
     background-color: var(--Secundary-950);
-    color: white;
+    color: var(--white);
     text-align: center;
     width: 100%;
     padding: 1rem;
