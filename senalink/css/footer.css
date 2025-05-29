@@ -1,11 +1,13 @@
+@import url(variables.css);
 .sector-empleo {
     padding: 0.7rem 1.7rem;
     background-color: #04324d;
+    color: var(--white);
 }
 
 .sector-empleo__text {
     margin: auto;
-    max-width: var(--web-margin);
+    max-width: 1336px;
     color: var(--color-info);
     display: flex;
     gap: 0.625rem;
@@ -15,7 +17,7 @@
 
 .entidades {
     margin: auto;
-    max-width: var(--web-margin);
+    max-width: 1366px;
     display: grid;
     grid-template-columns: 1.88fr repeat(4, 1fr);
     gap: 24px;
@@ -35,11 +37,12 @@
 
 
 .gobierno {
-    background-color: var(--alternate-background);
+    background-color: #04324d;
+    color: var(--white);
 }
 
 .gobierno__container {
-    max-width: var(--web-margin);
+    max-width: 1366px;
     margin: auto;
     display: grid;
     grid-template-columns: 3fr repeat(6, 1fr);
@@ -100,6 +103,7 @@
 .more-information__item--text {
     color: var(--alternate-background);
     font-weight: bold;
+    font-size:var(--h5-font-size);
 }
 
 .more-information__item--img {
@@ -148,7 +152,7 @@
 
 .more-information__container,
 .footer__text {
-    max-width: var(--web-margin);
+    max-width: 1366px;
 }
 
 .entidades__link-img {
@@ -165,7 +169,7 @@
 }
 
 .footer__redes-container{
-    max-width: var(--web-margin);
+    max-width: 1366px;
     margin: auto;
 }
 

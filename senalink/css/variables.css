@@ -77,4 +77,14 @@
     --h4-line-height: normal;
     --h4-font-weight: 400;
     --h4-font-style: normal;
+    --h5-font-family: 'Calibri-Regular', sans-serif;
+    --h5-font-size: 14px;
+    --h5-line-height: normal;
+    --h5-font-weight: 400;
+    --h5-font-style: normal;
+    --h6-font-family: 'Calibri-Regular', sans-serif;
+    --h6-font-size: 12px;
+    --h6-line-height: normal;
+    --h6-font-weight: 400;
+    --h6-font-style: normal;
   }
