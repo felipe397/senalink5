@@ -49,7 +49,7 @@
                 <a href="#" class="buttons__crud">Listar</a>
                 <button onclick="confirmInhabilitar('EmpresaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
                 <a href="EmpresaReport.html" class="buttons__crud">Reporte</a>
-                <a href="Gestion_Empresa.html" class="buttons__crud">Volver</a>
+                <button onclick="goBack()" class="btn edit">Volver</button>
             </div>
 
             <!-- Modal de confirmación -->
@@ -71,6 +71,7 @@
 
 
     <script src="../../../js/script.js"></script>
+    <script src="../../../js/backbutton.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
     // Obtener el ID desde la URL
