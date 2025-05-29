@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SenaLink</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/crud.css">
+    <link rel="shortcut icon" href="../../../img/Favicon1.png"> <!-- Favicon -->
+</head>
+<body>
+    <header class="header__login">
+        <div class="header__left">
+            <img src="../../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
+        </div>
+
+        <div class="header__center">
+        </div>
+
+        <div class="header__right">
+            <!-- Espacio vacío o podrías poner un botón u otro logo aquí -->
+        </div>
+        </header>
+    <div class="linea-verde"></div>
+    <div class="container">
+        <main class="container__crud">
+            <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
+            <div class="p-container">
+            <p><strong>Código:</strong> 228118</p>
+            <p><strong>Ficha:</strong> 2896365</p>
+            <p><strong>Tipo de programa:</strong> Tecnólogo</p>
+            <!-- Nombre del programa -->
+            <p class="program-title"><strong>Nombre del programa:</strong > Análisis y desarrollo de software</p>
+            <p><strong>Número de aprendices:</strong> 21</p>
+            <p class="program-description"><strong>Descripcion:</strong>Los aprendices implementaran conocimiento en el ciclo de vida del software, requisitos, arquitectura, pruebas y despliegue de software.<br></p>
+            
+
+            <!-- Habilidades adquiridas -->
+            <!-- Habilidades adquiridas -->
+            <!-- Habilidades adquiridas -->
+            <div class="skills-container">
+                <ul class="skills-text">
+                    <h4>Habilidades requeridas:</h4>
+                    <li>Creación de aplicaciones para páginas web y teléfonos móviles.</li>
+                    <li>Conocimiento en lenguajes de programación como Java, Python, JavaScript, entre otros.</li>
+                    <li>Diseño y manejo de bases de datos.</li>
+                    <li>Capacidad para entender lo que necesita un sistema y cómo debe funcionar.</li>
+                    <li>Pruebas de programas para asegurar su buen funcionamiento.</li>
+                    <li>Trabajo colaborativo y organización de proyectos con métodos ágiles.</li>
+                </ul>
+            </div>
+
+
+
+         
+            <!-- Descripción debajo del nombre del programa -->
+            <!-- Información adicional -->
+            <p><strong>Fecha de finalización:</strong> 02/03/2023<p>
+            <p><strong>Estado:</strong> habilitado</p>
+            </div>
+            <!-- Botones CRUD -->
+            <div class="buttons__container">
+                <a href="ProgramaEdit.html" class="buttons__crud">Actualizar</a>
+                <button class="buttons__crud">Listar</button>
+                <button onclick="confirmInhabilitar('ProgramaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
+                <a href="ProgramaReport.html" class="buttons__crud">Reporte</a>
+                <button onclick="goBack()" class="buttons__crud">Volver</button>
+
+            </div>
+
+            <!-- Modal de Confirmación -->
+            <div id="custom-confirm" class="modal">
+                <div class="modal-content">
+                    <h1>Inhabilitar</h1>
+                    <p>Una vez el usuario esté inhabilitado no podrá sufrir cambios hasta que el mismo sea habilitado nuevamente. ¿Está seguro?</p>
+                    <div class="buttons__disable">
+                        <button id="confirm-no" class="cancel-button" onclick="closeConfirm()">Cancelar</button>
+                        <button id="confirm-yes" class="disable-button">Inhabilitar</button>
+                    </div>
+                </div>
+        </main>
+    </div>
+    <script src="../../../js/script.js"></script>
+    <script src="../../../js/backbutton.js"></script>
+
+    
+    <footer>
+        <p>@ Todos los derechos reservados. SenaLink</p>
+    </footer>
+</body>
+</html>
+
