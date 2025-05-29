@@ -344,7 +344,7 @@ footer {
   background: linear-gradient(to top, rgb(0, 48, 77) 1px, transparent 50%);
 }
 .texto-cambiable {
-  color: black; /* Color original */
+  
   transition: color 0.3s ease, transform 0.3s ease;; /* Transición suave */
 }
 
