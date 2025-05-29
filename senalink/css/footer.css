@@ -1,0 +1,306 @@
+.sector-empleo {
+    padding: 0.7rem 1.7rem;
+    background-color: var(--alternate-background);
+}
+
+.sector-empleo__text {
+    margin: auto;
+    display: flex;
+    gap: 0.625rem;
+    justify-items: center;
+    align-items: center;
+}
+
+.entidades {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1.88fr repeat(4, 1fr);
+    gap: 24px;
+    align-items: center;
+    padding: 3rem 1.7rem;
+    justify-items: start;
+}
+
+.entidades__link-img {
+    filter: grayscale(100%);
+    transition: filter 0.2s ease-in-out;
+}
+
+.entidades__link-img:hover {
+    filter: none;
+}
+
+
+.gobierno {
+    background-color: var(--alternate-background);
+}
+
+.gobierno__container {
+    max-width: var(--web-margin);
+    margin: auto;
+    display: grid;
+    grid-template-columns: 3fr repeat(6, 1fr);
+    align-items: center;
+    padding: 3rem 1.7rem;
+    gap: 24px;
+}
+
+.gobierno__ministerio-container {
+    display: flex;
+    font-size: 12px;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+}
+
+.gobierno__ministerio-container--img {
+    align-items: flex-start;
+
+}
+
+.gobierno__img {
+    max-width: 20.875rem;
+}
+
+.gobierno__ministerios-circle {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 20%;
+    display: inline-block;
+}
+
+.gobierno__link {
+    text-decoration: none;
+    width: 109px;
+}
+
+.gobierno__link:hover {
+    text-decoration: underline;
+}
+
+.more-information {
+    background-color: white;
+    font-size: 0.75rem;
+    padding: 3rem 1.7rem;
+
+}
+
+.more-information__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: end;
+}
+
+.more-information__item {
+    flex-direction: column;
+}
+
+.more-information__item--text {
+    color: var(--alternate-background);
+    font-weight: bold;
+}
+
+.more-information__item--img {
+    justify-content: center;
+    align-items: end;
+}
+
+.more-information__icontec-img {
+    height: 7.813rem;
+}
+
+.more-information__icontec {
+    padding: 0.9rem;
+    justify-content: end;
+}
+
+/* Reutilizable */
+
+.more-information__icontec .more-information__item,
+.gobierno__ministerios,
+.footer__text {
+    display: flex;
+    
+}
+
+.more-information,
+.gobierno__link,
+.footer__container {
+    color: var(--color-info)
+}
+
+.more-information__container,
+.footer__text {
+    margin: auto;
+}
+
+.gobierno__ministerios {
+    gap: 0.75rem;
+}
+
+.more-information__icontec,
+.gobierno__ministerios,
+.footer__text {
+    align-items: center;
+}
+
+.more-information__container,
+.footer__text {
+    max-width: var(--web-margin);
+}
+
+.entidades__link-img {
+    width: 100%;
+}
+
+.gobierno__img,
+.gobierno__ministerios--img {
+    width: 100%
+}
+
+.more-information__container {
+    flex-direction: column;
+}
+
+.footer__redes-container{
+    max-width: var(--web-margin);
+    margin: auto;
+}
+
+
+.footer__redes {
+    display: flex;
+    gap: 15px;
+}
+
+.footer__redes-text {
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.footer__terminos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer__terminos-text{
+    text-decoration: none;
+    color: #0552c2;
+    font-size: 13px;
+}
+@media (max-width: 1200px) {
+
+    .entidades {
+        grid-template-columns: repeat(4, 1fr);
+        justify-items: center;
+    }
+
+    .entidades__link--ministerio {
+        grid-column: 1/-1;
+    }
+
+    .gobierno__container {
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+    }
+
+    .gobierno__ministerio-container {
+        align-items: center;
+    }
+
+    .gobierno__ministerio-container--img {
+        align-items: center;
+        margin: auto;
+        grid-column: span 3;
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+
+    .gobierno__ministerios {
+        font-size: 0.80rem;
+    }
+
+    .gobierno__ministerios--img {
+        justify-content: center;
+    }
+
+    .more-information__container {
+        display: flex;
+
+    }
+
+    .more-information__item--text {
+        align-items: start;
+    }
+
+    /* Reutilizable */
+
+
+    .more-information__container,
+    .more-information__item {
+        align-items: center;
+    }
+
+    .more-information__icontec-img,
+    .gobierno__img {
+        width: 100%;
+    }
+
+    .more-information__container {
+        gap: 1.5rem;
+    }
+
+    .footer__redes {
+        display: flex;
+        gap: 15px;
+        /* flex-direction: column; */
+        flex-wrap: wrap;
+    }
+
+    .footer__terminos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .entidades {
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+    }
+
+    .gobierno__container {
+        grid-template-columns: repeat(auto-fit, minmax(164px, 2fr));
+    }
+
+    .gobierno__ministerio-container--img {
+        grid-column: 1/-1;
+    }
+
+    .gobierno__ministerios {
+        font-size: 0.688rem;
+    }
+
+    .gobierno__ministerio-container {
+        width: 100%;
+    }
+
+    .footer__redes {
+        display: flex;
+        gap: 15px;
+        /* flex-direction: column; */
+        flex-wrap: wrap;
+    }
+
+    .footer__terminos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
