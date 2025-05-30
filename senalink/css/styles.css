@@ -354,3 +354,11 @@ img{
     top: 11rem;
     }
 }
+
+footer{
+    background-color: var(--Secundary-950);
+    color: var(--white);
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+}

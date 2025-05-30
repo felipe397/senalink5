@@ -268,6 +268,7 @@
   
   .form__buttons{
     display: flex;
+    gap: 8.9rem;
   }
   
   .container a {
