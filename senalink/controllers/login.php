@@ -32,7 +32,7 @@ if ($usuario) {
         if ($rol === 'empresa') {
             header("Location: ../html/Empresa/Home.html");
         } elseif ($rol === 'AdminSENA') {
-            header("Location: ../html/Super_Admin/Home.html");
+            header("Location: ../html/AdminSENA/Home.html");
         } elseif ($rol === 'super_admin') {
             // Redirigir a la página de inicio del Super Admin
             header("Location: ../html/Super_Admin/Home.html");

@@ -156,7 +156,7 @@ CREATE TABLE `usuarios` (
   `apellidos` varchar(100) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
-  `rol` enum('empresa','Admin SENA','super_admin') DEFAULT NULL,
+  `rol` enum('empresa','AdminSENA','super_admin') DEFAULT NULL,
   `estado` enum('Activo','Suspendido','Desactivado') DEFAULT 'Activo',
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `nit` varchar(50) DEFAULT NULL,

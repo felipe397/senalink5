@@ -124,6 +124,15 @@ button{
   box-sizing: border-box;
 }
 
+.container__adminSENA {
+  background-color: white;
+  padding: 4rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+
+}
+
+
 .container__crud {
   background-color: var(--white);
   padding: 4rem;
