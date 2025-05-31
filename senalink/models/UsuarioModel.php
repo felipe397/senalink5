@@ -26,46 +26,60 @@ class UsuarioModel {
         return $stmt->fetchColumn() > 0;
     }
 
-    // Crear un nuevo usuario
     public static function crear($datos) {
     try {
         $db = Conexion::conectar();
-
         $rol = $datos['rol'];
 
-        // Solo usamos nombre_empresa si el rol es Empresa
-        $razon_social = ($rol === 'empresa') ? $datos['razon_social'] ?? null : null;
+        if ($rol === 'empresa') {
+            $sql = "INSERT INTO usuarios (
+                        correo, contrasena, rol, estado, fecha_creacion,
+                        nit, direccion, razon_social, telefono, representante_legal, tipo_empresa
+                    ) VALUES (
+                        :correo, :contrasena, :rol, :estado, :fecha_creacion,
+                        :nit, :direccion, :razon_social, :telefono, :representante_legal, :tipo_empresa
+                    )";
 
-        $sql = "INSERT INTO usuarios (
-                    correo, contrasena, rol, estado, fecha_creacion,
-                    nit, direccion, razon_social, telefono,representante_legal,tipo_empresa
-                ) VALUES (
-                    :correo, :contrasena, :rol, :estado, :fecha_creacion,
-                    :nit, :direccion, :razon_social, :telefono,:representante_legal,:tipo_empresa
-                )";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':correo', $datos['correo']);
+            $stmt->bindValue(':contrasena', $datos['contrasena']);
+            $stmt->bindValue(':rol', $rol);
+            $stmt->bindValue(':estado', $datos['estado']);
+            $stmt->bindValue(':fecha_creacion', $datos['fecha_creacion']);
+            $stmt->bindValue(':nit', $datos['nit']);
+            $stmt->bindValue(':direccion', $datos['direccion']);
+            $stmt->bindValue(':razon_social', $datos['razon_social']);
+            $stmt->bindValue(':telefono', $datos['telefono']);
+            $stmt->bindValue(':representante_legal', $datos['representante_legal']);
+            $stmt->bindValue(':tipo_empresa', $datos['tipo_empresa']);
 
-        $stmt = $db->prepare($sql);
+        } else {
+            $sql = "INSERT INTO usuarios (
+                        correo, contrasena, rol, estado, fecha_creacion,
+                        nombres, apellidos, direccion, telefono
+                    ) VALUES (
+                        :correo, :contrasena, :rol, :estado, :fecha_creacion,
+                        :nombres, :apellidos, :direccion, :telefono
+                    )";
 
-        // Asignar todos los valores
-        $stmt->bindValue(':correo', $datos['correo']);
-        $stmt->bindValue(':contrasena', $datos['contrasena']); // ya debe venir hasheada
-        $stmt->bindValue(':rol', $rol);
-        $stmt->bindValue(':estado', $datos['estado']);
-        $stmt->bindValue(':fecha_creacion', $datos['fecha_creacion']);
-        $stmt->bindValue(':nit', $datos['nit']);
-        $stmt->bindValue(':tipo_empresa', $datos['tipo_empresa']);
-        $stmt->bindValue(':direccion', $datos['direccion']);
-        $stmt->bindValue(':razon_social', $razon_social);
-        $stmt->bindValue(':telefono', $datos['telefono']);
-        $stmt->bindValue(':representante_legal', $datos['representante_legal']);
-        $stmt->bindValue(':tipo_empresa', $datos['tipo_empresa']);
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':correo', $datos['correo']);
+            $stmt->bindValue(':contrasena', $datos['contrasena']);
+            $stmt->bindValue(':rol', $rol);
+            $stmt->bindValue(':estado', $datos['estado']);
+            $stmt->bindValue(':fecha_creacion', $datos['fecha_creacion']);
+            $stmt->bindValue(':nombres', $datos['nombres']);
+            $stmt->bindValue(':apellidos', $datos['apellidos']);
+            $stmt->bindValue(':direccion', $datos['direccion']);
+            $stmt->bindValue(':telefono', $datos['telefono']);
+        }
 
         return $stmt->execute();
     } catch (PDOException $e) {
         throw new Exception("Error en la base de datos: " . $e->getMessage());
     }
-    
 }
+
 public static function listarEmpresas() {
     $db = Conexion::conectar();
     $stmt = $db->prepare("SELECT id, razon_social,nit FROM usuarios WHERE rol = 'empresa'");

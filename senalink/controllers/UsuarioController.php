@@ -5,6 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo         = $_POST['correo'] ?? '';
     $contrasena     = $_POST['contrasena'] ?? '';
     $rol            = $_POST['rol'] ?? '';
+    $nombres        = $_POST['nombres'] ?? '';
+    $apellidos      = $_POST['apellidos'] ?? '';
     $estado         = 'Activo';
     $fecha_creacion = date('Y-m-d H:i:s');
 
@@ -53,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashedPassword = password_hash($contrasena, PASSWORD_BCRYPT);
 
     // Crear el array de datos (sin nickname)
+    if ($rol === 'empresa') {
     $datos = [
         'correo'              => $correo,
         'contrasena'          => $hashedPassword,
@@ -66,6 +69,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'razon_social'        => $razon_social,
         'telefono'            => $telefono
     ];
+} else {
+    $datos = [
+        'correo'         => $correo,
+        'contrasena'     => $hashedPassword,
+        'rol'            => $rol,
+        'estado'         => $estado,
+        'fecha_creacion' => $fecha_creacion,
+        'nombres'        => $nombres,
+        'apellidos'      => $apellidos,
+        'direccion'      => $direccion,
+        'telefono'       => $telefono
+    ];
+}
+
 
     // Crear el usuario
     try {

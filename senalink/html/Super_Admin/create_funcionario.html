@@ -27,17 +27,19 @@
             <img alt="SenaLink Logo" src="../../img/logo-proyecto1.png" class="logo__senalink"/>
             
             <!-- FORMULARIO DE REGISTRO ADMINISTRADOR -->
-            <form action="../../controllers/UsuarioController.php" method="POST"></form>               
-                    <input class="input-field" name="nombres" placeholder="Nombre" type="text" required/>
+            <form action="../../controllers/UsuarioController.php" method="POST">               <div class="inputs__container">
+                    <input class="input-field" name="nombres" placeholder="Nombres" type="text" required/>
                     <input class="input-field" name="apellidos" placeholder="Apellidos" type="text" required/>
                     <input class="input-field" name="correo" placeholder="Correo electrónico" type="email" required/>
+
+                    </select>
                     <input class="input-field" name="contrasena" placeholder="Contraseña" type="password" required/>
-                    <input type="hidden" name="rol" value="AdminSENA"/>
+                    <input class="input-field" type="hidden" name="rol" value="AdminSENA" required/>
                 </div>
 
                 <div class="buttons__container">
-                    <button type="submit" class="buttons__crud">Crear</button>
-                    <button type="button" onclick="goBack()" class="buttons__crud">Volver</button>
+                        <button type="submit" class="buttons__crud">Crear</button>
+                        <button type="button" onclick="goBack()" class="buttons__crud">Volver</button>
                 </div>
             </form>
         </main>
