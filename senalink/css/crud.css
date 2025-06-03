@@ -58,12 +58,19 @@ button{
   flex: 1;
 
 }
-.header__center,
-.header__right {
+.header__center{
   flex: 1;
   display: flex;
   justify-items:start;
   justify-content: center;
+  align-items: center;
+}
+
+.header__right {
+  flex: 1;
+  display: flex;
+  justify-items:start;
+  justify-content: end;
   align-items: center;
 }
 
