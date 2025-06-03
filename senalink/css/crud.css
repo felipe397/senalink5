@@ -371,7 +371,7 @@ footer{
   background: linear-gradient(to top, rgb(0, 48, 77) 1px, transparent 50%);
 }
 .gov{
-    background-color: var(--Secundary-950);
+    background-color: #003399;
 }
 .gov__container{
     margin: auto;
