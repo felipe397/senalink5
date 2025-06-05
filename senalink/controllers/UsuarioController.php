@@ -5,8 +5,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo         = $_POST['correo'] ?? '';
     $contrasena     = $_POST['contrasena'] ?? '';
     $rol            = $_POST['rol'] ?? '';
-    $nombres        = $_POST['nombres'] ?? '';
-    $apellidos      = $_POST['apellidos'] ?? '';
+    $primer_nombre        = $_POST['primer_nombre'] ?? '';
+    $segundo_nombre      = $_POST['segundo_nombre'] ?? '';
+    $primer_apellido        = $_POST['primer_apellido'] ?? '';
+    $segundo_apellido      = $_POST['segundo_apellido'] ?? '';
+    $numero_documento         = $_POST['numero_documento'] ?? '';
+    $tipo_documento     = $_POST['tipo_documento'] ?? '';
     $estado         = 'Activo';
     $fecha_creacion = date('Y-m-d H:i:s');
 
@@ -27,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($rol === 'super_admin' || $rol === 'AdminSENA') {
-        if (!$nombres || !$apellidos) {
+        if (!$primer_nombre || !$segundo_nombre || !$primer_apellido  || !$segundo_apellido) {
             $errores[] = "Nombres y apellidos son obligatorios para este rol.";
         }
     } elseif ($rol === 'empresa') {
@@ -69,6 +73,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'razon_social'        => $razon_social,
         'telefono'            => $telefono
     ];
+} else if ($rol === 'AdminSENA') {
+    $datos = [
+        'correo'              => $correo,
+        'contrasena'          => $hashedPassword,
+        'rol'                 => $rol,
+        'estado'              => $estado,
+        'fecha_creacion'      => $fecha_creacion,
+        'telefono'      => $telefono,
+        'primer_nombre'        => $primer_nombre,
+        'segundo_nombre'      => $segundo_nombre,
+        'primer_apellido'        => $primer_apellido,
+        'segundo_apellido'      => $segundo_apellido,
+        'numero_documento'      => $numero_documento,
+        'tipo_documento'       => $tipo_documento
+    ];
 } else {
     $datos = [
         'correo'         => $correo,
@@ -76,10 +95,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'rol'            => $rol,
         'estado'         => $estado,
         'fecha_creacion' => $fecha_creacion,
-        'nombres'        => $nombres,
-        'apellidos'      => $apellidos,
         'direccion'      => $direccion,
-        'telefono'       => $telefono
+        'telefono'       => $telefono,
+        'primer_nombre'        => $primer_nombre,
+        'segundo_nombre'      => $segundo_nombre,
+        'primer_apellido'        => $primer_apellido,
+        'segundo_apellido'      => $segundo_apellido,
+        'numero_documento'      => $numero_documento,
+        'tipo_documento'       => $tipo_documento
     ];
 }
 

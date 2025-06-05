@@ -53,13 +53,16 @@ class UsuarioModel {
             $stmt->bindValue(':representante_legal', $datos['representante_legal']);
             $stmt->bindValue(':tipo_empresa', $datos['tipo_empresa']);
 
-        } else {
+        } 
+        else if ($rol === 'AdminSENA') {
             $sql = "INSERT INTO usuarios (
                         correo, contrasena, rol, estado, fecha_creacion,
-                        nombres, apellidos, direccion, telefono
+                        telefono,primer_nombre,segundo_nombre,
+                        primer_apellido,segundo_apellido,numero_documento,tipo_documento
                     ) VALUES (
                         :correo, :contrasena, :rol, :estado, :fecha_creacion,
-                        :nombres, :apellidos, :direccion, :telefono
+                        :telefono,:primer_nombre,:segundo_nombre,
+                        :primer_apellido,:segundo_apellido,:numero_documento,:tipo_documento
                     )";
 
             $stmt = $db->prepare($sql);
@@ -68,10 +71,39 @@ class UsuarioModel {
             $stmt->bindValue(':rol', $rol);
             $stmt->bindValue(':estado', $datos['estado']);
             $stmt->bindValue(':fecha_creacion', $datos['fecha_creacion']);
-            $stmt->bindValue(':nombres', $datos['nombres']);
-            $stmt->bindValue(':apellidos', $datos['apellidos']);
+            $stmt->bindValue(':telefono', $datos['telefono']);
+            $stmt->bindValue(':primer_nombre', $datos['primer_nombre']);
+            $stmt->bindValue(':segundo_nombre', $datos['segundo_nombre']);
+            $stmt->bindValue(':primer_apellido', $datos['primer_apellido']);
+            $stmt->bindValue(':segundo_apellido', $datos['segundo_apellido']);
+            $stmt->bindValue(':numero_documento', $datos['numero_documento']);
+            $stmt->bindValue(':tipo_documento', $datos['tipo_documento']);
+        }
+        else {
+            $sql = "INSERT INTO usuarios (
+                        correo, contrasena, rol, estado, fecha_creacion,
+                        direccion, telefono,primer_nombre,segundo_nombre,
+                        primer_apellido,segundo_apellido,numero_documento,tipo_documento
+                    ) VALUES (
+                        :correo, :contrasena, :rol, :estado, :fecha_creacion,
+                        :nombres, :apellidos, :direccion, :telefono,:primer_nombre,:segundo_nombre,
+                        :primer_apellido,:segundo_apellido,:numero_documento,:tipo_documento
+                    )";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':correo', $datos['correo']);
+            $stmt->bindValue(':contrasena', $datos['contrasena']);
+            $stmt->bindValue(':rol', $rol);
+            $stmt->bindValue(':estado', $datos['estado']);
+            $stmt->bindValue(':fecha_creacion', $datos['fecha_creacion']);
             $stmt->bindValue(':direccion', $datos['direccion']);
             $stmt->bindValue(':telefono', $datos['telefono']);
+            $stmt->bindValue(':primer_nombre', $datos['primer_nombre']);
+            $stmt->bindValue(':segundo_nombre', $datos['segundo_nombre']);
+            $stmt->bindValue(':primer_apellido', $datos['primer_apellido']);
+            $stmt->bindValue(':segundo_apellido', $datos['segundo_apellido']);
+            $stmt->bindValue(':numero_documento', $datos['numero_documento']);
+            $stmt->bindValue(':tipo_documento', $datos['tipo_documento']);
         }
 
         return $stmt->execute();

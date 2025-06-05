@@ -12,7 +12,8 @@ if ($rol === 'empresa') {
     $query = "SELECT * FROM usuarios WHERE nit = :identificador AND rol = 'empresa'";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':identificador', $nit);
-} else {
+}
+else {
     $correo = $_POST['correo'];
     $query = "SELECT * FROM usuarios WHERE correo = :identificador AND rol = :rol";
     $stmt = $conn->prepare($query);
@@ -31,9 +32,9 @@ if ($usuario) {
         // Redirección según el rol
         if ($rol === 'empresa') {
             header("Location: ../html/Empresa/Home.html");
-        } elseif ($rol === 'AdminSENA') {
+        } else if ($rol === 'AdminSENA') {
             header("Location: ../html/AdminSENA/Home.html");
-        } elseif ($rol === 'super_admin') {
+        } else if ($rol === 'super_admin') {
             // Redirigir a la página de inicio del Super Admin
             header("Location: ../html/Super_Admin/Home.html");
         }

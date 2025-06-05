@@ -33,10 +33,22 @@
             <img alt="SenaLink Logo" src="../../img/logo-proyecto1.png" class="logo__senalink"/>
             
             <!-- FORMULARIO DE REGISTRO ADMINISTRADOR -->
-            <form action="../../controllers/UsuarioController.php" method="POST">               <div class="inputs__container">
-                    <input class="input-field" name="nombres" placeholder="Nombres" type="text" required/>
-                    <input class="input-field" name="apellidos" placeholder="Apellidos" type="text" required/>
+            <form action="../../controllers/UsuarioController.php" method="POST">               
+                <div class="inputs__container">
+                    <input class="input-field" name="primer_nombre" placeholder="Primer nombre" type="text" required/>
+                    <input class="input-field" name="segundo_nombre" placeholder="Segundo nombre" type="text"/>
+                    <input class="input-field" name="primer_apellido" placeholder="Primer apellido" type="text" required/>
+                    <input class="input-field" name="segundo_apellido" placeholder="Segundo apellido" type="text"/>
                     <input class="input-field" name="correo" placeholder="Correo electrónico" type="email" required/>
+                    <input class="input-field" name="telefono" placeholder="Numero telefonico" type="number" required/>
+                    <input class="input-field" name="numero_documento" placeholder="Numero de documento" type="number" required/>
+                    <select class="select_container" name="tipo_documento">
+                            <option selected disabled>Tipo de documento</option>
+                            <option>Cedula de ciudadania</option>
+                            <option>Cedula de extranjeria</option>
+                            <option>Permiso especial de permanencia</option> 
+                            <option>Permiso de proteccion temporal</option> 
+                        </select>
 
                     </select>
                     <input class="input-field" name="contrasena" placeholder="Contraseña" type="password" required/>
