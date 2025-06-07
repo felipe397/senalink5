@@ -4,7 +4,7 @@ class Conexion {
 
     public static function conectar() {
         if (self::$conn === null) {
-            $host = 'localhost:8111';
+            $host = 'localhost';
             $db = 'senalink';
             $user = 'root';
             $pass = ''; // o tu contraseña si la tienes
