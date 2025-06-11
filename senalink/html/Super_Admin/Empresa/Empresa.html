@@ -53,9 +53,9 @@
             <!-- Botones de acciones -->
             <div class="buttons__container">
                 <a href="EmpresaEdit.html" class="buttons__crud">Actualizar</a>
-                <a href="#" class="buttons__crud">Listar</a>
+                <a href="Gestion_Empresa.html" class="buttons__crud">Listar</a>
                 <button onclick="confirmInhabilitar('EmpresaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
-                <a href="EmpresaReport.html" class="buttons__crud">Reporte</a>
+                <a href="#" class="buttons__crud" id="btnReporte">Reporte</a>
                 <button onclick="goBack()" class="buttons__crud">Volver</button>
             </div>
 
@@ -80,6 +80,16 @@
     <script src="../../../js/script.js"></script>
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/viewempresas.js"></script>
+    <script>
+        document.getElementById('btnReporte').addEventListener('click', function() {
+            const empresaId = new URLSearchParams(window.location.search).get('id');
+            if (empresaId) {
+                window.location.href = `EmpresaReport.html?id=${empresaId}`;
+            } else {
+                alert('No se encontró el ID de la empresa.');
+            }
+        });
+    </script>
 <div class="footer__crud">
     <footer>
         <p>@ Todos los derechos reservados.SenaLink</p>

@@ -1,16 +1,34 @@
 <?php
-// models/Programa.php
-// Modelo para la entidad Programa de formación
+require_once __DIR__ . '/../Config/conexion.php';
 
-class Programa {
-    public $id;
-    public $nombre;
-    public $descripcion;
+class ProgramaFormacion {
+    private $db;
 
-    public function __construct($data) {
-        $this->id = $data['id'] ?? null;
-        $this->nombre = $data['nombre'];
-        $this->descripcion = $data['descripcion'];
+    public function __construct() {
+        $this->db = Conexion::conectar();
+    }
+
+    public function crear($data) {
+        $sql = "INSERT INTO programas_formacion 
+                (codigo, ficha, nivel_formacion, nombre_programa, 
+                 duracion_meses, estado, descripcion, habilidades_requeridas, fecha_finalizacion)
+                VALUES (:codigo, :ficha, :nivel_formacion, :nombre_programa,
+                 :duracion_meses, :estado, :descripcion, :habilidades_requeridas, :fecha_finalizacion)";
+
+        $stmt = $this->conn->prepare($sql);
+
+        return $stmt->execute([
+            $data['codigo'],
+            $data['ficha'],
+            $data['nivel_formacion'],
+            $data['nombre_programa'],
+            $data['duracion_meses'],
+            $data['estado'],
+            $data['descripcion'],
+            $data['habilidades_requeridas'],
+            $data['fecha_finalizacion']
+        ]);
     }
 }
-?>
+
+

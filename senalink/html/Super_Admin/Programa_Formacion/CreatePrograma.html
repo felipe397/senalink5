@@ -35,18 +35,29 @@
         <main class="container__crud">
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
             
-            <form action="#" method="POST">
+            <form action="../../../controllers/ProgramaController.php" method="POST">
                 <div class="inputs__container">
-                    <input class="input-field" name="codigo" placeholder="Codigo" type="text" required/>
-                    <input class="input-field" name="Ficha" placeholder="Ficha" type="email" required/>
-                    <input class="input-field" name="Tipo de Programa" placeholder="Tipo de programa" type="password" required/>
-                    <input class="input-field" name="nombre_del_programa" placeholder="Nombre del programa" type="text" required/>
-                    <input class="input-field" name="numero_de_aprendices" placeholder="Numero de aprendices" type="password" required/>
-                    <input class="input-field" name="fecha_de_finalizacion" placeholder="Fecha de finalizacion" type="password" required/>
+                    <input class="input-field" name="codigo" placeholder="Codigo" type="number" required/>
+                    <input class="input-field" name="ficha" placeholder="Ficha" type="number" required/>
+                    <select class="select_container" name="nivel_formacion">
+                            <option selected disabled>Nivel de formacion</option>
+                            <option>Auxiliar</option>
+                            <option>Operario</option>
+                            <option>Tecnico</option> 
+                            <option>Tecnologo</option> 
+                    <input class="input-field" name="nombre_programa" placeholder="Nombre del programa" type="text" required/>
+                    <input class="input-field" name="duracion_meses" placeholder="Duracion meses" type="number" required/>
+                    <select class="select_container" name="estado">
+                            <option selected disabled>Estado</option>
+                            <option>En curso</option>
+                            <option>Disponible</option>
+                    <input class="input-field" name="descripcion" placeholder="Descripcion" type="text" required/>
+                    <input class="input-field" name="habilidades_requeridas" placeholder="Habilidades requeridas" type="text" required/>
+                    <input class="input-field" name="fecha_finalizacion" placeholder="Fecha de finalizacion" type="date" required/>
                     </div>
             
             <div class="buttons__container">
-                <a href="Gestion_Programa.html" class="buttons__crud">Guardar</a>
+                <button type="submit" class="buttons__crud">Crear</button>
                 <button onclick="goBack()" class="buttons__crud">Volver</button>
 
             </div>
