@@ -15,20 +15,18 @@ class ProgramaFormacion {
                 VALUES (:codigo, :ficha, :nivel_formacion, :nombre_programa,
                  :duracion_meses, :estado, :descripcion, :habilidades_requeridas, :fecha_finalizacion)";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
 
         return $stmt->execute([
-            $data['codigo'],
-            $data['ficha'],
-            $data['nivel_formacion'],
-            $data['nombre_programa'],
-            $data['duracion_meses'],
-            $data['estado'],
-            $data['descripcion'],
-            $data['habilidades_requeridas'],
-            $data['fecha_finalizacion']
+            ':codigo' => $data['codigo'],
+            ':ficha' => $data['ficha'],
+            ':nivel_formacion' => $data['nivel_formacion'],
+            ':nombre_programa' => $data['nombre_programa'],
+            ':duracion_meses' => $data['duracion_meses'],
+            ':estado' => $data['estado'],
+            ':descripcion' => $data['descripcion'],
+            ':habilidades_requeridas' => $data['habilidades_requeridas'],
+            ':fecha_finalizacion' => $data['fecha_finalizacion']
         ]);
     }
 }
-
-
