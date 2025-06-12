@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($rol === 'super_admin' || $rol === 'AdminSENA') {
-        if (!$primer_nombre || !$segundo_nombre || !$primer_apellido  || !$segundo_apellido) {
+        if (!$primer_nombre || !$primer_apellido) {
             $errores[] = "Nombres y apellidos son obligatorios para este rol.";
         }
     } elseif ($rol === 'empresa') {
