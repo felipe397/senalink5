@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-05-2025 a las 18:54:40
+-- Tiempo de generación: 12-06-2025 a las 21:51:06
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -85,11 +85,16 @@ CREATE TABLE `diagnosticos_empresariales` (
 
 CREATE TABLE `programas_formacion` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(255) NOT NULL,
+  `nombre_programa` varchar(50) NOT NULL,
   `duracion_meses` int(11) NOT NULL,
   `nivel` enum('Tecnólogo','Técnico','Profundización Técnica','Operario','Especialización') NOT NULL,
-  `estado` enum('Activo','Suspendido','Desactivado') DEFAULT 'Activo',
-  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
+  `estado` enum('En curso','Disponible','Finalizado') DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `ficha` int(11) NOT NULL,
+  `habilidades_requeridas` text NOT NULL,
+  `fecha_finalizacion` date NOT NULL,
+  `descripcion` text NOT NULL,
+  `codigo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -165,7 +170,7 @@ CREATE TABLE `usuarios` (
   `telefono` varchar(255) NOT NULL,
   `nickname` varchar(100) DEFAULT NULL,
   `representante_legal` varchar(100) DEFAULT NULL,
-  `tipo_empresa` enum('Agricola','Industrial','Servicios') DEFAULT NULL
+  `tipo_empresa` enum('Agricola','Industrial','Servicios','Conocimiento, Innovacion y Desarrollo') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
