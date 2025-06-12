@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2025 a las 22:28:29
+-- Tiempo de generación: 12-06-2025 a las 22:49:20
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -87,7 +87,7 @@ CREATE TABLE `programas_formacion` (
   `id` int(11) NOT NULL,
   `nombre_programa` varchar(50) NOT NULL,
   `duracion_meses` int(11) NOT NULL,
-  `nivel` enum('Tecnólogo','Técnico','Profundización Técnica','Operario','Especialización') NOT NULL,
+  `nivel_formacion` enum('Auxiliar','Operario','Tecnico','Tecnologo') DEFAULT NULL,
   `estado` enum('En curso','Disponible','Finalizado') DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `ficha` int(11) NOT NULL,
@@ -183,7 +183,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`) VALUES
 (13, 'breiner.chica@admin.com', '$2y$10$FrWem4HXtdOMFgY8kEoDrOZthyYLXrIkGJxaYxT5AHaY9hBiC58t.', 'super_admin', 'Activo', '2025-05-09 14:10:06', NULL, 'Calle 123', NULL, '3001234567', NULL, NULL, NULL, '', NULL, '', NULL, NULL, 0),
-(15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'pele sas', '1234567891', NULL, 'pele', 'Industrial', '', NULL, '', NULL, NULL, 0);
+(15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'pele sas', '1234567891', NULL, 'pele', 'Industrial', '', NULL, '', NULL, NULL, 0),
+(16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', 'Laura', 'Leon', 'Alzate', '', 12345678);
 
 --
 -- Disparadores `usuarios`
@@ -294,7 +295,7 @@ ALTER TABLE `reportes_usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restricciones para tablas volcadas
