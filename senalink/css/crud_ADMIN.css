@@ -114,7 +114,7 @@ p{
   background-color: white;
   padding: 4rem;
   border-radius: 0.8rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0.5rem 0.5rem 2rem rgba(0, 48, 77, 1);
 
 }
 .container__crud--disable{
@@ -251,6 +251,7 @@ td {
 }
 
 .input-field {
+  text-decoration: none;
   width: 100%;
   height: 5.6rem;
   padding: 1rem;
@@ -258,6 +259,20 @@ td {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: var(--h4-font-size);
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.select_container{
+    width: 100%;
+    height: 5.6rem;
+    padding: 1rem ;
+    margin: 1rem 0;
+    border: 1px solid var(--Gray-300);
+    font-size: var(--h4-font-size);
+    border-radius: 0.4rem;
 }
 
 @media (max-width: 768px){
