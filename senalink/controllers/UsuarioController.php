@@ -1,4 +1,9 @@
 <?php
+// Al principio del archivo
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+error_reporting(E_ALL);
+
 require_once '../models/UsuarioModel.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener datos del formulario
@@ -146,6 +151,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'detalleEmpresa'
     $empresa = UsuarioModel::obtenerEmpresaPorId($_GET['id']);
     header('Content-Type: application/json');
     echo json_encode($empresa);
+    exit;
+}
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'listarPrograma') {
+    $programas = UsuarioModel::listarPrograma();
+    header('Content-Type: application/json');
+    echo json_encode($programas); // <- Aquí estaba el error: minúscula
+    exit;
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'DetallePrograma' && isset($_GET['id'])) {
+    $programa = UsuarioModel::obtenerProgramaporid($_GET['id']);
+    header('Content-Type: application/json');
+    echo json_encode($programa);
     exit;
 }
 
