@@ -106,15 +106,6 @@ button{
 }
 
 
-.header__home img:first-of-type {
-  order: 2; 
-  cursor: pointer;
-}
-
-.header__home img:last-of-type {
-  order: 1; 
-}
-
 .header__report{
   margin:0 auto;
 }

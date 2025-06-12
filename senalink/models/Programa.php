@@ -10,7 +10,7 @@ class ProgramaFormacion {
 
     public function crear($data) {
         $sql = "INSERT INTO programas_formacion 
-                (codigo, ficha, nivel_formacion, nombre_programa, 
+                (id,codigo, ficha, nivel_formacion, nombre_programa, 
                  duracion_meses, estado, descripcion, habilidades_requeridas, fecha_finalizacion)
                 VALUES (:codigo, :ficha, :nivel_formacion, :nombre_programa,
                  :duracion_meses, :estado, :descripcion, :habilidades_requeridas, :fecha_finalizacion)";
@@ -18,6 +18,7 @@ class ProgramaFormacion {
         $stmt = $this->db->prepare($sql);
 
         return $stmt->execute([
+            ':id' => $data['id'],
             ':codigo' => $data['codigo'],
             ':ficha' => $data['ficha'],
             ':nivel_formacion' => $data['nivel_formacion'],
