@@ -11,9 +11,9 @@ class ProgramaFormacion {
     public function crear($data) {
         $sql = "INSERT INTO programas_formacion 
                 (id,codigo, ficha, nivel_formacion, nombre_programa, 
-                 duracion_meses, estado, descripcion, habilidades_requeridas, fecha_finalizacion)
-                VALUES (:codigo, :ficha, :nivel_formacion, :nombre_programa,
-                 :duracion_meses, :estado, :descripcion, :habilidades_requeridas, :fecha_finalizacion)";
+                duracion_meses, estado, descripcion, habilidades_requeridas, fecha_finalizacion)
+                VALUES (:id,:codigo, :ficha, :nivel_formacion, :nombre_programa,
+                :duracion_meses, :estado, :descripcion, :habilidades_requeridas, :fecha_finalizacion)";
 
         $stmt = $this->db->prepare($sql);
 
