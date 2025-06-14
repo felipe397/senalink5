@@ -52,14 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.error) {
                     console.error(data.error);
                 } else {
-                    document.querySelector('p:nth-of-type(1) span').textContent = data.codigo || "";
-                    document.querySelector('p:nth-of-type(2) span').textContent = data.ficha || "";
-                    document.querySelector('p:nth-of-type(3) span').textContent = data.nivel_formacion || "";
-                    document.querySelector('p:nth-of-type(4) span').textContent = data.nombre_programa || "";
-                    document.querySelector('p:nth-of-type(5) span').textContent = data.descripcion || "";
-                    document.querySelector('p:nth-of-type(6) span').textContent = data.habilidades_requeridas || "";
-                    document.querySelector('p:nth-of-type(7) span').textContent = data.fecha_finalizacion || "";
-                    document.querySelector('p:nth-of-type(8) span').textContent = data.estado || "";
+                    document.getElementById('codigo').textContent = data.codigo || "";
+                    document.getElementById('ficha').textContent = data.ficha || "";
+                    document.getElementById('nivel_formacion').textContent = data.nivel_formacion || "";
+                    document.getElementById('nombre_programa').textContent = data.nombre_programa || "";
+                    document.getElementById('descripcion').textContent = data.descripcion || "";
+                    document.getElementById('habilidades_requeridas').textContent = data.habilidades_requeridas || "";
+                    document.getElementById('fecha_finalizacion').textContent = data.fecha_finalizacion || "";
+                    document.getElementById('estado').textContent = data.estado || "";
                 }
             })
             .catch(error => {
@@ -67,3 +67,4 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 });
+

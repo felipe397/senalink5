@@ -43,6 +43,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         echo "⚠️ Todos los campos son obligatorios.";
     }
+} elseif ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['action']) && $_GET['action'] === 'detallePrograma' && isset($_GET['id'])) {
+    require_once '../config/Conexion.php';
+    $programa = new ProgramaFormacion();
+    $id = $_GET['id'];
+    $data = $programa->getById($id);
+    if ($data) {
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    } else {
+        http_response_code(404);
+        echo json_encode(['error' => 'Programa no encontrado']);
+    }
 } else {
     echo "⛔ Método no permitido.";
 }
