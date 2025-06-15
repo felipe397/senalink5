@@ -67,16 +67,31 @@
                     <td id="estado"></td>
                 </tr>
             </table>
-            <div class="buttons__container">
-                <a href="Programa de formacion.html"class="btn__report">Descargar</a>
-            </div>
+             <!-- Botón para generar el PDF -->
+            <button class="btn__report">Descargar</button>
+
+            <!-- Formulario oculto que se enviará al hacer clic en el botón -->
+            <form id="formReporte" action="../../../reportes/reporte_programa.php" method="POST" target="_blank" style="display: none;">
+                <input type="hidden" name="codigo">
+                <input type="hidden" name="ficha">
+                <input type="hidden" name="nivel_formacion">
+                <input type="hidden" name="nombre_programa">
+                <input type="hidden" name="descripcion">
+                <input type="hidden" name="habilidades_requeridas">
+                <input type="hidden" name="fecha_finalizacion">
+                <input type="hidden" name="estado">
+            </form>
         </main>
     </div>
-    <div class="linea-azul-difuminada"></div>
+
     <script src="../../../js/viewprogramareport.js"></script>
+
+    <!-- Footer -->
+    <div class="linea-azul-difuminada"></div>
     <footer>
-    <p>@ Todos los derechos reservados.SenaLink</p>
-  </footer>
+        <p>@ Todos los derechos reservados. SenaLink</p>
+    </footer>
+
 </body>
 </html>
 

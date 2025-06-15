@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>SenaLink</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SenaLink - Editar Programa de Formación</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../../../css/crud.css">
-    <link rel="shortcut icon " href="../../../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
+    <link rel="shortcut icon" href="../../../img/Favicon1.png">
 </head>
+
 <body>
+    <!-- Header GOV -->
     <header class="gov" id="inicio">
         <div class="gov__container">
             <a href="https://www.gov.co/" target="_blank">
@@ -18,44 +20,69 @@
             </a>
         </div>
     </header>
+
+    <!-- Header SENA -->
     <header class="header__login">
-    <div class="header__left">
-        <img src="../../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
-    </div>
-
-    <div class="header__center">
-    </div>
-
-    <div class="header__right">
-        <!-- Espacio vacío o podrías poner un botón u otro logo aquí -->
-    </div>
+        <div class="header__left">
+            <img src="../../../img/logo-sena-white0.png" alt="Logo SENA" class="logo__sena">
+        </div>
+        <div class="header__center"></div>
+        <div class="header__right"></div>
     </header>
+
     <div class="linea-verde"></div>
+
+    <!-- Contenido principal -->
     <div class="container">
         <main class="container__crud">
-            <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
-            <div class="inputs__container">
-                <input class="input-field" name="codigo" placeholder="Codigo" type="text" required/>
-                <input class="input-field" name="Ficha" placeholder="Ficha" type="email" required/>
-                <input class="input-field" name="Tipo de Programa" placeholder="Tipo de programa" type="password" required/>
-                <input class="input-field" name="nombre_del_programa" placeholder="Nombre del programa" type="text" required/>
-                <input class="input-field" name="numero_de_aprendices" placeholder="Numero de aprendices" type="password" required/>
-                <input class="input-field" name="fecha_de_finalizacion" placeholder="Fecha de finalizacion" type="password" required/>
-            </div>
-            <div class="buttons__container">
-                <a href="Programa de formacion.html" class="buttons__crud">Guardar</a>
-                <button onclick="goBack()" class="buttons__crud">Volver</button>
+            <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"/>
 
-            </div>
+            <form action="../../../controllers/ProgramaController.php" method="POST">
+                <div class="inputs__container">
+
+                    <!-- Campos ocultos para actualizar -->
+                    <input type="hidden" id="programa_id" name="id" value="">
+                    <input type="hidden" name="action" value="update">
+
+                    <input class="input-field" id="codigo" name="codigo" placeholder="Código" type="number" required />
+                    <input class="input-field" id="ficha" name="ficha" placeholder="Ficha" type="number" required />
+
+                    <select class="select_container" id="nivel_formacion" name="nivel_formacion" required>
+                        <option disabled selected>Nivel de formación</option>
+                        <option>Auxiliar</option>
+                        <option>Operario</option>
+                        <option>Tecnico</option>
+                        <option>Tecnologo</option>
+                    </select>
+
+                    <input class="input-field" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required />
+                    <input class="input-field" id="duracion_meses" name="duracion_meses" placeholder="Duración (meses)" type="number" required />
+
+                    <select class="select_container" id="estado" name="estado" required>
+                        <option disabled selected>Estado</option>
+                        <option>En curso</option>
+                        <option>Disponible</option>
+                    </select>
+
+                    <input class="input-field" id="descripcion" name="descripcion" placeholder="Descripción" type="text" required />
+                    <input class="input-field" id="habilidades_requeridas" name="habilidades_requeridas" placeholder="Habilidades requeridas" type="text" required />
+                    <input class="input-field" id="fecha_finalizacion" name="fecha_finalizacion" placeholder="Fecha de finalización" type="date" required />
+
+                </div>
+
+                <div class="buttons__container">
+                    <button type="submit" class="buttons__crud">Actualizar</button>
+                    <button type="button" onclick="goBack()" class="buttons__crud">Volver</button>
+                </div>
+            </form>
         </main>
     </div>
+
     <script src="../../../js/backbutton.js"></script>
     <div class="linea-azul-difuminada"></div>
-<footer>
-    <p>@ Todos los derechos reservados.SenaLink</p>
-</footer>
+
+    <footer>
+        <p>@ Todos los derechos reservados. SenaLink</p>
+    </footer>
 </body>
 </html>
-
-
-

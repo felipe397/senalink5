@@ -112,6 +112,28 @@ class UsuarioModel {
     }
 }
 
+public function updateEmpresa($id, $data) {
+    $sql = "UPDATE usuarios SET 
+            nit = :nit,
+            representante_legal = :representante_legal,
+            razon_social = :razon_social,
+            telefono = :telefono,
+            correo = :correo,
+            direccion = :direccion,
+            tipo_empresa = :tipo_empresa
+            WHERE id = :id AND rol = 'empresa'";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':nit', $data['nit']);
+    $stmt->bindValue(':representante_legal', $data['representante_legal']);
+    $stmt->bindValue(':razon_social', $data['razon_social']);
+    $stmt->bindValue(':telefono', $data['telefono']);
+    $stmt->bindValue(':correo', $data['correo']);
+    $stmt->bindValue(':direccion', $data['direccion']);
+    $stmt->bindValue(':tipo_empresa', $data['tipo_empresa']);
+    $stmt->bindValue(':id', $id);
+    return $stmt->execute();
+}
+
 public static function listarEmpresas() {
     $db = Conexion::conectar();
     $stmt = $db->prepare("SELECT id, razon_social,nit FROM usuarios WHERE rol = 'empresa'");
@@ -142,5 +164,4 @@ public static function obtenerProgramaporid($id) {
 }
 
 }
-
 ?>

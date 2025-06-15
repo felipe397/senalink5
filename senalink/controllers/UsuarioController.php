@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Hashear contraseña
     $hashedPassword = password_hash($contrasena, PASSWORD_BCRYPT);
 
-    // Crear el array de datos (sin nickname)
+    // Crear el array de datos
     if ($rol === 'empresa') {
     $datos = [
         'correo'              => $correo,
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'detalleEmpresa'
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'listarPrograma') {
     $programas = UsuarioModel::listarPrograma();
     header('Content-Type: application/json');
-    echo json_encode($programas); // <- Aquí estaba el error: minúscula
+    echo json_encode($programas); 
     exit;
 }
 
