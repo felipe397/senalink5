@@ -33,10 +33,51 @@
   <main class="container__forms--forgot">
         <h2>¿Olvidaste tu contraseña?</h2>
         <p>Digita tu correo electrónico y te enviaremos <br> un código de recuperación para acceder tu cuenta</p>
-        <input placeholder="Correo electrónico" type="email"/>
-        <a href="Fogot_code.html" class="btn">Enviar</a>
+        <input placeholder="Correo electrónico" type="email" id="emailInput" required/>
+        <button id="sendCodeBtn" class="btn">Enviar</button>
+        <p id="message" style="color:red;"></p>
   </main>
   </div>        
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM cargado, registrando evento click');
+      document.getElementById('sendCodeBtn').addEventListener('click', function(event) {
+          console.log('Botón enviar clickeado');
+          event.preventDefault();
+          const email = document.getElementById('emailInput').value.trim();
+          const messageEl = document.getElementById('message');
+          if (!email) {
+              messageEl.textContent = 'Por favor ingrese un correo válido.';
+              return;
+          }
+          fetch('../controllers/send_code.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: `email=${encodeURIComponent(email)}`
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  messageEl.style.color = 'green';
+                  messageEl.textContent = 'Código enviado al correo. Por favor revise su bandeja.';
+                  setTimeout(() => {
+                      window.location.href = 'Fogot_code.html';
+                  }, 2000);
+              } else {
+                  messageEl.style.color = 'red';
+                  messageEl.textContent = data.message || 'Error al enviar el código.';
+              }
+          })
+          .catch(error => {
+              messageEl.style.color = 'red';
+              messageEl.textContent = 'Error en la conexión.';
+          });
+      });
+    });
+  </script>
       
           <div class="linea-azul-difuminada"></div>
   <footer>

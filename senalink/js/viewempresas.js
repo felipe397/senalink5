@@ -53,6 +53,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.querySelector('p:nth-of-type(6) span').textContent = data.direccion; // Ubicación
                     document.querySelector('p:nth-of-type(7) span').textContent = data.tipo_empresa; // Tipo de Empresa
                     document.querySelector('p:nth-of-type(8) span').textContent = data.estado; // Estado
+
+                    // Actualizar el enlace "Actualizar" para que incluya el id en la URL
+                    const actualizarLink = document.querySelector('a.buttons__crud[href="EmpresaEdit.html"]');
+                    if (actualizarLink) {
+                        actualizarLink.href = `EmpresaEdit.html?id=${empresaId}`;
+                    }
                 }
             })
             .catch(error => {

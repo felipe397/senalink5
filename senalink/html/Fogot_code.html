@@ -1,9 +1,11 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>SenaLink - Recuperar Contraseña</title>
+    <title>SenaLink - Validar Código</title>
     <link href="../css/Inputs.css" rel="stylesheet"/>
+    <link href="../css/forgot_new_password.css" rel="stylesheet"/>
     <link rel="shortcut icon " href="../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
 </head>
 <body>
@@ -14,39 +16,76 @@
             </a>
         </div>
     </header>
-    <header class="header__login">
+  <header class="header__home">
+    <button id="menu-toggle" class="menu-toggle">
+      <img src="../icon/menu_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Menu Icon" />
+    </button>
+    <button class="account__button">
+      <a href="../viewuser.html">
+        <img src="../icon/account_circle_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="icon" />
+      </a>
+    </button>
+
   <div class="header__left">
-    
+
   </div>
 
   <div class="header__center">
-    <img src="../img/sena-link-removebg-preview-10.png" alt="Logo Centro" class="logo__senalink">
   </div>
 
   <div class="header__right">
     <img src="../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
   </div>
+  
 </header>
-  <div class="linea-verde"></div>
+<div class="linea-verde"></div>
 <div class="container">
-  <main class="container__forms">
-          <h2>¿Olvidaste tu contraseña?</h2>
-          <p>Ingresa el codigo que hemos enviado a tu cuenta</p>
-          <div class="code__container">
-              <input type="code"/>
-              <input type="code"/>
-              <input type="code"/>
-              <input type="code"/>
-              <input type="code"/>
-              <input type="code"/>
-          </div>
-          <button class="btn">Iniciar</button>
+  <main class="container__forms--forgot">
+        <h2>Ingrese el código de recuperación</h2>
+        <form id="codeForm" method="POST">
+            <input type="text" name="code" placeholder="Código de 6 cifras" maxlength="6" required/>
+            <div class="buttons__container">
+                <button type="submit" class="btn">Validar</button>
+                <a href="Forgot.html" class="btn btn-secondary">Volver</a>
+            </div>
+            <p id="message" style="color:red;"></p>
+        </form>
   </main>
-</div>
-    <div class="linea-azul-difuminada"></div>
-<footer>
-    <p>@ Todos los derechos reservados.SenaLink</p>
+  </div>        
+      
+  <div class="linea-azul-difuminada"></div>
+  <footer>
+    <p>@ Todos los derechos reservados. SenaLink</p>
   </footer>
+
+  <script>
+    document.getElementById('codeForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const code = this.code.value.trim();
+        const messageEl = document.getElementById('message');
+        if (code.length !== 6 || !/^\d{6}$/.test(code)) {
+            messageEl.textContent = 'Por favor ingrese un código válido de 6 cifras.';
+            return;
+        }
+        fetch('../controllers/validate_code.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `code=${encodeURIComponent(code)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = 'Forgot_new_password.html';
+            } else {
+                messageEl.textContent = data.message || 'Código incorrecto.';
+            }
+        })
+        .catch(error => {
+            messageEl.textContent = 'Error en la conexión.';
+        });
+    });
+  </script>
 </body>
 </html>
-

@@ -37,7 +37,7 @@
         <main class="container__crud">
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"/>
 
-            <form action="../../../controllers/ProgramaController.php" method="POST">
+            <form action="../../../controllers/update_programa.php" method="POST" id="programaForm">
                 <div class="inputs__container">
 
                     <!-- Campos ocultos para actualizar -->
@@ -48,7 +48,7 @@
                     <input class="input-field" id="ficha" name="ficha" placeholder="Ficha" type="number" required />
 
                     <select class="select_container" id="nivel_formacion" name="nivel_formacion" required>
-                        <option disabled selected>Nivel de formación</option>
+                        <option value="" disabled selected>Nivel de formación</option>
                         <option>Auxiliar</option>
                         <option>Operario</option>
                         <option>Tecnico</option>
@@ -59,7 +59,7 @@
                     <input class="input-field" id="duracion_meses" name="duracion_meses" placeholder="Duración (meses)" type="number" required />
 
                     <select class="select_container" id="estado" name="estado" required>
-                        <option disabled selected>Estado</option>
+                        <option value="" disabled selected>Estado</option>
                         <option>En curso</option>
                         <option>Disponible</option>
                     </select>
@@ -79,6 +79,38 @@
     </div>
 
     <script src="../../../js/backbutton.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const programaId = new URLSearchParams(window.location.search).get('id');
+            if (programaId) {
+                fetch(`../../../controllers/UsuarioController.php?action=DetallePrograma&id=${programaId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.error) {
+                            document.getElementById('programa_id').value = programaId;
+                            document.getElementById('codigo').value = data.codigo || '';
+                            document.getElementById('ficha').value = data.ficha || '';
+                            document.getElementById('nivel_formacion').value = data.nivel_formacion || '';
+                            document.getElementById('nombre_programa').value = data.nombre_programa || '';
+                            document.getElementById('duracion_meses').value = data.duracion_meses || '';
+                            document.getElementById('estado').value = data.estado || '';
+                            document.getElementById('descripcion').value = data.descripcion || '';
+                            document.getElementById('habilidades_requeridas').value = data.habilidades_requeridas || '';
+                            document.getElementById('fecha_finalizacion').value = data.fecha_finalizacion || '';
+                        } else {
+                            alert('Error al cargar los datos del programa.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar los datos del programa:', error);
+                        alert('Error al cargar los datos del programa.');
+                    });
+            } else {
+                alert('No se recibió el ID del programa.');
+            }
+        });
+    </script>
+
     <div class="linea-azul-difuminada"></div>
 
     <footer>

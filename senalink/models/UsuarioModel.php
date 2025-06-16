@@ -163,5 +163,11 @@ public static function obtenerProgramaporid($id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+public function updatePasswordByEmail($email, $hashedPassword) {
+    $sql = "UPDATE usuarios SET contrasena = :contrasena WHERE correo = :correo";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':contrasena', $hashedPassword);
+    $stmt->bindValue(':correo', $email);
+    return $stmt->execute();
 }
-?>
+}

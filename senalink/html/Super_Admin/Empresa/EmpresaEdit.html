@@ -36,7 +36,7 @@
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
             
             <!-- FORMULARIO DE REGISTRO EMPRESA -->
-            <form action="../../../controllers/update_empresa.php" method="POST">
+            <form action="../../../controllers/update_empresa.php" method="POST" id="empresaForm">
                 <input type="hidden" name="id" id="empresa_id" value="">
                 <div class="inputs__container">
                     <input class="input-field" name="nit" id="nit" placeholder="Número NIT" type="text" required/>
@@ -45,13 +45,13 @@
                     <input class="input-field" name="telefono" id="telefono" placeholder="Número telefónico" type="text" required/>
                     <input class="input-field" name="correo" id="correo" placeholder="Correo electrónico" type="email" required/>
                     <input class="input-field" name="ubicacion" id="ubicacion" placeholder="Ubicación" type="text" required/>
-                    <select class="select_container" name="tipo_empresa" id="tipo_empresa">
-                            <option selected disabled>Sector Económico</option>
-                            <option>Agrícola</option>
-                            <option>Industrial</option>
-                            <option>Servicios</option> 
-                            <option>Conocimiento, Innovacion y Desarrollo</option> 
-                        </select>
+                    <select class="select_container" name="tipo_empresa" id="tipo_empresa" required>
+                        <option value="" disabled selected>Sector Económico</option>
+                        <option value="Agrícola">Agrícola</option>
+                        <option value="Industrial">Industrial</option>
+                        <option value="Servicios">Servicios</option> 
+                        <option value="Conocimiento, Innovacion y Desarrollo">Conocimiento, Innovacion y Desarrollo</option> 
+                    </select>
                 </div>
                 <div class="buttons__container">
                     <button type="submit" class="buttons__crud">Guardar</button>
@@ -61,6 +61,35 @@
         </main>
     </div>
     <script src="../../../js/backbutton.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const empresaId = new URLSearchParams(window.location.search).get('id');
+            if (empresaId) {
+                fetch(`../../../controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.error) {
+                            document.getElementById('empresa_id').value = empresaId;
+                            document.getElementById('nit').value = data.nit || '';
+                            document.getElementById('representante_legal').value = data.representante_legal || '';
+                            document.getElementById('razon_social').value = data.razon_social || '';
+                            document.getElementById('telefono').value = data.telefono || '';
+                            document.getElementById('correo').value = data.correo || '';
+                            document.getElementById('ubicacion').value = data.direccion || '';
+                            document.getElementById('tipo_empresa').value = data.tipo_empresa || '';
+                        } else {
+                            alert('Error al cargar los datos de la empresa.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar los datos de la empresa:', error);
+                        alert('Error al cargar los datos de la empresa.');
+                    });
+            } else {
+                alert('No se recibió el ID de la empresa.');
+            }
+        });
+    </script>
 </body>
 </html>
 <footer>

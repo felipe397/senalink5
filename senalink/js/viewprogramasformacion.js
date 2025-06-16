@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <p class="card-subtitle">${programa.ficha}</p>
                         </div>
                     </a>
+                    <a href="ProgramaEdit.html?id=${encodeURIComponent(programa.id)}" class="buttons__crud"></a>
                 `;
 
                 container.appendChild(card);

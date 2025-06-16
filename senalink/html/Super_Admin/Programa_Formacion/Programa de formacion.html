@@ -62,7 +62,7 @@
             </div>
             <!-- Botones CRUD -->
             <div class="buttons__container">
-                <a href="ProgramaEdit.html" class="buttons__crud">Actualizar</a>
+                <a href="ProgramaEdit.html?id=" class="buttons__crud" id="btnActualizar">Actualizar</a>
                 <button class="buttons__crud">Listar</button>
                 <button onclick="confirmInhabilitar('ProgramaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
                 <a href="#" class="buttons__crud" id="ProgReporte">Reporte</a>
@@ -92,6 +92,15 @@
             window.location.href = `ProgramaReport.html?id=${programaId}`;
         } else {
             alert('No se encontró el ID del programa.');
+        }
+    });
+
+    // Actualizar el enlace "Actualizar" con el id del programa
+    document.addEventListener("DOMContentLoaded", function () {
+        const programaId = new URLSearchParams(window.location.search).get('id');
+        const btnActualizar = document.getElementById('btnActualizar');
+        if (programaId && btnActualizar) {
+            btnActualizar.href = `ProgramaEdit.html?id=${programaId}`;
         }
     });
     </script>

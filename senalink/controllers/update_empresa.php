@@ -2,16 +2,16 @@
 require_once '../models/UsuarioModel.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $id = $_POST['id'] ?? null;
-    $nit = $_POST['nit'] ?? null;
-    $representante_legal = $_POST['representante_legal'] ?? null;
-    $razon_social = $_POST['razon_social'] ?? null;
-    $telefono = $_POST['telefono'] ?? null;
-    $correo = $_POST['correo'] ?? null;
-    $ubicacion = $_POST['ubicacion'] ?? null;
-    $tipo_empresa = $_POST['tipo_empresa'] ?? null;
+    $id = isset($_POST['id']) ? trim($_POST['id']) : null;
+    $nit = isset($_POST['nit']) ? trim($_POST['nit']) : null;
+    $representante_legal = isset($_POST['representante_legal']) ? trim($_POST['representante_legal']) : null;
+    $razon_social = isset($_POST['razon_social']) ? trim($_POST['razon_social']) : null;
+    $telefono = isset($_POST['telefono']) ? trim($_POST['telefono']) : null;
+    $correo = isset($_POST['correo']) ? trim($_POST['correo']) : null;
+    $ubicacion = isset($_POST['ubicacion']) ? trim($_POST['ubicacion']) : null;
+    $tipo_empresa = isset($_POST['tipo_empresa']) ? trim($_POST['tipo_empresa']) : null;
 
-    if ($id && $nit && $representante_legal && $razon_social && $telefono && $correo && $ubicacion && $tipo_empresa) {
+    if ($id !== null && $nit !== '' && $representante_legal !== '' && $razon_social !== '' && $telefono !== '' && $correo !== '' && $ubicacion !== '' && $tipo_empresa !== '') {
         // Validar que tipo_empresa sea una de las opciones válidas
         $opciones_validas = ['Agrícola', 'Industrial', 'Servicios', 'Conocimiento, Innovacion y Desarrollo'];
         if (!in_array($tipo_empresa, $opciones_validas)) {
