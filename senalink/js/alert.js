@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (data.success) {
                 messageEl.style.color = 'green';
-                messageEl.textContent = '.';
+                messageEl.textContent = 'El link ha sido enviado exitosamente.';
             } else {
                 messageEl.style.color = 'red';
                 switch (data.error) {
