@@ -235,12 +235,15 @@ img{
 .card__button:hover {
     background-color: var(--Secundary-800);
 }
-.cardh__container{
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    margin-top: 4rem;
-}
+
+  .cardh__container {
+    padding: 2rem;
+    text-align: center; 
+    grid-template-columns: repeat(4,1fr);
+    display: grid;
+    
+} 
+
 .cardh {
     background-color: var(--white); /* Set background color */
     border-radius: 1rem; /* Rounded corners */
