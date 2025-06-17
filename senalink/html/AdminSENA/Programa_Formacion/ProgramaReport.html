@@ -20,14 +20,14 @@
     </header>
     <header class="header__login">
         <div class="header__left">
-            
+            <img src="../../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
         </div>
 
         <div class="header__center">
         </div>
 
         <div class="header__right">
-            <img src="../../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
+            <!-- Espacio vacío o podrías poner un botón u otro logo aquí -->
         </div>
     </header>
     <div class="linea-verde"></div>
@@ -35,55 +35,63 @@
         <main class="table-container">
             <table>
                 <tr>
-                    <th>ID</th>
-                    <td>1</td>
+                    <th>Codigo</th>
+                    <td id="codigo"></td>
                 </tr>
                 <tr>
-                    <th>Número NIT</th>
-                    <td>123456789</td>
+                    <th>Ficha</th>
+                    <td id="ficha"></td>
                 </tr>
                 <tr>
-                    <th>Representante legal</th>
-                    <td>Carlos López</td>
+                    <th>Nivel de formacion</th>
+                    <td id="nivel_formacion"></td>
                 </tr>
                 <tr>
-                    <th>Razón social</th>
-                    <td>Ejemplo S.A.S.</td>
+                    <th>Nombre del programa</th>
+                    <td id="nombre_programa"></td>
                 </tr>
                 <tr>
-                    <th>Razón comercial</th>
-                    <td>Ejemplo Comercial</td>
+                    <th>Descripcion</th>
+                    <td id="descripcion"></td>
                 </tr>
                 <tr>
-                    <th>Número telefónico</th>
-                    <td>123456789</td>
+                    <th>Habilidades requeridas</th>
+                    <td id="habilidades_requeridas"></td>
                 </tr>
                 <tr>
-                    <th>Correo electrónico</th>
-                    <td>ejemplo@dominio.co</td>
-                </tr>
-                <tr>
-                    <th>Ubicación</th>
-                    <td>Cr 2 Calle 9-12, Barrio Ciudad</td>
-                </tr>
-                <tr>
-                    <th>Tipo de empresa</th>
-                    <td>Empresa unipersonal</td>
+                    <th>Fecha de finalizacion</th>
+                    <td id="fecha_finalizacion"></td>
                 </tr>
                 <tr>
                     <th>Estado</th>
-                    <td>Activo</td>
+                    <td id="estado"></td>
                 </tr>
             </table>
-            <div class="buttons__container">
-                <a href="Programa de formacion.html"class="btn__report">Descargar</a>
-            </div>
+             <!-- Botón para generar el PDF -->
+            <button class="btn__report">Descargar</button>
+
+            <!-- Formulario oculto que se enviará al hacer clic en el botón -->
+            <form id="formReporte" action="../../../reportes/reporte_programa.php" method="POST" target="_blank" style="display: none;">
+                <input type="hidden" name="codigo">
+                <input type="hidden" name="ficha">
+                <input type="hidden" name="nivel_formacion">
+                <input type="hidden" name="nombre_programa">
+                <input type="hidden" name="descripcion">
+                <input type="hidden" name="habilidades_requeridas">
+                <input type="hidden" name="fecha_finalizacion">
+                <input type="hidden" name="estado">
+            </form>
         </main>
     </div>
+
+    <script src="../../../js/viewprogramareport.js"></script>
+
+    <!-- Footer -->
     <div class="linea-azul-difuminada"></div>
-<footer>
-    <p>@ Todos los derechos reservados.SenaLink</p>
-  </footer>
+    <footer>
+        <p>@ Todos los derechos reservados. SenaLink</p>
+    </footer>
+
 </body>
 </html>
 

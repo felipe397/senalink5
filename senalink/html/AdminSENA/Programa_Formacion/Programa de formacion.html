@@ -35,44 +35,37 @@
         <main class="container__crud">
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
             <div class="p-container">
-            <p><strong>Código:</strong> 228118</p>
-            <p><strong>Ficha:</strong> 2896365</p>
-            <p><strong>Tipo de programa:</strong> Tecnólogo</p>
-            <!-- Nombre del programa -->
-            <p class="program-title"><strong>Nombre del programa:</strong > Análisis y desarrollo de software</p>
-            <p><strong>Número de aprendices:</strong> 21</p>
-            <p class="program-description"><strong>Descripcion:</strong>Los aprendices implementaran conocimiento en el ciclo de vida del software, requisitos, arquitectura, pruebas y despliegue de software.<br></p>
+                <p><strong>Código:</strong><span id="codigo"></span></p>
+                <p><strong>Ficha:</strong><span id="ficha"></span></p>
+                <p><strong>Nivel de formacion:</strong><span id="nivel_formacion"></span></p>
+                <!-- Nombre del programa -->
+                <p class="program-title"><strong>Nombre del programa:</strong><span id="nombre_programa"></span></p>
+                <p class="program-description"><strong>Descripcion:</strong><span id="descripcion"></span></p>
             
 
             <!-- Habilidades adquiridas -->
-            <!-- Habilidades adquiridas -->
-            <!-- Habilidades adquiridas -->
-            <div class="skills-container">
-                <ul class="skills-text">
-                    <h4>Habilidades requeridas:</h4>
-                    <li>Creación de aplicaciones para páginas web y teléfonos móviles.</li>
-                    <li>Conocimiento en lenguajes de programación como Java, Python, JavaScript, entre otros.</li>
-                    <li>Diseño y manejo de bases de datos.</li>
-                    <li>Capacidad para entender lo que necesita un sistema y cómo debe funcionar.</li>
-                    <li>Pruebas de programas para asegurar su buen funcionamiento.</li>
-                    <li>Trabajo colaborativo y organización de proyectos con métodos ágiles.</li>
-                </ul>
-            </div>
+                <div class="skills-container">
+                    <ul class="skills-text">
+                        <strong>Habilidades requeridas: </strong>
+                        <span id="habilidades_requeridas"></span>
+                        </h4>
+                    </ul>
+                </div>
 
 
 
-         
-            <!-- Descripción debajo del nombre del programa -->
-            <!-- Información adicional -->
-            <p><strong>Fecha de finalización:</strong> 02/03/2023<p>
-            <p><strong>Estado:</strong> habilitado</p>
+            
+                <!-- Descripción debajo del nombre del programa -->
+                <!-- Información adicional -->
+                <p><strong>Fecha de finalización:</strong><span id="fecha_finalizacion"></span></p>
+                <p><strong>Estado:</strong><span id="estado"></span></p>
             </div>
             <!-- Botones CRUD -->
             <div class="buttons__container">
-                <a href="ProgramaEdit.html" class="buttons__crud">Actualizar</a>
+                <a href="ProgramaEdit.html?id=" class="buttons__crud" id="btnActualizar">Actualizar</a>
                 <button class="buttons__crud">Listar</button>
                 <button onclick="confirmInhabilitar('ProgramaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
-                <a href="ProgramaReport.html" class="buttons__crud">Reporte</a>
+                <a href="#" class="buttons__crud" id="ProgReporte">Reporte</a>
                 <button onclick="goBack()" class="buttons__crud">Volver</button>
 
             </div>
@@ -91,11 +84,31 @@
     </div>
     <script src="../../../js/script.js"></script>
     <script src="../../../js/backbutton.js"></script>
+    <script src="../../../js/viewprogramasformacion.js"></script>
+    <script>
+    document.getElementById('ProgReporte').addEventListener('click', function() {
+        const programaId = new URLSearchParams(window.location.search).get('id');
+        if (programaId) {
+            window.location.href = `ProgramaReport.html?id=${programaId}`;
+        } else {
+            alert('No se encontró el ID del programa.');
+        }
+    });
 
-    
+    // Actualizar el enlace "Actualizar" con el id del programa
+    document.addEventListener("DOMContentLoaded", function () {
+        const programaId = new URLSearchParams(window.location.search).get('id');
+        const btnActualizar = document.getElementById('btnActualizar');
+        if (programaId && btnActualizar) {
+            btnActualizar.href = `ProgramaEdit.html?id=${programaId}`;
+        }
+    });
+    </script>
+    <div class="footer__crud">
     <footer>
-        <p>@ Todos los derechos reservados. SenaLink</p>
+        <p>@ Todos los derechos reservados.SenaLink</p>
     </footer>
+</div>
 </body>
 </html>
 
