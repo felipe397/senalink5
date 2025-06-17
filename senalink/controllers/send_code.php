@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+date_default_timezone_set('America/Bogota');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -46,12 +46,12 @@ try {
             $mail->CharSet = 'UTF-8';
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'crisberx@gmail.com';
-            $mail->Password = 'ukji qykn knhs bayh';
+            $mail->Username = 'senalink05@gmail.com';
+            $mail->Password = 'nlbb bkoe opyf vrvj';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
-            $mail->setFrom('crisberx@gmail.com', 'SenaLink');
+            $mail->setFrom('senalink05@gmail.com', 'SenaLink');
             $mail->addAddress($correo);
 
             $mail->isHTML(true);
@@ -60,7 +60,7 @@ try {
                 <p>Hola <strong>Usuario</strong>,</p>
                 <p>Hemos recibido una solicitud para restablecer tu contraseña.</p>
                 <p>Haz clic en el siguiente enlace para continuar:</p>
-                <p><a href='$enlace'>$enlace</a></p>
+                <p><a href='$enlace'>Recupera tu contraseña</a></p>
                 <p>Este enlace expira en 1 hora. Si no solicitaste el cambio, ignora este mensaje.</p>
                 <p>Atentamente,<br>Equipo SenaLink</p>
             ";
