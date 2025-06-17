@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (empresaId) {
     // Hacer una solicitud GET al backend para obtener los detalles de la empresa
-    fetch(`http://localhost/senalink5/senalink5/senalink/controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
+    fetch(`http://localhost/senalink5/senalink/controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
       .then(response => response.json())
       .then(data => {
         console.log('Datos recibidos del backend:', data);
