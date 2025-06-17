@@ -140,6 +140,14 @@ public static function listarEmpresas() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+public static function obtenerUsuarioPorId($id) {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT * FROM usuarios WHERE id = :id");
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 
 public static function obtenerEmpresaPorId($id) {
     $db = Conexion::conectar();

@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,13 +31,14 @@
   <main class="container__forms--forgot">
         <h2>Ingresa tu nueva contraseña</h2>
         <form action="../controllers/update_password.php" method="POST" id="newPasswordForm">
-            <input type="password" name="new_password" placeholder="Nueva contraseña" required/>
-            <input type="password" name="confirm_password" placeholder="Confirmar nueva contraseña" required/>
-            <div class="buttons__container">
-                <button type="submit" class="btn">Confirmar</button>
-                <a href="index.html" class="btn btn-secondary">Volver</a>
-            </div>
-        </form>
+          <input type="password" name="new_password" placeholder="Nueva contraseña" required/>
+          <input type="password" name="confirm_password" placeholder="Confirmar nueva contraseña" required/>
+          <input type="hidden" name="token" value="<?php echo htmlspecialchars($_SESSION['token_recuperacion'] ?? '') ?>" />
+          <div class="buttons__container">
+              <button type="submit" class="btn">Confirmar</button>
+              <a href="index.html" class="btn btn-secondary">Volver</a>
+          </div>
+      </form>
   </main>
   </div>         
   <div class="linea-azul-difuminada"></div>

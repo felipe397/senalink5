@@ -28,37 +28,42 @@
   <div class="header__right">
     <!-- Espacio vacío o podrías poner un botón u otro logo aquí -->
   </div>
-  
 </header>
   <div class="linea-verde"></div>
   <main class="main">
-        <div class="card">
-          <img src="../img/logo-proyecto1.png"class="logo__Senalink">
-          <div class="user-avatar">
-              <i class="fas fa-user"></i>
-          </div>
-          <p class="title">Bienvenido Usuario</p>
-          <div class="user-info">
-            <div class="user-details">
-              <p><strong class="name">Pepito <span>Enriques Gonzalez</span></strong></p>
-              <p><strong>Identificación:</strong> CC: 12313586</p>
-              <p><strong>Género:</strong> Masculino</p>
-              <p><strong>Fecha de nacimiento:</strong> 14/10/2000</p>
-              <p><strong>Edad:</strong> 23</p>
-              <p><strong>Número de contacto:</strong> 30125555</p>
-              <p><strong>Dirección de residencia:</strong> no tiene</p>
-              <p><strong>Correo electrónico:</strong> pedro@gonzales.com</p>
-            </div>
-          </div>
-          <div class="actions">
-            <button class="btn edit">Editar</button>
-            <button onclick="goBack()" class="btn edit">Volver</button>
-            
-          </div>
+    <div class="card">
+      <img src="../img/logo-proyecto1.png" class="logo__Senalink">
+      <div class="user-avatar">
+          <i class="fas fa-user"></i>
       </div>
+      <p class="title">Bienvenido Usuario</p>
+      <div class="user-info">
+        <div class="user-details" id="empresa-section" style="display: none;">
+          <p><strong>NIT:</strong> <span id="nit"></span></p>
+          <p><strong>Razón Social:</strong> <span id="razon_social"></span></p>
+          <p><strong>Representante Legal:</strong> <span id="representante_legal"></span></p>
+          <p><strong>Tipo de Empresa:</strong> <span id="tipo_empresa"></span></p>
+          <p><strong>Teléfono:</strong> <span id="telefono_empresa"></span></p>
+          <p><strong>Correo Electrónico:</strong> <span id="correo_empresa"></span></p>
+          <p><strong>Dirección:</strong> <span id="direccion_empresa"></span></p>
+          <p><strong>Estado:</strong> <span id="estado"></span></p>
+        </div>
+        <div class="user-details" id="admin-section" style="display: none;">
+          <p><strong>Nombre:</strong> <span id="nombre_admin"></span></p>
+          <p><strong>Apellidos:</strong> <span id="apellido_admin"></span></p>
+          <p><strong>Correo Electrónico:</strong> <span id="correo_admin"></span></p>
+          <p><strong>Teléfono:</strong> <span id="telefono_admin"></span></p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn edit">Editar</button>
+        <button onclick="goBack()" class="btn edit">Volver</button>
+      </div>
+    </div>
   </main>
-     <div class="linea-azul-difuminada"></div>
-    <script src="../js/backbutton.js"></script>
+  <div class="linea-azul-difuminada"></div>
+  <script src="../js/backbutton.js"></script>
+  <script src="../js/viewuser.js"></script>
   <footer>
     <p>@ Todos los derechos reservados. SenaLink</p>
   </footer>

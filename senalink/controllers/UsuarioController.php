@@ -1,5 +1,9 @@
 <?php
 // Al principio del archivo
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 error_reporting(E_ALL);
@@ -147,6 +151,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'listarEmpresas'
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'detalleUsuario') {
+    $id = $_SESSION['id_usuario'] ?? null;
+
+
+    if (!$id) {
+        echo json_encode(['error' => 'No autorizado']);
+        exit;
+    }
+
+    $usuario = UsuarioModel::obtenerUsuarioPorId($id);
+
+    if ($usuario) {
+        echo json_encode($usuario);
+    } else {
+        echo json_encode(['error' => 'Usuario no encontrado']);
+    }
+
+    exit;
+}
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'detalleEmpresa' && isset($_GET['id'])) {
     $empresa = UsuarioModel::obtenerEmpresaPorId($_GET['id']);
     header('Content-Type: application/json');

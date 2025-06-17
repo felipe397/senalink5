@@ -63,6 +63,13 @@
     </main>
   </div>
   <script src="../js/changerol.js"></script>
+  <?php if (isset($_GET['reset']) && $_GET['reset'] === 'success'): ?>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      alert('¡Contraseña actualizada con éxito! Ahora puedes iniciar sesión.');
+    });
+  </script>
+<?php endif; ?>
 <script src="../js/viewpassword.js"></script>
 </body>
 </html>
