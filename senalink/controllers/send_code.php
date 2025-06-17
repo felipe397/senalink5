@@ -1,6 +1,7 @@
 <?php
 session_start();
 date_default_timezone_set('America/Bogota');
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -12,8 +13,9 @@ require '../config/conexion.php';
 header('Content-Type: application/json');
 
 $correo = $_POST['correo'] ?? null;
+
 if (!$correo || !filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-    echo json_encode(['success' => false, 'message' => 'Correo inválido']);
+    echo json_encode(['success' => false, 'error' => 'correo_invalido']);
     exit;
 }
 
@@ -26,17 +28,12 @@ try {
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($usuario) {
-        $idUsuario = $usuario['id'];
-
-        // Generar token y fecha de expiración (ej: 1 hora)
         $token = bin2hex(random_bytes(32));
         $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-        // Guardar token en tabla de recuperación
         $stmt = $conexion->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
         $stmt->execute([$correo, $token, $expires]);
 
-        // Crear enlace
         $enlace = "http://localhost/senalink5/senalink/controllers/reset_password.php?token=$token";
 
         $mail = new PHPMailer(true);
@@ -76,16 +73,15 @@ try {
             }
 
             $mail->send();
-            echo json_encode(['success' => true, 'message' => 'Correo de recuperación enviado.']);
+            echo json_encode(['success' => true]);
         } catch (Exception $e) {
             error_log("Error al enviar correo: " . $mail->ErrorInfo);
-            echo json_encode(['success' => false, 'message' => 'Error al enviar el correo: ' . $mail->ErrorInfo]);
+            echo json_encode(['success' => false, 'error' => 'envio_fallido']);
         }
-
     } else {
-        echo json_encode(['success' => false, 'message' => 'Correo no registrado.']);
+        echo json_encode(['success' => false, 'error' => 'correo_no_registrado']);
     }
 } catch (PDOException $e) {
-    echo json_encode(['success' => false, 'message' => 'Error en el servidor.']);
+    error_log("Error de base de datos: " . $e->getMessage());
+    echo json_encode(['success' => false, 'error' => 'error_servidor']);
 }
-?>

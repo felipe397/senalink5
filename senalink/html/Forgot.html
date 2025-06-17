@@ -30,13 +30,14 @@
 </header>
 <div class="linea-verde"></div>
 <div class="container">
-  <form class="container__forms--forgot" method="post" action="../controllers/send_code.php">
-        <h2>¿Olvidaste tu contraseña?</h2>
-        <p>Digita tu correo electrónico y te enviaremos <br> un código de recuperación para acceder tu cuenta</p>
-        <input name="correo" placeholder="Correo electrónico" type="email" id="emailInput" required/>
-        <button id="sendCodeBtn" class="btn" type="submit">Enviar</button>
-        <p id="message" style="color:red;"></p>
+  <form id="forgotForm" class="container__forms--forgot">
+    <h2>¿Olvidaste tu contraseña?</h2>
+    <p>Digita tu correo electrónico y te enviaremos <br> un código de recuperación para acceder tu cuenta</p>
+    <input name="correo" placeholder="Correo electrónico" type="email" id="emailInput" required />
+    <button id="sendCodeBtn" class="btn" type="submit">Enviar</button>
+    <p id="message" style="display: none;"></p>
   </form>
+
   </div>        
   
   <script src="../js/alert.js"></script>
