@@ -185,7 +185,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     }
-}
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'listarEmpresas') {
     $empresas = UsuarioModel::listarEmpresas();
     header('Content-Type: application/json');
