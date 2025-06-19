@@ -280,6 +280,11 @@ img{
 .menu__logo img {
     height: 100%;
 }
+.menu__icon{
+    height: 2.4rem;
+    width: 2.4rem;
+    margin-left: 1rem;
+}
 
 .menu__list {
   list-style: none;
@@ -289,21 +294,23 @@ img{
 }
 
 .menu__item {
-  width: 100%;
+display:flex ;
+align-items: center;
+width: 100%;
 }
 
 .menu__link {
   display: block;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 1rem;
   width: 100%;
   color: var(--Text-Primary, var(--black));
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
-.menu__link:hover {
+.menu__item:hover {
   background-color: var(--Secundary-700);
-  color: #fff;
+  width: 100%;
 }
 
 .content {
