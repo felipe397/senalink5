@@ -309,7 +309,7 @@ width: 100%;
 }
 
 .menu__item:hover {
-  background-color: var(--Secundary-700);
+  background-color: var(--primary-700);
   width: 100%;
 }
 
