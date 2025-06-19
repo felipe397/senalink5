@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../../../css/crud.css">
+    <link rel="stylesheet" href="../../../css/Inputs.css">
     <link rel="shortcut icon " href="../../../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
 </head>
 <body>
@@ -51,7 +52,13 @@
                             <option>Servicios</option> 
                             <option>Conocimiento, Innovacion y Desarrollo</option> 
                         </select>
-                        <input class="input-field" name="contrasena" placeholder="Contraseña" type="password" required/>
+                        <!-- Campo común: contraseña -->
+                    <div class="box__password">
+                        <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" required />
+                        <button type="button" id="togglePassword">
+                        <img class="icon__pass" id="viewPassword" src="../../../img/icons8-invisible-24.png" alt="Ver contraseña">
+                        </button>
+                    </div>
                         <input class="input-field" type="hidden" name="rol" value="empresa" required/>
                     </div>
 
@@ -64,6 +71,8 @@
             </main>
         </div>
         <script src="../../../js/backbutton.js"></script>
+        <script src="../../../js/viewpassword.js"></script>
+
  <footer>
     <p>@ Todos los derechos reservados.SenaLink</p>
   </footer>

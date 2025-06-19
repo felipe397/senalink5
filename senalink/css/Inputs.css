@@ -276,6 +276,7 @@
   .container input[type="password"],
   .container input[type="code"],
   .container input[type="text"],
+  .container input[type="number"],
   .container__crud input[type="text"] {
     width: 100%;
     height: 5.6rem;

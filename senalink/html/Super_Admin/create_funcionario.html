@@ -49,19 +49,42 @@
                             <option>Permiso especial de permanencia</option> 
                             <option>Permiso de proteccion temporal</option> 
                         </select>
-
-                    </select>
-                    <input class="input-field" name="contrasena" placeholder="Contraseña" type="password" required/>
+                    
+                <div class="box__password">
+                    <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" class="input-field" required />
+                    <button type="button" id="togglePassword">
+                    <img class="icon__pass" id="viewPassword" src="../../img/icons8-invisible-24.png" alt="Ver contraseña">
+                    </button>
+                </div>
                     <input class="input-field" type="hidden" name="rol" value="AdminSENA" required/>
                 </div>
 
                 <div class="buttons__container">
-                        <button type="submit" class="buttons__crud">Crear</button>
-                        <button type="button" onclick="goBack()" class="buttons__crud">Volver</button>
+                    <button type="submit" class="buttons__crud">Crear</button>
+                    <button onclick="goBack()" class="buttons__crud">Volver</button>
                 </div>
             </form>
         </main>
     </div>
-        <script src="../../js/backbutton.js"></script>
+    <script src="../../js/backbutton.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const passwordInput = document.querySelector('input[name="contrasena"]');
+            const toggleButton = document.querySelector(".box__password button");
+            const eyeIcon = document.getElementById("viewPassword");
+
+            toggleButton.addEventListener("click", function (e) {
+                e.preventDefault(); // evita que el botón haga submit
+
+                const isPassword = passwordInput.type === "password";
+                passwordInput.type = isPassword ? "text" : "password";
+
+                // Opcional: cambia el ícono según el estado
+                eyeIcon.src = isPassword 
+                ? "../../img/icons8-eye-24.png" // imagen de ojo abierto
+                : "../../img/icons8-invisible-24.png";      // imagen de ojo cerrado
+            });
+            });
+    </script>
 </body>
 </html>

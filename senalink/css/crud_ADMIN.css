@@ -250,6 +250,37 @@ td {
   gap: 1rem;
 }
 
+.box__password {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.box__password input {
+  width: 100%;
+  margin: 10px 0px;
+  padding: 10px;
+  font-size: var(--h4-font-size);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.box__password button {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon__pass {
+  width: 24px;
+  height: 24px;
+}
+
 .input-field {
   text-decoration: none;
   width: 100%;
