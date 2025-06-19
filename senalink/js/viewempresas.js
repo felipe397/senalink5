@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputBusqueda = document.querySelector('.search-container input');
     let empresas = [];
 
-    if (!container || !inputBusqueda) {
+    if (!container) {
         console.error("No se encontró el contenedor o el input de búsqueda.");
         return;
     }
@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             console.error("Error al cargar las empresas:", error);
         });
-
     // Buscar en tiempo real
     inputBusqueda.addEventListener("input", function () {
         const q = this.value.toLowerCase();
