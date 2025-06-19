@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-
+    }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'listarEmpresas') {
     $empresas = UsuarioModel::listarEmpresas();
@@ -231,5 +231,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'DetallePrograma
     echo json_encode($programa);
     exit;
 }
-}
+
 ?>
