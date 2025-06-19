@@ -52,18 +52,24 @@
                             <option>Servicios</option> 
                             <option>Conocimiento, Innovacion y Desarrollo</option> 
                         </select>
-                        <input class="input-field" name="contrasena" placeholder="Contraseña" type="password" required/>
+                    <div class="box__password">
+                        <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" required />
+                        <button type="button" id="togglePassword">
+                        <img class="icon__pass" id="viewPassword" src="../../../img/icons8-invisible-24.png" alt="Ver contraseña">
+                        </button>
+                    </div>    
                         <input class="input-field" type="hidden" name="rol" value="empresa" required/>
                     </div>
 
-    <div class="buttons__container">
-        <button type="submit" class="buttons__crud">Crear</button>
-        <button onclick="goBack()" class="buttons__crud" type="button">Volver</button>
-    </div>
-</form>
-            </main>
+                    <div class="buttons__container">
+                        <button type="submit" class="buttons__crud">Crear</button>
+                        <button onclick="goBack()" class="buttons__crud" type="button">Volver</button>
+                    </div>
+                </form>
+        </main>
         </div>
         <script src="../../../js/backbutton.js"></script>
+        <script src="../../../js/viewpassword.js"></script>
  <footer>
     <p>@ Todos los derechos reservados.SenaLink</p>
 </footer>
