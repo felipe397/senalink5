@@ -1,0 +1,15 @@
+# Ignorar archivos de configuración locales
+config.local.php
+
+# Ignorar archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de XAMPP o entorno
+*.log
+*.tmp
+
+# Ignorar carpetas comunes de entornos locales
+/vendor/
+node_modules/
+.env
