@@ -13,37 +13,83 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $habilidades_requeridas = $_POST['habilidades_requeridas'] ?? null;
     $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
 
-    // Validar que no falte ningún dato
-    if (
-        $codigo && $ficha && $nivel_formacion && $nombre_programa &&
-        $duracion_meses && $estado && $descripcion && $habilidades_requeridas && $fecha_finalizacion
-    ) {
-        require_once '../config/Conexion.php'; // Asegúrate que existe esta clase y conecta
+    // Inicializar array de errores
+    $errores = [];
 
-        $programa = new ProgramaFormacion(); // Clase en Programa.php
-
-        $resultado = $programa->crear([
-            'codigo'                 => $codigo,
-            'ficha'                  => $ficha,
-            'nivel_formacion'        => $nivel_formacion,
-            'nombre_programa'        => $nombre_programa,
-            'duracion_meses'         => $duracion_meses,
-            'estado'                 => $estado,
-            'descripcion'            => $descripcion,
-            'habilidades_requeridas' => $habilidades_requeridas,
-            'fecha_finalizacion'     => $fecha_finalizacion
-        ]);
-
-        if ($resultado) {
-            header("Location: ../html/Super_Admin/Programa_Formacion/Gestion_Programa.html");
-            exit();
-        } else {
-            echo "❌ Error al guardar el programa.";
-        }
-    } else {
-        echo "⚠️ Todos los campos son obligatorios.";
+    // Validaciones numéricas positivas
+    if (!is_numeric($codigo) || intval($codigo) <= 0) {
+        $errores[] = "El código del programa debe ser un número positivo.";
     }
-} elseif ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['action']) && $_GET['action'] === 'detallePrograma' && isset($_GET['id'])) {
+
+    if (!is_numeric($ficha) || intval($ficha) <= 0) {
+        $errores[] = "La ficha debe ser un número positivo.";
+    }
+
+    if (!is_numeric($duracion_meses) || intval($duracion_meses) <= 0) {
+        $errores[] = "La duración debe ser un número positivo en meses.";
+    }
+
+    // Validar nombre del programa (texto, espacios, puntos)
+    if (!preg_match('/^[\p{L}\s.]+$/u', $nombre_programa)) {
+        $errores[] = "El nombre del programa solo puede contener letras, espacios y puntos.";
+    }
+
+    // Validar descripción (texto, espacios, comas, puntos)
+    if (!preg_match('/^[\p{L}\p{N}\s.,]+$/u', $descripcion)) {
+        $errores[] = "La descripción solo puede contener letras, números, espacios, comas y puntos.";
+    }
+
+    // Validar habilidades requeridas (texto, espacios, comas, puntos)
+    if (!preg_match('/^[\p{L}\p{N}\s.,]+$/u', $habilidades_requeridas)) {
+        $errores[] = "Las habilidades requeridas solo pueden contener letras, números, espacios, comas y puntos.";
+    }
+
+    // Validar fecha mínima
+    $fechaMinima = '1957-06-21';
+    if (!$fecha_finalizacion || strtotime($fecha_finalizacion) < strtotime($fechaMinima)) {
+        $errores[] = "La fecha de finalización no puede ser anterior al 21 de junio de 1957.";
+    }
+
+    // Validar campos obligatorios básicos
+    if (
+        !$codigo || !$ficha || !$nivel_formacion || !$nombre_programa ||
+        !$duracion_meses || !$estado || !$descripcion || !$habilidades_requeridas || !$fecha_finalizacion
+    ) {
+        $errores[] = "Todos los campos son obligatorios.";
+    }
+
+    // Mostrar errores si existen
+    if (!empty($errores)) {
+        echo "⚠️ Se encontraron los siguientes errores:<br>" . implode("<br>", $errores);
+        exit;
+    }
+
+    // Si pasa todas las validaciones:
+    require_once '../config/Conexion.php';
+    $programa = new ProgramaFormacion();
+
+    $resultado = $programa->crear([
+        'codigo'                 => $codigo,
+        'ficha'                  => $ficha,
+        'nivel_formacion'        => $nivel_formacion,
+        'nombre_programa'        => $nombre_programa,
+        'duracion_meses'         => $duracion_meses,
+        'estado'                 => $estado,
+        'descripcion'            => $descripcion,
+        'habilidades_requeridas' => $habilidades_requeridas,
+        'fecha_finalizacion'     => $fecha_finalizacion
+    ]);
+
+    if ($resultado) {
+        header("Location: ../html/Super_Admin/Programa_Formacion/Gestion_Programa.html");
+        exit();
+    } else {
+        echo "❌ Error al guardar el programa.";
+    }
+}
+
+// Obtener detalle de programa
+elseif ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['action']) && $_GET['action'] === 'detallePrograma' && isset($_GET['id'])) {
     require_once '../config/Conexion.php';
     $programa = new ProgramaFormacion();
     $id = $_GET['id'];
@@ -58,4 +104,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
     echo "⛔ Método no permitido.";
 }
-
