@@ -84,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $contrasena)) {
     echo "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un caracter especial.";
     exit;
+    }
     
     if ($rol === 'empresa' && !preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u', $representante_legal)) {
         echo "El nombre del representante legal solo debe contener letras.";
@@ -230,6 +231,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'DetallePrograma
     header('Content-Type: application/json');
     echo json_encode($programa);
     exit;
-}
 }
 ?>
