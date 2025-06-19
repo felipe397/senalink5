@@ -306,7 +306,10 @@
 
   }
 
-  
+  .buttons__container {
+    display: flex;
+    justify-content: space-between;
+}
   .icons {
     padding: 0 2rem;
     margin-left: auto;
