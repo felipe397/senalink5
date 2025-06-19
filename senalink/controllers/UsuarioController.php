@@ -35,6 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validación básica
     $errores = [];
 
+    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+    echo "El correo no tiene un formato válido.";
+    exit;
+}
+
     if (!$correo || !$contrasena) {
         $errores[] = "Correo y contraseña son obligatorios.";
     }
@@ -55,8 +60,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Validaciones únicas
+    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        echo "El correo no tiene un formato válido.";
+        exit;
+    }
+
+    // Validaciones únicas
     if (UsuarioModel::existeCorreo($correo)) {
         echo "Este correo ya está registrado.";
+        exit;
+    }
+
+    if ($rol === 'empresa' && (!is_numeric($nit) || intval($nit) <= 0)) {
+        echo "El NIT debe ser un número positivo.";
         exit;
     }
 
@@ -64,6 +80,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Este NIT ya está registrado.";
         exit;
     }
+
+    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $contrasena)) {
+    echo "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un caracter especial.";
+    exit;
+    
+    if ($rol === 'empresa' && !preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u', $representante_legal)) {
+        echo "El nombre del representante legal solo debe contener letras.";
+        exit;
+    }
+
+    if ($rol === 'empresa' && !preg_match('/^[\p{L}\p{N}\s,.\']+$/u', $razon_social)) {
+        echo "La razón social contiene caracteres no válidos.";
+        exit;
+    }
+
+    if ($rol === 'empresa' && !preg_match('/^[\p{L}\p{N}\s,.\']+$/u', $tipo_empresa)) {
+        echo "El tipo de empresa contiene caracteres no válidos.";
+        exit;
+    }
+
+    if ($rol === 'empresa' && !preg_match('/^[\p{L}\p{N}\s,.\'#-]+$/u', $direccion)) {
+        echo "La dirección contiene caracteres no válidos.";
+        exit;
+    }
+
     // Hashear contraseña
     $hashedPassword = password_hash($contrasena, PASSWORD_BCRYPT);
 
@@ -190,5 +231,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'DetallePrograma
     echo json_encode($programa);
     exit;
 }
-
+}
 ?>
