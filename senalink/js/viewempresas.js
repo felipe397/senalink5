@@ -21,10 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // Buscar en tiempo real
     inputBusqueda.addEventListener("input", function () {
         const q = this.value.toLowerCase();
-        const filtradas = empresas.filter(e =>
-            e.razon_social.toLowerCase().includes(q) || e.nit.toLowerCase().includes(q)
-        );
-        renderEmpresas(filtradas);
+        if (q.length >= 1) {
+            const filtradas = empresas.filter(e =>
+                e.razon_social.toLowerCase().startsWith(q) || e.nit.toLowerCase().startsWith(q)
+            );
+            renderEmpresas(filtradas);
+        } else {
+            renderEmpresas(empresas);
+        }
     });
 
     function renderEmpresas(empresas) {

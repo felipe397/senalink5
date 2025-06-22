@@ -63,7 +63,7 @@
             <!-- Botones CRUD -->
             <div class="buttons__container">
                 <a href="ProgramaEdit.html?id=" class="buttons__crud" id="btnActualizar">Actualizar</a>
-                <button class="buttons__crud">Listar</button>
+                <a href="Gestion_Programa.html" class="buttons__crud">Listar</a>
                 <button onclick="confirmInhabilitar('ProgramaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
                 <a href="#" class="buttons__crud" id="ProgReporte">Reporte</a>
                 <button onclick="goBack()" class="buttons__crud">Volver</button>
@@ -85,6 +85,7 @@
     <script src="../../../js/script.js"></script>
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/viewprogramasformacion.js"></script>
+
     <script>
     document.getElementById('ProgReporte').addEventListener('click', function() {
         const programaId = new URLSearchParams(window.location.search).get('id');
@@ -108,7 +109,6 @@
     <footer>
         <p>@ Todos los derechos reservados.SenaLink</p>
     </footer>
-</div>
 </body>
 </html>
 
