@@ -3,63 +3,63 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputBusqueda = document.querySelector('.search-container input');
     let empresas = [];
 
-    if (!container) {
-        console.error("No se encontró el contenedor o el input de búsqueda.");
-        return;
+    // Detectar si estamos en Gestion_Empresa.html (listado)
+    if (container && inputBusqueda) {
+        console.log("viewempresas.js: contenedor y input encontrados, iniciando carga de empresas.");
+
+        // Cargar empresas al inicio
+        fetch("../../../controllers/UsuarioController.php?action=listarEmpresasActivas")
+            .then(response => response.json())
+            .then(data => {
+                empresas = data;
+                renderEmpresas(empresas);
+            })
+            .catch(error => {
+                console.error("Error al cargar las empresas:", error);
+            });
+        // Buscar en tiempo real
+        inputBusqueda.addEventListener("input", function () {
+            const q = this.value.toLowerCase();
+            if (q.length >= 1) {
+                const filtradas = empresas.filter(e =>
+                    e.razon_social.toLowerCase().startsWith(q) || e.nit.toLowerCase().startsWith(q)
+                );
+                renderEmpresas(filtradas);
+            } else {
+                renderEmpresas(empresas);
+            }
+        });
+
+        function renderEmpresas(empresas) {
+            container.innerHTML = "";
+
+            if (empresas.length === 0) {
+                container.innerHTML = "<p>No se encontraron empresas.</p>";
+                return;
+            }
+
+            empresas.forEach(empresa => {
+                const card = document.createElement("article");
+                card.classList.add("cardh");
+
+                card.innerHTML = `
+                    <a href="Empresa.html?id=${empresa.id}">
+                        <div class="card-text">
+                            <h2 class="card-title">${empresa.razon_social}</h2>
+                            <p class="card-subtitle">${empresa.nit}</p>
+                        </div>
+                    </a>
+                `;
+
+                container.appendChild(card);
+            });
+        }
     }
 
-    // Cargar empresas al inicio
-    fetch("../../../controllers/UsuarioController.php?action=listarEmpresas")
-        .then(response => response.json())
-        .then(data => {
-            empresas = data;
-            renderEmpresas(empresas);
-        })
-        .catch(error => {
-            console.error("Error al cargar las empresas:", error);
-        });
-    // Buscar en tiempo real
-    inputBusqueda.addEventListener("input", function () {
-        const q = this.value.toLowerCase();
-        if (q.length >= 1) {
-            const filtradas = empresas.filter(e =>
-                e.razon_social.toLowerCase().startsWith(q) || e.nit.toLowerCase().startsWith(q)
-            );
-            renderEmpresas(filtradas);
-        } else {
-            renderEmpresas(empresas);
-        }
-    });
-
-    function renderEmpresas(empresas) {
-        container.innerHTML = "";
-
-        if (empresas.length === 0) {
-            container.innerHTML = "<p>No se encontraron empresas.</p>";
-            return;
-        }
-
-        empresas.forEach(empresa => {
-            const card = document.createElement("article");
-            card.classList.add("cardh");
-
-            card.innerHTML = `
-                <a href="Empresa.html?id=${empresa.id}">
-                    <div class="card-text">
-                        <h2 class="card-title">${empresa.razon_social}</h2>
-                        <p class="card-subtitle">${empresa.nit}</p>
-                    </div>
-                </a>
-            `;
-
-            container.appendChild(card);
-        });
-    }
-
-    // DETALLE DE EMPRESA
+    // Detectar si estamos en Empresa.html (detalle)
     const empresaId = new URLSearchParams(window.location.search).get('id');
     if (empresaId) {
-        fetch(`http://localhost/senalink5/senalink/controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
+        fetch(`http://localhost/senalink5/senalink5/senalink/controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {

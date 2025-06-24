@@ -178,4 +178,18 @@ public function updatePasswordByEmail($email, $hashedPassword) {
     $stmt->bindValue(':correo', $email);
     return $stmt->execute();
 }
+
+public static function listarEmpresasActivas() {
+    $db = Conexion::conectar();
+    $stmt = $db->prepare("SELECT id, razon_social, nit FROM usuarios WHERE rol = 'empresa' AND estado = 'activo'");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public static function listarEmpresasInhabilitadas() {
+    $db = Conexion::conectar();
+    $stmt = $db->prepare("SELECT id, razon_social, nit FROM usuarios WHERE rol = 'empresa' AND estado = 'inactivo'");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }

@@ -231,5 +231,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'DetallePrograma
     echo json_encode($programa);
     exit;
 }
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listarEmpresasActivas') {
+    $empresas = UsuarioModel::listarEmpresasActivas();
+    header('Content-Type: application/json');
+    echo json_encode($empresas);
+    exit;
+}
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listarEmpresasInhabilitadas') {
+    $empresas = UsuarioModel::listarEmpresasInhabilitadas();
+    header('Content-Type: application/json');
+    echo json_encode($empresas);
+    exit;
+}
 ?>

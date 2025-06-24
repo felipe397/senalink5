@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>SenaLink</title>
+    <title>Empresa Inhabilitada - SenaLink</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../../../css/crud.css">
-    <link rel="shortcut icon " href="../../../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
+    <link rel="shortcut icon " href="../../../img/Favicon1.png">
 </head>
 <body>
     <header class="gov" id="inicio">
@@ -20,6 +20,7 @@
     </header>
     <header class="header__login">
         <div class="header__left">
+            
         </div>
 
         <div class="header__center">
@@ -30,30 +31,73 @@
         </div>
     </header>
     <div class="linea-verde"></div>
-        <div class="container--disable">
-            <main class="container__crud--disable">
-                <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
-                    <p><span>Numero NIT</span> 123456789</p>
-                    <p><span>Representante legal</span> Carlos López</p>
-                    <p><span>Razón social</span> (Ejemplo)</p>
-                    <p><span>Razón comercial</span> Ejemplo</p>
-                    <p><span>Numero telefónico</span> 123456789</p>
-                    <p><span>Correo electrónico</span> ejemplo@dominio.co</p>
-                    <p><span>Ubicación</span> cr 6 calle 9-12 barrio-ciudad</p>
-                    <p><span>Tipo de empresa</span> Empresa unipersonal</p>
-                    <p><span>Estado</span> Activa</p>
-                    <div class="buttons__container">
-                        <a href="Empresa.html" class="buttons__crud">Habilitar</a>
-                        <button onclick="goBack()" class="buttons__crud">Volver</button>
-
-                    </div>
-                </main>
+    <div class="container">
+        <main class="container__crud">
+            <!-- Logo del proyecto -->
+            <div class="logo__container">
+                <img src="../../../img/logo-proyecto1.png" alt="SenaLink Logo" class="logo__senalink" />
             </div>
+
+            <!-- Información de la empresa inhabilitada -->
+            <section class="empresa__info">
+                <p><strong>NIT:</strong> <span id="nit"></span></p>
+                <p><strong>Representante legal:</strong> <span id="representante"></span></p>
+                <p><strong>Razón social:</strong> <span id="razon-social"></span></p>
+                <p><strong>Número telefónico:</strong> <span id="telefono"></span></p>
+                <p><strong>Correo electrónico:</strong> <span id="correo"></span></p>
+                <p><strong>Ubicación:</strong> <span id="ubicacion"></span></p>
+                <p><strong>Tipo de empresa:</strong> <span id="tipo-empresa"></span></p>
+                <p><strong>Estado:</strong> <span id="estado"></span></p>
+            </section>
+
+            <!-- Botones de acciones -->
+            <div class="buttons__container">
+                <a href="Gestion_Empresas_inhabilitadas.html" class="buttons__crud">Listar Inhabilitadas</a>
+                <button id="btn-habilitar" data-empresa-id="" class="buttons__crud">Habilitar</button>
+                <button onclick="goBack()" class="buttons__crud">Volver</button>
+            </div>
+        </main>
+    </div>
+
     <script src="../../../js/script.js"></script>
-    <script src="../../../js/backbutton.js"></script> <!-- Agregar el JavaScript para el menú -->
-    <div class="linea-azul-difuminada"></div>
+    <script src="../../../js/backbutton.js"></script>
+    <script src="../../../js/viewempresas.js"></script>
+    <script src="../../../js/EmpresaInhabilitado.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const empresaId = new URLSearchParams(window.location.search).get('id');
+            if (empresaId) {
+                fetch(`../../../controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error(data.error);
+                        } else {
+                            document.getElementById('nit').textContent = data.nit;
+                            document.getElementById('representante').textContent = data.representante_legal;
+                            document.getElementById('razon-social').textContent = data.razon_social;
+                            document.getElementById('telefono').textContent = data.telefono;
+                            document.getElementById('correo').textContent = data.correo;
+                            document.getElementById('ubicacion').textContent = data.direccion;
+                            document.getElementById('tipo-empresa').textContent = data.tipo_empresa;
+                            document.getElementById('estado').textContent = data.estado;
+
+                            const btnHabilitar = document.getElementById('btn-habilitar');
+                            if (btnHabilitar) {
+                                btnHabilitar.dataset.empresaId = empresaId;
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar los detalles de la empresa:', error);
+                    });
+            }
+        });
+    </script>
+<div class="footer__crud">
     <footer>
         <p>@ Todos los derechos reservados.SenaLink</p>
     </footer>
+</div>
 </body>
 </html>
