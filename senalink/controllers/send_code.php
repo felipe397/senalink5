@@ -34,7 +34,7 @@ try {
         $stmt = $conexion->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
         $stmt->execute([$correo, $token, $expires]);
 
-        $enlace = "http://localhost/senalink5/senalink/controllers/reset_password.php?token=$token";
+        $enlace = "http://localhost/senalink5/senalink5/senalink/controllers/reset_password.php?token=$token";
 
         $mail = new PHPMailer(true);
 

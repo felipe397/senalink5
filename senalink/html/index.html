@@ -25,38 +25,56 @@
       <!-- FORMULARIO DE LOGIN -->
       <form action="../controllers/login.php" method="POST">
         
-        <!-- Campo de correo -->
+        <!-- Campo de correo (solo visible para AdminSENA y Super Admin) -->
         <div id="correoGroup">
-          <input name="correo" placeholder="Correo electrónico" type="email" />
+          <input name="correo"
+                placeholder="Correo electrónico"
+                type="email"
+                title="Ingrese un correo electrónico válido."
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          />
         </div>
 
-        <!-- Campo de NIT -->
+        <!-- Campo de NIT (solo visible para empresa): solo números positivos -->
         <div id="nitGroup" style="display: none;">
-            <input name="nit" placeholder="NIT de empresa" type="number" />
+          <input name="nit"
+                placeholder="NIT de empresa"
+                type="number"
+                min="1"
+                title="El NIT debe ser un número positivo."
+          />
         </div>
-      
 
-        <!-- Campo común: contraseña -->
+        <!-- Campo común: contraseña con requisitos de seguridad -->
         <div class="box__password">
-          <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" required />
+          <input name="contrasena"
+                id="contrasena"
+                placeholder="Contraseña"
+                type="password"
+                required
+                minlength="14"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{14,}$"
+                title="Debe tener al menos 14 caracteres, una mayúscula, una minúscula, un número y un símbolo especial." />
           <button type="button" id="togglePassword">
-          <img class="icon__pass" id="viewPassword" src="../img/icons8-invisible-24.png" alt="Ver contraseña">
+            <img class="icon__pass" id="viewPassword" src="../img/icons8-invisible-24.png" alt="Ver contraseña">
           </button>
         </div>
 
-        <!-- Rol seleccionado -->
-        <select name="rol" id="rol" class="select_container" onchange="toggleFields()" required >
+        <!-- Selector de rol -->
+        <select name="rol" id="rol" class="select_container" onchange="toggleFields()" required>
           <option value="empresa">Empresa</option>
           <option value="AdminSENA">Admin SENA</option>
           <option value="super_admin">Super Admin</option>
         </select>
+
+        <!-- Botón de envío -->
         <button type="submit" class="login__button">Iniciar Sesión</button>
       </form>
 
-      <a href="Forgot.html"class="texto-cambiable">¿Olvidó su contraseña?</a>
+      <a href="Forgot.html" class="texto-cambiable">¿Olvidó su contraseña?</a>
 
       <div class="profiles__container">
-        <a id="Crear" href="Empresa/CreateEmpresa.html" style="display: none;"class="texto-cambiable">Crear cuenta</a>
+        <a id="Crear" href="Empresa/CreateEmpresa.html" style="display: none;" class="texto-cambiable">Crear cuenta</a>
       </div>
     </main>
   </div>
