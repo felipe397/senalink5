@@ -80,3 +80,4 @@ $stmt->execute([
 ]);
 
 echo "✅ Super admin insertado correctamente.";
+?>
