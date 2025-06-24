@@ -18,7 +18,7 @@ try {
         $_SESSION['token_recuperacion'] = $token;
 
         // Redirigir al formulario
-        header("Location: ../html/forgot_new_password.php");
+        header("Location: ../html/Forgot_new_password.php");
         exit;
     } else {
         echo "Token inválido o expirado.";
