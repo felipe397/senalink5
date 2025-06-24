@@ -43,11 +43,11 @@
             <section class="empresa__info">
                 <p><strong>NIT:</strong> <span id="nit"></span></p>
                 <p><strong>Representante legal:</strong> <span id="representante"></span></p>
-                <p><strong>Razón social:</strong> <span id="razon-social"></span></p>
+                <p><strong>Razón social:</strong> <span id="razon_social"></span></p>
                 <p><strong>Número telefónico:</strong> <span id="telefono"></span></p>
                 <p><strong>Correo electrónico:</strong> <span id="correo"></span></p>
                 <p><strong>Ubicación:</strong> <span id="ubicacion"></span></p>
-                <p><strong>Tipo de empresa:</strong> <span id="tipo-empresa"></span></p>
+                <p><strong>Tipo de empresa:</strong> <span id="tipo_empresa"></span></p>
                 <p><strong>Estado:</strong> <span id="estado"></span></p>
             </section>
 
@@ -55,7 +55,7 @@
             <div class="buttons__container">
                 <a href="EmpresaEdit.html" class="buttons__crud">Actualizar</a>
                 <a href="Gestion_Empresa.html" class="buttons__crud">Listar</a>
-                <button id="btn-inhabilitar" data-empresa-id="" class="buttons__crud btn-inhabilitar">Inhabilitar</button>
+                <button id="btn-inhabilitar" class="buttons__crud btn-inhabilitar">Inhabilitar</button>
                 <a href="#" class="buttons__crud" id="btnReporte">Reporte</a>
                 <button onclick="goBack()" class="buttons__crud">Volver</button>
             </div>
@@ -83,25 +83,24 @@
     <!-- <script src="../../../js/script.js"></script> -->
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/viewempresas.js"></script>
-    <script src="../../../js/gestionEmpresaEstado.js"></script>
     <script>
-        // Forzar el id de empresa para pruebas si está vacío
-        document.addEventListener('DOMContentLoaded', function() {
-            var btn = document.getElementById('btn-inhabilitar');
-            if(btn && !btn.dataset.empresaId) {
-                btn.dataset.empresaId = '1'; // Cambia '1' por un id válido de prueba
-            }
-        });
-    </script>
-    <script>
-        document.getElementById('btnReporte').addEventListener('click', function() {
-            const empresaId = new URLSearchParams(window.location.search).get('id');
-            if (empresaId) {
-                window.location.href = `EmpresaReport.html?id=${empresaId}`;
-            } else {
-                alert('No se encontró el ID de la empresa.');
-            }
-        });
+    //     // Forzar el id de empresa para pruebas si está vacío
+    //     document.addEventListener('DOMContentLoaded', function() {
+    //         var btn = document.getElementById('btn-inhabilitar');
+    //         if(btn && !btn.dataset.empresaId) {
+    //             btn.dataset.empresaId = '1'; // Cambia '1' por un id válido de prueba
+    //         }
+    //     });
+    // </script>
+    // <script>
+    //     document.getElementById('btnReporte').addEventListener('click', function() {
+    //         const empresaId = new URLSearchParams(window.location.search).get('id');
+    //         if (empresaId) {
+    //             window.location.href = `EmpresaReport.html?id=${empresaId}`;
+    //         } else {
+    //             alert('No se encontró el ID de la empresa.');
+    //         }
+    //     });
     </script>
 <div class="footer__crud">
     <footer>

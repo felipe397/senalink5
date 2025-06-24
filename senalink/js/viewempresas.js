@@ -59,20 +59,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // Detectar si estamos en Empresa.html (detalle)
     const empresaId = new URLSearchParams(window.location.search).get('id');
     if (empresaId) {
-        fetch(`http://localhost/senalink5/senalink5/senalink/controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
+        fetch(`http://localhost/senalink5/senalink/controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
                     console.error(data.error);
                 } else {
-                    document.querySelector('p:nth-of-type(1) span').textContent = data.nit;
-                    document.querySelector('p:nth-of-type(2) span').textContent = data.representante_legal;
-                    document.querySelector('p:nth-of-type(3) span').textContent = data.razon_social;
-                    document.querySelector('p:nth-of-type(4) span').textContent = data.telefono;
-                    document.querySelector('p:nth-of-type(5) span').textContent = data.correo;
-                    document.querySelector('p:nth-of-type(6) span').textContent = data.direccion;
-                    document.querySelector('p:nth-of-type(7) span').textContent = data.tipo_empresa;
-                    document.querySelector('p:nth-of-type(8) span').textContent = data.estado;
+                    document.getElementById('nit').textContent = data.nit;
+                    document.getElementById('representante').textContent = data.representante_legal;
+                    document.getElementById('razon_social').textContent = data.razon_social;
+                    document.getElementById('telefono').textContent = data.telefono;
+                    document.getElementById('correo').textContent = data.correo.trim();
+                    document.getElementById('ubicacion').textContent = data.direccion;
+                    document.getElementById('tipo_empresa').textContent = data.tipo_empresa;
+                    document.getElementById('estado').textContent = data.estado;
 
                     const actualizarLink = document.querySelector('a.buttons__crud[href="EmpresaEdit.html"]');
                     if (actualizarLink) {
@@ -85,3 +85,58 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 });
+function confirmInhabilitar(callback) {
+    const modal = document.getElementById("custom-confirm");
+    modal.classList.add("show");
+
+    document.getElementById("confirm-yes").onclick = function () {
+        modal.classList.remove("show");
+        if (typeof callback === "function") {
+            callback(); // Aquí se ejecuta el fetch solo si confirman
+        }
+    };
+
+    document.getElementById("confirm-no").onclick = function () {
+        modal.classList.remove("show");
+    };
+}
+
+// Este se ejecuta solo al hacer clic en el botón de "Inhabilitar"
+document.getElementById('btn-inhabilitar').addEventListener('click', function () {
+    const empresaId = this.dataset.empresaId;
+    const estadoActual = document.getElementById('estado').textContent.trim();
+    const nuevoEstado = estadoActual === 'Activo' ? 'Desactivado' : 'Activo';
+
+    confirmInhabilitar(() => {
+        const formData = new URLSearchParams();
+        formData.append('accion', 'actualizarEstado');
+        formData.append('id', empresaId);
+        formData.append('estado', nuevoEstado);
+
+        fetch('../../../controllers/UsuarioController.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            window.location.reload(); // refresca la página para ver el nuevo estado
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const empresaId = params.get('id');
+
+    if (empresaId) {
+        const btn = document.getElementById('btn-inhabilitar');
+        btn.dataset.empresaId = empresaId;
+    }
+});
+
+
+

@@ -23,21 +23,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-function confirmInhabilitar(callback) {
-    // Muestra la ventana emergente personalizada
-    const modal = document.getElementById('custom-confirm');
-    modal.classList.add('show');
 
-    // Maneja el clic en el botón "Sí"
-    document.getElementById('confirm-yes').onclick = function() {
-        modal.classList.remove('show'); // Cierra la ventana
-        if (typeof callback === 'function') {
-            callback();
-        }
-    };
 
-    // Maneja el clic en el botón "No"
-    document.getElementById('confirm-no').onclick = function() {
-        modal.classList.remove('show'); // Cierra la ventana
-    };
-}
