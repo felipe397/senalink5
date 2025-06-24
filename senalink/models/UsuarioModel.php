@@ -156,6 +156,22 @@ public static function obtenerEmpresaPorId($id) {
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+public static function actualizarEstado($id, $estado) {
+    try {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("UPDATE usuarios SET estado = :estado WHERE id = :id");
+        $stmt->bindValue(':estado', $estado);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount() > 0; // ✅ esto sí verifica si realmente cambió el estado
+    } catch (PDOException $e) {
+        error_log("Error al actualizar estado: " . $e->getMessage());
+        return false;
+    }
+}
+
+
 public static function listarPrograma() {
     $db = Conexion::conectar();
     $stmt = $db->prepare("SELECT id, nombre_programa,ficha FROM programas_formacion");
@@ -188,7 +204,7 @@ public static function listarEmpresasActivas() {
 
 public static function listarEmpresasInhabilitadas() {
     $db = Conexion::conectar();
-    $stmt = $db->prepare("SELECT id, razon_social, nit FROM usuarios WHERE rol = 'empresa' AND estado = 'inactivo'");
+    $stmt = $db->prepare("SELECT id, razon_social, nit FROM usuarios WHERE rol = 'empresa' AND estado = 'Desactivado'");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

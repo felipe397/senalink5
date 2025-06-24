@@ -9,6 +9,29 @@ ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../models/UsuarioModel.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
+    isset($_POST['accion']) && $_POST['accion'] === 'actualizarEstado' &&
+    isset($_POST['id']) && isset($_POST['estado'])) {
+
+    $id = $_POST['id'];
+
+    // Normalizar estado a primera letra mayúscula
+    $nuevoEstado = ucfirst(strtolower(trim($_POST['estado'])));
+
+    // Validar estados permitidos
+    if (!in_array($nuevoEstado, ['Activo', 'Desactivado'])) {
+        echo "Estado no válido.";
+        exit;
+    }
+
+    $resultado = UsuarioModel::actualizarEstado($id, $nuevoEstado);
+
+    echo $resultado ? "Estado actualizado correctamente." : "Error al actualizar estado.";
+    exit;
+}
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener datos del formulario
     $correo         = $_POST['correo'] ?? '';
@@ -58,7 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo implode("<br>", $errores);
         exit;
     }
-
     // Validaciones únicas
     if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
         echo "El correo no tiene un formato válido.";
@@ -217,6 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'detalleEmpresa'
     echo json_encode($empresa);
     exit;
 }
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'listarPrograma') {
     $programas = UsuarioModel::listarPrograma();
     header('Content-Type: application/json');
