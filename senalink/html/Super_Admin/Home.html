@@ -45,27 +45,68 @@
             <input type="text" placeholder="Hinted search text">
             <i class="fas fa-search search-icon"></i>
         </div>
-        <div class="slider-frame">
-            <ul>
-                <li><img src="../../img/bannerejemplo.webp" alt=""></li>
-                <li><img src="../../img/banner2.webp" alt=""></li>
-                <li><img src="../../img/banner3.webp" alt=""></li>
-                <li><img src="../../img/banner4.webp" alt=""></li>
+        <div class="slider-frame" style="overflow: hidden;">
+            <ul id="slider-list" style="display: flex; width: 400%; margin-left: 0; transition: margin-left 0.5s ease;">
+                <li style="width: 100%; list-style: none;"><img src="../../img/bannerejemplo.webp" alt=""></li>
+                <li style="width: 100%; list-style: none;"><img src="../../img/banner2.webp" alt=""></li>
+                <li style="width: 100%; list-style: none;"><img src="../../img/banner3.webp" alt=""></li>
+                <li style="width: 100%; list-style: none;"><img src="../../img/banner4.webp" alt=""></li>
             </ul>
+
             <div class="carousel__indicators">
-                <div class="carousel__indicator carousel__indicator--active"></div>
-                <div class="carousel__indicator"></div>
-                <div class="carousel__indicator"></div>
-                <div class="carousel__indicator"></div>
-                <div class="carousel__indicator"></div>
-                <div class="carousel__indicator"></div>
-                <div class="carousel__indicator"></div>
-                <div class="carousel__indicator"></div>
-                <div class="carousel__indicator"></div>
+                <div class="carousel__indicator carousel__indicator--active" data-index="0"></div>
+                <div class="carousel__indicator" data-index="1"></div>
+                <div class="carousel__indicator" data-index="2"></div>
+                <div class="carousel__indicator" data-index="3"></div>
             </div>
         </div>
 
+
+
+
         <section class="cards">
+            <article class="card">
+                <img alt="Card Image" class="card__image" src="https://storage.googleapis.com/a1aa/image/PPsFhVro6KYTMdsQdYzgtBcs1mngnmKVsEHCjZOoCpXrQOeJA.jpg""/>
+                <h3 class="card__title">Análisis y Desarrollo de Software</h3>
+                <p class="card__text">2395053</p>
+                <button class="card__button">Ver más</button>
+            </article>
+            <article class="card">
+                <img alt="Card Image" class="card__image" src="https://storage.googleapis.com/a1aa/image/PPsFhVro6KYTMdsQdYzgtBcs1mngnmKVsEHCjZOoCpXrQOeJA.jpg""/>
+                <h3 class="card__title">Análisis y Desarrollo de Software</h3>
+                <p class="card__text">2395053</p>
+                <button class="card__button">Ver más</button>
+            </article>
+            <article class="card">
+                <img alt="Card Image" class="card__image" src="https://storage.googleapis.com/a1aa/image/PPsFhVro6KYTMdsQdYzgtBcs1mngnmKVsEHCjZOoCpXrQOeJA.jpg""/>
+                <h3 class="card__title">Análisis y Desarrollo de Software</h3>
+                <p class="card__text">2395053</p>
+                <button class="card__button">Ver más</button>
+            </article>
+            <article class="card">
+                <img alt="Card Image" class="card__image" src="https://storage.googleapis.com/a1aa/image/PPsFhVro6KYTMdsQdYzgtBcs1mngnmKVsEHCjZOoCpXrQOeJA.jpg""/>
+                <h3 class="card__title">Análisis y Desarrollo de Software</h3>
+                <p class="card__text">2395053</p>
+                <button class="card__button">Ver más</button>
+            </article>
+            <article class="card">
+                <img alt="Card Image" class="card__image" src="https://storage.googleapis.com/a1aa/image/PPsFhVro6KYTMdsQdYzgtBcs1mngnmKVsEHCjZOoCpXrQOeJA.jpg""/>
+                <h3 class="card__title">Análisis y Desarrollo de Software</h3>
+                <p class="card__text">2395053</p>
+                <button class="card__button">Ver más</button>
+            </article>
+            <article class="card">
+                <img alt="Card Image" class="card__image" src="https://storage.googleapis.com/a1aa/image/PPsFhVro6KYTMdsQdYzgtBcs1mngnmKVsEHCjZOoCpXrQOeJA.jpg""/>
+                <h3 class="card__title">Análisis y Desarrollo de Software</h3>
+                <p class="card__text">2395053</p>
+                <button class="card__button">Ver más</button>
+            </article>
+            <article class="card">
+                <img alt="Card Image" class="card__image" src="https://storage.googleapis.com/a1aa/image/PPsFhVro6KYTMdsQdYzgtBcs1mngnmKVsEHCjZOoCpXrQOeJA.jpg""/>
+                <h3 class="card__title">Análisis y Desarrollo de Software</h3>
+                <p class="card__text">2395053</p>
+                <button class="card__button">Ver más</button>
+            </article>
             <article class="card">
                 <img alt="Card Image" class="card__image" src="https://storage.googleapis.com/a1aa/image/PPsFhVro6KYTMdsQdYzgtBcs1mngnmKVsEHCjZOoCpXrQOeJA.jpg""/>
                 <h3 class="card__title">Análisis y Desarrollo de Software</h3>
@@ -304,6 +345,30 @@
             </a>
         </div>
     </div>
+
+    <!-- Agregar script para controlar el slider -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const indicators = document.querySelectorAll(".carousel__indicator");
+    const sliderList = document.getElementById("slider-list");
+
+    indicators.forEach(indicator => {
+      indicator.addEventListener("click", () => {
+        const index = parseInt(indicator.getAttribute("data-index"));
+
+        // Mover el slider al slide correspondiente
+        sliderList.style.marginLeft = `-${index * 100}%`;
+
+        // Eliminar clase activa de todos
+        indicators.forEach(i => i.classList.remove("carousel__indicator--active"));
+
+        // Agregar clase activa al clickeado
+        indicator.classList.add("carousel__indicator--active");
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
 
