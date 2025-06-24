@@ -33,35 +33,68 @@
             <img alt="SenaLink Logo" src="../../img/logo-proyecto1.png" class="logo__senalink"/>
             
             <!-- FORMULARIO DE REGISTRO ADMINISTRADOR -->
-            <form action="../../controllers/UsuarioController.php" method="POST">               
+            <form action="../../controllers/UsuarioController.php" method="POST">
                 <div class="inputs__container">
-                    <input class="input-field" name="primer_nombre" placeholder="Primer nombre" type="text" required/>
-                    <input class="input-field" name="segundo_nombre" placeholder="Segundo nombre" type="text"/>
-                    <input class="input-field" name="primer_apellido" placeholder="Primer apellido" type="text" required/>
-                    <input class="input-field" name="segundo_apellido" placeholder="Segundo apellido" type="text"/>
-                    <input class="input-field" name="correo" placeholder="Correo electrónico" type="email" required/>
-                    <input class="input-field" name="telefono" placeholder="Numero telefonico" type="number" required/>
-                    <input class="input-field" name="numero_documento" placeholder="Numero de documento" type="number" required/>
-                    <select class="select_container" name="tipo_documento">
-                            <option selected disabled>Tipo de documento</option>
-                            <option>Cedula de ciudadania</option>
-                            <option>Cedula de extranjeria</option>
-                            <option>Permiso especial de permanencia</option> 
-                            <option>Permiso de proteccion temporal</option> 
-                        </select>
-                
+                    <!-- Primer nombre: solo letras y espacios -->
+                    <input class="input-field" name="primer_nombre" placeholder="Primer nombre" type="text" required
+                        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
+                        title="Solo se permiten letras y espacios."/>
+
+                    <!-- Segundo nombre: opcional -->
+                    <input class="input-field" name="segundo_nombre" placeholder="Segundo nombre" type="text"
+                        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$"
+                        title="Solo se permiten letras y espacios."/>
+
+                    <!-- Primer apellido: obligatorio -->
+                    <input class="input-field" name="primer_apellido" placeholder="Primer apellido" type="text" required
+                        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
+                        title="Solo se permiten letras y espacios."/>
+
+                    <!-- Segundo apellido: opcional -->
+                    <input class="input-field" name="segundo_apellido" placeholder="Segundo apellido" type="text"
+                        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$"
+                        title="Solo se permiten letras y espacios."/>
+
+                    <!-- Correo electrónico -->
+                    <input class="input-field" name="correo" placeholder="Correo electrónico" type="email" required
+                        title="Ingrese un correo electrónico válido."/>
+
+                    <!-- Teléfono: solo números positivos -->
+                    <input class="input-field" name="telefono" placeholder="Número telefónico" type="number" min="1" required
+                        title="El número debe ser positivo."/>
+
+                    <!-- Documento: solo números positivos -->
+                    <input class="input-field" name="numero_documento" placeholder="Número de documento" type="number" min="1" required
+                        title="El número de documento debe ser positivo."/>
+
+                    <!-- Tipo de documento -->
+                    <select class="select_container" name="tipo_documento" required>
+                        <option selected disabled value="">Tipo de documento</option>
+                        <option>Cedula de ciudadania</option>
+                        <option>Cedula de extranjeria</option>
+                        <option>Permiso especial de permanencia</option>
+                        <option>Permiso de proteccion temporal</option>
+                    </select>
+
+                    <!-- Contraseña: mínimo 8 caracteres con requisitos -->
                     <div class="box__password">
-                        <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" class="input-field" required />
+                        <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password"
+                            class="input-field" required
+                            minlength="8"
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$"
+                            title="Mínimo 8 caracteres, una mayúscula, una minúscula, un número y un símbolo." />
                         <button type="button" id="togglePassword">
-                        <img class="icon__pass" id="viewPassword" src="../../img/icons8-invisible-24.png" alt="Ver contraseña">
+                            <img class="icon__pass" id="viewPassword" src="../../img/icons8-invisible-24.png" alt="Ver contraseña">
                         </button>
                     </div>
-                    <input class="input-field" type="hidden" name="rol" value="AdminSENA" required/>
+
+                    <!-- Rol oculto -->
+                    <input class="input-field" type="hidden" name="rol" value="AdminSENA" required />
                 </div>
 
                 <div class="buttons__container">
                     <button type="submit" class="buttons__crud">Crear</button>
-                    <button onclick="goBack()" class="buttons__crud">Volver</button>
+                    <button onclick="goBack()" class="buttons__crud" type="button">Volver</button>
                 </div>
             </form>
         </main>
@@ -69,11 +102,11 @@
     <script src="../../js/backbutton.js"></script>
     <script> 
         document.addEventListener("DOMContentLoaded", function () {
-  const passwordInput = document.querySelector('input[name="contrasena"]');
-  const toggleButton = document.querySelector(".box__password button");
-  const eyeIcon = document.getElementById("viewPassword");
+const passwordInput = document.querySelector('input[name="contrasena"]');
+const toggleButton = document.querySelector(".box__password button");
+const eyeIcon = document.getElementById("viewPassword");
 
-  toggleButton.addEventListener("click", function (e) {
+toggleButton.addEventListener("click", function (e) {
     e.preventDefault(); // evita que el botón haga submit
 
     const isPassword = passwordInput.type === "password";
