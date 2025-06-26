@@ -259,7 +259,36 @@ td {
     cursor: pointer;
     font-size: var(--h4-font-size);
   }
-  
+  .inputs__container{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 1rem;
+}
+  .box__password {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.box__password input {
+  width: 100%;
+  margin: 10px 0px;
+  padding: 10px;
+  font-size: var(--h4-font-size);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.box__password button {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
   .modal {
     display: none; /* Oculto por defecto */
     position: fixed; /* Mantiene la ventana en la misma posición */
@@ -324,13 +353,8 @@ td {
   }
 
 
-.inputs__container{
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 1rem;
-}
-
 .input-field {
+  text-decoration: none;
   width: 100%;
   height: 5.6rem;
   padding: 1rem;
@@ -338,6 +362,11 @@ td {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: var(--h4-font-size);
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 @media (max-width: 768px){
@@ -348,6 +377,11 @@ td {
   .buttons__container--disable{
     display: grid;
     grid-template-columns: repeat(2,1fr);
+  }
+  .inputs__container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 }
 footer{
