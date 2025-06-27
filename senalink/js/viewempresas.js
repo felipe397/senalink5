@@ -123,7 +123,7 @@ document.getElementById('btn-inhabilitar').addEventListener('click', function ()
         .then(response => response.text())
         .then(data => {
             alert(data);
-            window.location.reload(); // refresca la página para ver el nuevo estado
+            window.location.href='../html/Super_Admin/Empresa/Gestion_empresas_inhabilitadas.html' // refresca la página para ver el nuevo estado
         })
         .catch(error => console.error('Error:', error));
     });

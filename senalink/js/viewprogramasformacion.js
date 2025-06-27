@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.warn("No se encontraron datos para el programa con id:", id);
                     alert("No se encontraron datos para el programa solicitado.");
                 } else {
-                    const campos = ['codigo', 'ficha', 'nivel_formacion', 'nombre_programa', 'descripcion', 'habilidades_requeridas', 'fecha_finalizacion', 'estado'];
+                    const campos = ['codigo', 'ficha', 'nivel_formacion', 'sector_programa', 'nombre_programa', 'descripcion', 'habilidades_requeridas', 'fecha_finalizacion', 'estado'];
                     campos.forEach(campo => {
                         const elemento = document.getElementById(campo);
                         if (elemento) {

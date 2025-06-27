@@ -10,8 +10,8 @@ class ProgramaFormacion {
 
     public function crear($data) {
         $sql = "INSERT INTO programas_formacion
-        (codigo, ficha, nivel_formacion, nombre_programa, duracion_meses, estado, descripcion, habilidades_requeridas, fecha_finalizacion)
-        VALUES (:codigo, :ficha, :nivel_formacion, :nombre_programa, :duracion_meses, :estado, :descripcion, :habilidades_requeridas, :fecha_finalizacion)";
+        (codigo, ficha, nivel_formacion, nombre_programa, duracion_meses, estado, descripcion, habilidades_requeridas, fecha_finalizacion,sector_programa)
+        VALUES (:codigo, :ficha, :nivel_formacion, :nombre_programa, :duracion_meses, :estado, :descripcion, :habilidades_requeridas, :fecha_finalizacion,:sector_programa)";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':codigo', $data['codigo']);
         $stmt->bindParam(':ficha', $data['ficha']);
@@ -21,6 +21,7 @@ class ProgramaFormacion {
         $stmt->bindParam(':descripcion', $data['descripcion']);
         $stmt->bindParam(':habilidades_requeridas', $data['habilidades_requeridas']);
         $stmt->bindParam(':fecha_finalizacion', $data['fecha_finalizacion']);
+        $stmt->bindParam(':sector_programa', $data['sector_programa']);
         $stmt->bindParam(':estado', $data['estado']);
         return $stmt->execute();
     }
@@ -43,12 +44,14 @@ class ProgramaFormacion {
             estado = :estado,
             descripcion = :descripcion,
             habilidades_requeridas = :habilidades_requeridas,
-            fecha_finalizacion = :fecha_finalizacion
+            fecha_finalizacion = :fecha_finalizacion,
+            sector_programa = :sector_programa
             WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':codigo', $data['codigo']);
         $stmt->bindParam(':ficha', $data['ficha']);
         $stmt->bindParam(':nivel_formacion', $data['nivel_formacion']);
+        $stmt->bindParam(':sector_programa', $data['sector_programa']);
         $stmt->bindParam(':nombre_programa', $data['nombre_programa']);
         $stmt->bindParam(':duracion_meses', $data['duracion_meses']);
         $stmt->bindParam(':estado', $data['estado']);

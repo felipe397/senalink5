@@ -55,72 +55,21 @@
         <section class="search-container">
             <input type="text" placeholder="Buscar...">
             <i class="fas fa-search search-icon"></i>
+            <div class="dropdown">
+                <button id="estadoDropdownBtn">Filtrar por estado</button>
+                <div id="estadoDropdownMenu" class="dropdown-menu">
+                    <a href="#" data-estado="Activo">Activo</a>
+                    <a href="#" data-estado="Desactivado">Desactivado</a>
+                </div>
+            </div>
         </section>
-        <div id="resultados"></div>
-        <section class="cardh__container">
-            <article class="cardh">
-                <a href="Empresa.html">
-                    <div class="card-text">
-                        <h2 class="card-title">Empresa ejemplo</h2>
-                        <p class="card-subtitle">Ciudad-departamento</p>
-                    </div>
-                </a>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Empresa ejemplo</h2>
-                    <p class="card-subtitle">Ciudad-departamento</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Empresa ejemplo</h2>
-                    <p class="card-subtitle">Ciudad-departamento</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Empresa ejemplo</h2>
-                    <p class="card-subtitle">Ciudad-departamento</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Empresa ejemplo</h2>
-                    <p class="card-subtitle">Ciudad-departamento</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Empresa ejemplo</h2>
-                    <p class="card-subtitle">Ciudad-departamento</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Empresa ejemplo</h2>
-                    <p class="card-subtitle">Ciudad-departamento</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Empresa ejemplo</h2>
-                    <p class="card-subtitle">Ciudad-departamento</p>
-                </div>
-            </article>
-        </section>
+        <section id="resultados" class="cardh__container"></section>
     </main>
 
     <script src="../../../js/script.js"></script>
     <script src="../../../js/viewempresas.js"></script>
-    <script src="../../../js/gestionEmpresaEstado.js"></script>
+    <script src="../../../js/filter.js"></script>
+    <!-- <script src="../../../js/gestionEmpresaEstado.js"></script> -->
 
     <footer>
         <p>@ Todos los derechos reservados. SenaLink</p>

@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $codigo              = $_POST['codigo'] ?? null;
     $ficha               = $_POST['ficha'] ?? null;
     $nivel_formacion     = $_POST['nivel_formacion'] ?? null;
+    $sector_programa     = $_POST['sector_programa'] ?? null;
     $nombre_programa     = $_POST['nombre_programa'] ?? null;
     $duracion_meses      = $_POST['duracion_meses'] ?? null;
     $estado              = $_POST['estado'] ?? 'Disponible'; // Valor por defecto
@@ -53,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Validar campos obligatorios básicos
     if (
         !$codigo || !$ficha || !$nivel_formacion || !$nombre_programa ||
-        !$duracion_meses || !$estado || !$descripcion || !$habilidades_requeridas || !$fecha_finalizacion
+        !$duracion_meses || !$estado || !$descripcion || !$habilidades_requeridas || !$fecha_finalizacion || !$sector_programa
     ) {
         $errores[] = "Todos los campos son obligatorios.";
     }
@@ -72,6 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         'codigo'                 => $codigo,
         'ficha'                  => $ficha,
         'nivel_formacion'        => $nivel_formacion,
+        'sector_programa'     => $sector_programa,
         'nombre_programa'        => $nombre_programa,
         'duracion_meses'         => $duracion_meses,
         'estado'                 => $estado,

@@ -208,4 +208,12 @@ public static function listarEmpresasInhabilitadas() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+public static function getEmpresasPorEstado($estado) {
+    $conexion = Conexion::conectar();
+    $sql = "SELECT id,razon_social,nit FROM Usuarios WHERE estado = :estado";
+    $stmt = $conexion->prepare($sql);
+    $stmt->execute([':estado' => $estado]); // ✅ MATCH
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }
