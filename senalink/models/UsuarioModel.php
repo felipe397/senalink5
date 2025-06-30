@@ -172,20 +172,6 @@ public static function actualizarEstado($id, $estado) {
 }
 
 
-public static function listarPrograma() {
-    $db = Conexion::conectar();
-    $stmt = $db->prepare("SELECT id, nombre_programa,ficha FROM programas_formacion");
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-public static function obtenerProgramaporid($id) {
-    $db = Conexion::conectar();
-    $stmt = $db->prepare("SELECT * FROM programas_formacion WHERE id = :id");
-    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
 
 public function updatePasswordByEmail($email, $hashedPassword) {
     $sql = "UPDATE usuarios SET contrasena = :contrasena WHERE correo = :correo";

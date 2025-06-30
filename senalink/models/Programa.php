@@ -1,14 +1,17 @@
 <?php
 require_once __DIR__ . '/../Config/conexion.php';
 
-class ProgramaFormacion {
+class ProgramaFormacion
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = Conexion::conectar();
     }
 
-    public function crear($data) {
+    public function crear($data)
+    {
         $sql = "INSERT INTO programas_formacion
         (codigo, ficha, nivel_formacion, nombre_programa, duracion_meses, estado, descripcion, habilidades_requeridas, fecha_finalizacion,sector_programa)
         VALUES (:codigo, :ficha, :nivel_formacion, :nombre_programa, :duracion_meses, :estado, :descripcion, :habilidades_requeridas, :fecha_finalizacion,:sector_programa)";
@@ -26,7 +29,8 @@ class ProgramaFormacion {
         return $stmt->execute();
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
         $sql = "SELECT * FROM programas_formacion WHERE id = :id LIMIT 1";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -34,7 +38,8 @@ class ProgramaFormacion {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $data) {
+    public function update($id, $data)
+    {
         $sql = "UPDATE programas_formacion SET 
             codigo = :codigo,
             ficha = :ficha,
@@ -60,5 +65,21 @@ class ProgramaFormacion {
         $stmt->bindParam(':fecha_finalizacion', $data['fecha_finalizacion']);
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
+    }
+    public static function listarPrograma()
+    {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT id, nombre_programa,ficha FROM programas_formacion");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function obtenerProgramaporid($id)
+    {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT * FROM programas_formacion WHERE id = :id");
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

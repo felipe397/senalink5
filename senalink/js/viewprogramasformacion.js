@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Solo ejecutar la parte de lista si existe el contenedor
     if (container) {
         // Cargar todos los programas
-        fetch("../../../controllers/UsuarioController.php?action=listarPrograma")
+        fetch("../../../controllers/ProgramaController.php?action=listarPrograma")
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const id = new URLSearchParams(window.location.search).get('id');
     console.log("ID obtenido de la URL:", id);
     if (id) {
-        fetch(`../../../controllers/UsuarioController.php?action=DetallePrograma&id=${id}`)
+        fetch(`../../../controllers/ProgramaController.php?action=DetallePrograma&id=${id}`)
             .then(response => {
                 console.log("Respuesta HTTP del fetch DetallePrograma:", response);
                 if (!response.ok) {

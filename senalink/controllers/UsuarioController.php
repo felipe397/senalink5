@@ -52,14 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         exit;
     }
 
-    // Solo para rol Empresas
-    $nit                 = $_POST['nit'] ?? '';
-    $representante_legal = $_POST['representante_legal'] ?? '';
-    $tipo_empresa        = $_POST['tipo_empresa'] ?? '';
-    $direccion           = $_POST['direccion'] ?? '';
-    $razon_social        = $_POST['razon_social'] ?? '';
-    $telefono            = $_POST['telefono'] ?? '';
-
     // Validación básica
     $errores = [];
 
@@ -67,21 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     $hashedPassword = password_hash($contrasena, PASSWORD_BCRYPT);
 
     // Crear el array de datos
-    if ($rol === 'empresa') {
-    $datos = [
-        'correo'              => $correo,
-        'contrasena'          => $hashedPassword,
-        'rol'                 => $rol,
-        'estado'              => $estado,
-        'fecha_creacion'      => $fecha_creacion,
-        'nit'                 => $nit,
-        'representante_legal' => $representante_legal,
-        'tipo_empresa'        => $tipo_empresa,
-        'direccion'           => $direccion,
-        'razon_social'        => $razon_social,
-        'telefono'            => $telefono
-    ];
-} else if ($rol === 'AdminSENA') {
+    if ($rol === 'AdminSENA') {
     $datos = [
         'correo'              => $correo,
         'contrasena'          => $hashedPassword,
@@ -116,114 +94,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
 
 
     // Crear el usuario
-    try {
-        $resultado = UsuarioModel::crear($datos);
+if ($resultado) {
+    header('Location: ../html/index.html');
+    exit;
+} else {
+    echo "Error al crear el usuario.";
+    exit;
+}
 
-        if ($resultado) {
-            switch ($rol) {
-                case 'super_admin':
-                    header('Location: ../html/index.html');
-                    break;
-                case 'AdminSENA':
-                    header('Location: ../html/index.html');
-                    break;
-                case 'empresa':
-                    header('Location: ../html/index.html');
-                    break;
-            }
-            exit;
-        } else {
-            echo "Error al crear el usuario.";
-            exit;
-        }
-    } catch (Exception $e) {
-        echo "Error al procesar la solicitud: " . $e->getMessage();
-        exit;
+
     }
 
-    }
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'listarEmpresas') {
-    $empresas = UsuarioModel::listarEmpresas();
-    header('Content-Type: application/json');
-    echo json_encode($empresas);
-    exit;
-}
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'detalleUsuario') {
-    $id = $_SESSION['id_usuario'] ?? null;
-
-
-    if (!$id) {
-        echo json_encode(['error' => 'No autorizado']);
-        exit;
-    }
-
-    $usuario = UsuarioModel::obtenerUsuarioPorId($id);
-
-    if ($usuario) {
-        echo json_encode($usuario);
-    } else {
-        echo json_encode(['error' => 'Usuario no encontrado']);
-    }
-
-    exit;
-}
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'detalleEmpresa' && isset($_GET['id'])) {
-    $empresa = UsuarioModel::obtenerEmpresaPorId($_GET['id']);
-    header('Content-Type: application/json');
-    echo json_encode($empresa);
-    exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'listarPrograma') {
-    $programas = UsuarioModel::listarPrograma();
-    header('Content-Type: application/json');
-    echo json_encode($programas); 
-    exit;
-}
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'DetallePrograma' && isset($_GET['id'])) {
-    $programa = UsuarioModel::obtenerProgramaporid($_GET['id']);
-    header('Content-Type: application/json');
-    echo json_encode($programa);
-    exit;
-}
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listarEmpresasActivas') {
-    $empresas = UsuarioModel::listarEmpresasActivas();
-    header('Content-Type: application/json');
-    echo json_encode($empresas);
-    exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listarEmpresasInhabilitadas') {
-    $empresas = UsuarioModel::listarEmpresasInhabilitadas();
-    header('Content-Type: application/json');
-    echo json_encode($empresas);
-    exit;
-}
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($_POST['accion'] === 'filtrarPorEstado') {
-        $estado = $_POST['estado'];
-        $empresas = UsuarioModel::getEmpresasPorEstado($estado);
-
-        if (empty($empresas)) {
-            echo "<p>No se encontraron empresas con estado $estado.</p>";
-        } else {
-            foreach ($empresas as $empresa) {
-                echo "
-                <article class='cardh'>
-                    <a href='Empresa.html?id={$empresa['id']}'>
-                        <div class='card-text'>
-                            <h2 class='card-title'>{$empresa['razon_social']}</h2>
-                            <p class='card-subtitle'>{$empresa['nit']}</p>
-                        </div>
-                    </a>
-                </article>
-                ";
-            }
-        }
-        exit;
-    }
-}
-?>

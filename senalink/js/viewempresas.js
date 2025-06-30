@@ -25,9 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
             estadoActual = estado;
             let url = "";
             if (estado === "Activo") {
-                url = "../../../controllers/UsuarioController.php?action=listarEmpresasActivas";
+                url = "../../../controllers/EmpresaController.php?action=listarEmpresasActivas";
             } else if (estado === "Desactivado") {
-                url = "../../../controllers/UsuarioController.php?action=listarEmpresasInhabilitadas";
+                url = "../../../controllers/EmpresaController.php?action=listarEmpresasInhabilitadas";
             }
             fetch(url)
                 .then(response => response.json())
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Detectar si estamos en Empresa.html (detalle)
     const empresaId = new URLSearchParams(window.location.search).get('id');
     if (empresaId && window.location.pathname.includes('Empresa.html')) {
-        fetch(`http://localhost/senalink5/senalink5/senalink/controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
+        fetch(`http://localhost/senalink5/senalink/controllers/EmpresaController.php?action=detalleEmpresa&id=${empresaId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
