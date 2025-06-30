@@ -375,6 +375,104 @@ footer {
 
 .texto-cambiable:hover {
   color: var(--Secundary-950);  /* Color al pasar el cursor */
-   transform: scale(1.2); 
+  transform: scale(1.2); 
   
 }
+
+.btn-guardar {
+  margin-left: 10px;
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0 10px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background 0.2s;
+  }
+  .btn-guardar:hover {
+  background: #219150;
+  }
+        /* Solo estilos para el container__forms, el header y footer se controlan desde Inputs.css */
+        .container__forms {
+            max-width: 900px;
+            width: 95%;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            padding: 32px 24px 24px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 32px auto 32px auto;
+            position: relative;
+        }
+        .container__forms label,
+        .container__forms input[type="text"],
+        .container__forms select,
+        .container__forms .select_container,
+        .container__forms h3 {
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            font-size: 1.5rem;
+            font-family: inherit;
+        }
+        /* Asegura que los input y los select .select_container tengan el mismo tamaño visual */
+        .container__forms input[type="text"] {
+            height: 44px;
+        }
+        .container__forms .select_container {
+            height: 44px;
+            padding: 0 12px;
+        }
+        .form__buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            width: 100%;
+            margin-top: 18px;
+        }
+        .opciones-edit-group {
+            width: 100%;
+            max-width: 700px;
+        }
+        .opcion-edit-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .opcion-edit-row input[type="text"] {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        .btn-eliminar {
+            margin-left: 10px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0 10px;
+            height: 36px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.2s;
+        }
+        .btn-eliminar:hover {
+            background: #c0392b;
+        }
+        @media (max-width: 700px) {
+            .container__forms {
+                max-width: 99vw;
+                padding: 12px 4vw;
+                margin: 24px auto 40px auto;
+            }
+            .container__forms label,
+            .container__forms input[type="text"],
+            .container__forms select {
+                max-width: 100%;
+            }
+        }
