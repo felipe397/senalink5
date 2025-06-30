@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
 
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'crearUsuario') {
     // Obtener datos del formulario
     $correo         = $_POST['correo'] ?? '';
     $contrasena     = $_POST['contrasena'] ?? '';
@@ -46,6 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $estado         = 'Activo';
     $fecha_creacion = date('Y-m-d H:i:s');
 
+    // Validar correo no vacío
+    if (empty($correo)) {
+        echo "El campo correo es obligatorio.";
+        exit;
+    }
 
     // Solo para rol Empresas
     $nit                 = $_POST['nit'] ?? '';

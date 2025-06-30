@@ -17,16 +17,6 @@ if (!in_array($rol, $roles_permitidos)) {
     $errores[] = "Rol no válido.";
 }
 
-// Validar contraseña segura
-if (
-    strlen($contrasena) < 14 ||
-    !preg_match('/[a-z]/', $contrasena) ||
-    !preg_match('/[A-Z]/', $contrasena) ||
-    !preg_match('/[0-9]/', $contrasena) ||
-    !preg_match('/[\W_]/', $contrasena)
-) {
-    $errores[] = "La contraseña debe tener al menos 14 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.";
-}
 
 // Validar campos según rol
 if ($rol === 'empresa') {

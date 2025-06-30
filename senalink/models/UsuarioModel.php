@@ -86,7 +86,7 @@ class UsuarioModel {
                         primer_apellido,segundo_apellido,numero_documento,tipo_documento
                     ) VALUES (
                         :correo, :contrasena, :rol, :estado, :fecha_creacion,
-                        :nombres, :apellidos, :direccion, :telefono,:primer_nombre,:segundo_nombre,
+                        :direccion, :telefono,:primer_nombre,:segundo_nombre,
                         :primer_apellido,:segundo_apellido,:numero_documento,:tipo_documento
                     )";
 
@@ -210,7 +210,7 @@ public static function listarEmpresasInhabilitadas() {
 }
 public static function getEmpresasPorEstado($estado) {
     $conexion = Conexion::conectar();
-    $sql = "SELECT id,razon_social,nit FROM Usuarios WHERE estado = :estado";
+    $sql = "SELECT id,razon_social,nit FROM usuarios WHERE estado = :estado";
     $stmt = $conexion->prepare($sql);
     $stmt->execute([':estado' => $estado]); // ✅ MATCH
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
