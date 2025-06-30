@@ -77,37 +77,7 @@
     <script src="../../../js/script.js"></script>
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/viewempresas.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const empresaId = new URLSearchParams(window.location.search).get('id');
-        if (empresaId) {
-            fetch(`../../../controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        console.error(data.error);
-                    } else {
-                        document.getElementById('nit').textContent = data.nit;
-                        document.getElementById('representante').textContent = data.representante_legal;
-                        document.getElementById('razon-social').textContent = data.razon_social;
-                        document.getElementById('telefono').textContent = data.telefono;
-                        document.getElementById('correo').textContent = data.correo;
-                        document.getElementById('ubicacion').textContent = data.direccion;
-                        document.getElementById('tipo-empresa').textContent = data.tipo_empresa;
-                        document.getElementById('estado').textContent = data.estado;
-
-                        const btnHabilitar = document.getElementById('btn-habilitar');
-                        if (btnHabilitar) {
-                            btnHabilitar.dataset.empresaId = empresaId;
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al cargar los detalles de la empresa:', error);
-                });
-        }
-    });
-    </script>
+    <script src="../../../js/viewempresasinhabilitadas.js"></script>
 <div class="footer__crud">
     <footer>
         <p>@ Todos los derechos reservados.SenaLink</p>

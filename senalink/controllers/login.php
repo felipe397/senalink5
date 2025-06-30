@@ -36,11 +36,11 @@ if (!empty($errores)) {
 
 // Consulta a la base de datos según rol
 if ($rol === 'empresa') {
-    $query = "SELECT * FROM usuarios WHERE nit = :identificador AND rol = 'empresa'";
+    $query = "SELECT * FROM usuarios WHERE nit = :identificador AND rol = 'empresa' AND estado = 'activo'";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':identificador', $nit);
 } else {
-    $query = "SELECT * FROM usuarios WHERE correo = :identificador AND rol = :rol";
+    $query = "SELECT * FROM usuarios WHERE correo = :identificador AND rol = :rol AND estado = 'activo'";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':identificador', $correo);
     $stmt->bindParam(':rol', $rol);

@@ -66,10 +66,18 @@ class ProgramaFormacion
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
-    public static function listarPrograma()
+    public static function listarProgramasActivos()
     {
         $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT id, nombre_programa,ficha FROM programas_formacion");
+        $stmt = $db->prepare("SELECT id, nombre_programa,ficha FROM programas_formacion WHERE estado = 'activo'");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    //inhabilitar programa
+    public static function listarProgramasInhabilitados()
+    {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT id, nombre_programa, ficha FROM programas_formacion WHERE estado = 'Desactivado'");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

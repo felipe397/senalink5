@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (window.opener && window.opener.recargarEmpresas) {
                         window.opener.recargarEmpresas();
                     }
-                    window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html?estado=activo';
+                    window.location.href = '/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
 
                 })
                 .catch(error => console.error('Error:', error));
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (window.opener && window.opener.recargarEmpresas) {
                             window.opener.recargarEmpresas();
                         }
-                        window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html?estado=Desactivado';
+                        window.location.href = '/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
                     })
                     .catch(error => console.error('Error:', error));
                 } else {
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (window.opener && window.opener.recargarEmpresas) {
                         window.opener.recargarEmpresas();
                     }
-                    window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html?estado=Desactivado';
+                    window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
                         })
                         .catch(error => console.error('Error:', error));
                     });
