@@ -81,7 +81,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         const empresaId = new URLSearchParams(window.location.search).get('id');
         if (empresaId) {
-            fetch(`../../../controllers/UsuarioController.php?action=detalleEmpresa&id=${empresaId}`)
+            fetch(`http://localhost/senalink5/senalink5/senalink/controllers/EmpresaController.php?action=detalleEmpresa&id=${empresaId}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
