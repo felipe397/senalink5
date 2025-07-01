@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-07-2025 a las 02:53:08
+-- Servidor: 127.0.0.1:3307
+-- Tiempo de generación: 02-07-2025 a las 01:48:04
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -89,6 +89,25 @@ CREATE TABLE `opciones` (
   `texto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `opciones`
+--
+
+INSERT INTO `opciones` (`id`, `id_pregunta`, `texto`) VALUES
+(1, 1, 'Sector Primario (Agricola)'),
+(2, 1, 'Sector Secundario (Industrial)'),
+(3, 1, 'Sector Terciario (Servicios)'),
+(4, 1, 'Sector Cuaternario (Investigacion y Desarrollo)'),
+(5, 2, 'Areas de talento humano'),
+(6, 2, 'Administracion de personal'),
+(7, 2, 'Capacitacion y seleccion de talento'),
+(8, 2, 'Formacion'),
+(9, 2, 'Desarrollo organizacional'),
+(10, 2, 'Salud y seguridad en el trabajo'),
+(13, 5, 'Tecnico'),
+(14, 5, 'Tecnologo'),
+(15, 1, 'Sector Quinto');
+
 -- --------------------------------------------------------
 
 --
@@ -123,6 +142,18 @@ CREATE TABLE `preguntas` (
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `preguntas`
+--
+
+INSERT INTO `preguntas` (`id`, `enunciado`, `fecha_creacion`) VALUES
+(1, 'A que sector productivo pertenece la empresa?', '2025-07-01 22:09:30'),
+(2, 'En que areas o procesos de su empresa considera que es necesario incorporar nuevo talento humano?', '2025-07-01 22:09:30'),
+(3, 'En que areas de conocimiento o formativas considera importantes para fortalecer su empresa?', '2025-07-01 22:09:30'),
+(4, 'Que tecnologias, herramientas o procesos especificos estan presentes en su operacion diaria?', '2025-07-01 22:09:30'),
+(5, 'Que nivel de formacion considera mas adecuado para su empresa?', '2025-07-01 22:09:30'),
+(6, 'Que tipo de conocimientos o habilidades considera que hacen falta en su empresa?', '2025-07-01 22:09:30');
+
 -- --------------------------------------------------------
 
 --
@@ -149,9 +180,10 @@ CREATE TABLE `programas_formacion` (
 --
 
 INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_meses`, `nivel_formacion`, `estado`, `fecha_creacion`, `ficha`, `habilidades_requeridas`, `fecha_finalizacion`, `descripcion`, `codigo`, `sector_programa`) VALUES
-(1, 'Analisis y desarrollo de software', 27, 'Tecnologo', 'En curso', '2025-06-22 00:04:59', 2896365, 'Saber python, JavaScript, SQL Y node.js', '2025-10-06', 'Crear software y hardware', 12345, 'Industrial'),
+(1, 'Analisis y desarrollo de software', 27, 'Tecnologo', 'Disponible', '2025-06-22 00:04:59', 2896365, 'Saber python, JavaScript, SQL Y node.js', '2025-10-06', 'Crear software y hardware', 12345, 'Industrial'),
 (2, 'Contenidos Digitales', 21, 'Tecnico', 'Disponible', '2025-06-22 02:26:07', 2344221, 'Ser migue', '2025-06-26', 'Migue la pampara', 9898989, 'Industrial'),
-(3, 'Audiovisuales', 23, '', 'En curso', '2025-06-22 02:29:33', 99887766, 'Manejar contenido', '2025-06-25', 'Crear contenido audiovisual', 44556677, 'Servicios');
+(3, 'Audiovisuales', 23, 'Tecnologo', 'Finalizado', '2025-06-22 02:29:33', 99887766, 'Manejar contenido', '2025-06-25', 'Crear contenido audiovisual', 44556677, 'Servicios'),
+(4, 'ADSO', 45, 'Tecnologo', 'En curso', '2025-07-01 20:08:01', 567899765, 'ruth y edwin trabajen', '2025-07-15', 'dsfvposdvxddd', 333444, 'Industrial');
 
 -- --------------------------------------------------------
 
@@ -225,13 +257,17 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`) VALUES
-(15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'Migue sas', '1234567891', NULL, 'Migue', 'Industrial', '', NULL, '', NULL, NULL, 0),
+(15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'Frisby S.A', '1234567891', NULL, 'Frisby', 'Industrial', '', NULL, '', NULL, NULL, 0),
 (16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', 'Laura', 'Leon', 'Alzate', '', 12345678),
 (17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, '3001234567', NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567),
 (19, 'chicaalzateb@gmail.com', '$2y$10$MuUNkZMGj0EGdwCLTGe4fO8oLkfYNxZlcKJeAoURY9bIrjVPkkajm', 'empresa', 'Activo', '2025-06-17 12:23:36', '4422', 'direccion ejemplo', 'Braulio ejemplo sas', '1234567891', NULL, 'Braulio', 'Industrial', '', NULL, '', NULL, NULL, 0),
-(20, '', '$2y$10$qFb1tX1qfpR8TZzCDeVkROrs4nNUg7UgPKpckPpKSo5qQ852NEHga', '', 'Activo', '2025-06-30 07:18:15', NULL, '', NULL, '', NULL, NULL, NULL, '', '', '', '', '', 0),
 (24, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$gQp4g5O5jRPd8zenNWy7eOQO8SZ2gmp3J/ygVK5dFxMUUg9/Mvtae', 'empresa', 'Activo', '2025-06-30 09:07:53', '4721233', 'Arabia', 'Monster y cuates', '345333555', NULL, 'Edwin Manito', 'Industrial', '', NULL, '', NULL, NULL, 0),
-(25, 'osoriolopezjuanfelipe@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, '322222222', NULL, NULL, NULL, 'Pele', 'Felipe', 'Osorio', 'Lopez', 'Cedula de ciudadania', 23456789);
+(25, 'osoriolopezjuanfelipe@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, '322222222', NULL, NULL, NULL, 'Pele', 'Felipe', 'Osorio', 'Lopez', 'Cedula de ciudadania', 23456789),
+(26, 'crisberx1@gmail.com', '$2y$10$FLuzp334nlTSHgt5jg5.4.8GCP4cEHA4r9Gbifj6gPGjFtbBLsUky', 'empresa', 'Activo', '2025-07-02 01:49:59', '987654321', 'Villaverde', 'Migue Monster cuates', '31222333', NULL, 'Migue', 'Agricola', '', NULL, '', NULL, NULL, 0),
+(29, 'crisberx12@gmail.com', '$2y$10$FsATLOq0VUFelBfI6cLTDu/0x6bRBL2Dz74NwlXFtxeMUPYCNcoee', 'empresa', 'Activo', '2025-07-02 01:51:27', '9876543212', 'Villaverde 1', 'Migue Monster cuates xd', '312223333', NULL, 'Miguel', 'Servicios', '', NULL, '', NULL, NULL, 0),
+(33, 'alejito@gmail.com', '$2y$10$IFmSsKZuEZdGg2bAolpJwuov/vHyg48taJiICN6FXCaXwBO9PD9LW', 'empresa', 'Activo', '2025-07-02 02:02:49', '333666999', 'Islas canarias', 'Alejo asa', '3122233344', NULL, 'alejo', 'Agricola', '', NULL, '', NULL, NULL, 0),
+(34, 'raiba1234@gmail.com', '$2y$10$fpJ9K2vdlpo97P5KkxWYbepSefOUr2vJU9Ben0n.UdZDQoJlXbtae', 'empresa', 'Activo', '2025-07-02 02:27:52', '999888777', 'Villaverde', 'Raigosa INC', '312223334', NULL, 'Chocolates ruth', 'Agricola', '', NULL, '', NULL, NULL, 0),
+(35, 'appleinc@gmail.com', '$2y$10$3y.5xMj8T.TIhXX3DmIq9.YOxGSE6/9w7S7YX4dD1aG77zXkmDtr.', 'empresa', 'Activo', '2025-07-02 06:20:20', '111222333', 'Beverly Hills', 'Apple INC', '321897654', NULL, 'Steve Jobs', 'Agricola', '', NULL, '', NULL, NULL, 0);
 
 --
 -- Disparadores `usuarios`
@@ -324,7 +360,7 @@ ALTER TABLE `diagnosticos_empresariales`
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `password_resets`
@@ -336,13 +372,13 @@ ALTER TABLE `password_resets`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `programas_formacion`
 --
 ALTER TABLE `programas_formacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `reportes_diagnosticos`
@@ -366,7 +402,7 @@ ALTER TABLE `reportes_usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Restricciones para tablas volcadas
@@ -394,27 +430,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
--- Poblar preguntas y opciones de ejemplo
-INSERT INTO preguntas (id, enunciado) VALUES
-(1, '¿A qué sector productivo pertenece la empresa?'),
-(2, '¿En qué áreas o procesos de su empresa considera que es necesario incorporar nuevo talento humano?'),
-(3, '¿Qué áreas de conocimiento o formativas considera importantes para fortalecer su empresa?'),
-(4, '¿Qué tecnologías, herramientas o procesos específicos están presentes en su operación diaria?'),
-(5, '¿Qué nivel de formación considera más adecuado para su empresa?'),
-(6, '¿Qué tipo de conocimientos o habilidades considera que hacen falta en su empresa?');
-
-INSERT INTO opciones (id, id_pregunta, texto) VALUES
-(1, 1, 'Sector Primario (Agrícola)'),
-(2, 1, 'Sector Secundario (Industrial)'),
-(3, 1, 'Sector Terciario (Servicios)'),
-(4, 1, 'Sector Cuaternario (Investigación y Desarrollo)'),
-(5, 2, 'Áreas de talento humano'),
-(6, 2, 'Administración de personal'),
-(7, 2, 'Capacitación y selección de talento'),
-(8, 2, 'Formación'),
-(9, 2, 'Desarrollo organizacional'),
-(10, 2, 'Salud y seguridad en el trabajo'),
-(11, 5, 'Auxiliar'),
-(12, 5, 'Operario'),
-(13, 5, 'Técnico'),
-(14, 5, 'Tecnólogo');
