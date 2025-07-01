@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>SenaLink</title>
+    <title>SenaLink - Editar Formulario</title>
 
     <!-- Iconos -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
@@ -43,23 +43,23 @@
 
     <!-- Contenido principal debajo del header y encima del footer -->
     <main style="flex:1 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;">
-        <form class="container__forms">
+        <form class="container__forms" id="diagnosticoForm">
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"><br>
 
             <!-- Bloque de preguntas 1 -->
 
             <label>Pregunta 1:</label>
             <div class="pregunta-input-group">
-                <input type="text" name="pregunta1" value="¿A qué sector productivo pertenece la empresa?" class="pregunta-enunciado" />
+                <input type="text" name="pregunta1" value="¿A qué sector productivo pertenece la empresa?" class="pregunta-enunciado" data-id="1" />
                 <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
                     <img src="../../../icon/check_purple.svg" alt="Guardar" />
                 </button>
             </div>
-            <div id="opciones1-edit" class="opciones-edit-group">
-                <div class="opcion-edit-row"><input type="text" value="Sector Primario (Agrícola)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Sector Secundario (Industrial)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Sector Terciario (Servicios)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Sector Cuaternario (Investigación y Desarrollo)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+            <div id="opciones1-edit" class="opciones-edit-group" data-pregunta-id="1">
+                <div class="opcion-edit-row" data-opcion-id="1"><input type="text" value="Sector Primario (Agrícola)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row" data-opcion-id="2"><input type="text" value="Sector Secundario (Industrial)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row" data-opcion-id="3"><input type="text" value="Sector Terciario (Servicios)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row" data-opcion-id="4"><input type="text" value="Sector Cuaternario (Investigación y Desarrollo)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
                 <button type="button" class="btn btn-agregar" onclick="agregarOpcion('opciones1-edit')">Agregar opción</button>
             </div>
 
@@ -201,6 +201,89 @@ function agregarOpcion(idGrupo) {
     //
     </script>
     <script src="../../../js/backbutton.js"></script>
+
+    <script>
+    // Enviar todos los cambios al backend al hacer click en el botón "Guardar" en form__buttons
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('diagnosticoForm');
+        const btnGuardarGlobal = document.querySelector('.form__buttons a.btn[href="VerDiagnostico.html"]');
+
+        btnGuardarGlobal.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            // Recopilar enunciados de preguntas
+            const preguntas = {};
+            form.querySelectorAll('input.pregunta-enunciado').forEach(input => {
+                const idPregunta = input.getAttribute('data-id');
+                preguntas[idPregunta] = input.value.trim();
+            });
+
+            // Recopilar opciones nuevas (sin data-opcion-id)
+            const nuevas_opciones = {};
+            form.querySelectorAll('.opciones-edit-group').forEach(grupo => {
+                const idPregunta = grupo.getAttribute('data-pregunta-id');
+                const opcionesNuevas = [];
+                grupo.querySelectorAll('.opcion-edit-row').forEach(row => {
+                    if (!row.hasAttribute('data-opcion-id')) {
+                        const texto = row.querySelector('input.opcion-edit').value.trim();
+                        if (texto) opcionesNuevas.push(texto);
+                    }
+                });
+                if (opcionesNuevas.length > 0) {
+                    nuevas_opciones[idPregunta] = opcionesNuevas;
+                }
+            });
+
+            // Recopilar opciones a borrar (con data-opcion-id pero que fueron eliminadas)
+            // Para esto, se debe mantener una lista de opciones eliminadas en JS
+            // Aquí asumimos que se mantiene en window.opcionesEliminadas
+            const opciones_a_borrar = window.opcionesEliminadas || [];
+
+            const payload = {
+                preguntas: preguntas,
+                nuevas_opciones: nuevas_opciones,
+                opciones_a_borrar: opciones_a_borrar
+            };
+
+            fetch('../../../controllers/DiagnosticoController.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    accion: 'actualizarDiagnosticoCompleto',
+                    ...payload
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Diagnóstico actualizado correctamente.');
+                    window.location.href = '../Diagnostico/VerDiagnostico.html';
+                } else {
+                    alert('Error al actualizar diagnóstico: ' + data.message);
+                }
+            })
+            .catch(error => {
+                alert('Error en la comunicación con el servidor.');
+                console.error(error);
+            });
+        });
+
+        // Inicializar array para opciones eliminadas
+        window.opcionesEliminadas = [];
+
+        // Modificar función eliminarOpcion para registrar opciones eliminadas
+        window.eliminarOpcion = function(btn) {
+            const row = btn.parentElement;
+            const opcionId = row.getAttribute('data-opcion-id');
+            if (opcionId) {
+                window.opcionesEliminadas.push(opcionId);
+            }
+            row.parentElement.removeChild(row);
+        };
+    });
+    </script>
 
     <!-- Pie de página -->
     <footer>
