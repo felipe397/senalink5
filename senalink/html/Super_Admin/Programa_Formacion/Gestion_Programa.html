@@ -47,6 +47,16 @@
         <section class="search-container">
             <input type="text" placeholder="Buscar programa...">
             <i class="fas fa-search search-icon"></i>
+            <div class="dropdown">
+            <button id="estadoDropdownBtn"><img src="../../../icon/filtrar.png" style="width:32px; height:32px;"></button>
+                <div id="estadoDropdownMenu" class="dropdown-menu">
+                    <div id="estadoDropdownMenu" class="dropdown-menu">
+                        <a href="#" id="filtro-disponible" data-estado="Activo">Disponible</a>
+                        <a href="#" id="filtro-en-curso" data-estado="Desactivado">En curso</a>
+                        <a href="#" id="filtro-finalizado" data-estado="Desactivado">finalizado</a>
+                    </div>
+                </div>
+            </div>
         </section>
         <div id="resultados"></div>
         <section class="cardh__container">
@@ -112,6 +122,7 @@
 
     <script src="../../../js/script.js"></script> <!-- Agregar el JavaScript para el menú -->
     <script src="../../../js/viewprogramasformacion.js"></script> <!-- Agregar el JavaScript para el menú -->
+    <script src="../../../js/filter.js"></script> <!-- Agregar el JavaScript para el menú -->
 <div class="linea-azul-difuminada"></div>
 <footer>
     <p>@ Todos los derechos reservados.SenaLink</p>

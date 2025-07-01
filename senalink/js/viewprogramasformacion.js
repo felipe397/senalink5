@@ -1,30 +1,44 @@
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".cardh__container");
     const inputBusqueda = document.querySelector('.search-container input');
-    const filtroActivo = document.getElementById('filtro-activo');
-    const filtroDesactivado = document.getElementById('filtro-desactivado');
+
+    // Nuevos botones de filtro
+    const filtroDisponible = document.getElementById('filtro-disponible');
+    const filtroEnCurso = document.getElementById('filtro-en-curso');
+    const filtroFinalizado = document.getElementById('filtro-finalizado');
+
     let programas = [];
 
     // Leer el estado desde la URL
     const params = new URLSearchParams(window.location.search);
-    let estadoActual = 'Activo';
+    let estadoActual = 'disponible'; // Valor por defecto
     if (params.has('estado')) {
-        const estadoParam = params.get('estado');
-        if (estadoParam.toLowerCase() === 'desactivado' || estadoParam.toLowerCase() === 'inactivo') {
-            estadoActual = 'Desactivado';
+        const estadoParam = params.get('estado').toLowerCase();
+        if (['disponible', 'en curso', 'finalizado'].includes(estadoParam)) {
+            estadoActual = estadoParam;
         }
     }
 
     if (container && inputBusqueda) {
-        // Cargar programas según el estado
         function cargarProgramasPorEstado(estado) {
-            estadoActual = estado;
+            estadoActual = estado.toLowerCase();
             let url = "";
-            if (estado === "Activo") {
-                url = "../../../controllers/ProgramaController.php?action=listarProgramasActivos";
-            } else {
-                url = "../../../controllers/ProgramaController.php?action=listarProgramasInhabilitados";
+
+            switch (estadoActual) {
+                case "disponible":
+                    url = "../../../controllers/ProgramaController.php?action=listarProgramasDisponibles";
+                    break;
+                case "en curso":
+                    url = "../../../controllers/ProgramaController.php?action=listarProgramasEnCurso";
+                    break;
+                case "finalizado":
+                    url = "../../../controllers/ProgramaController.php?action=listarProgramasFinalizados";
+                    break;
+                default:
+                    console.error("Estado no válido:", estadoActual);
+                    return;
             }
+
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -39,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Cargar programas inicialmente
         cargarProgramasPorEstado(estadoActual);
 
-        // Buscar por nombre o código
+        // Buscar por nombre o ficha
         inputBusqueda.addEventListener("input", function () {
             const q = this.value.toLowerCase();
             if (q.length >= 1) {
@@ -53,17 +67,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Filtros
-        if (filtroActivo && filtroDesactivado) {
-            filtroActivo.addEventListener('click', function () {
-                cargarProgramasPorEstado('Activo');
+        // Filtros nuevos
+        if (filtroDisponible && filtroEnCurso && filtroFinalizado) {
+            filtroDisponible.addEventListener('click', function () {
+                cargarProgramasPorEstado('disponible');
             });
-            filtroDesactivado.addEventListener('click', function () {
-                cargarProgramasPorEstado('Desactivado');
+            filtroEnCurso.addEventListener('click', function () {
+                cargarProgramasPorEstado('en curso');
+            });
+            filtroFinalizado.addEventListener('click', function () {
+                cargarProgramasPorEstado('finalizado');
             });
         }
 
-        // Renderizar tarjetas
         function renderProgramas(programas) {
             container.innerHTML = "";
             if (programas.length === 0) {
@@ -81,11 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 `;
                 card.style.cursor = 'pointer';
                 card.addEventListener('click', function () {
-                    if (estadoActual === 'Activo') {
-                        window.location.href = `Programa.html?id=${programa.id}`;
-                    } else {
-                        window.location.href = `ProgramaInhabilitado.html?id=${programa.id}`;
-                    }
+                    window.location.href = `programa de formacion.html?id=${programa.id}&estado=${estadoActual}`;
                 });
                 container.appendChild(card);
             });
@@ -94,25 +106,21 @@ document.addEventListener("DOMContentLoaded", function () {
         // Recarga externa
         window.recargarProgramas = () => cargarProgramasPorEstado(estadoActual);
     }
-    // Ejecutar siempre la parte de detalle del programa
+
+    // Parte del detalle del programa
     const id = new URLSearchParams(window.location.search).get('id');
-    console.log("ID obtenido de la URL:", id);
     if (id) {
         fetch(`../../../controllers/ProgramaController.php?action=DetallePrograma&id=${id}`)
             .then(response => {
-                console.log("Respuesta HTTP del fetch DetallePrograma:", response);
                 if (!response.ok) {
                     throw new Error(`Error HTTP: ${response.status}`);
                 }
                 return response.json();
             })
             .then(data => {
-                console.log("Datos recibidos del fetch DetallePrograma:", data);
                 if (data.error) {
-                    console.error(data.error);
                     alert("Error al obtener los detalles del programa: " + data.error);
                 } else if (!data || Object.keys(data).length === 0) {
-                    console.warn("No se encontraron datos para el programa con id:", id);
                     alert("No se encontraron datos para el programa solicitado.");
                 } else {
                     const campos = ['codigo', 'ficha', 'nivel_formacion', 'sector_programa', 'nombre_programa', 'descripcion', 'habilidades_requeridas', 'fecha_finalizacion', 'estado'];
@@ -120,8 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         const elemento = document.getElementById(campo);
                         if (elemento) {
                             elemento.textContent = data[campo] || "";
-                        } else {
-                            console.warn(`Elemento con id '${campo}' no encontrado en el DOM.`);
                         }
                     });
                 }

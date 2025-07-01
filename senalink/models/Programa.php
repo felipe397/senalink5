@@ -66,23 +66,28 @@ class ProgramaFormacion
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
-    public static function listarProgramasActivos()
-    {
+    public function listarProgramasDisponibles() {
         $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT id, nombre_programa,ficha FROM programas_formacion WHERE estado = 'activo'");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    //inhabilitar programa
-    public static function listarProgramasInhabilitados()
-    {
-        $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT id, nombre_programa, ficha FROM programas_formacion WHERE estado = 'Desactivado'");
+        $stmt = $db->prepare("SELECT id,nombre_programa,ficha FROM programas_formacion WHERE estado = 'Disponible'");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function obtenerProgramaporid($id)
+    public function listarProgramasEnCurso() {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT * FROM programas_formacion WHERE estado = 'en curso'");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function listarProgramasFinalizados() {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT * FROM programas_formacion WHERE estado = 'finalizado'");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function obtenerDetallePrograma($id)
     {
         $db = Conexion::conectar();
         $stmt = $db->prepare("SELECT * FROM programas_formacion WHERE id = :id");

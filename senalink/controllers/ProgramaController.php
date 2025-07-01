@@ -117,35 +117,42 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_P
     }
     exit;
 }
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+    try {
+        switch ($_GET['action']) {
 
-// 📃 LISTAR PROGRAMAS
-else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listarProgramasActivos') {
-    try {
-        $programas = $programa->listarProgramasActivos();
-        header('Content-Type: application/json');
-        echo json_encode($programas);
+            case 'listarProgramasDisponibles':
+                $data = $programa->listarProgramasDisponibles();
+                echo json_encode($data);
+                break;
+
+            case 'listarProgramasEnCurso':
+                $data = $programa->listarProgramasEnCurso();
+                echo json_encode($data);
+                break;
+
+            case 'listarProgramasFinalizados':
+                $data = $programa->listarProgramasFinalizados();
+                echo json_encode($data);
+                break;
+
+            case 'DetallePrograma':
+                if (!isset($_GET['id'])) {
+                    http_response_code(400);
+                    echo json_encode(['error' => 'Falta el parámetro ID']);
+                    exit;
+                }
+                $detalle = $programa->obtenerDetallePrograma($_GET['id']);
+                echo json_encode($detalle ?: []);
+                break;
+
+            default:
+                http_response_code(400);
+                echo json_encode(['error' => 'Acción no válida']);
+        }
     } catch (Exception $e) {
         http_response_code(500);
-        echo json_encode(['error' => 'Excepción: ' . $e->getMessage()]);
+        echo json_encode(['error' => 'Error interno: ' . $e->getMessage()]);
     }
-    exit;
-}
-// GET action listarEmpresasInhabilitadas
-else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listarProgramasInhabilitados') {
-    try {
-        $programas = $programa->listarProgramasInhabilitados();
-        header('Content-Type: application/json');
-        echo json_encode($programas);
-    } catch (Exception $e) {
-        http_response_code(500);
-        echo json_encode(['error' => 'Excepción: ' . $e->getMessage()]);
-    }
-    exit;
-}
-// 🔍 DETALLE DE UN PROGRAMA
-else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'DetallePrograma' && isset($_GET['id'])) {
-    $detalle = $programa->getById($_GET['id']);
-    header('Content-Type: application/json');
-    echo json_encode($detalle);
     exit;
 }
