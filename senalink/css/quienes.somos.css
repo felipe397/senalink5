@@ -1,0 +1,56 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+  margin: 50px auto;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(23, 0, 0, 0.1);
+    box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.info {
+  flex: 1;
+  padding: 40px;
+}
+
+.header__center {
+  flex: 1; /* Igual peso que el texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color:var(--Secundary-200);
+  min-height: 400px; /* Aumenta altura mínima si es necesario */
+}
+
+.yo-amo-el-sena {
+  width: 100%;
+  max-width: 700px;  /* Aumenta tamaño máximo */
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+ 
+}
+
+.senalink-box {
+  background-color: #dfeee7;
+  padding: 20px;
+  text-align: center;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+  max-width: 200px;
+  margin: auto;
+   margin-left: 0;  
+   text-align: left; 
+}
+
+ .logo-Senalink {
+  width: 150px;         /* Tamaño moderado */
+  max-width: 150px;
+  height: auto;
+  display: block;
+   margin: 0;
+}
+
