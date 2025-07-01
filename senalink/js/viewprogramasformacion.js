@@ -42,6 +42,19 @@ document.addEventListener("DOMContentLoaded", function () {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
+                    // Si la respuesta es un error, mostrar alerta y limpiar la lista
+                    if (data && data.error) {
+                        alert("Error: " + data.error);
+                        programas = [];
+                        renderProgramas(programas);
+                        return;
+                    }
+                    // Si la respuesta no es un array, limpiar la lista
+                    if (!Array.isArray(data)) {
+                        programas = [];
+                        renderProgramas(programas);
+                        return;
+                    }
                     programas = data;
                     renderProgramas(programas);
                 })
