@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-06-2025 a las 22:26:58
+-- Tiempo de generación: 01-07-2025 a las 02:53:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -80,13 +80,13 @@ CREATE TABLE `diagnosticos_empresariales` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `opciones_preguntas`
+-- Estructura de tabla para la tabla `opciones`
 --
 
-CREATE TABLE `opciones_preguntas` (
-  `id_opciones_preguntas` int(11) NOT NULL,
+CREATE TABLE `opciones` (
+  `id` int(11) NOT NULL,
   `id_pregunta` int(11) NOT NULL,
-  `opcion_texto` varchar(100) NOT NULL
+  `texto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -114,13 +114,13 @@ INSERT INTO `password_resets` (`id`, `email`, `token`, `expires_at`, `created_at
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `preguntas_diagnostico`
+-- Estructura de tabla para la tabla `preguntas`
 --
 
-CREATE TABLE `preguntas_diagnostico` (
-  `id_preguntas_diagnostico` int(11) NOT NULL,
-  `enunciado` varchar(255) NOT NULL,
-  `tipo` enum('texto','opcion_multiple') NOT NULL
+CREATE TABLE `preguntas` (
+  `id` int(11) NOT NULL,
+  `enunciado` text NOT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -133,7 +133,7 @@ CREATE TABLE `programas_formacion` (
   `id` int(11) NOT NULL,
   `nombre_programa` varchar(50) NOT NULL,
   `duracion_meses` int(11) NOT NULL,
-  `nivel_formacion` enum('Auxiliar','Operario','Tecnico','Tecnologo') DEFAULT NULL,
+  `nivel_formacion` enum('Tecnico','Tecnologo') DEFAULT NULL,
   `estado` enum('En curso','Disponible','Finalizado') DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `ficha` int(11) NOT NULL,
@@ -149,9 +149,9 @@ CREATE TABLE `programas_formacion` (
 --
 
 INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_meses`, `nivel_formacion`, `estado`, `fecha_creacion`, `ficha`, `habilidades_requeridas`, `fecha_finalizacion`, `descripcion`, `codigo`, `sector_programa`) VALUES
-(1, 'software', 27, 'Tecnologo', 'En curso', '2025-06-22 00:04:59', 2896365, 'Saber python, JavaScript, SQL Y node.js', '2025-10-06', 'Crear software y hardware', 12345, NULL),
-(2, 'Contenidos Digitales', 21, 'Tecnico', 'Disponible', '2025-06-22 02:26:07', 2344221, 'Ser migue ', '2025-06-26', 'Migue la pampara ', 9898989, NULL),
-(3, 'Audiovisuales', 23, 'Auxiliar', 'En curso', '2025-06-22 02:29:33', 99887766, 'Manejar contenido', '2025-06-25', 'Crear contenido audiovisual', 44556677, NULL);
+(1, 'Analisis y desarrollo de software', 27, 'Tecnologo', 'En curso', '2025-06-22 00:04:59', 2896365, 'Saber python, JavaScript, SQL Y node.js', '2025-10-06', 'Crear software y hardware', 12345, 'Industrial'),
+(2, 'Contenidos Digitales', 21, 'Tecnico', 'Disponible', '2025-06-22 02:26:07', 2344221, 'Ser migue', '2025-06-26', 'Migue la pampara', 9898989, 'Industrial'),
+(3, 'Audiovisuales', 23, '', 'En curso', '2025-06-22 02:29:33', 99887766, 'Manejar contenido', '2025-06-25', 'Crear contenido audiovisual', 44556677, 'Servicios');
 
 -- --------------------------------------------------------
 
@@ -190,21 +190,6 @@ CREATE TABLE `reportes_usuarios` (
   `generado_por` int(11) NOT NULL,
   `fecha_generacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `formato` enum('PDF','XML') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `respuestas_diagnostico`
---
-
-CREATE TABLE `respuestas_diagnostico` (
-  `id_respuestas_diagnostico` int(11) NOT NULL,
-  `id_empresa` int(11) NOT NULL,
-  `id_pregunta` int(11) NOT NULL,
-  `respuesta_texto` text DEFAULT NULL,
-  `id_opcion` int(11) DEFAULT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -272,11 +257,11 @@ ALTER TABLE `diagnosticos_empresariales`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `opciones_preguntas`
+-- Indices de la tabla `opciones`
 --
-ALTER TABLE `opciones_preguntas`
-  ADD PRIMARY KEY (`id_opciones_preguntas`),
-  ADD KEY `fk_opciones_preguntas_pregunta` (`id_pregunta`);
+ALTER TABLE `opciones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_pregunta` (`id_pregunta`);
 
 --
 -- Indices de la tabla `password_resets`
@@ -285,10 +270,10 @@ ALTER TABLE `password_resets`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `preguntas_diagnostico`
+-- Indices de la tabla `preguntas`
 --
-ALTER TABLE `preguntas_diagnostico`
-  ADD PRIMARY KEY (`id_preguntas_diagnostico`);
+ALTER TABLE `preguntas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `programas_formacion`
@@ -317,15 +302,6 @@ ALTER TABLE `reportes_usuarios`
   ADD KEY `generado_por` (`generado_por`);
 
 --
--- Indices de la tabla `respuestas_diagnostico`
---
-ALTER TABLE `respuestas_diagnostico`
-  ADD PRIMARY KEY (`id_respuestas_diagnostico`),
-  ADD KEY `fk_respuestas_diagnostico_empresa` (`id_empresa`),
-  ADD KEY `fk_respuestas_diagnostico_pregunta` (`id_pregunta`),
-  ADD KEY `fk_respuestas_diagnostico_opcion` (`id_opcion`);
-
---
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -345,10 +321,10 @@ ALTER TABLE `diagnosticos_empresariales`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `opciones_preguntas`
+-- AUTO_INCREMENT de la tabla `opciones`
 --
-ALTER TABLE `opciones_preguntas`
-  MODIFY `id_opciones_preguntas` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `opciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `password_resets`
@@ -357,10 +333,10 @@ ALTER TABLE `password_resets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `preguntas_diagnostico`
+-- AUTO_INCREMENT de la tabla `preguntas`
 --
-ALTER TABLE `preguntas_diagnostico`
-  MODIFY `id_preguntas_diagnostico` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `preguntas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `programas_formacion`
@@ -387,12 +363,6 @@ ALTER TABLE `reportes_usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `respuestas_diagnostico`
---
-ALTER TABLE `respuestas_diagnostico`
-  MODIFY `id_respuestas_diagnostico` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -403,10 +373,10 @@ ALTER TABLE `usuarios`
 --
 
 --
--- Filtros para la tabla `opciones_preguntas`
+-- Filtros para la tabla `opciones`
 --
-ALTER TABLE `opciones_preguntas`
-  ADD CONSTRAINT `fk_opciones_preguntas_pregunta` FOREIGN KEY (`id_pregunta`) REFERENCES `preguntas_diagnostico` (`id_preguntas_diagnostico`) ON DELETE CASCADE;
+ALTER TABLE `opciones`
+  ADD CONSTRAINT `opciones_ibfk_1` FOREIGN KEY (`id_pregunta`) REFERENCES `preguntas` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `reportes_programas`
@@ -419,14 +389,6 @@ ALTER TABLE `reportes_programas`
 --
 ALTER TABLE `reportes_usuarios`
   ADD CONSTRAINT `reportes_usuarios_ibfk_1` FOREIGN KEY (`generado_por`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
-
---
--- Filtros para la tabla `respuestas_diagnostico`
---
-ALTER TABLE `respuestas_diagnostico`
-  ADD CONSTRAINT `fk_respuestas_diagnostico_empresa` FOREIGN KEY (`id_empresa`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `fk_respuestas_diagnostico_opcion` FOREIGN KEY (`id_opcion`) REFERENCES `opciones_preguntas` (`id_opciones_preguntas`),
-  ADD CONSTRAINT `fk_respuestas_diagnostico_pregunta` FOREIGN KEY (`id_pregunta`) REFERENCES `preguntas_diagnostico` (`id_preguntas_diagnostico`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
