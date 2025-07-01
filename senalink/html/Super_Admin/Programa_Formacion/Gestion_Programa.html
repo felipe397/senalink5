@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -45,73 +45,25 @@
         <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
         
         <section class="search-container">
-            <input type="text" placeholder="Buscar programa...">
+            <input type="text" placeholder="Buscar...">
             <i class="fas fa-search search-icon"></i>
-        </section>
-        <div id="resultados"></div>
-        <section class="cardh__container">
-            <article class="cardh">
-                <a href="Programa de formacion.html">
-                    <div class="card-text">
-                        <h2 class="card-title">Programa ejemplo</h2>
-                        <p class="card-subtitle">Código: 2896365</p>
+            <div class="dropdown">
+            <button id="estadoDropdownBtn"><img src="../../../icon/filtrar.png" style="width:32px; height:32px;"></button>
+                <div id="estadoDropdownMenu" class="dropdown-menu">
+                    <div id="estadoDropdownMenu" class="dropdown-menu">
+                        <a href="#" id="filtro-activo" data-estado="Activo">Activo</a>
+                        <a href="#" id="filtro-desactivado" data-estado="Desactivado">Desactivado</a>
                     </div>
-                </a>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Programa ejemplo</h2>
-                    <p class="card-subtitle">Código: 2896365</p>
                 </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Programa ejemplo</h2>
-                    <p class="card-subtitle">Código: 2896365</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Programa ejemplo</h2>
-                    <p class="card-subtitle">Código: 2896365</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Programa ejemplo</h2>
-                    <p class="card-subtitle">Código: 2896365</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Programa ejemplo</h2>
-                    <p class="card-subtitle">Código: 2896365</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Programa ejemplo</h2>
-                    <p class="card-subtitle">Código: 2896365</p>
-                </div>
-            </article>
-            
-            <article class="cardh">
-                <div class="card-text">
-                    <h2 class="card-title">Análisis y desarrollo de software</h2>
-                    <p class="card-subtitle">Código: 2896365</p>
-                </div>
-            </article>
+            </div>
         </section>
+        <section id="resultados" class="cardh__container"></section>
+    </main>
     </main>
 
     <script src="../../../js/script.js"></script> <!-- Agregar el JavaScript para el menú -->
     <script src="../../../js/viewprogramasformacion.js"></script> <!-- Agregar el JavaScript para el menú -->
+    <script src="../../../js/filterprograma.js"></script> <!-- Agregar el JavaScript para el menú -->
 <div class="linea-azul-difuminada"></div>
 <footer>
     <p>@ Todos los derechos reservados.SenaLink</p>

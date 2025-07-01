@@ -13,6 +13,7 @@
     <!-- Estilos -->
     <link rel="stylesheet" href="../../../css/Inputs.css">
     <link rel="shortcut icon" href="../../../img/Favicon1.png">
+    <link rel="stylesheet" href="../../../css/btn-guardar-pregunta.css">
 </head>
 <body>
     <header class="gov" id="inicio">
@@ -48,48 +49,78 @@
             <!-- Bloque de preguntas 1 -->
 
             <label>Pregunta 1:</label>
-            <input type="text" name="pregunta1" value="¿A qué sector productivo pertenece la empresa?" />
+            <div class="pregunta-input-group">
+                <input type="text" name="pregunta1" value="¿A qué sector productivo pertenece la empresa?" class="pregunta-enunciado" />
+                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
+                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
+                </button>
+            </div>
             <div id="opciones1-edit" class="opciones-edit-group">
-                <div class="opcion-edit-row"><input type="text" value="Sector Primario (Agrícola)" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Sector Secundario (Industrial)" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Sector Terciario (Servicios)" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Sector Cuaternario (Investigación y Desarrollo)" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Sector Primario (Agrícola)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Sector Secundario (Industrial)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Sector Terciario (Servicios)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Sector Cuaternario (Investigación y Desarrollo)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
                 <button type="button" class="btn btn-agregar" onclick="agregarOpcion('opciones1-edit')">Agregar opción</button>
             </div>
 
 
             <label>Pregunta 2:</label>
-            <input type="text" name="pregunta2" value="¿En qué áreas o procesos de su empresa considera que es necesario incorporar nuevo talento humano?" />
+            <div class="pregunta-input-group">
+                <input type="text" name="pregunta2" value="¿En qué áreas o procesos de su empresa considera que es necesario incorporar nuevo talento humano?" class="pregunta-enunciado" />
+                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
+                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
+                </button>
+            </div>
             <div id="opciones2-edit" class="opciones-edit-group">
-                <div class="opcion-edit-row"><input type="text" value="Áreas de talento humano" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Administración de personal" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Capacitación y selección de talento" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Formación" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Desarrollo organizacional" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Salud y seguridad en el trabajo" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Áreas de talento humano" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Administración de personal" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Capacitación y selección de talento" class="opcion-edit" readonly/><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Formación" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Desarrollo organizacional" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Salud y seguridad en el trabajo" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
                 <button type="button" class="btn btn-agregar" onclick="agregarOpcion('opciones2-edit')">Agregar opción</button>
             </div>
 
             <label>Pregunta 3:</label>
-            <input type="text" name="pregunta3" value="¿Qué áreas de conocimiento o formativas considera importantes para fortalecer su empresa?" placeholder="Ingrese su respuesta">
+            <div class="pregunta-input-group">
+                <input type="text" name="pregunta3" value="¿Qué áreas de conocimiento o formativas considera importantes para fortalecer su empresa?" placeholder="Ingrese su respuesta" class="pregunta-enunciado">
+                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
+                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
+                </button>
+            </div>
 
             <!-- Bloque de preguntas 2 -->
             <label>Pregunta 4:</label>
-            <input type="text" name="pregunta4" value="¿Qué tecnologías, herramientas o procesos específicos están presentes en su operación diaria?" placeholder="Ingrese su respuesta">
+            <div class="pregunta-input-group">
+                <input type="text" name="pregunta4" value="¿Qué tecnologías, herramientas o procesos específicos están presentes en su operación diaria?" placeholder="Ingrese su respuesta" class="pregunta-enunciado">
+                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
+                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
+                </button>
+            </div>
 
 
             <label>Pregunta 5:</label>
-            <input type="text" name="pregunta5" value="¿Qué nivel de formación considera más adecuado para su empresa?" />
+            <div class="pregunta-input-group">
+                <input type="text" name="pregunta5" value="¿Qué nivel de formación considera más adecuado para su empresa?" class="pregunta-enunciado" />
+                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
+                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
+                </button>
+            </div>
             <div id="opciones5-edit" class="opciones-edit-group">
-                <div class="opcion-edit-row"><input type="text" value="Auxiliar" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Operario" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Técnico" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Tecnólogo" class="opcion-edit" /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Auxiliar" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Operario" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Técnico" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
+                <div class="opcion-edit-row"><input type="text" value="Tecnólogo" class="opcion-edit" readonly/><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
                 <button type="button" class="btn btn-agregar" onclick="agregarOpcion('opciones5-edit')">Agregar opción</button>
             </div>
 
             <label>Pregunta 6:</label>
-            <input type="text" name="pregunta6" value="¿Qué tipo de conocimientos o habilidades considera que hacen falta en su empresa?" placeholder="Ingrese su respuesta">
+            <div class="pregunta-input-group">
+                <input type="text" name="pregunta6" value="¿Qué tipo de conocimientos o habilidades considera que hacen falta en su empresa?" placeholder="Ingrese su respuesta" class="pregunta-enunciado">
+                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
+                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
+                </button>
+            </div>
 
             <!-- Botones -->
             <div class="form__buttons">
@@ -105,6 +136,20 @@
 
 
     <script>
+    // Mostrar botón guardar solo cuando se edite el input de pregunta
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('input[type="text"][name^="pregunta"]').forEach(function(input) {
+            const btn = input.parentElement.querySelector('.btn-guardar-pregunta');
+            if (!btn) return;
+            input.addEventListener('input', function() {
+                btn.style.display = 'inline-flex';
+            });
+            btn.addEventListener('click', function() {
+                // Aquí puedes agregar la lógica para guardar el enunciado si lo deseas
+                btn.style.display = 'none';
+            });
+        });
+    });
     // Permite agregar inputs para nuevas opciones
 function agregarOpcion(idGrupo) {
     const grupo = document.getElementById(idGrupo);

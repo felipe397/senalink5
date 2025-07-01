@@ -133,9 +133,16 @@ else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET
 
 // 🔍 DETALLE DE UN PROGRAMA
 else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'DetallePrograma' && isset($_GET['id'])) {
-    $detalle = $programa->getById($_GET['id']);
+    error_log("DEBUG: Recibiendo DetallePrograma con ID: " . $_GET['id']);
+    $detalle = ProgramaFormacion::obtenerProgramaporid($_GET['id']);
+    error_log("DEBUG: Resultado de obtenerProgramaporid: " . print_r($detalle, true));
     header('Content-Type: application/json');
-    echo json_encode($detalle);
+    if (!$detalle || empty($detalle)) {
+        http_response_code(404);
+        echo json_encode(['error' => 'No se encontró el programa de formación con el ID proporcionado.']);
+    } else {
+        echo json_encode($detalle);
+    }
     exit;
 }
 

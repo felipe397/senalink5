@@ -28,7 +28,7 @@
         </div>
         <div class="header__center"></div>
         <div class="header__right">
-            <img src="../../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
+            <img src="../../../img/logo-sena-white0.png" alt="Logo SENA" class="logo__sena">
         </div>
     </header>
 
@@ -56,7 +56,12 @@
                         <option>Tecnico</option>
                         <option>Tecnologo</option>
                     </select>
-
+                    <select class="select_container" name="sector_programa" required>
+                        <option selected disabled value="">Sector del programa</option>
+                        <option>Industrial</option>
+                        <option>Primario</option>
+                        <option>Servicios</option>
+                    </select>
                     <input class="input-field" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required />
                     <input class="input-field" id="duracion_meses" name="duracion_meses" placeholder="Duración (meses)" type="number" required />
 
@@ -64,6 +69,7 @@
                         <option value="" disabled selected>Estado</option>
                         <option>En curso</option>
                         <option>Disponible</option>
+                        <option>Finalizado</option>
                     </select>
 
                     <input class="input-field" id="descripcion" name="descripcion" placeholder="Descripción" type="text" required />
@@ -85,7 +91,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const programaId = new URLSearchParams(window.location.search).get('id');
             if (programaId) {
-                fetch(`../../../controllers/UsuarioController.php?action=DetallePrograma&id=${programaId}`)
+                fetch(`../../../controllers/ProgramaController.php?action=DetallePrograma&id=${programaId}`)
                     .then(response => response.json())
                     .then(data => {
                         if (!data.error) {
