@@ -50,29 +50,29 @@
                 <p><strong>Tipo de empresa:</strong> <span id="tipo_empresa"></span></p>
                 <p><strong>Estado:</strong> <span id="estado"></span></p>
             </section>
-
             <!-- Botones de acciones -->
             <div class="buttons__container">
                 <a href="EmpresaEdit.html" class="buttons__crud">Actualizar</a>
                 <a href="Gestion_Empresa.html" class="buttons__crud">Listar</a>
                 <button id="btn-inhabilitar" class="buttons__crud btn-inhabilitar">Inhabilitar</button>
+                <button id="btn-habilitar" class="buttons__crud btn-habilitar" style="display: none;">Habilitar</button>
                 <a href="#" class="buttons__crud" id="btnReporte">Reporte</a>
                 <button onclick="goBack()" class="buttons__crud">Volver</button>
             </div>
 
-            <!-- Modal de confirmación -->
-            <div id="custom-confirm" class="modal"><!-- Solo la clase modal, sin show -->
+
+            <!-- Modal de confirmación reutilizable -->
+            <div id="custom-confirm" class="modal">
                 <div class="content">
                     <div class="modal-content">
-                    <h1>Inhabilitar</h1>
-                    <p>
-                        Una vez el usuario esté inhabilitado no podrá sufrir cambios hasta que sea habilitado nuevamente.
-                        ¿Está seguro?
-                    </p>
-                    <div class="buttons__disable">
-                        <button id="confirm-no" class="cancel-button">Cancelar</button>
-                        <button id="confirm-yes" class="disable-button">Inhabilitar</button>
-                    </div>
+                        <h1 id="modal-title">Confirmar acción</h1>
+                        <p id="modal-message">
+                            ¿Estás seguro de continuar con esta acción?
+                        </p>
+                        <div class="buttons__disable">
+                            <button id="confirm-no" class="cancel-button">Cancelar</button>
+                            <button id="confirm-yes" class="disable-button">Confirmar</button>
+                        </div>
                     </div>
                 </div>
             </div>

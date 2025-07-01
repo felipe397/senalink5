@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
@@ -29,9 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
     echo $resultado ? "Estado actualizado correctamente." : "Error al actualizar estado.";
     exit;
 }
-
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'crearUsuario') {
     // Obtener datos comunes
     $correo         = $_POST['correo'] ?? '';
