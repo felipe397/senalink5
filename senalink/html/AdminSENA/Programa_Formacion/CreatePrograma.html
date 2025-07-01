@@ -36,6 +36,7 @@
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
             
             <form action="../../../controllers/ProgramaController.php" method="POST">
+                <input type="hidden" name="accion" value="crear" />
                 <div class="inputs__container">
                     <input class="input-field" name="codigo" placeholder="Codigo" type="number" required/>
                     <input class="input-field" name="ficha" placeholder="Ficha" type="number" required/>

@@ -35,7 +35,8 @@
         <main class="container__crud">
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
             
-            <form action="../../../controllers/ProgramaController.php" method="POST">
+<form action="../../../controllers/ProgramaController.php" method="POST">
+    <input type="hidden" name="accion" value="crear" />
     <div class="inputs__container">
         <!-- Código: solo números positivos -->
         <input class="input-field" name="codigo" placeholder="Código" type="number" min="1" required 
@@ -48,8 +49,6 @@
         <!-- Nivel formación -->
         <select class="select_container" name="nivel_formacion" required>
             <option selected disabled value="">Nivel de formación</option>
-            <option>Auxiliar</option>
-            <option>Operario</option>
             <option>Tecnico</option>
             <option>Tecnologo</option>
         </select>

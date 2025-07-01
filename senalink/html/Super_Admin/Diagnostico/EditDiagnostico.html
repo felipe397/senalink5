@@ -43,162 +43,162 @@
 
     <!-- Contenido principal debajo del header y encima del footer -->
     <main style="flex:1 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;">
-        <form class="container__forms" id="diagnosticoForm">
+        <form class="container__forms" id="diagnosticoForm" style="max-width: 800px; width: 90%; margin: 0 auto; padding: 2rem 2.5rem; background: #fff; border-radius: 18px; box-shadow: 0 2px 16px 0 rgba(0,0,0,0.08);">
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"><br>
-
-            <!-- Bloque de preguntas 1 -->
-
-            <label>Pregunta 1:</label>
-            <div class="pregunta-input-group">
-                <input type="text" name="pregunta1" value="¿A qué sector productivo pertenece la empresa?" class="pregunta-enunciado" data-id="1" />
-                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
-                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
-                </button>
-            </div>
-            <div id="opciones1-edit" class="opciones-edit-group" data-pregunta-id="1">
-                <div class="opcion-edit-row" data-opcion-id="1"><input type="text" value="Sector Primario (Agrícola)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row" data-opcion-id="2"><input type="text" value="Sector Secundario (Industrial)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row" data-opcion-id="3"><input type="text" value="Sector Terciario (Servicios)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row" data-opcion-id="4"><input type="text" value="Sector Cuaternario (Investigación y Desarrollo)" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <button type="button" class="btn btn-agregar" onclick="agregarOpcion('opciones1-edit')">Agregar opción</button>
-            </div>
-
-
-            <label>Pregunta 2:</label>
-            <div class="pregunta-input-group">
-                <input type="text" name="pregunta2" value="¿En qué áreas o procesos de su empresa considera que es necesario incorporar nuevo talento humano?" class="pregunta-enunciado" />
-                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
-                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
-                </button>
-            </div>
-            <div id="opciones2-edit" class="opciones-edit-group">
-                <div class="opcion-edit-row"><input type="text" value="Áreas de talento humano" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Administración de personal" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Capacitación y selección de talento" class="opcion-edit" readonly/><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Formación" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Desarrollo organizacional" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Salud y seguridad en el trabajo" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <button type="button" class="btn btn-agregar" onclick="agregarOpcion('opciones2-edit')">Agregar opción</button>
-            </div>
-
-            <label>Pregunta 3:</label>
-            <div class="pregunta-input-group">
-                <input type="text" name="pregunta3" value="¿Qué áreas de conocimiento o formativas considera importantes para fortalecer su empresa?" placeholder="Ingrese su respuesta" class="pregunta-enunciado">
-                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
-                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
-                </button>
-            </div>
-
-            <!-- Bloque de preguntas 2 -->
-            <label>Pregunta 4:</label>
-            <div class="pregunta-input-group">
-                <input type="text" name="pregunta4" value="¿Qué tecnologías, herramientas o procesos específicos están presentes en su operación diaria?" placeholder="Ingrese su respuesta" class="pregunta-enunciado">
-                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
-                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
-                </button>
-            </div>
-
-
-            <label>Pregunta 5:</label>
-            <div class="pregunta-input-group">
-                <input type="text" name="pregunta5" value="¿Qué nivel de formación considera más adecuado para su empresa?" class="pregunta-enunciado" />
-                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
-                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
-                </button>
-            </div>
-            <div id="opciones5-edit" class="opciones-edit-group">
-                <div class="opcion-edit-row"><input type="text" value="Auxiliar" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Operario" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Técnico" class="opcion-edit" readonly /><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <div class="opcion-edit-row"><input type="text" value="Tecnólogo" class="opcion-edit" readonly/><button type="button" class="btn-eliminar" onclick="eliminarOpcion(this)">🗑️</button></div>
-                <button type="button" class="btn btn-agregar" onclick="agregarOpcion('opciones5-edit')">Agregar opción</button>
-            </div>
-
-            <label>Pregunta 6:</label>
-            <div class="pregunta-input-group">
-                <input type="text" name="pregunta6" value="¿Qué tipo de conocimientos o habilidades considera que hacen falta en su empresa?" placeholder="Ingrese su respuesta" class="pregunta-enunciado">
-                <button type="button" class="btn-guardar-pregunta" title="Guardar enunciado">
-                    <img src="../../../icon/check_purple.svg" alt="Guardar" />
-                </button>
-            </div>
-
+            <div id="preguntas-container"></div>
             <!-- Botones -->
             <div class="form__buttons">
                 <a href="../Home.html" class="btn">Resultado</a>
                 <a href="../Diagnostico/VerDiagnostico.html" class="btn">Gestión</a>
-                <a href="VerDiagnostico.html" class="btn">Guardar</a>
+                <button type="button" id="btnGuardarDiagnostico" class="btn">Guardar</button>
                 <button type="button" onclick="goBack()" class="btn">Volver</button>
-                
             </div>
-            
         </form>
     </main>
 
 
     <script>
-    // Mostrar botón guardar solo cuando se edite el input de pregunta
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('input[type="text"][name^="pregunta"]').forEach(function(input) {
-            const btn = input.parentElement.querySelector('.btn-guardar-pregunta');
-            if (!btn) return;
+    // Renderizar preguntas y opciones dinámicamente
+    function renderPreguntas(preguntas) {
+        const container = document.getElementById('preguntas-container');
+        container.innerHTML = '';
+        preguntas.forEach(pregunta => {
+            // Pregunta
+            const label = document.createElement('label');
+            label.textContent = 'Pregunta: ';
+            container.appendChild(label);
+            const preguntaDiv = document.createElement('div');
+            preguntaDiv.className = 'pregunta-input-group';
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'pregunta-enunciado';
+            input.value = pregunta.enunciado;
+            input.setAttribute('data-id', pregunta.id);
+            preguntaDiv.appendChild(input);
+            // Botón guardar enunciado
+            const btnGuardar = document.createElement('button');
+            btnGuardar.type = 'button';
+            btnGuardar.className = 'btn-guardar-pregunta';
+            btnGuardar.title = 'Guardar enunciado';
+            btnGuardar.style.display = 'none';
+            btnGuardar.innerHTML = '<img src="../../../icon/check_purple.svg" alt="Guardar" />';
+            preguntaDiv.appendChild(btnGuardar);
             input.addEventListener('input', function() {
-                btn.style.display = 'inline-flex';
+                btnGuardar.style.display = 'inline-flex';
             });
-            btn.addEventListener('click', function() {
-                // Aquí puedes agregar la lógica para guardar el enunciado si lo deseas
-                btn.style.display = 'none';
+            btnGuardar.addEventListener('click', function() {
+                btnGuardar.style.display = 'none';
             });
-        });
-    });
-    // Permite agregar inputs para nuevas opciones
-function agregarOpcion(idGrupo) {
-    const grupo = document.getElementById(idGrupo);
-    const div = document.createElement('div');
-    div.className = 'opcion-edit-row';
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.className = 'opcion-edit';
-    input.placeholder = 'Nueva opción';
-    // Botón guardar (check)
-    const btnGuardar = document.createElement('button');
-    btnGuardar.type = 'button';
-    btnGuardar.className = 'btn-guardar';
-    btnGuardar.title = 'Guardar opción';
-    btnGuardar.innerHTML = '✔️';
-    btnGuardar.onclick = function() {
-        if(input.value.trim() === '') {
-            input.focus();
-            return;
-        }
-        // Al guardar, quitar el botón guardar y poner el de eliminar
-        div.removeChild(btnGuardar);
-        const btnEliminar = document.createElement('button');
-        btnEliminar.type = 'button';
-        btnEliminar.className = 'btn-eliminar';
-        btnEliminar.innerText = '🗑️';
-        btnEliminar.onclick = function() { eliminarOpcion(btnEliminar); };
-        div.appendChild(btnEliminar);
-        input.readOnly = false; // Permitir seguir editando
-    };
-    div.appendChild(input);
-    div.appendChild(btnGuardar);
-    // Busca el botón de "Agregar opción" dentro del grupo
-    const btnAgregar = Array.from(grupo.querySelectorAll('button')).find(b => b.textContent.includes('Agregar opción'));
-    if (btnAgregar) {
-        grupo.insertBefore(div, btnAgregar);
-    } else {
-        grupo.appendChild(div);
-    }
-    input.focus();
-}
+            container.appendChild(preguntaDiv);
 
+            // Opciones
+            const opcionesDiv = document.createElement('div');
+            opcionesDiv.className = 'opciones-edit-group';
+            opcionesDiv.id = 'opciones' + pregunta.id + '-edit';
+            opcionesDiv.setAttribute('data-pregunta-id', pregunta.id);
+            if (pregunta.opciones && pregunta.opciones.length > 0) {
+                pregunta.opciones.forEach(opcion => {
+                    const row = document.createElement('div');
+                    row.className = 'opcion-edit-row';
+                    row.setAttribute('data-opcion-id', opcion.id);
+                    const inputOpcion = document.createElement('input');
+                    inputOpcion.type = 'text';
+                    inputOpcion.className = 'opcion-edit';
+                    inputOpcion.value = opcion.texto;
+                    inputOpcion.readOnly = true;
+                    row.appendChild(inputOpcion);
+                    const btnEliminar = document.createElement('button');
+                    btnEliminar.type = 'button';
+                    btnEliminar.className = 'btn-eliminar';
+                    btnEliminar.innerText = '🗑️';
+                    btnEliminar.onclick = function() { eliminarOpcion(btnEliminar); };
+                    row.appendChild(btnEliminar);
+                    opcionesDiv.appendChild(row);
+                });
+            }
+            // Botón agregar opción, excepto para preguntas con id 3, 4 y 6
+            if (!(pregunta.id == 3 || pregunta.id == 4 || pregunta.id == 6)) {
+                const btnAgregar = document.createElement('button');
+                btnAgregar.type = 'button';
+                btnAgregar.className = 'btn btn-agregar';
+                btnAgregar.textContent = 'Agregar opción';
+                btnAgregar.onclick = function() { agregarOpcion(opcionesDiv.id); };
+                opcionesDiv.appendChild(btnAgregar);
+            }
+            container.appendChild(opcionesDiv);
+        });
+    }
+
+    // Permite agregar inputs para nuevas opciones
+    function agregarOpcion(idGrupo) {
+        const grupo = document.getElementById(idGrupo);
+        const div = document.createElement('div');
+        div.className = 'opcion-edit-row';
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'opcion-edit';
+        input.placeholder = 'Nueva opción';
+        // Botón guardar (check)
+        const btnGuardar = document.createElement('button');
+        btnGuardar.type = 'button';
+        btnGuardar.className = 'btn-guardar';
+        btnGuardar.title = 'Guardar opción';
+        btnGuardar.innerHTML = '✔️';
+        btnGuardar.onclick = function() {
+            if(input.value.trim() === '') {
+                input.focus();
+                return;
+            }
+            // Al guardar, quitar el botón guardar y poner el de eliminar
+            div.removeChild(btnGuardar);
+            const btnEliminar = document.createElement('button');
+            btnEliminar.type = 'button';
+            btnEliminar.className = 'btn-eliminar';
+            btnEliminar.innerText = '🗑️';
+            btnEliminar.onclick = function() { eliminarOpcion(btnEliminar); };
+            div.appendChild(btnEliminar);
+            input.readOnly = false; // Permitir seguir editando
+        };
+        div.appendChild(input);
+        div.appendChild(btnGuardar);
+        // Busca el botón de "Agregar opción" dentro del grupo
+        const btnAgregar = Array.from(grupo.querySelectorAll('button')).find(b => b.textContent.includes('Agregar opción'));
+        if (btnAgregar) {
+            grupo.insertBefore(div, btnAgregar);
+        } else {
+            grupo.appendChild(div);
+        }
+        input.focus();
+    }
 
     // Permite eliminar una opción
     function eliminarOpcion(btn) {
         const row = btn.parentElement;
+        const opcionId = row.getAttribute('data-opcion-id');
+        if (opcionId) {
+            window.opcionesEliminadas.push(opcionId);
+        }
         row.parentElement.removeChild(row);
     }
-    //
+
+    // Cargar preguntas y opciones al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        window.opcionesEliminadas = [];
+        fetch('../../../controllers/DiagnosticoController.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accion: 'obtenerDiagnosticoCompleto' })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.preguntas) {
+                renderPreguntas(data.preguntas);
+            } else {
+                alert('No se pudieron cargar las preguntas.');
+            }
+        })
+        .catch(() => alert('Error al cargar preguntas'));
+    });
     </script>
     <script src="../../../js/backbutton.js"></script>
 
@@ -206,7 +206,8 @@ function agregarOpcion(idGrupo) {
     // Enviar todos los cambios al backend al hacer click en el botón "Guardar" en form__buttons
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('diagnosticoForm');
-        const btnGuardarGlobal = document.querySelector('.form__buttons a.btn[href="VerDiagnostico.html"]');
+        const btnGuardarGlobal = document.getElementById('btnGuardarDiagnostico');
+
 
         btnGuardarGlobal.addEventListener('click', function(event) {
             event.preventDefault();

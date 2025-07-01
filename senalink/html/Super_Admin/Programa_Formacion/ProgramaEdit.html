@@ -51,8 +51,6 @@
 
                     <select class="select_container" id="nivel_formacion" name="nivel_formacion" required>
                         <option value="" disabled selected>Nivel de formación</option>
-                        <option>Auxiliar</option>
-                        <option>Operario</option>
                         <option>Tecnico</option>
                         <option>Tecnologo</option>
                     </select>
@@ -91,7 +89,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const programaId = new URLSearchParams(window.location.search).get('id');
             if (programaId) {
-                fetch(`/senalink5/senalink5/senalink/controllers/ProgramaController.php?action=DetallePrograma&id=${programaId}`)
+                fetch(`/senalink5/senalink/controllers/ProgramaController.php?action=DetallePrograma&id=${programaId}`)
                     .then(response => response.json())
                     .then(data => {
                         if (!data.error) {

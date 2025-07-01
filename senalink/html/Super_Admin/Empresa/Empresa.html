@@ -92,15 +92,15 @@
     //         }
     //     });
     // </script>
-    // <script>
-    //     document.getElementById('btnReporte').addEventListener('click', function() {
-    //         const empresaId = new URLSearchParams(window.location.search).get('id');
-    //         if (empresaId) {
-    //             window.location.href = `EmpresaReport.html?id=${empresaId}`;
-    //         } else {
-    //             alert('No se encontró el ID de la empresa.');
-    //         }
-    //     });
+    <script>
+        document.getElementById('btnReporte').addEventListener('click', function() {
+            const empresaId = new URLSearchParams(window.location.search).get('id');
+            if (empresaId) {
+                window.location.href = `EmpresaReport.html?id=${empresaId}`;
+            } else {
+                alert('No se encontró el ID de la empresa.');
+            }
+        });
     </script>
 <div class="footer__crud">
     <footer>

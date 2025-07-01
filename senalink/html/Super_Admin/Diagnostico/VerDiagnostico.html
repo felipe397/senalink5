@@ -36,14 +36,34 @@
         <main class="container__crud">
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/><br>
             
-            <div class="cuestionario-container">
-                <p>1. ¿A qué sector productivo pertenece la empresa?</p>
-                <p>2. ¿En qué áreas o procesos de su empresa considera que es necesario incorporar nuevo talento humano?</p>
-                <p>3. ¿Qué áreas de conocimiento o formativas considera importantes para fortalecer su empresa?</p>
-                <p>4. ¿Qué tecnologías, herramientas o procesos específicos están presentes en su operación diaria?</p>
-                <p>5. ¿Qué nivel de formación considera más adecuado para su empresa?</p>
-                <p>6. ¿Qué tipo de conocimientos o habilidades considera que hacen falta en su empresa?</p>
+            <div class="cuestionario-container" id="cuestionario-container">
+                <!-- Las preguntas se cargarán dinámicamente -->
             </div>
+    <script>
+    // Cargar preguntas dinámicamente desde el backend
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('../../../controllers/DiagnosticoController.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accion: 'obtenerDiagnosticoCompleto' })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.preguntas) {
+                const container = document.getElementById('cuestionario-container');
+                container.innerHTML = '';
+                data.preguntas.forEach((pregunta, idx) => {
+                    const p = document.createElement('p');
+                    p.textContent = (idx+1) + '. ' + pregunta.enunciado;
+                    container.appendChild(p);
+                });
+            } else {
+                alert('No se pudieron cargar las preguntas.');
+            }
+        })
+        .catch(() => alert('Error al cargar preguntas'));
+    });
+    </script>
 
 
             

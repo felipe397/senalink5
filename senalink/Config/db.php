@@ -5,7 +5,7 @@
  */
 
 // Constantes de configuración de la base de datos
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'localhost:3307');
 define('DB_NAME', 'senalink');
 define('DB_USER', 'root');
 define('DB_PASS', '');
