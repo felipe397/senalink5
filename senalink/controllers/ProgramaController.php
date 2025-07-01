@@ -156,3 +156,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     }
     exit;
 }
+// 🔍 DETALLE DE UN PROGRAMA
+else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'DetallePrograma' && isset($_GET['id'])) {
+    $detalle = $programa->getById($_GET['id']);
+    header('Content-Type: application/json');
+    echo json_encode($detalle);
+    exit;
+}

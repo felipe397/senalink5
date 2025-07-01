@@ -1,0 +1,58 @@
+/* Botón de guardar (check) para inputs de pregunta */
+
+/* Contenedor para input y botón */
+.pregunta-input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 8px;
+    justify-content: flex-start;
+}
+
+.pregunta-enunciado {
+    flex: 1 1 0%;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    height: 44px;
+}
+
+.pregunta-enunciado {
+    flex: 1 1 0%;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    padding: 8px 12px;
+}
+
+.btn-guardar-pregunta {
+    display: none;
+    background: #34c759;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    margin-left: 8px;
+    vertical-align: middle;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+    padding: 0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-guardar-pregunta:active {
+    background: #28a745;
+}
+.btn-guardar-pregunta img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: auto;
+}

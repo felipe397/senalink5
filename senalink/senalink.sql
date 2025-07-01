@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-06-2025 a las 05:24:00
+-- Tiempo de generación: 30-06-2025 a las 22:26:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -140,17 +140,18 @@ CREATE TABLE `programas_formacion` (
   `habilidades_requeridas` text NOT NULL,
   `fecha_finalizacion` date NOT NULL,
   `descripcion` text NOT NULL,
-  `codigo` int(11) NOT NULL
+  `codigo` int(11) NOT NULL,
+  `sector_programa` enum('Industrial','Primario','Servicios') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `programas_formacion`
 --
 
-INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_meses`, `nivel_formacion`, `estado`, `fecha_creacion`, `ficha`, `habilidades_requeridas`, `fecha_finalizacion`, `descripcion`, `codigo`) VALUES
-(1, 'software', 27, 'Tecnologo', 'En curso', '2025-06-22 00:04:59', 2896365, 'Saber python, JavaScript, SQL Y node.js', '2025-10-06', 'Crear software y hardware', 12345),
-(2, 'Contenidos Digitales', 21, 'Tecnico', 'Disponible', '2025-06-22 02:26:07', 2344221, 'Ser migue ', '2025-06-26', 'Migue la pampara ', 9898989),
-(3, 'Audiovisuales', 23, 'Auxiliar', 'En curso', '2025-06-22 02:29:33', 99887766, 'Manejar contenido', '2025-06-25', 'Crear contenido audiovisual', 44556677);
+INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_meses`, `nivel_formacion`, `estado`, `fecha_creacion`, `ficha`, `habilidades_requeridas`, `fecha_finalizacion`, `descripcion`, `codigo`, `sector_programa`) VALUES
+(1, 'software', 27, 'Tecnologo', 'En curso', '2025-06-22 00:04:59', 2896365, 'Saber python, JavaScript, SQL Y node.js', '2025-10-06', 'Crear software y hardware', 12345, NULL),
+(2, 'Contenidos Digitales', 21, 'Tecnico', 'Disponible', '2025-06-22 02:26:07', 2344221, 'Ser migue ', '2025-06-26', 'Migue la pampara ', 9898989, NULL),
+(3, 'Audiovisuales', 23, 'Auxiliar', 'En curso', '2025-06-22 02:29:33', 99887766, 'Manejar contenido', '2025-06-25', 'Crear contenido audiovisual', 44556677, NULL);
 
 -- --------------------------------------------------------
 
@@ -239,10 +240,13 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`) VALUES
-(15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'pele sas', '1234567891', NULL, 'pele', 'Industrial', '', NULL, '', NULL, NULL, 0),
+(15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'Migue sas', '1234567891', NULL, 'Migue', 'Industrial', '', NULL, '', NULL, NULL, 0),
 (16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', 'Laura', 'Leon', 'Alzate', '', 12345678),
 (17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, '3001234567', NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567),
-(19, 'chicaalzateb@gmail.com', '$2y$10$MuUNkZMGj0EGdwCLTGe4fO8oLkfYNxZlcKJeAoURY9bIrjVPkkajm', 'empresa', 'Activo', '2025-06-17 12:23:36', '4422', 'direccion ejemplo', 'breiner ejemplo sas', '1234567891', NULL, 'breiner', 'Industrial', '', NULL, '', NULL, NULL, 0);
+(19, 'chicaalzateb@gmail.com', '$2y$10$MuUNkZMGj0EGdwCLTGe4fO8oLkfYNxZlcKJeAoURY9bIrjVPkkajm', 'empresa', 'Activo', '2025-06-17 12:23:36', '4422', 'direccion ejemplo', 'Braulio ejemplo sas', '1234567891', NULL, 'Braulio', 'Industrial', '', NULL, '', NULL, NULL, 0),
+(20, '', '$2y$10$qFb1tX1qfpR8TZzCDeVkROrs4nNUg7UgPKpckPpKSo5qQ852NEHga', '', 'Activo', '2025-06-30 07:18:15', NULL, '', NULL, '', NULL, NULL, NULL, '', '', '', '', '', 0),
+(24, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$gQp4g5O5jRPd8zenNWy7eOQO8SZ2gmp3J/ygVK5dFxMUUg9/Mvtae', 'empresa', 'Activo', '2025-06-30 09:07:53', '4721233', 'Arabia', 'Monster y cuates', '345333555', NULL, 'Edwin Manito', 'Industrial', '', NULL, '', NULL, NULL, 0),
+(25, 'osoriolopezjuanfelipe@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, '322222222', NULL, NULL, NULL, 'Pele', 'Felipe', 'Osorio', 'Lopez', 'Cedula de ciudadania', 23456789);
 
 --
 -- Disparadores `usuarios`
@@ -350,7 +354,7 @@ ALTER TABLE `opciones_preguntas`
 -- AUTO_INCREMENT de la tabla `password_resets`
 --
 ALTER TABLE `password_resets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas_diagnostico`
@@ -392,7 +396,7 @@ ALTER TABLE `respuestas_diagnostico`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Restricciones para tablas volcadas

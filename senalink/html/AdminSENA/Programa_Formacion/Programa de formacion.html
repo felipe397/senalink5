@@ -33,6 +33,7 @@
     <div class="linea-verde"></div>
     <div class="container">
         <main class="container__crud">
+
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
             <div class="p-container">
                 <p><strong>Código:</strong><span id="codigo"></span></p>
@@ -60,7 +61,7 @@
             <!-- Botones CRUD -->
             <div class="buttons__container">
                 <a href="ProgramaEdit.html?id=" class="buttons__crud" id="btnActualizar">Actualizar</a>
-                <button class="buttons__crud">Listar</button>
+                <a href="Gestion_Programa.html" class="buttons__crud">Listar</a>
                 <button onclick="confirmInhabilitar('ProgramaInhabilitado.html')" class="buttons__crud">Inhabilitar</button>
                 <a href="#" class="buttons__crud" id="ProgReporte">Reporte</a>
                 <button onclick="goBack()" class="buttons__crud">Volver</button>
@@ -69,17 +70,22 @@
 
             <!-- Modal de Confirmación -->
             <div id="custom-confirm" class="modal">
+                <div class="content">
                 <div class="modal-content">
                     <h1>Inhabilitar</h1>
-                    <p>Una vez el usuario esté inhabilitado no podrá sufrir cambios hasta que el mismo sea habilitado nuevamente. ¿Está seguro?</p>
+                    <p>
+                        Una vez el usuario esté inhabilitado no podrá sufrir cambios hasta que el mismo sea habilitado nuevamente. 
+                        ¿Está seguro?
+                    </p>
                     <div class="buttons__disable">
-                        <button id="confirm-no" class="cancel-button" onclick="closeConfirm()">Cancelar</button>
+                        <button id="confirm-no" class="cancel-button">Cancelar</button>
                         <button id="confirm-yes" class="disable-button">Inhabilitar</button>
                     </div>
                 </div>
         </main>
     </div>
-    <script src="../../../js/script.js"></script>
+
+
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/viewprogramasformacion.js"></script>
     <script>

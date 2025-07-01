@@ -34,6 +34,7 @@
             
             <!-- FORMULARIO DE REGISTRO ADMINISTRADOR -->
             <form action="../../controllers/UsuarioController.php" method="POST">
+                <input type="hidden" name="accion" value="crearUsuario" />
                 <div class="inputs__container">
                     <!-- Primer nombre: solo letras y espacios -->
                     <input class="input-field" name="primer_nombre" placeholder="Primer nombre" type="text" required
@@ -116,7 +117,7 @@ toggleButton.addEventListener("click", function (e) {
     eyeIcon.src = isPassword 
       ? "../../img/icons8-eye-24.png" // imagen de ojo abierto
       : "../../img/icons8-invisible-24.png";      // imagen de ojo cerrado
-  });I
+});
 });
     </script>
 </body>

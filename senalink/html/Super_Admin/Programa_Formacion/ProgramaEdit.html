@@ -69,6 +69,7 @@
                         <option value="" disabled selected>Estado</option>
                         <option>En curso</option>
                         <option>Disponible</option>
+                        <option>Finalizado</option>
                     </select>
 
                     <input class="input-field" id="descripcion" name="descripcion" placeholder="Descripción" type="text" required />
@@ -90,7 +91,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const programaId = new URLSearchParams(window.location.search).get('id');
             if (programaId) {
-                fetch(`../../../controllers/UsuarioController.php?action=DetallePrograma&id=${programaId}`)
+                fetch(`/senalink5/senalink5/senalink/controllers/ProgramaController.php?action=DetallePrograma&id=${programaId}`)
                     .then(response => response.json())
                     .then(data => {
                         if (!data.error) {
