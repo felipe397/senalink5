@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('http://localhost/senalink5/senalink5/senalink/controllers/UsuarioController.php?action=detalleUsuario', {
+    fetch('http://localhost/senalink5/senalink/controllers/UsuarioController.php?action=detalleUsuario', {
         credentials: 'include'
     })
     .then(response => response.text())
