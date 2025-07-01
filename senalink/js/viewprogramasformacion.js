@@ -1,73 +1,99 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".cardh__container");
     const inputBusqueda = document.querySelector('.search-container input');
+    const filtroActivo = document.getElementById('filtro-activo');
+    const filtroDesactivado = document.getElementById('filtro-desactivado');
     let programas = [];
 
-    // Solo ejecutar la parte de lista si existe el contenedor
-    if (container) {
-        // Cargar todos los programas
-        fetch("../../../controllers/ProgramaController.php?action=listarPrograma")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                programas = data;
-                renderProgramas(programas);
-            })
-            .catch(error => {
-                console.error("Error al cargar los programas de formación:", error);
-                container.innerHTML = "<p>Error al cargar los programas de formación.</p>";
-            });
+    // Leer el estado desde la URL
+    const params = new URLSearchParams(window.location.search);
+    let estadoActual = 'Activo';
+    if (params.has('estado')) {
+        const estadoParam = params.get('estado');
+        if (estadoParam.toLowerCase() === 'desactivado' || estadoParam.toLowerCase() === 'inactivo') {
+            estadoActual = 'Desactivado';
+        }
+    }
 
-    // Buscar en tiempo real solo si existe el inputBusqueda
-    if (inputBusqueda) {
+    if (container && inputBusqueda) {
+        // Cargar programas según el estado
+        function cargarProgramasPorEstado(estado) {
+            estadoActual = estado;
+            let url = "";
+            if (estado === "Activo") {
+                url = "../../../controllers/ProgramaController.php?action=listarProgramasActivos";
+            } else {
+                url = "../../../controllers/ProgramaController.php?action=listarProgramasInhabilitados";
+            }
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    programas = data;
+                    renderProgramas(programas);
+                })
+                .catch(error => {
+                    console.error("Error al cargar los programas:", error);
+                });
+        }
+
+        // Cargar programas inicialmente
+        cargarProgramasPorEstado(estadoActual);
+
+        // Buscar por nombre o código
         inputBusqueda.addEventListener("input", function () {
-            const q = this.value.trim().toLowerCase();
+            const q = this.value.toLowerCase();
             if (q.length >= 1) {
                 const filtrados = programas.filter(p =>
-                    p.nombre_programa?.toLowerCase().startsWith(q) ||
-                    p.ficha?.toLowerCase().startsWith(q) ||
-                    p.codigo?.toLowerCase().startsWith(q)
+                    p.nombre_programa.toLowerCase().includes(q) ||
+                    p.ficha.toLowerCase().includes(q)
                 );
                 renderProgramas(filtrados);
             } else {
                 renderProgramas(programas);
             }
         });
-    }
 
+        // Filtros
+        if (filtroActivo && filtroDesactivado) {
+            filtroActivo.addEventListener('click', function () {
+                cargarProgramasPorEstado('Activo');
+            });
+            filtroDesactivado.addEventListener('click', function () {
+                cargarProgramasPorEstado('Desactivado');
+            });
+        }
+
+        // Renderizar tarjetas
         function renderProgramas(programas) {
             container.innerHTML = "";
-
             if (programas.length === 0) {
-                container.innerHTML = "<p>No se encontraron programas de formación.</p>";
+                container.innerHTML = "<p>No se encontraron programas.</p>";
                 return;
             }
-
             programas.forEach(programa => {
                 const card = document.createElement("article");
                 card.classList.add("cardh");
-
                 card.innerHTML = `
-                    <a href="Programa de formacion.html?id=${encodeURIComponent(programa.id)}">
-                        <div class="card-text">
-                            <h2 class="card-title">${programa.nombre_programa}</h2>
-                            <p class="card-subtitle">${programa.ficha}</p>
-                        </div>
-                    </a>
-                    <a href="ProgramaEdit.html?id=${encodeURIComponent(programa.id)}" class="buttons__crud"></a>
+                    <div class="card-text">
+                        <h2 class="card-title">${programa.nombre_programa}</h2>
+                        <p class="card-subtitle">Código: ${programa.ficha}</p>
+                    </div>
                 `;
-
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function () {
+                    if (estadoActual === 'Activo') {
+                        window.location.href = `Programa.html?id=${programa.id}`;
+                    } else {
+                        window.location.href = `ProgramaInhabilitado.html?id=${programa.id}`;
+                    }
+                });
                 container.appendChild(card);
             });
         }
-    } else {
-        console.warn("No se encontró el contenedor con clase .cardh__container");
-    }
 
+        // Recarga externa
+        window.recargarProgramas = () => cargarProgramasPorEstado(estadoActual);
+    }
     // Ejecutar siempre la parte de detalle del programa
     const id = new URLSearchParams(window.location.search).get('id');
     console.log("ID obtenido de la URL:", id);

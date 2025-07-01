@@ -119,9 +119,9 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_P
 }
 
 // 📃 LISTAR PROGRAMAS
-else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listarPrograma') {
+else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listarProgramasActivos') {
     try {
-        $programas = $programa->listarPrograma();
+        $programas = $programa->listarProgramasActivos();
         header('Content-Type: application/json');
         echo json_encode($programas);
     } catch (Exception $e) {
@@ -130,7 +130,18 @@ else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET
     }
     exit;
 }
-
+// GET action listarEmpresasInhabilitadas
+else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listarProgramasInhabilitados') {
+    try {
+        $programas = $programa->listarProgramasInhabilitados();
+        header('Content-Type: application/json');
+        echo json_encode($programas);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Excepción: ' . $e->getMessage()]);
+    }
+    exit;
+}
 // 🔍 DETALLE DE UN PROGRAMA
 else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'DetallePrograma' && isset($_GET['id'])) {
     error_log("DEBUG: Recibiendo DetallePrograma con ID: " . $_GET['id']);
@@ -143,11 +154,5 @@ else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET
     } else {
         echo json_encode($detalle);
     }
-    exit;
-}
-
-// ❌ MÉTODO NO PERMITIDO
-else {
-    echo "⛔ Acción no permitida.";
     exit;
 }
