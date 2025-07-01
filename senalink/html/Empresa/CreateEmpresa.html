@@ -39,6 +39,7 @@
             <!-- FORMULARIO DE REGISTRO -->
                 <form action="../../controllers/UsuarioController.php" method="POST">
                     <div class="inputs__container">
+                        <input type="hidden" name="accion" value="crearUsuario" />
                         <input class="input-field" name="nit" placeholder="Número NIT" type="text" required/>
                         <input class="input-field" name="representante_legal" placeholder="Representante legal" type="text" required/>
                         <input class="input-field" name="razon_social" placeholder="Razon social" type="text" required/>

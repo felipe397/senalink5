@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 require_once '../config/conexion.php';
 
 $conn = Conexion::conectar();
@@ -52,7 +53,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 // Verificar existencia y contraseña
 if ($usuario) {
     if (password_verify($contrasena, $usuario['contrasena'])) {
-        $_SESSION['id_usuario'] = $usuario['id'];
+        $_SESSION['user_id'] = $usuario['id'];
         $_SESSION['rol'] = $usuario['rol'];
 
         // Redireccionar según rol
