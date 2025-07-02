@@ -4,7 +4,9 @@ class Conexion {
 
     public static function conectar() {
         if (self::$conn === null) {
-            $host = 'localhost:3307';
+            $host = 'localhost'; // Cambia esto si tu servidor MySQL está en otro host
+            // $host = 'localhost:3307'; 
+            // $host = 'localhost:8111'; 
             $db = 'senalink';
             $user = 'root';
             $pass = ''; // o tu contraseña si la tienes

@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 02-07-2025 a las 01:48:04
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 02-07-2025 a las 17:55:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -267,7 +267,10 @@ INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_cr
 (29, 'crisberx12@gmail.com', '$2y$10$FsATLOq0VUFelBfI6cLTDu/0x6bRBL2Dz74NwlXFtxeMUPYCNcoee', 'empresa', 'Activo', '2025-07-02 01:51:27', '9876543212', 'Villaverde 1', 'Migue Monster cuates xd', '312223333', NULL, 'Miguel', 'Servicios', '', NULL, '', NULL, NULL, 0),
 (33, 'alejito@gmail.com', '$2y$10$IFmSsKZuEZdGg2bAolpJwuov/vHyg48taJiICN6FXCaXwBO9PD9LW', 'empresa', 'Activo', '2025-07-02 02:02:49', '333666999', 'Islas canarias', 'Alejo asa', '3122233344', NULL, 'alejo', 'Agricola', '', NULL, '', NULL, NULL, 0),
 (34, 'raiba1234@gmail.com', '$2y$10$fpJ9K2vdlpo97P5KkxWYbepSefOUr2vJU9Ben0n.UdZDQoJlXbtae', 'empresa', 'Activo', '2025-07-02 02:27:52', '999888777', 'Villaverde', 'Raigosa INC', '312223334', NULL, 'Chocolates ruth', 'Agricola', '', NULL, '', NULL, NULL, 0),
-(35, 'appleinc@gmail.com', '$2y$10$3y.5xMj8T.TIhXX3DmIq9.YOxGSE6/9w7S7YX4dD1aG77zXkmDtr.', 'empresa', 'Activo', '2025-07-02 06:20:20', '111222333', 'Beverly Hills', 'Apple INC', '321897654', NULL, 'Steve Jobs', 'Agricola', '', NULL, '', NULL, NULL, 0);
+(35, 'appleinc@gmail.com', '$2y$10$3y.5xMj8T.TIhXX3DmIq9.YOxGSE6/9w7S7YX4dD1aG77zXkmDtr.', 'empresa', 'Activo', '2025-07-02 06:20:20', '111222333', 'Beverly Hills', 'Apple INC', '321897654', NULL, 'Steve Jobs', 'Agricola', '', NULL, '', NULL, NULL, 0),
+(36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, '3024345634', NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cedula de ciudadania', 1111111111),
+(37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, '3024345635', NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cedula de ciudadania', 2222222222),
+(38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, '3024345636', NULL, NULL, NULL, 'Edwin', NULL, 'Banol', 'Cardona', 'Cedula de ciudadania', 3333333333);
 
 --
 -- Disparadores `usuarios`
@@ -402,7 +405,7 @@ ALTER TABLE `reportes_usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Restricciones para tablas volcadas
