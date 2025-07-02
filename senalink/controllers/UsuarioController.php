@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     try {
         $creado = UsuarioModel::crear($datos);
         if ($creado) {
-            header('Location: http://localhost/senalink5/senalink/html/index.html');
+            header('Location: http://localhost/senalink5/senalink5/senalink/html/index.html');
             exit;
         } else {
             echo '<script>alert("Error al crear el usuario."); window.history.back();</script>';
