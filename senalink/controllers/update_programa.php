@@ -6,13 +6,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $codigo = isset($_POST['codigo']) ? trim($_POST['codigo']) : null;
     $ficha = isset($_POST['ficha']) ? trim($_POST['ficha']) : null;
     $nivel_formacion = isset($_POST['nivel_formacion']) ? trim($_POST['nivel_formacion']) : null;
+    $sector_programa = isset($_POST['sector_programa']) ? trim($_POST['sector_programa']) : null;
     $nombre_programa = isset($_POST['nombre_programa']) ? trim($_POST['nombre_programa']) : null;
     $duracion_meses = isset($_POST['duracion_meses']) ? trim($_POST['duracion_meses']) : null;
     $estado = isset($_POST['estado']) ? trim($_POST['estado']) : 'Disponible';
     $descripcion = isset($_POST['descripcion']) ? trim($_POST['descripcion']) : null;
     $habilidades_requeridas = isset($_POST['habilidades_requeridas']) ? trim($_POST['habilidades_requeridas']) : null;
     $fecha_finalizacion = isset($_POST['fecha_finalizacion']) ? trim($_POST['fecha_finalizacion']) : null;
-    $sector_programa = isset($_POST['sector_programa']) ? trim($_POST['sector_programa']) : null;
 
     if ($id !== null && $codigo !== '' && $ficha !== '' && $nivel_formacion !== '' && $nombre_programa !== '' && $duracion_meses !== '' && $estado !== '' && $descripcion !== '' && $habilidades_requeridas !== '' && $fecha_finalizacion !== '') {
         $programa = new ProgramaFormacion();

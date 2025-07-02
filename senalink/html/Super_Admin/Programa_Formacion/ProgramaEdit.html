@@ -54,7 +54,7 @@
                         <option>Tecnico</option>
                         <option>Tecnologo</option>
                     </select>
-                    <select class="select_container" name="sector_programa" required>
+                    <select class="select_container" id="sector_programa" name="sector_programa" required>
                         <option selected disabled value="">Sector del programa</option>
                         <option>Industrial</option>
                         <option>Primario</option>
@@ -97,6 +97,7 @@
                             document.getElementById('codigo').value = data.codigo || '';
                             document.getElementById('ficha').value = data.ficha || '';
                             document.getElementById('nivel_formacion').value = data.nivel_formacion || '';
+                            document.getElementById('sector_programa').value = data.sector_programa || '';
                             document.getElementById('nombre_programa').value = data.nombre_programa || '';
                             document.getElementById('duracion_meses').value = data.duracion_meses || '';
                             document.getElementById('estado').value = data.estado || '';
