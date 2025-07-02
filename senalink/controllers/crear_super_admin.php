@@ -4,17 +4,20 @@ require_once '../Config/conexion.php';
 $pdo = Conexion::conectar();
 
 // --- DATOS DE ENTRADA (normalmente vendrían de un formulario POST) ---
-$primer_nombre      = 'Breiner';
-$primer_apellido    = 'Chica';
-$segundo_apellido   = 'Alzate';
-$correo             = 'crisberx@gmail.com';
-$contrasena_input   = 'ClaveSegura123@'; // Contraseña sin encriptar para validar
+$primer_nombre      = 'Edwin';
+$segundo_nombre     = '';
+$primer_apellido    = 'Banol';
+$segundo_apellido   = 'Cardona';
+$correo             = 'edwin@gmail.com';
+$contrasena_input   = 'Edwinbanolcar2244#'; // Contraseña sin encriptar para validar
 $rol                = 'super_admin';
 $estado             = 'activo';
-$direccion          = 'Calle 123 #45-67';
-$telefono           = '3001234567';
-$numero_documento   = '1000123456';
-$tipo_documento     = 'Cédula de ciudadanía';
+$direccion          = 'Calle 2488 #49-17';
+$telefono           = '3024345636';
+$numero_documento   = '3333333333';
+$tipo_documento     = 'Cedula de ciudadania';
+
+
 
 // --- VALIDACIONES ---
 $errores = [];
