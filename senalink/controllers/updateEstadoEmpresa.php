@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
     $estado = isset($_POST['estado']) ? $_POST['estado'] : '';
 
-    if ($id > 0 && ($estado === 'activo' || $estado === 'inactivo')) {
+    if ($id > 0 && ($estado === 'activo' || $estado === 'Desactivado')) {
         $db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
         if ($db->connect_error) {

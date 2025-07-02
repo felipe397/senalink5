@@ -91,7 +91,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const programaId = new URLSearchParams(window.location.search).get('id');
             if (programaId) {
-                fetch(`senalink5/senalink/controllers/ProgramaController.php?action=DetallePrograma&id=${programaId}`)
+                fetch(`http://localhost/senalink5/senalink5/senalink/controllers/ProgramaController.php?action=DetallePrograma&id=${programaId}`)
                     .then(response => response.json())
                     .then(data => {
                         if (!data.error) {

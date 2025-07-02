@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (window.opener && window.opener.recargarEmpresas) {
                             window.opener.recargarEmpresas();
                         }
-                        window.location.href = '/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
+                        window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
                     })
                     .catch(error => console.error('Error:', error));
             });
@@ -178,9 +178,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (window.opener && window.opener.recargarEmpresas) {
                         window.opener.recargarEmpresas();
                     }
-                    window.location.href = '/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
+                    window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
                 })
                 .catch(error => console.error('Error:', error));
         });
     }
 });
+    // Mostrar advertencia en login si la empresa está inhabilitada
+    function mostrarAdvertenciaEmpresaInhabilitada() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('empresa_inhabilitada') === '1') {
+            const advertDiv = document.getElementById('empresa-inhabilitada-advertencia');
+            const mensaje = '⚠️ Su empresa está inhabilitada. Por favor contacte al administrador.';
+            if (advertDiv) {
+                advertDiv.textContent = mensaje;
+                advertDiv.style.display = 'block';
+            } else {
+                // Fallback: crear el div si no existe (por si lo llaman en otra vista)
+                let advert = document.createElement('div');
+                advert.textContent = mensaje;
+                advert.style.color = '#c0392b';
+                advert.style.fontWeight = 'bold';
+                advert.style.textAlign = 'center';
+                advert.style.margin = '1.5rem 0 0 0';
+                advert.style.fontSize = '1.5rem';
+                const loginContainer = document.querySelector('.container__forms--login');
+                if (loginContainer) {
+                    loginContainer.prepend(advert);
+                }
+            }
+            alert(mensaje);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', mostrarAdvertenciaEmpresaInhabilitada);

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.success) {
                 alert('Empresa habilitada correctamente');
                 // Si estamos en detalle, redirigir a la lista
-                if (window.location.pathname.includes('EmpresaInhabilitado.html')) {
+                if (window.location.pathname.includes('Empresa.html')) {
                     window.location.href = 'Gestion_Empresa.html';
                 } else {
                     // Si estamos en lista, recargar la página para actualizar la lista

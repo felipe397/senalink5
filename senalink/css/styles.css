@@ -310,7 +310,6 @@ width: 100%;
 .menu__link {
     display: block;
     padding: 1.5rem 1rem;
-    width: 100%;
     color: var(--Text-Primary, var(--black));
     text-decoration: none;
     transition: background-color 0.3s ease;
@@ -318,7 +317,6 @@ width: 100%;
 
 .menu__item:hover {
     background-color: var(--primary-700);
-    width: 100%;
 }
 .dropdown {
     position: relative;
