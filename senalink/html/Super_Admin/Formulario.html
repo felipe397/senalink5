@@ -33,47 +33,87 @@
     <div class="container">
         <form class="container__forms">
             <img src="../../img/logo-proyecto1.png" alt="" class="logo__senalink"><br>
-            <label>¿A qué sector productivo pertenece la empresa?</label>
-            <label>¿A qué sector productivo pertenece su empresa?</label>
-            <select class="select_container">
-                <option selected disabled>Seleccione un sector económico</option>
-                <option>Construcción</option>
-                <option>Educación</option>
-                <option>Electricidad</option>
-                <option>Industrial</option>
-                <option>Salud</option>
-                <option>Servicios</option>
-                <option>Textiles</option>
-                <option>Transporte</option>
-            </select>
-
-
-            
-            <label>¿En qué áreas o procesos de su empresa considera que es necesario incorporar nuevo talento humano?</label>
-                <select class="select_container">
-                    <option selected disabled>Seleccione el área</option>
-                    <option>Áreas de talento humano</option>
-                    <option>Administración de personal</option>
-                    <option>Capacitación y selección de talento</option>
-                    <option>Formación</option>
-                    <option>Desarrollo organizacional</option>
-                    <option>Salud y seguridad en el trabajo</option> 
-                </select>
-            
-            <label>¿Que áreas de conocimiento o formativas considera importantes para fortalecer su empresa?</label>
-            <input type="text" placeholder="Ingrese su respuesta">
-
-           <div class="form__buttons"> 
-                <a href="Formulario2.html" class="btn">Siguiente</a>
+            <div id="preguntas-dinamicas"></div>
+            <div class="form__buttons"> 
+                <!-- <a href="Formulario2.html" class="btn">Siguiente</a> -->
                 <a href="Diagnostico/VerDiagnostico.html" class="btn">Gestión</a>
                 <button type="button" onclick="goBack()" class="btn">Volver</button>
-            </div>
-
-
             </div>
         </form>
     </div>
     <script src="../../js/backbutton.js"></script>
+    <script>
+    // Render dinámico de preguntas y opciones desde el backend
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('../../controllers/DiagnosticoController.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accion: 'obtenerDiagnosticoCompleto' })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.preguntas) {
+                renderPreguntasDinamicas(data.preguntas);
+            } else {
+                document.getElementById('preguntas-dinamicas').innerHTML = '<p>No se pudieron cargar las preguntas.</p>';
+            }
+        })
+        .catch(() => {
+            document.getElementById('preguntas-dinamicas').innerHTML = '<p>Error al cargar preguntas.</p>';
+        });
+
+        function renderPreguntasDinamicas(preguntas) {
+            const cont = document.getElementById('preguntas-dinamicas');
+            cont.innerHTML = '';
+            preguntas.forEach(pregunta => {
+                // Crear un contenedor para cada pregunta
+                const preguntaDiv = document.createElement('div');
+                preguntaDiv.style.display = 'flex';
+                preguntaDiv.style.flexDirection = 'column';
+                preguntaDiv.style.alignItems = 'center';
+                preguntaDiv.style.marginBottom = '30px';
+
+                const label = document.createElement('label');
+                label.textContent = pregunta.enunciado;
+                label.style.textAlign = 'center';
+                label.style.fontWeight = 'bold';
+                label.style.marginBottom = '10px';
+                label.style.width = '100%';
+                preguntaDiv.appendChild(label);
+
+                if (pregunta.opciones && pregunta.opciones.length > 0) {
+                    const select = document.createElement('select');
+                    select.className = 'select_container';
+                    select.style.width = '90%';
+                    select.style.margin = '0 auto';
+                    select.style.display = 'block';
+                    const optDefault = document.createElement('option');
+                    optDefault.selected = true;
+                    optDefault.disabled = true;
+                    optDefault.textContent = 'Seleccione una opción';
+                    select.appendChild(optDefault);
+                    pregunta.opciones.forEach(opc => {
+                        const opt = document.createElement('option');
+                        opt.value = opc.texto;
+                        opt.textContent = opc.texto;
+                        select.appendChild(opt);
+                    });
+                    preguntaDiv.appendChild(select);
+                } else {
+                    // Si no tiene opciones, input de texto
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.placeholder = 'Ingrese su respuesta';
+                    input.className = 'input-field';
+                    input.style.width = '90%';
+                    input.style.margin = '0 auto';
+                    preguntaDiv.appendChild(input);
+                }
+                cont.appendChild(preguntaDiv);
+            });
+        }
+    });
+    </script>
     <div class="linea-azul-difuminada"></div>
    <footer>
     <p>© Todos los derechos reservados. SenaLink</p>

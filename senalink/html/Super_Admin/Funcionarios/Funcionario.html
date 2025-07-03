@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SenaLink</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/crud.css">
+    <link rel="shortcut icon " href="../../../img/Favicon1.png">
+    <link rel="stylesheet" href="../../../css/modal-fix.css">
+</head>
+<body>
+    <header class="gov" id="inicio">
+        <div class="gov__container">
+            <a href="https://www.gov.co/" target="_blank">
+                <img loading="lazy" src="../../../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
+            </a>
+        </div>
+    </header>
+    <header class="header__login">
+        <div class="header__left">
+            
+        </div>
+
+        <div class="header__center">
+        </div>
+
+        <div class="header__right">
+            <img src="../../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
+        </div>
+    </header>
+    <div class="linea-verde"></div>
+    <div class="container">
+        <main class="container__crud">
+            <!-- Logo del proyecto -->
+            <div class="logo__container">
+                <img src="../../../img/logo-proyecto1.png" alt="SenaLink Logo" class="logo__senalink" />
+            </div>
+
+            <!-- Información de la empresa -->
+            <section class="empresa__info">
+                <p><strong>Primer nombre:</strong> <span id="primer_nombre"></span></p>
+                <p><strong>Segundo Nombre:</strong> <span id="segundo_nombre"></span></p>
+                <p><strong>Primer apellido:</strong> <span id="primer_apellido"></span></p>
+                <p><strong>Segundo apellido:</strong> <span id="segundo_apellido"></span></p>
+                <p><strong>Correo electrónico:</strong> <span id="correo"></span></p>
+                <p><strong>Numero de telefono:</strong> <span id="telefono"></span></p>
+                <p><strong>Numero de documento:</strong> <span id="numero_documento"></span></p>
+                <p><strong>Tipo de documento:</strong> <span id="tipo_documento"></span></p>
+                <p><strong>Estado:</strong> <span id="estado"></span></p>
+
+            </section>
+            <!-- Botones de acciones -->
+            <div class="buttons__container">
+                <a href="FuncionarioEdit.html" class="buttons__crud">Actualizar</a>
+                <a href="Gestion_Funcionario.html" class="buttons__crud">Listar</a>
+                <button id="btn-inhabilitar" class="buttons__crud btn-inhabilitar">Inhabilitar</button>
+                <button id="btn-habilitar" class="buttons__crud btn-habilitar" style="display: none;">Habilitar</button>
+                <a href="#" class="buttons__crud" id="btnReporte">Reporte</a>
+                <button onclick="goBack()" class="buttons__crud">Volver</button>
+            </div>
+
+
+            <!-- Modal de confirmación reutilizable -->
+            <div id="custom-confirm" class="modal">
+                <div class="content">
+                    <div class="modal-content">
+                        <h1 id="modal-title">Confirmar acción</h1>
+                        <p id="modal-message">
+                            ¿Estás seguro de continuar con esta acción?
+                        </p>
+                        <div class="buttons__disable">
+                            <button id="confirm-no" class="cancel-button">Cancelar</button>
+                            <button id="confirm-yes" class="disable-button">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- <script src="../../../js/script.js"></script> -->
+    <script src="../../../js/backbutton.js"></script>
+    <script src="../../../js/viewempresas.js"></script>
+    <script>
+    //     // Forzar el id de empresa para pruebas si está vacío
+    //     document.addEventListener('DOMContentLoaded', function() {
+    //         var btn = document.getElementById('btn-inhabilitar');
+    //         if(btn && !btn.dataset.empresaId) {
+    //             btn.dataset.empresaId = '1'; // Cambia '1' por un id válido de prueba
+    //         }
+    //     });
+    // </script>
+    <script>
+        document.getElementById('btnReporte').addEventListener('click', function() {
+            const empresaId = new URLSearchParams(window.location.search).get('id');
+            if (empresaId) {
+                window.location.href = `EmpresaReport.html?id=${empresaId}`;
+            } else {
+                alert('No se encontró el ID de la empresa.');
+            }
+        });
+    </script>
+<div class="footer__crud">
+    <footer>
+        <p>© Todos los derechos reservados.SenaLink</p>
+    </footer>
+</div>
+</body>
+</html>
+
