@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SenaLink Login</title>
-  <link href="../css/Inputs.css" rel="stylesheet"/>
-  <link rel="shortcut icon" href="../img/Favicon1.png">
+  <link rel="stylesheet" href="../css/Inputs.css" />
+  <link rel="shortcut icon" href="../img/Favicon1.png" />
 </head>
 <body>
-  <header class="gov" id="inicio">
-        <div class="gov__container">
-            <a href="https://www.gov.co/" target="_blank">
-                <img loading="lazy" src="../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
-            </a>
-        </div>
-    </header>
-  <div class="container">
-    <div class="left_side">
-      <img class="imglogin" src="../img/imagen_loginn-Photoroom.png" alt="">
-    </div>
-    <main class="container__forms--login">
-      <img src="../img/logo-proyecto1.png" alt="logo__Senalink" class="logo__senalink">
+<!-- Encabezado del Gobierno -->
+<header class="gov" id="inicio">
+  <div class="gov__container">
+      <a href="https://www.gov.co/" target="_blank">
+          <img loading="lazy" src="../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
+      </a>
+  </div>
+</header>
 
-      <!-- FORMULARIO DE LOGIN -->
+  <!-- Contenedor principal -->
+  <div class="container">
+    <!-- Lado izquierdo con imagen -->
+    <div class="left_side">
+      <img class="imglogin" src="../img/imagen_loginn-Photoroom.png" alt="Imagen de inicio de sesión" />
+    </div>
+
+    <!-- Formulario de inicio de sesión -->
+    <main class="container__forms--login">
+      <img src="../img/logo-proyecto1.png" alt="Logo Senalink" class="logo__senalink" />
+
       <form action="../controllers/login.php" method="POST">
-        
-        <!-- Campo de correo (solo visible para AdminSENA y Super Admin) -->
+        <!-- Campo de correo (visible solo para AdminSENA y Super Admin) -->
         <div id="correoGroup">
           <input name="correo"
                 placeholder="Correo electrónico"
                 type="email"
                 title="Ingrese un correo electrónico válido."
                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-          />
+           />
         </div>
 
         <!-- Campo de NIT (solo visible para empresa): solo números positivos -->

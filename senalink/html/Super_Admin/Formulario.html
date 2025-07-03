@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>SenaLink</title>
+    <title>SenaLink-Formulario</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -33,6 +33,7 @@
     <div class="container">
         <form class="container__forms">
             <img src="../../img/logo-proyecto1.png" alt="" class="logo__senalink"><br>
+            <label>¿A qué sector productivo pertenece la empresa?</label>
             <label>¿A qué sector productivo pertenece su empresa?</label>
             <select class="select_container">
                 <option selected disabled>Seleccione un sector económico</option>
@@ -48,34 +49,23 @@
 
 
             
-            <label>¿En qué tipo de ocupación considera que se necesita talento humano?</label>
-            <select class="select_container">
-                <option selected disabled>Seleccione un tipo de ocupación</option>
-                <option>Asistentes administrativos</option>
-                <option>Desarrolladores de software</option>
-                <option>Técnicos electricistas</option>
-                <option>Auxiliares contables</option>
-                <option>Operarios de maquinaria</option>
-                <option>Diseñadores gráficos</option>
-                <option>Inspectores de calidad</option>
-                <option>Agentes de servicio al cliente</option>
-                <option>Personal logístico</option>
-                <option>Mecánicos de mantenimiento</option>
-            </select>
-
+            <label>¿En qué áreas o procesos de su empresa considera que es necesario incorporar nuevo talento humano?</label>
+                <select class="select_container">
+                    <option selected disabled>Seleccione el área</option>
+                    <option>Áreas de talento humano</option>
+                    <option>Administración de personal</option>
+                    <option>Capacitación y selección de talento</option>
+                    <option>Formación</option>
+                    <option>Desarrollo organizacional</option>
+                    <option>Salud y seguridad en el trabajo</option> 
+                </select>
             
-            <label>¿Qué nivel de formación desea incorporar con etapa lectiva y práctica?</label>
-            <select class="select_container">
-                <option selected disabled>Seleccione un nivel</option>
-                <option>Técnico</option>
-                <option>Tecnólogo</option>
-            </select>
-
-
+            <label>¿Que áreas de conocimiento o formativas considera importantes para fortalecer su empresa?</label>
+            <input type="text" placeholder="Ingrese su respuesta">
 
            <div class="form__buttons"> 
                 <a href="Formulario2.html" class="btn">Siguiente</a>
-                <a href="Diagnostico/VerDiagnostico.html" class="btn">Gestion</a>
+                <a href="Diagnostico/VerDiagnostico.html" class="btn">Gestión</a>
                 <button type="button" onclick="goBack()" class="btn">Volver</button>
             </div>
 
@@ -86,7 +76,7 @@
     <script src="../../js/backbutton.js"></script>
     <div class="linea-azul-difuminada"></div>
    <footer>
-    <p>@ Todos los derechos reservados. SenaLink</p>
+    <p>© Todos los derechos reservados. SenaLink</p>
   </footer>
 </body>
 </html>

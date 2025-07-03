@@ -56,7 +56,7 @@
   </div>         
   <div class="linea-azul-difuminada"></div>
   <footer>
-    <p>@ Todos los derechos reservados. SenaLink</p>
+    <p>© Todos los derechos reservados. SenaLink</p>
   </footer>
   <script src="../js/viewpassword.js"></script>
   <script>
