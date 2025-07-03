@@ -122,6 +122,34 @@ if (isset($_GET['action']) && $_GET['action'] === 'detalleUsuario') {
 }
 
 // 🟡 Si no coincide ninguna acción
+// 🟢 POST: Filtrar empresas por estado
+if (
+    $_SERVER['REQUEST_METHOD'] === 'POST' &&
+    isset($_POST['accion']) && $_POST['accion'] === 'filtrarPorEstado' &&
+    isset($_POST['estado'])
+) {
+    $estado = $_POST['estado'];
+    require_once '../models/UsuarioModel.php';
+    $empresas = UsuarioModel::getEmpresasPorEstado($estado);
+    // Puedes devolver HTML o JSON según lo que espera tu JS
+    // Aquí devuelvo una tabla simple como ejemplo:
+    if (empty($empresas)) {
+        echo '<p>No se encontraron empresas.</p>';
+    } else {
+        echo '<table class="tabla-empresas">';
+        echo '<tr><th>ID</th><th>Razón Social</th><th>NIT</th></tr>';
+        foreach ($empresas as $empresa) {
+            echo '<tr>';
+            echo '<td>' . htmlspecialchars($empresa['id']) . '</td>';
+            echo '<td>' . htmlspecialchars($empresa['razon_social']) . '</td>';
+            echo '<td>' . htmlspecialchars($empresa['nit']) . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+    }
+    exit;
+}
+
 if (php_sapi_name() !== 'cli') {
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && empty($_GET['action'])) {
         echo '<script>window.location.href = "/senalink5/senalink/html/index.html";</script>';

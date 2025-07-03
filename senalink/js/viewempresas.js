@@ -150,7 +150,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                     .then(response => response.text())
                     .then(data => {
-                        alert(data);
+                        // Si la respuesta es JSON, mostrar solo el mensaje
+                        try {
+                            const res = JSON.parse(data);
+                            if (message) {
+                                alert(res.message);
+                            } else {
+                                alert(data);
+                            }
+                        } catch (e) {
+                            alert(data);
+                        }
                         if (window.opener && window.opener.recargarEmpresas) {
                             window.opener.recargarEmpresas();
                         }
@@ -174,7 +184,17 @@ document.addEventListener('DOMContentLoaded', () => {
             })
                 .then(response => response.text())
                 .then(data => {
-                    alert(data);
+                    // Si la respuesta es JSON, mostrar solo el mensaje
+                    try {
+                        const res = JSON.parse(data);
+                        if (res.message) {
+                            alert(message);
+                        } else {
+                            alert(data);
+                        }
+                    } catch (e) {
+                        alert(data);
+                    }
                     if (window.opener && window.opener.recargarEmpresas) {
                         window.opener.recargarEmpresas();
                     }

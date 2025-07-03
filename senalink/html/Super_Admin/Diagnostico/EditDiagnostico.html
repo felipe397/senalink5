@@ -116,15 +116,13 @@
                     opcionesDiv.appendChild(row);
                 });
             }
-            // Botón agregar opción, excepto para preguntas con id 3, 4 y 6
-            if (!(pregunta.id == 3 || pregunta.id == 4 || pregunta.id == 6)) {
-                const btnAgregar = document.createElement('button');
-                btnAgregar.type = 'button';
-                btnAgregar.className = 'btn btn-agregar';
-                btnAgregar.textContent = 'Agregar opción';
-                btnAgregar.onclick = function() { agregarOpcion(opcionesDiv.id); };
-                opcionesDiv.appendChild(btnAgregar);
-            }
+            // Botón agregar opción para TODAS las preguntas
+            const btnAgregar = document.createElement('button');
+            btnAgregar.type = 'button';
+            btnAgregar.className = 'btn btn-agregar';
+            btnAgregar.textContent = 'Agregar opción';
+            btnAgregar.onclick = function() { agregarOpcion(opcionesDiv.id); };
+            opcionesDiv.appendChild(btnAgregar);
             container.appendChild(opcionesDiv);
         });
     }
