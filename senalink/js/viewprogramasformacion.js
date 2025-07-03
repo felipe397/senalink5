@@ -2,54 +2,46 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".cardh__container");
     const inputBusqueda = document.querySelector('.search-container input');
 
-    // Nuevos botones de filtro
-    const filtroDisponible = document.getElementById('filtro-disponible');
-    const filtroEnCurso = document.getElementById('filtro-en-curso');
+    // Nuevos botones de filtro (ajustados a los nuevos ids y estados)
+    const filtroEjecucion = document.getElementById('filtro-ejecucion');
     const filtroFinalizado = document.getElementById('filtro-finalizado');
 
     let programas = [];
 
     // Leer el estado desde la URL
     const params = new URLSearchParams(window.location.search);
-    let estadoActual = 'disponible'; // Valor por defecto
+    let estadoActual = 'En ejecucion'; // Valor por defecto
     if (params.has('estado')) {
-        const estadoParam = params.get('estado').toLowerCase();
-        if (['disponible', 'en curso', 'finalizado'].includes(estadoParam)) {
+        const estadoParam = params.get('estado');
+        if (["En ejecucion", "Finalizado"].includes(estadoParam)) {
             estadoActual = estadoParam;
         }
     }
 
     if (container && inputBusqueda) {
         function cargarProgramasPorEstado(estado) {
-            estadoActual = estado.toLowerCase();
+            estadoActual = estado;
             let url = "";
-
             switch (estadoActual) {
-                case "disponible":
-                    url = "../../../controllers/ProgramaController.php?action=listarProgramasDisponibles";
+                case "En ejecucion":
+                    url = "../../../controllers/ProgramaController.php?action=listarProgramasEnEjecucion";
                     break;
-                case "en curso":
-                    url = "../../../controllers/ProgramaController.php?action=listarProgramasEnCurso";
-                    break;
-                case "finalizado":
+                case "Finalizado":
                     url = "../../../controllers/ProgramaController.php?action=listarProgramasFinalizados";
                     break;
                 default:
                     console.error("Estado no válido:", estadoActual);
                     return;
             }
-
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    // Si la respuesta es un error, mostrar alerta y limpiar la lista
                     if (data && data.error) {
                         alert("Error: " + data.error);
                         programas = [];
                         renderProgramas(programas);
                         return;
                     }
-                    // Si la respuesta no es un array, limpiar la lista
                     if (!Array.isArray(data)) {
                         programas = [];
                         renderProgramas(programas);
@@ -80,16 +72,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Filtros nuevos
-        if (filtroDisponible && filtroEnCurso && filtroFinalizado) {
-            filtroDisponible.addEventListener('click', function () {
-                cargarProgramasPorEstado('disponible');
-            });
-            filtroEnCurso.addEventListener('click', function () {
-                cargarProgramasPorEstado('en curso');
+        // Filtros nuevos (ajustados a los nuevos ids y estados)
+        if (filtroEjecucion && filtroFinalizado) {
+            filtroEjecucion.addEventListener('click', function () {
+                cargarProgramasPorEstado('En ejecucion');
             });
             filtroFinalizado.addEventListener('click', function () {
-                cargarProgramasPorEstado('finalizado');
+                cargarProgramasPorEstado('Finalizado');
             });
         }
 

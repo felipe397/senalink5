@@ -40,6 +40,7 @@
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"/>
 
             <form action="../../../controllers/update_programa.php" method="POST" id="programaForm">
+                <input type="hidden" name="origen" value="AdminSENA">
                 <div class="inputs__container">
 
                     <!-- Campos ocultos para actualizar -->
@@ -51,12 +52,10 @@
 
                     <select class="select_container" id="nivel_formacion" name="nivel_formacion" required>
                         <option value="" disabled selected>Nivel de formación</option>
-                        <option>Auxiliar</option>
-                        <option>Operario</option>
                         <option>Tecnico</option>
                         <option>Tecnologo</option>
                     </select>
-                    <select class="select_container" name="sector_programa" required>
+                    <select class="select_container" id="sector_programa" name="sector_programa" required>
                         <option selected disabled value="">Sector del programa</option>
                         <option>Industrial</option>
                         <option>Primario</option>
@@ -67,8 +66,7 @@
 
                     <select class="select_container" id="estado" name="estado" required>
                         <option value="" disabled selected>Estado</option>
-                        <option>En curso</option>
-                        <option>Disponible</option>
+                        <option>En ejecucion</option>
                         <option>Finalizado</option>
                     </select>
 
@@ -99,6 +97,7 @@
                             document.getElementById('codigo').value = data.codigo || '';
                             document.getElementById('ficha').value = data.ficha || '';
                             document.getElementById('nivel_formacion').value = data.nivel_formacion || '';
+                            document.getElementById('sector_programa').value = data.sector_programa || '';
                             document.getElementById('nombre_programa').value = data.nombre_programa || '';
                             document.getElementById('duracion_meses').value = data.duracion_meses || '';
                             document.getElementById('estado').value = data.estado || '';

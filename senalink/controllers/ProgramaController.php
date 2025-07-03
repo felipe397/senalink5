@@ -120,22 +120,22 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_P
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     try {
         switch ($_GET['action']) {
-
             case 'listarProgramasDisponibles':
                 $data = $programa->listarProgramasDisponibles();
                 echo json_encode($data);
                 break;
-
             case 'listarProgramasEnCurso':
                 $data = $programa->listarProgramasEnCurso();
                 echo json_encode($data);
                 break;
-
             case 'listarProgramasFinalizados':
                 $data = $programa->listarProgramasFinalizados();
                 echo json_encode($data);
                 break;
-
+            case 'listarProgramasEnEjecucion':
+                $data = $programa->listarProgramasEnCurso();
+                echo json_encode($data);
+                break;
             case 'DetallePrograma':
                 if (!isset($_GET['id'])) {
                     http_response_code(400);
@@ -145,7 +145,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
                 $detalle = $programa->obtenerDetallePrograma($_GET['id']);
                 echo json_encode($detalle ?: []);
                 break;
-
             default:
                 http_response_code(400);
                 echo json_encode(['error' => 'Acción no válida']);

@@ -68,21 +68,21 @@ class ProgramaFormacion
     }
     public function listarProgramasDisponibles() {
         $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT id,nombre_programa,ficha FROM programas_formacion WHERE estado = 'Disponible'");
+        $stmt = $db->prepare("SELECT id,nombre_programa,ficha FROM programas_formacion WHERE estado = 'En ejecucion'");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function listarProgramasEnCurso() {
         $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT * FROM programas_formacion WHERE estado = 'en curso'");
+        $stmt = $db->prepare("SELECT * FROM programas_formacion WHERE estado = 'En ejecucion'");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function listarProgramasFinalizados() {
         $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT * FROM programas_formacion WHERE estado = 'finalizado'");
+        $stmt = $db->prepare("SELECT * FROM programas_formacion WHERE estado = 'Finalizado'");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

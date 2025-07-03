@@ -29,8 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'fecha_finalizacion' => $fecha_finalizacion
         ]);
 
+        // Redirección dinámica según el origen
+        $origen = isset($_POST['origen']) ? $_POST['origen'] : '';
         if ($resultado) {
-            header("Location: ../html/Super_Admin/Programa_Formacion/Gestion_Programa.html");
+            if ($origen === 'Super_Admin') {
+                header("Location: ../html/Super_Admin/Programa_Formacion/Gestion_Programa.html");
+            } else {
+                header("Location: ../html/AdminSENA/Programa_Formacion/Gestion_Programa.html");
+            }
             exit();
         } else {
             echo "❌ Error al actualizar el programa.";

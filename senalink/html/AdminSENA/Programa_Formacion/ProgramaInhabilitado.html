@@ -43,7 +43,15 @@
             <p><strong>Fecha de terminación:</strong> 02/03/2026</p>
         </div>
             <div class="buttons__container">
-                <a href="Programa de formacion.html" class="buttons__crud">Habilitar</a>
+                <div id="custom-confirm" class="modal">
+                    <div class="modal-content">
+                        <h1>Inhabilitar</h1>
+                        <p>Una vez el usuario esté inhabilitado no podrá sufrir cambios hasta que el mismo sea habilitado nuevamente. ¿Está seguro?</p>
+                        <div class="buttons__disable">
+                            <button id="confirm-no" class="cancel-button" onclick="closeConfirm()">Cancelar</button>
+                            <button id="confirm-yes" class="disable-button">Inhabilitar</button>
+                        </div>
+                    </div>
                 <button onclick="goBack()" class="buttons__crud">Volver</button>
                 
             </div>
