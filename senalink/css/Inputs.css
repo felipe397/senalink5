@@ -166,8 +166,7 @@
   box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
   text-align: center;
   max-width: 100%;
-  margin-top: 15rem;
-  margin-bottom: 8rem; /* Aumentado para evitar superposición con footer */
+  margin: 0 auto;
 }
 .container__forms--forgot{
   background-color: var(--white);
@@ -494,3 +493,9 @@ footer {
                 max-width: 100%;
             }
         }
+
+/* --- Espaciado para evitar superposición --- */
+main {
+  padding-top: 7rem; /* Espacio para header */
+  padding-bottom: 5rem; /* Espacio para footer */
+}
