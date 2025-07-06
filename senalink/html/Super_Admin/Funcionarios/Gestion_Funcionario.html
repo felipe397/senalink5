@@ -83,8 +83,14 @@
                             const card = document.createElement('div');
                             card.className = 'cardh';
                             card.style.cursor = 'pointer';
+                            // Mostrar segundo nombre solo si existe, sin dejar doble espacio
+                            let nombreCompleto = usuario.primer_nombre;
+                            if (usuario.segundo_nombre && usuario.segundo_nombre.trim() !== '') {
+                                nombreCompleto += ' ' + usuario.segundo_nombre;
+                            }
+                            nombreCompleto += ' ' + usuario.primer_apellido + ' ' + usuario.segundo_apellido;
                             card.innerHTML = `
-                                <h3>${usuario.primer_nombre} ${usuario.segundo_nombre} ${usuario.primer_apellido} ${usuario.segundo_apellido}</h3>
+                                <h3>${nombreCompleto}</h3>
                                 <p>Número de documento: ${usuario.numero_documento}</p>
                             `;
                             card.addEventListener('click', () => {

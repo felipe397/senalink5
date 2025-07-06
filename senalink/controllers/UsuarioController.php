@@ -107,20 +107,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'listarAdminSENA') {
 if (isset($_GET['action']) && $_GET['action'] === 'detalleUsuario') {
     header('Content-Type: application/json');
 
-    if (!isset($_SESSION['user_id'])) {
-        error_log("❌ Error: user_id no definido en sesión");
-        echo json_encode(['success' => false, 'error' => 'Usuario no autenticado']);
+    // Permitir obtener por id GET o por sesión
+    $usuarioId = isset($_GET['id']) ? intval($_GET['id']) : (isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null);
+    if (!$usuarioId) {
+        error_log("❌ Error: id de usuario no proporcionado ni en sesión");
+        echo json_encode(['success' => false, 'error' => 'Usuario no autenticado ni id proporcionado']);
         exit;
     }
 
-    $userId = $_SESSION['user_id'];
-    error_log("🟢 user_id en sesión: $userId");
-
     $usuarioModel = new UsuarioModel();
-    $usuario = $usuarioModel->obtenerUsuarioPorId($userId);
+    $usuario = $usuarioModel->obtenerUsuarioPorId($usuarioId);
 
     if (!$usuario) {
-        error_log("❌ Usuario no encontrado para ID: $userId");
+        error_log("❌ Usuario no encontrado para ID: $usuarioId");
         echo json_encode(['success' => false, 'error' => 'Usuario no encontrado']);
         exit;
     }

@@ -120,7 +120,7 @@
                     if (data.success && data.data) {
                         const usuario = data.data;
                         document.getElementById('primer_nombre').textContent = usuario.primer_nombre || '';
-                        document.getElementById('segundo_nombre').textContent = usuario.segundo_nombre || '';
+                        document.getElementById('segundo_nombre').textContent = (usuario.segundo_nombre && usuario.segundo_nombre.trim() !== '') ? usuario.segundo_nombre : 'N/A';
                         document.getElementById('primer_apellido').textContent = usuario.primer_apellido || '';
                         document.getElementById('segundo_apellido').textContent = usuario.segundo_apellido || '';
                         document.getElementById('correo').textContent = usuario.correo || '';
