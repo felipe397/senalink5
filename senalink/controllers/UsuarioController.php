@@ -95,6 +95,14 @@ if (
     exit;
 }
 
+if (isset($_GET['action']) && $_GET['action'] === 'listarAdminSENA') {
+    header('Content-Type: application/json');
+    $usuarioModel = new UsuarioModel();
+    $usuarios = $usuarioModel->obtenerUsuariosPorRol('AdminSENA');
+    echo json_encode(['success' => true, 'data' => $usuarios]);
+    exit;
+}
+
 // 🟢 GET: Detalle de usuario autenticado
 if (isset($_GET['action']) && $_GET['action'] === 'detalleUsuario') {
     header('Content-Type: application/json');

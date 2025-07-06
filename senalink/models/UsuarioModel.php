@@ -17,6 +17,14 @@ class UsuarioModel {
         return $stmt->fetchColumn() > 0;
     }
 
+    public static function obtenerUsuariosPorRol($rol) {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT id, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, numero_documento FROM usuarios WHERE rol = :rol");
+        $stmt->bindValue(':rol', $rol, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Verificar si el NIT ya existe
     public static function existeNIT($nit) {
         $db = Conexion::conectar();

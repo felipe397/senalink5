@@ -67,9 +67,41 @@
     </main>
 
     <script src="../../../js/script.js"></script>
-    <script src="../../../js/viewempresas.js"></script>
+    <!--<script src="../../../js/viewempresas.js"></script>
     <script src="../../../js/filter.js"></script>
     <!-- <script src="../../../js/gestionEmpresaEstado.js"></script> -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contenedor = document.getElementById('resultados');
+
+            fetch('http://localhost/senalink5/senalink/controllers/UsuarioController.php?action=listarAdminSENA')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.data.length > 0) {
+                        data.data.forEach(usuario => {
+                            const card = document.createElement('div');
+                            card.className = 'cardh';
+                            card.style.cursor = 'pointer';
+                            card.innerHTML = `
+                                <h3>${usuario.primer_nombre} ${usuario.segundo_nombre} ${usuario.primer_apellido} ${usuario.segundo_apellido}</h3>
+                                <p>Número de documento: ${usuario.numero_documento}</p>
+                            `;
+                            card.addEventListener('click', () => {
+                                window.location.href = `Funcionario.html?id=${usuario.id}`;
+                            });
+                            contenedor.appendChild(card);
+                        });
+                    } else {
+                        contenedor.innerHTML = '<p>No se encontraron usuarios AdminSENA.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar usuarios AdminSENA:', error);
+                    contenedor.innerHTML = '<p>Error al cargar usuarios.</p>';
+                });
+        });
+    </script>
 
     <footer>
         <p>©  Todos los derechos reservados. SenaLink</p>
