@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-07-2025 a las 17:55:18
+-- Tiempo de generación: 06-07-2025 a las 05:34:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -165,7 +165,7 @@ CREATE TABLE `programas_formacion` (
   `nombre_programa` varchar(50) NOT NULL,
   `duracion_meses` int(11) NOT NULL,
   `nivel_formacion` enum('Tecnico','Tecnologo') DEFAULT NULL,
-  `estado` enum('En curso','Disponible','Finalizado') DEFAULT NULL,
+  `estado` enum('En ejecucion','Finalizado') DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `ficha` int(11) NOT NULL,
   `habilidades_requeridas` text NOT NULL,
@@ -180,10 +180,8 @@ CREATE TABLE `programas_formacion` (
 --
 
 INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_meses`, `nivel_formacion`, `estado`, `fecha_creacion`, `ficha`, `habilidades_requeridas`, `fecha_finalizacion`, `descripcion`, `codigo`, `sector_programa`) VALUES
-(1, 'Analisis y desarrollo de software', 27, 'Tecnologo', 'Disponible', '2025-06-22 00:04:59', 2896365, 'Saber python, JavaScript, SQL Y node.js', '2025-10-06', 'Crear software y hardware', 12345, 'Industrial'),
-(2, 'Contenidos Digitales', 21, 'Tecnico', 'Disponible', '2025-06-22 02:26:07', 2344221, 'Ser migue', '2025-06-26', 'Migue la pampara', 9898989, 'Industrial'),
-(3, 'Audiovisuales', 23, 'Tecnologo', 'Finalizado', '2025-06-22 02:29:33', 99887766, 'Manejar contenido', '2025-06-25', 'Crear contenido audiovisual', 44556677, 'Servicios'),
-(4, 'ADSO', 45, 'Tecnologo', 'En curso', '2025-07-01 20:08:01', 567899765, 'ruth y edwin trabajen', '2025-07-15', 'dsfvposdvxddd', 333444, 'Industrial');
+(6, 'Contenidos Digitales', 23, 'Tecnico', 'Finalizado', '2025-07-06 01:41:30', 27283737, 'Saber python, JavaScript, SQL Y node.js', '2025-07-17', 'Crear software', 899999, 'Primario'),
+(7, 'Análisis y desarrollo de software', 27, 'Tecnologo', 'En ejecucion', '2025-07-06 01:42:53', 61286533, 'Saber desamblar', '2025-07-31', 'Crear software', 567774443, 'Servicios');
 
 -- --------------------------------------------------------
 
@@ -258,11 +256,11 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`) VALUES
 (15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'Frisby S.A', '1234567891', NULL, 'Frisby', 'Industrial', '', NULL, '', NULL, NULL, 0),
-(16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', 'Laura', 'Leon', 'Alzate', '', 12345678),
+(16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Desactivado', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', 'Cedula de ciudadania', 12345678),
 (17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, '3001234567', NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567),
 (19, 'chicaalzateb@gmail.com', '$2y$10$MuUNkZMGj0EGdwCLTGe4fO8oLkfYNxZlcKJeAoURY9bIrjVPkkajm', 'empresa', 'Activo', '2025-06-17 12:23:36', '4422', 'direccion ejemplo', 'Braulio ejemplo sas', '1234567891', NULL, 'Braulio', 'Industrial', '', NULL, '', NULL, NULL, 0),
 (24, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$gQp4g5O5jRPd8zenNWy7eOQO8SZ2gmp3J/ygVK5dFxMUUg9/Mvtae', 'empresa', 'Activo', '2025-06-30 09:07:53', '4721233', 'Arabia', 'Monster y cuates', '345333555', NULL, 'Edwin Manito', 'Industrial', '', NULL, '', NULL, NULL, 0),
-(25, 'osoriolopezjuanfelipe@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, '322222222', NULL, NULL, NULL, 'Pele', 'Felipe', 'Osorio', 'Lopez', 'Cedula de ciudadania', 23456789),
+(25, 'osoriolopezjuanfelipe@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, '322222222', NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', 'Cedula de ciudadania', 23456789),
 (26, 'crisberx1@gmail.com', '$2y$10$FLuzp334nlTSHgt5jg5.4.8GCP4cEHA4r9Gbifj6gPGjFtbBLsUky', 'empresa', 'Activo', '2025-07-02 01:49:59', '987654321', 'Villaverde', 'Migue Monster cuates', '31222333', NULL, 'Migue', 'Agricola', '', NULL, '', NULL, NULL, 0),
 (29, 'crisberx12@gmail.com', '$2y$10$FsATLOq0VUFelBfI6cLTDu/0x6bRBL2Dz74NwlXFtxeMUPYCNcoee', 'empresa', 'Activo', '2025-07-02 01:51:27', '9876543212', 'Villaverde 1', 'Migue Monster cuates xd', '312223333', NULL, 'Miguel', 'Servicios', '', NULL, '', NULL, NULL, 0),
 (33, 'alejito@gmail.com', '$2y$10$IFmSsKZuEZdGg2bAolpJwuov/vHyg48taJiICN6FXCaXwBO9PD9LW', 'empresa', 'Activo', '2025-07-02 02:02:49', '333666999', 'Islas canarias', 'Alejo asa', '3122233344', NULL, 'alejo', 'Agricola', '', NULL, '', NULL, NULL, 0),
@@ -381,7 +379,7 @@ ALTER TABLE `preguntas`
 -- AUTO_INCREMENT de la tabla `programas_formacion`
 --
 ALTER TABLE `programas_formacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `reportes_diagnosticos`
