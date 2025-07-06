@@ -94,8 +94,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById('estado').textContent = data.estado;
 
                     const actualizarLink = document.querySelector('a.buttons__crud[href="EmpresaEdit.html"]');
+                    const btnReporte = document.getElementById('btnReporte');
                     if (actualizarLink) {
                         actualizarLink.href = `EmpresaEdit.html?id=${empresaId}`;
+                    }
+
+                    // Ocultar/mostrar botones según estado
+                    if (data.estado && data.estado.trim().toLowerCase() === 'desactivado') {
+                        if (actualizarLink) actualizarLink.style.display = 'none';
+                        if (btnReporte) btnReporte.style.display = 'none';
+                    } else {
+                        if (actualizarLink) actualizarLink.style.display = '';
+                        if (btnReporte) btnReporte.style.display = '';
                     }
 
                     const btnInhabilitar = document.getElementById('btn-inhabilitar');
@@ -164,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (window.opener && window.opener.recargarEmpresas) {
                             window.opener.recargarEmpresas();
                         }
-                        window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
+                        window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/Super_Admin/Funcionarios/Gestion_Funcionario.html';
                     })
                     .catch(error => console.error('Error:', error));
             });
@@ -198,7 +208,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (window.opener && window.opener.recargarEmpresas) {
                         window.opener.recargarEmpresas();
                     }
-                    window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
+                    // Redirigir según el tipo de usuario (empresa o AdminSENA)
+                    const params = new URLSearchParams(window.location.search);
+                    if (params.get('tipo') === 'funcionario' || params.get('rol') === 'AdminSENA') {
+                        window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Funcionarios/Gestion_Funcionario.html';
+                    } else {
+                        window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
+                    }
                 })
                 .catch(error => console.error('Error:', error));
         });

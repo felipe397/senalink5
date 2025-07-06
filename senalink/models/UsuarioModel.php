@@ -1,11 +1,36 @@
 <?php
 require_once __DIR__ . '/../Config/conexion.php';
-
 class UsuarioModel {
     private $db;
 
+    // Actualizar datos de un usuario AdminSENA
+    public function actualizarAdminSENA($data) {
+        $sql = "UPDATE usuarios SET primer_nombre = :primer_nombre, segundo_nombre = :segundo_nombre, primer_apellido = :primer_apellido, segundo_apellido = :segundo_apellido, correo = :correo, telefono = :telefono, numero_documento = :numero_documento, tipo_documento = :tipo_documento WHERE id = :id AND rol = 'AdminSENA'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':primer_nombre', $data['primer_nombre']);
+        $stmt->bindParam(':segundo_nombre', $data['segundo_nombre']);
+        $stmt->bindParam(':primer_apellido', $data['primer_apellido']);
+        $stmt->bindParam(':segundo_apellido', $data['segundo_apellido']);
+        $stmt->bindParam(':correo', $data['correo']);
+        $stmt->bindParam(':telefono', $data['telefono']);
+        $stmt->bindParam(':numero_documento', $data['numero_documento']);
+        $stmt->bindParam(':tipo_documento', $data['tipo_documento']);
+        $stmt->bindParam(':id', $data['id']);
+        return $stmt->execute();
+    }
+
     public function __construct() {
         $this->db = Conexion::conectar();
+    }
+
+    // Obtener usuarios por rol y estado
+    public static function obtenerUsuariosPorRolYEstado($rol, $estado) {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT id, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, numero_documento, estado FROM usuarios WHERE rol = :rol AND estado = :estado");
+        $stmt->bindValue(':rol', $rol, PDO::PARAM_STR);
+        $stmt->bindValue(':estado', $estado, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Verificar si el correo ya existe

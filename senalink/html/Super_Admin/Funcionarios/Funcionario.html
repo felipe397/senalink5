@@ -54,7 +54,7 @@
             </section>
             <!-- Botones de acciones -->
             <div class="buttons__container">
-                <a href="FuncionarioEdit.html" class="buttons__crud">Actualizar</a>
+            <a href="#" id="linkActualizar" class="buttons__crud">Actualizar</a>
                 <a href="Gestion_Funcionario.html" class="buttons__crud">Listar</a>
                 <button id="btn-inhabilitar" class="buttons__crud btn-inhabilitar">Inhabilitar</button>
                 <button id="btn-habilitar" class="buttons__crud btn-habilitar" style="display: none;">Habilitar</button>
@@ -84,7 +84,7 @@
 
     <!-- <script src="../../../js/script.js"></script> -->
     <script src="../../../js/backbutton.js"></script>
-    <script src="../../../js/viewempresas.js"></script>
+    <script src="../../../js/viewfuncionario_detalle.js"></script>
     <script>
     //     // Forzar el id de empresa para pruebas si está vacío
     //     document.addEventListener('DOMContentLoaded', function() {
@@ -96,11 +96,11 @@
     // </script>
     <script>
         document.getElementById('btnReporte').addEventListener('click', function() {
-            const empresaId = new URLSearchParams(window.location.search).get('id');
-            if (empresaId) {
-                window.location.href = `EmpresaReport.html?id=${empresaId}`;
+            const usuarioId = new URLSearchParams(window.location.search).get('id');
+            if (usuarioId) {
+                window.location.href = `FuncionarioReport.html?id=${usuarioId}`;
             } else {
-                alert('No se encontró el ID de la empresa.');
+                alert('No se encontró el ID del usuario.');
             }
         });
     </script>
@@ -114,7 +114,7 @@
                 return;
             }
 
-            fetch(`http://localhost/senalink5/senalink/controllers/UsuarioController.php?action=detalleUsuario&id=${usuarioId}`)
+            fetch(`http://localhost/senalink5/senalink5/senalink/controllers/UsuarioController.php?action=detalleUsuario&id=${usuarioId}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success && data.data) {
@@ -128,6 +128,12 @@
                         document.getElementById('numero_documento').textContent = usuario.numero_documento || '';
                         document.getElementById('tipo_documento').textContent = usuario.tipo_documento || '';
                         document.getElementById('estado').textContent = usuario.estado || '';
+
+                        // Actualizar el enlace "Actualizar" con el ID del usuario
+                        const linkActualizar = document.getElementById('linkActualizar');
+                        if (linkActualizar) {
+                            linkActualizar.href = `FuncionarioEdit.html?id=${usuarioId}`;
+                        }
                     } else {
                         alert('No se encontró el usuario.');
                     }

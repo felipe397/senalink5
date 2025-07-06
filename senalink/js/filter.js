@@ -23,7 +23,12 @@ function getEmpresasPorEstado(estado) {
     })
     .then(response => response.text())
     .then(data => {
-        document.getElementById("resultados").innerHTML = data;
+        const container = document.querySelector(".cardh__container");
+        if (container) {
+            container.innerHTML = data;
+        } else {
+            console.error("No se encontró el contenedor .cardh__container para mostrar los resultados.");
+        }
     })
     .catch(error => console.error('Error al cargar empresas:', error));
 }

@@ -32,6 +32,17 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('correo_empresa').textContent = userData.correo || '';
             document.getElementById('direccion_empresa').textContent = userData.direccion || '';
             document.getElementById('estado').textContent = userData.estado || '';
+
+            // Mostrar/ocultar botones según estado
+            const btnActualizar = document.getElementById('btnActualizarEmpresa');
+            const btnReporte = document.getElementById('btnReporteEmpresa');
+            if (userData.estado && userData.estado.trim() === 'Desactivado') {
+                if (btnActualizar) btnActualizar.style.display = 'none';
+                if (btnReporte) btnReporte.style.display = 'none';
+            } else {
+                if (btnActualizar) btnActualizar.style.display = '';
+                if (btnReporte) btnReporte.style.display = '';
+            }
         }
 
         // Mostrar datos para SUPER_ADMIN y AdminSENA

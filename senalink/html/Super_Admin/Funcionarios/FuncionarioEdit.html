@@ -34,19 +34,19 @@
     <div class="container">
         <main class="container__crud">
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
-            
-            <!-- FORMULARIO DE REGISTRO EMPRESA -->
-            <form action="../../../controllers/update_empresa.php" method="POST" id="empresaForm">
-                <input type="hidden" name="id" id="empresa_id" value="">
+
+                <form action="../../../controllers/update_adminsena.php" method="POST" id="funcionarioForm">
+                <input type="hidden" id="id" name="id" value="">
+                <input type="hidden" name="action" value="update">
                 <div class="inputs__container">
                     <input class="input-field" name="primer_nombre" id="primer_nombre" placeholder="Primer nombre" type="text" required/>
-                    <input class="input-field" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre" type="text" required/>
+<input class="input-field" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre" type="text"/>
                     <input class="input-field" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" type="text" required/>
-                    <input class="input-field" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo apellido" type="text" required/>
+                    <input class="input-field" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo apellido" type="text"/>
                     <input class="input-field" name="correo" id="correo" placeholder="Correo electrónico" type="email" required/>
                     <input class="input-field" name="telefono" id="telefono" placeholder="Numero de telefono" type="number" required/>
                     <input class="input-field" name="numero_documento" id="numero_documento" placeholder="Numero de documento" type="number" required/>
-                    <select class="select_container" name="tipo_documento" required>
+                    <select class="select_container" name="tipo_documento" id="tipo_documento" required>
                         <option selected disabled value="">Tipo de documento</option>
                         <option>Cédula de ciudadania</option>
                         <option>Cédula de extranjería</option>
@@ -64,31 +64,55 @@
     <script src="../../../js/backbutton.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const empresaId = new URLSearchParams(window.location.search).get('id');
-            if (empresaId) {
-                fetch(`../../../controllers/EmpresaController.php?action=detalleEmpresa&id=${empresaId}`)
+            const id = new URLSearchParams(window.location.search).get('id');
+            if (id) {
+                fetch(`../../../controllers/UsuarioController.php?action=detalleUsuario&id=${id}`)
                     .then(response => response.json())
                     .then(data => {
-                        if (!data.error) {
-                            document.getElementById('empresa_id').value = empresaId;
-                            document.getElementById('nit').value = data.nit || '';
-                            document.getElementById('representante_legal').value = data.representante_legal || '';
-                            document.getElementById('razon_social').value = data.razon_social || '';
-                            document.getElementById('telefono').value = data.telefono || '';
-                            document.getElementById('correo').value = data.correo || '';
-                            document.getElementById('ubicacion').value = data.direccion || '';
-                            document.getElementById('tipo_empresa').value = data.tipo_empresa || '';
+                        if (data.success && data.data) {
+                            document.getElementById('id').value = id;
+                            document.getElementById('primer_nombre').value = data.data.primer_nombre || '';
+                            document.getElementById('segundo_nombre').value = data.data.segundo_nombre || '';
+                            document.getElementById('primer_apellido').value = data.data.primer_apellido || '';
+                            document.getElementById('segundo_apellido').value = data.data.segundo_apellido || '';
+                            document.getElementById('correo').value = data.data.correo || '';
+                            document.getElementById('telefono').value = data.data.telefono || '';
+                            document.getElementById('numero_documento').value = data.data.numero_documento || '';
+                            document.getElementById('tipo_documento').value = data.data.tipo_documento || '';
                         } else {
-                            alert('Error al cargar los datos de la empresa.');
+                            alert('Error al cargar los datos del AdminSENA.');
                         }
                     })
                     .catch(error => {
-                        console.error('Error al cargar los datos de la empresa:', error);
-                        alert('Error al cargar los datos de la empresa.');
+                        console.error('Error al cargar los datos del AdminSENA:', error);
+                        alert('Error al cargar los datos del AdminSENA.');
                     });
             } else {
-                alert('No se recibió el ID de la empresa.');
+                // Redirigir automáticamente si no hay id
+                window.location.href = 'Gestion_Funcionario.html';
             }
+
+            // Manejar el submit para actualizar
+            document.getElementById('funcionarioForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                fetch('../../../controllers/update_adminsena.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Datos actualizados correctamente');
+                        window.location.href = 'Gestion_Funcionario.html';
+                    } else {
+                        alert(data.error || 'Error al actualizar los datos');
+                    }
+                })
+                .catch(error => {
+                    alert('Error al actualizar los datos');
+                });
+            });
         });
     </script>
 </body>

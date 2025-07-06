@@ -57,21 +57,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     }
 
     if (!empty($errores)) {
-        echo '<script>alert("' . implode('\\n', $errores) . '"); window.history.back();</script>';
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'errors' => $errores]);
         exit;
     }
 
     try {
         $creado = UsuarioModel::crear($datos);
         if ($creado) {
-            header('Location: http://localhost/senalink5/senalink5/senalink/html/index.html');
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true, 'message' => 'Usuario creado correctamente']);
             exit;
         } else {
-            echo '<script>alert("Error al crear el usuario."); window.history.back();</script>';
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'error' => 'Error al crear el usuario.']);
             exit;
         }
     } catch (Exception $e) {
-        echo '<script>alert("' . addslashes($e->getMessage()) . '"); window.history.back();</script>';
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
         exit;
     }
 }
@@ -95,10 +99,13 @@ if (
     exit;
 }
 
+
+// Listar AdminSENA por estado (GET: listarAdminSENA&estado=Activo|Desactivado)
 if (isset($_GET['action']) && $_GET['action'] === 'listarAdminSENA') {
     header('Content-Type: application/json');
+    $estado = isset($_GET['estado']) ? $_GET['estado'] : 'Activo';
     $usuarioModel = new UsuarioModel();
-    $usuarios = $usuarioModel->obtenerUsuariosPorRol('AdminSENA');
+    $usuarios = $usuarioModel->obtenerUsuariosPorRolYEstado('AdminSENA', $estado);
     echo json_encode(['success' => true, 'data' => $usuarios]);
     exit;
 }
