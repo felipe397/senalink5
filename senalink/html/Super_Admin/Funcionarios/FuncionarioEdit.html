@@ -39,18 +39,19 @@
             <form action="../../../controllers/update_empresa.php" method="POST" id="empresaForm">
                 <input type="hidden" name="id" id="empresa_id" value="">
                 <div class="inputs__container">
-                    <input class="input-field" name="nit" id="nit" placeholder="Número NIT" type="text" required/>
-                    <input class="input-field" name="representante_legal" id="representante_legal" placeholder="Representante legal" type="text" required/>
-                    <input class="input-field" name="razon_social" id="razon_social" placeholder="Razón social" type="text" required/>
-                    <input class="input-field" name="telefono" id="telefono" placeholder="Número telefónico" type="text" required/>
+                    <input class="input-field" name="primer_nombre" id="primer_nombre" placeholder="Primer nombre" type="text" required/>
+                    <input class="input-field" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre" type="text" required/>
+                    <input class="input-field" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" type="text" required/>
+                    <input class="input-field" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo apellido" type="text" required/>
                     <input class="input-field" name="correo" id="correo" placeholder="Correo electrónico" type="email" required/>
-                    <input class="input-field" name="ubicacion" id="ubicacion" placeholder="Ubicación" type="text" required/>
-                    <select class="select_container" name="tipo_empresa" id="tipo_empresa" required>
-                        <option value="" disabled selected>Sector Económico</option>
-                        <option value="Agrícola">Agrícola</option>
-                        <option value="Industrial">Industrial</option>
-                        <option value="Servicios">Servicios</option> 
-                        <option value="Conocimiento, Innovacion y Desarrollo">Conocimiento, Innovación y Desarrollo</option> 
+                    <input class="input-field" name="telefono" id="telefono" placeholder="Numero de telefono" type="number" required/>
+                    <input class="input-field" name="numero_documento" id="numero_documento" placeholder="Numero de documento" type="number" required/>
+                    <select class="select_container" name="tipo_documento" required>
+                        <option selected disabled value="">Tipo de documento</option>
+                        <option>Cédula de ciudadania</option>
+                        <option>Cédula de extranjería</option>
+                        <option>Permiso especial de permanencia</option>
+                        <option>Permiso de protección temporal</option>
                     </select>
                 </div>
                 <div class="buttons__container">

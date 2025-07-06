@@ -36,32 +36,36 @@
         <main class="table-container">
             <table>
                 <tr>
-                    <th>Numero NIT</th>
-                    <td id="nit"></td>
+                    <th>Primer nombre</th>
+                    <td id="primer_nombre"></td>
                 </tr>
                 <tr>
-                    <th>Representante legal</th>
-                    <td id="representante"></td>
+                    <th>Segundo nombre</th>
+                    <td id="segundo_apellido"></td>
                 </tr>
                 <tr>
-                    <th>Razón social</th>
-                    <td id="razon_social"></td>
+                    <th>Primer apellido</th>
+                    <td id="primer_apellido"></td>
                 </tr>
                 <tr>
-                    <th>Numero telefónico</th>
-                    <td id="telefono"></td>
+                    <th>Segundo apellido</th>
+                    <td id="segundo_apellido"></td>
                 </tr>
                 <tr>
                     <th>Correo electronico</th>
                     <td id="correo"></td>
                 </tr>
                 <tr>
-                    <th>Ubicación</th>
-                    <td id="ubicacion"></td>
+                    <th>Numero de telefono</th>
+                    <td id="telefono"></td>
                 </tr>
                 <tr>
-                    <th>Tipo de empresa</th>
-                    <td id="tipo_empresa"></td>
+                    <th>Numero de documento</th>
+                    <td id="numero_documento"></td>
+                </tr>
+                <tr>
+                    <th>Tipo de documento</th>
+                    <td id="tipo_documento"></td>
                 </tr>
                 <tr>
                     <th>Estado</th>
@@ -74,13 +78,14 @@
 
             <!-- Formulario oculto que se enviará al hacer clic en el botón -->
             <form id="formReporte" action="../../../reportes/reporte_empresa.php" method="POST" target="_blank" style="display: none;">
-                <input type="hidden" name="nit">
-                <input type="hidden" name="representante">
-                <input type="hidden" name="razon_social">
+                <input type="hidden" name="primer_nombre">
+                <input type="hidden" name="segundo_nombre">
+                <input type="hidden" name="primer_apellido">
+                <input type="hidden" name="segundo_apellido">
                 <input type="hidden" name="telefono">
                 <input type="hidden" name="correo">
-                <input type="hidden" name="ubicacion">
-                <input type="hidden" name="tipo_empresa">
+                <input type="hidden" name="numero_documento">
+                <input type="hidden" name="tipo_documento">
                 <input type="hidden" name="estado">
             </form>
         </main>
