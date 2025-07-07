@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (window.opener && window.opener.recargarEmpresas) {
                             window.opener.recargarEmpresas();
                         }
-                        window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/Super_Admin/Funcionarios/Gestion_Funcionario.html';
+                        window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
                     })
                     .catch(error => console.error('Error:', error));
             });

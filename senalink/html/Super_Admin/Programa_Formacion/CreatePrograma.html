@@ -64,8 +64,13 @@
             pattern="[\p{L}\s.]+"
             title="El nombre solo debe contener letras, espacios y puntos."/>
 
+        <input class="input-field" name="nombre_ocupacion" placeholder="Nombre de Ocupacion" type="text" required 
+            pattern="[\p{L}\s.]+"
+            title="El nombre solo debe contener letras, espacios y puntos."/>
+    
+
         <!-- Duración: solo números positivos -->
-        <input class="input-field" name="duracion_meses" placeholder="Duración (meses)" type="number" min="1" required 
+        <input class="input-field" name="duracion_programa" placeholder="Duración (meses)" type="number" min="1" required 
             title="La duración debe ser un número positivo."/>
 
         <!-- Estado -->
@@ -73,6 +78,22 @@
             <option selected disabled value="">Estado</option>
             <option>En Ejecución</option>
             <option>Finalizado</option>
+        </select>
+
+        <select class="select_container" name="etapa_ficha" required>
+            <option selected disabled value="">Estado</option>
+            <option>Lectiva</option>
+            <option>Practica</option>
+        </select>
+
+
+        <select class="select_container" name="sector_economico" required>
+            <option selected disabled value="">Estado</option>
+            <option>Industria</option>
+            <option>Servicios</option>
+            <option>Textiles</option>
+            <option>Construccion</option>
+            <option>Electricidad</option>
         </select>
 
         <!-- Descripción: letras, números, espacios, comas y puntos -->

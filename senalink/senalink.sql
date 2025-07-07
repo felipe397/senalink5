@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-07-2025 a las 05:34:37
+-- Tiempo de generación: 07-07-2025 a las 04:42:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -94,19 +94,51 @@ CREATE TABLE `opciones` (
 --
 
 INSERT INTO `opciones` (`id`, `id_pregunta`, `texto`) VALUES
-(1, 1, 'Sector Primario (Agricola)'),
-(2, 1, 'Sector Secundario (Industrial)'),
-(3, 1, 'Sector Terciario (Servicios)'),
-(4, 1, 'Sector Cuaternario (Investigacion y Desarrollo)'),
-(5, 2, 'Areas de talento humano'),
-(6, 2, 'Administracion de personal'),
-(7, 2, 'Capacitacion y seleccion de talento'),
-(8, 2, 'Formacion'),
-(9, 2, 'Desarrollo organizacional'),
-(10, 2, 'Salud y seguridad en el trabajo'),
-(13, 5, 'Tecnico'),
-(14, 5, 'Tecnologo'),
-(15, 1, 'Sector Quinto');
+(17, 1, 'Construcción'),
+(18, 1, 'Educación'),
+(19, 1, 'Electricidad'),
+(20, 1, 'Industrial'),
+(21, 1, 'Salud'),
+(22, 1, 'Servicios'),
+(23, 1, 'Textiles'),
+(24, 1, 'Transporte'),
+(25, 2, 'Asistentes administrativos'),
+(26, 2, 'Desarrolladores de software'),
+(27, 2, 'Técnicos electricistas'),
+(28, 2, 'Auxiliares contables'),
+(29, 2, 'Operarios de maquinaria'),
+(30, 2, 'Diseñadores gráficos'),
+(31, 2, 'Inspectores de calidad'),
+(32, 2, 'Agentes de servicio al cliente'),
+(33, 2, 'Personal logístico'),
+(34, 2, 'Mecánicos de mantenimiento'),
+(35, 3, 'Técnico'),
+(36, 3, 'Tecnólogo'),
+(37, 4, 'Procesos administrativos y financieros'),
+(38, 4, 'Soporte técnico y mantenimiento'),
+(39, 4, 'Producción y manufactura'),
+(40, 4, 'Logística y transporte'),
+(41, 4, 'Atención al cliente y ventas'),
+(42, 4, 'Procesos educativos o formativos'),
+(43, 5, 'Tecnologías de la información'),
+(44, 5, 'Administración y contabilidad'),
+(45, 5, 'Diseño y multimedia'),
+(46, 5, 'Mecánica y mantenimiento'),
+(47, 5, 'Electricidad y electrónica'),
+(48, 5, 'Textil y confección'),
+(49, 5, 'Salud y seguridad laboral'),
+(50, 5, 'Logística y transporte'),
+(51, 5, 'Atención al cliente'),
+(52, 6, 'Administración y gestión empresarial'),
+(53, 6, 'Servicios financieros'),
+(54, 6, 'Electricidad y electrónica'),
+(55, 6, 'Mecánica y mantenimiento'),
+(56, 6, 'Tecnologías de la información'),
+(57, 6, 'Textil, diseño y confección'),
+(58, 6, 'Salud y seguridad laboral'),
+(59, 6, 'Construcción y obras civiles'),
+(60, 6, 'Logística y transporte'),
+(61, 6, 'Atención al cliente y ventas');
 
 -- --------------------------------------------------------
 
@@ -147,12 +179,12 @@ CREATE TABLE `preguntas` (
 --
 
 INSERT INTO `preguntas` (`id`, `enunciado`, `fecha_creacion`) VALUES
-(1, 'A que sector productivo pertenece la empresa?', '2025-07-01 22:09:30'),
-(2, 'En que areas o procesos de su empresa considera que es necesario incorporar nuevo talento humano?', '2025-07-01 22:09:30'),
-(3, 'En que areas de conocimiento o formativas considera importantes para fortalecer su empresa?', '2025-07-01 22:09:30'),
-(4, 'Que tecnologias, herramientas o procesos especificos estan presentes en su operacion diaria?', '2025-07-01 22:09:30'),
-(5, 'Que nivel de formacion considera mas adecuado para su empresa?', '2025-07-01 22:09:30'),
-(6, 'Que tipo de conocimientos o habilidades considera que hacen falta en su empresa?', '2025-07-01 22:09:30');
+(1, '¿A qué sector productivo pertenece su empresa?', '2025-07-01 22:09:30'),
+(2, '¿En qué tipo de ocupación considera que se necesita talento humano?', '2025-07-01 22:09:30'),
+(3, 'Que nivel de formacion considera mas adecuado para su empresa?', '2025-07-01 22:09:30'),
+(4, '¿Qué tipo de procesos predominan en su operación diaria?', '2025-07-01 22:09:30'),
+(5, '¿Qué área temática desea fortalecer dentro de su empresa?', '2025-07-01 22:09:30'),
+(6, '¿Qué área ocupacional considera más relevante para su empresa?', '2025-07-01 22:09:30');
 
 -- --------------------------------------------------------
 
@@ -163,25 +195,20 @@ INSERT INTO `preguntas` (`id`, `enunciado`, `fecha_creacion`) VALUES
 CREATE TABLE `programas_formacion` (
   `id` int(11) NOT NULL,
   `nombre_programa` varchar(50) NOT NULL,
-  `duracion_meses` int(11) NOT NULL,
+  `duracion_programa` int(11) NOT NULL,
   `nivel_formacion` enum('Tecnico','Tecnologo') DEFAULT NULL,
   `estado` enum('En ejecucion','Finalizado') DEFAULT NULL,
-  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  `ficha` int(11) NOT NULL,
-  `habilidades_requeridas` text NOT NULL,
+  `fecha_creacion` timestamp NULL DEFAULT NULL,
+  `ficha` int(11) DEFAULT NULL,
+  `habilidades_requeridas` text DEFAULT NULL,
   `fecha_finalizacion` date NOT NULL,
-  `descripcion` text NOT NULL,
+  `descripcion` text DEFAULT NULL,
   `codigo` int(11) NOT NULL,
-  `sector_programa` enum('Industrial','Primario','Servicios') DEFAULT NULL
+  `sector_programa` enum('Industrial','Primario','Servicios') DEFAULT NULL,
+  `nombre_ocupacion` varchar(255) DEFAULT NULL,
+  `sector_economico` enum('Industria','Servicios','Textiles','Construccion','Electricidad') DEFAULT NULL,
+  `etapa_ficha` enum('Lectiva','Practica') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `programas_formacion`
---
-
-INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_meses`, `nivel_formacion`, `estado`, `fecha_creacion`, `ficha`, `habilidades_requeridas`, `fecha_finalizacion`, `descripcion`, `codigo`, `sector_programa`) VALUES
-(6, 'Contenidos Digitales', 23, 'Tecnico', 'Finalizado', '2025-07-06 01:41:30', 27283737, 'Saber python, JavaScript, SQL Y node.js', '2025-07-17', 'Crear software', 899999, 'Primario'),
-(7, 'Análisis y desarrollo de software', 27, 'Tecnologo', 'En ejecucion', '2025-07-06 01:42:53', 61286533, 'Saber desamblar', '2025-07-31', 'Crear software', 567774443, 'Servicios');
 
 -- --------------------------------------------------------
 
@@ -256,7 +283,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`) VALUES
 (15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'Frisby S.A', '1234567891', NULL, 'Frisby', 'Industrial', '', NULL, '', NULL, NULL, 0),
-(16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Desactivado', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', 'Cedula de ciudadania', 12345678),
+(16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', 'Cedula de ciudadania', 12345678),
 (17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, '3001234567', NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567),
 (19, 'chicaalzateb@gmail.com', '$2y$10$MuUNkZMGj0EGdwCLTGe4fO8oLkfYNxZlcKJeAoURY9bIrjVPkkajm', 'empresa', 'Activo', '2025-06-17 12:23:36', '4422', 'direccion ejemplo', 'Braulio ejemplo sas', '1234567891', NULL, 'Braulio', 'Industrial', '', NULL, '', NULL, NULL, 0),
 (24, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$gQp4g5O5jRPd8zenNWy7eOQO8SZ2gmp3J/ygVK5dFxMUUg9/Mvtae', 'empresa', 'Activo', '2025-06-30 09:07:53', '4721233', 'Arabia', 'Monster y cuates', '345333555', NULL, 'Edwin Manito', 'Industrial', '', NULL, '', NULL, NULL, 0),
@@ -361,7 +388,7 @@ ALTER TABLE `diagnosticos_empresariales`
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `password_resets`
