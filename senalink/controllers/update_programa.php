@@ -7,26 +7,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $ficha = isset($_POST['ficha']) ? trim($_POST['ficha']) : null;
     $nivel_formacion = isset($_POST['nivel_formacion']) ? trim($_POST['nivel_formacion']) : null;
     $sector_programa = isset($_POST['sector_programa']) ? trim($_POST['sector_programa']) : null;
+    $etapa_ficha = isset($_POST['etapa_ficha']) ? trim($_POST['etapa_ficha']) : null;
+    $sector_economico = isset($_POST['sector_economico']) ? trim($_POST['sector_economico']) : null;
+    $nombre_ocupacion = isset($_POST['nombre_ocupacion']) ? trim($_POST['nombre_ocupacion']) : null;
     $nombre_programa = isset($_POST['nombre_programa']) ? trim($_POST['nombre_programa']) : null;
-    $duracion_meses = isset($_POST['duracion_meses']) ? trim($_POST['duracion_meses']) : null;
-    $estado = isset($_POST['estado']) ? trim($_POST['estado']) : 'Disponible';
-    $descripcion = isset($_POST['descripcion']) ? trim($_POST['descripcion']) : null;
+    $duracion_programa = isset($_POST['duracion_programa']) ? trim($_POST['duracion_programa']) : null;
+    $estado = isset($_POST['estado']) ? trim($_POST['estado']) : 'En ejecucion';
     $habilidades_requeridas = isset($_POST['habilidades_requeridas']) ? trim($_POST['habilidades_requeridas']) : null;
     $fecha_finalizacion = isset($_POST['fecha_finalizacion']) ? trim($_POST['fecha_finalizacion']) : null;
 
-    if ($id !== null && $codigo !== '' && $ficha !== '' && $nivel_formacion !== '' && $nombre_programa !== '' && $duracion_meses !== '' && $estado !== '' && $descripcion !== '' && $habilidades_requeridas !== '' && $fecha_finalizacion !== '') {
+    if ($id !== null && $codigo !== '' && $ficha !== '' && $nivel_formacion !== '' && $sector_programa !== '' && $etapa_ficha !== '' && $sector_economico !== '' && $nombre_ocupacion !== '' && $nombre_programa !== '' && $duracion_programa !== '' && $estado !== '' && $fecha_finalizacion !== '') {
         $programa = new ProgramaFormacion();
         $resultado = $programa->update($id, [
             'codigo' => $codigo,
             'ficha' => $ficha,
             'nivel_formacion' => $nivel_formacion,
             'sector_programa' => $sector_programa,
+            'etapa_ficha' => $etapa_ficha,
+            'sector_economico' => $sector_economico,
+            'duracion_programa' => $duracion_programa,
+            'nombre_ocupacion' => $nombre_ocupacion,
             'nombre_programa' => $nombre_programa,
-            'duracion_meses' => $duracion_meses,
-            'estado' => $estado,
-            'descripcion' => $descripcion,
             'habilidades_requeridas' => $habilidades_requeridas,
-            'fecha_finalizacion' => $fecha_finalizacion
+            'fecha_finalizacion' => $fecha_finalizacion,
+            'estado' => $estado
         ]);
 
         // Redirección dinámica según el origen

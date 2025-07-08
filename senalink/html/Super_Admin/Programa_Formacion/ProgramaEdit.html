@@ -61,16 +61,30 @@
                         <option>Primario</option>
                         <option>Servicios</option>
                     </select>
-                    <input class="input-field" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required />
-                    <input class="input-field" id="duracion_meses" name="duracion_meses" placeholder="Duración (meses)" type="number" required />
+                    <select class="select_container" id="etapa_ficha" name="etapa_ficha" required>
+                        <option selected disabled value="">Etapa Ficha</option>
+                        <option>Lectiva</option>
+                        <option>Práctica</option>
+                    </select>
+                    <select class="select_container" id="sector_economico" name="sector_economico" required>
+                        <option selected disabled value="">Sector Económico</option>
+                        <option>INDUSTRIA</option>
+                        <option>SERVICIOS</option>
+                        <option>TEXTILES</option>
+                        <option>ELECTRICIDAD</option>
+                        <option>CONSTRUCCIÓN</option>
+                    </select>        
 
+                    <input class="input-field" id="nombre_ocupacion" name="nombre_ocupacion" placeholder="Nombre de Ocupación" type="text" required pattern="[\p{L}\s.]+" title="El nombre solo debe contener letras, espacios y puntos." />
+                    <input class="input-field" id="duracion_programa" name="duracion_programa" placeholder="Duración(Horas)" type="number" min="1" required title="La duración debe ser un número positivo." />
+                    <input class="input-field" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required />
                     <select class="select_container" id="estado" name="estado" required>
                         <option value="" disabled selected>Estado</option>
                         <option>En Ejecución</option>
                         <option>Finalizado</option>
                     </select>
 
-                    <input class="input-field" id="habilidades_requeridas" name="habilidades_requeridas" placeholder="Habilidades requeridas" type="text" required />
+                    <input class="input-field" id="habilidades_requeridas" name="habilidades_requeridas" placeholder="Habilidades requeridas" type="text" />
                     <input class="input-field" id="fecha_finalizacion" name="fecha_finalizacion" placeholder="Fecha de finalización" type="date" required />
 
                 </div>
@@ -97,8 +111,11 @@
                             document.getElementById('ficha').value = data.ficha || '';
                             document.getElementById('nivel_formacion').value = data.nivel_formacion || '';
                             document.getElementById('sector_programa').value = data.sector_programa || '';
+                            document.getElementById('etapa_ficha').value = data.etapa_ficha || '';
+                            document.getElementById('sector_economico').value = data.sector_economico || '';
+                            document.getElementById('nombre_ocupacion').value = data.nombre_ocupacion || '';
+                            document.getElementById('duracion_programa').value = data.duracion_programa || '';
                             document.getElementById('nombre_programa').value = data.nombre_programa || '';
-                            document.getElementById('duracion_meses').value = data.duracion_meses || '';
                             document.getElementById('estado').value = data.estado || '';
                             document.getElementById('habilidades_requeridas').value = data.habilidades_requeridas || '';
                             document.getElementById('fecha_finalizacion').value = data.fecha_finalizacion || '';
