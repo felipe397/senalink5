@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('ficha').textContent = data.ficha || '';
         document.getElementById('nivel_formacion').textContent = data.nivel_formacion || '';
         document.getElementById('nombre_programa').textContent = data.nombre_programa || '';
-        document.getElementById('descripcion').textContent = data.descripcion || '';
         document.getElementById('habilidades_requeridas').textContent = data.habilidades_requeridas || '';
         document.getElementById('fecha_finalizacion').textContent = data.fecha_finalizacion || '';
         document.getElementById('estado').textContent = data.estado || '';
@@ -48,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
     form.elements['ficha'].value = document.getElementById('ficha').textContent.trim();
     form.elements['nivel_formacion'].value = document.getElementById('nivel_formacion').textContent.trim();
     form.elements['nombre_programa'].value = document.getElementById('nombre_programa').textContent.trim();
-    form.elements['descripcion'].value = document.getElementById('descripcion').textContent.trim();
     form.elements['habilidades_requeridas'].value = document.getElementById('habilidades_requeridas').textContent.trim();
     form.elements['fecha_finalizacion'].value = document.getElementById('fecha_finalizacion').textContent.trim();
     form.elements['estado'].value = document.getElementById('estado').textContent.trim();

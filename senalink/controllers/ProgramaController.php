@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     $nombre_programa     = $_POST['nombre_programa'] ?? null;
     $duracion_meses      = $_POST['duracion_meses'] ?? null;
     $estado              = $_POST['estado'] ?? 'Disponible';
-    $descripcion         = $_POST['descripcion'] ?? null;
     $habilidades         = $_POST['habilidades_requeridas'] ?? null;
     $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
 
@@ -43,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     }
 
     if (!$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$nombre_programa ||
-        !$duracion_meses || !$estado || !$descripcion || !$habilidades || !$fecha_finalizacion) {
+        !$duracion_meses || !$estado || !$habilidades || !$fecha_finalizacion) {
         $errores[] = "Todos los campos son obligatorios.";
     }
 
@@ -62,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         'nombre_programa' => $nombre_programa,
         'duracion_meses' => $duracion_meses,
         'estado' => $estado,
-        'descripcion' => $descripcion,
         'habilidades_requeridas' => $habilidades,
         'fecha_finalizacion' => $fecha_finalizacion
     ]);
@@ -85,7 +83,6 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_P
     $nombre_programa     = $_POST['nombre_programa'] ?? null;
     $duracion_meses      = $_POST['duracion_meses'] ?? null;
     $estado              = $_POST['estado'] ?? 'Disponible';
-    $descripcion         = $_POST['descripcion'] ?? null;
     $habilidades         = $_POST['habilidades_requeridas'] ?? null;
     $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
 
@@ -105,7 +102,6 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_P
         'nombre_programa' => $nombre_programa,
         'duracion_meses' => $duracion_meses,
         'estado' => $estado,
-        'descripcion' => $descripcion,
         'habilidades_requeridas' => $habilidades,
         'fecha_finalizacion' => $fecha_finalizacion
     ]);

@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else if (!data || Object.keys(data).length === 0) {
                     alert("No se encontraron datos para el programa solicitado.");
                 } else {
-                    const campos = ['codigo', 'ficha', 'nivel_formacion', 'sector_programa', 'nombre_programa', 'descripcion', 'habilidades_requeridas', 'fecha_finalizacion', 'estado'];
+                    const campos = ['codigo', 'ficha', 'nivel_formacion', 'sector_programa', 'nombre_programa', 'habilidades_requeridas', 'fecha_finalizacion', 'estado'];
                     campos.forEach(campo => {
                         const elemento = document.getElementById(campo);
                         if (elemento) {
