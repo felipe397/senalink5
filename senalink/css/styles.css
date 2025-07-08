@@ -176,19 +176,19 @@ img{
 
 /* Carousel Indicators */
 .carousel__indicators {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
 }
 
 .carousel__indicator {
-  width: 10px;
-  height: 10px;
-  background-color: #ccc;
-  border-radius: 50%;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .carousel__indicator--active {
@@ -241,13 +241,13 @@ img{
 }
 
 .cardh__container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 tarjetas en escritorio */
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 tarjetas en escritorio */
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
 } 
 
 .cardh {
@@ -271,17 +271,17 @@ img{
 }
 
 .menu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 25rem;
-  height: 100vh;
-  background-color: var(--Gray-100);
-  position: fixed;
-  left: -25rem;
-  transition: left 0.3s ease;
-  z-index: 1000;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25rem;
+    height: 100vh;
+    background-color: var(--Gray-100);
+    position: fixed;
+    left: -25rem;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .menu__logo {
@@ -369,35 +369,35 @@ width: 100%;
 
 /* Default: Desktop */
 .cardh__container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 tarjetas en escritorio */
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 tarjetas en escritorio */
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
 /* Tablets: 3 tarjetas */
 @media (max-width: 1199px) {
-  .cardh__container {
-    grid-template-columns: repeat(3, 1fr);
-  }
+    .cardh__container {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 /* Tablets pequeñas: 2 tarjetas */
 @media (max-width: 992px) {
-  .cardh__container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .cardh__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* Móviles: 1 tarjeta */
 @media (max-width: 768px) {
-  .cardh__container {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-  }
+    .cardh__container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
 }
 
 
@@ -415,13 +415,14 @@ footer{
     display: flex;
     align-items: center;
     gap: 8px;
+    padding-left: 6.5rem;
 }
 
 .search-container input {
     flex-grow: 1;
     padding: 8px 12px;
     border-radius: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc
 }
 
 .search-container .search-icon {
@@ -443,4 +444,3 @@ footer{
     align-items: center;
     justify-content: center;
 }
-
