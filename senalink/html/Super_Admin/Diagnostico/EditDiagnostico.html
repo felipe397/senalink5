@@ -47,9 +47,8 @@
             <div id="preguntas-container"></div>
             <!-- Botones -->
             <div class="form__buttons">
-                <a href="../Home.html" class="btn">Resultado</a>
+                <button type="button" class="btn" id="btnAgregarPregunta">➕ Agregar Pregunta</button>
                 <a href="../Diagnostico/VerDiagnostico.html" class="btn">Gestión</a>
-                <a href="../Formulario.html" class="btn">Formulario</a>
                 <button type="button" id="btnGuardarDiagnostico" class="btn">Guardar</button>
                 <button type="button" onclick="goBack()" class="btn">Volver</button>
             </div>
@@ -75,6 +74,36 @@
             input.value = pregunta.enunciado;
             input.setAttribute('data-id', pregunta.id);
             preguntaDiv.appendChild(input);
+            // Botón eliminar pregunta
+            const btnEliminarPregunta = document.createElement('button');
+            btnEliminarPregunta.type = 'button';
+            btnEliminarPregunta.className = 'btn-eliminar';
+            btnEliminarPregunta.title = 'Eliminar pregunta';
+            btnEliminarPregunta.innerText = '🗑️';
+            btnEliminarPregunta.onclick = function () {
+            if (confirm('¿Seguro que deseas eliminar esta pregunta?')) {
+                if (!String(pregunta.id).startsWith('nueva-')) {
+                    fetch('../../../controllers/DiagnosticoController.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ accion: 'eliminarPregunta', idPregunta: pregunta.id })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            preguntaDiv.remove();
+                            opcionesDiv.remove();
+                        } else {
+                            alert('No se pudo eliminar la pregunta');
+                        }
+                    });
+                } else {
+                    preguntaDiv.remove();
+                    opcionesDiv.remove();
+                }
+            }
+        };
+            preguntaDiv.appendChild(btnEliminarPregunta);
             // Botón guardar enunciado
             const btnGuardar = document.createElement('button');
             btnGuardar.type = 'button';
@@ -90,7 +119,7 @@
                 btnGuardar.style.display = 'none';
             });
             container.appendChild(preguntaDiv);
-
+            
             // Opciones
             const opcionesDiv = document.createElement('div');
             opcionesDiv.className = 'opciones-edit-group';
@@ -126,6 +155,56 @@
             container.appendChild(opcionesDiv);
         });
     }
+    // Agregar nueva pregunta manualmente
+        document.getElementById('btnAgregarPregunta').addEventListener('click', function () {
+            const container = document.getElementById('preguntas-container');
+
+            // Generar ID único para nueva pregunta
+            const nuevaId = 'nueva-' + Date.now();
+
+            // Crear contenedor de la nueva pregunta
+            const preguntaDiv = document.createElement('div');
+            preguntaDiv.className = 'pregunta-input-group nueva-pregunta';
+
+            const inputPregunta = document.createElement('input');
+            inputPregunta.type = 'text';
+            inputPregunta.className = 'pregunta-enunciado';
+            inputPregunta.placeholder = 'Nueva pregunta';
+            inputPregunta.setAttribute('data-id', nuevaId);
+            preguntaDiv.appendChild(inputPregunta);
+
+            // Botón eliminar pregunta
+            const btnEliminarPregunta = document.createElement('button');
+            btnEliminarPregunta.type = 'button';
+            btnEliminarPregunta.className = 'btn-eliminar';
+            btnEliminarPregunta.innerText = '🗑️';
+            btnEliminarPregunta.onclick = function () {
+                preguntaDiv.remove();
+                document.getElementById('opciones-' + nuevaId).remove();
+            };
+            preguntaDiv.appendChild(btnEliminarPregunta);
+
+            container.appendChild(preguntaDiv);
+
+            // Crear contenedor de opciones
+            const opcionesDiv = document.createElement('div');
+            opcionesDiv.className = 'opciones-edit-group';
+            opcionesDiv.id = 'opciones-' + nuevaId;
+            opcionesDiv.setAttribute('data-pregunta-id', nuevaId);
+
+            // Botón agregar opción
+            const btnAgregarOpcion = document.createElement('button');
+            btnAgregarOpcion.type = 'button';
+            btnAgregarOpcion.className = 'btn btn-agregar';
+            btnAgregarOpcion.textContent = 'Agregar opción';
+            btnAgregarOpcion.onclick = function () {
+                agregarOpcion(opcionesDiv.id);
+            };
+            opcionesDiv.appendChild(btnAgregarOpcion);
+
+            container.appendChild(opcionesDiv);
+        });
+
 
     // Permite agregar inputs para nuevas opciones
     function agregarOpcion(idGrupo) {
@@ -188,13 +267,13 @@
             body: JSON.stringify({ accion: 'obtenerDiagnosticoCompleto' })
         })
         .then(res => res.json())
-        .then(data => {
+        .then(data => { 
             if (data.success && data.preguntas) {
                 renderPreguntas(data.preguntas);
             } else {
                 alert('No se pudieron cargar las preguntas.');
             }
-        })
+        })  
         .catch(() => alert('Error al cargar preguntas'));
     });
     </script>
@@ -207,67 +286,91 @@
         const btnGuardarGlobal = document.getElementById('btnGuardarDiagnostico');
 
 
-        btnGuardarGlobal.addEventListener('click', function(event) {
-            event.preventDefault();
+    btnGuardarGlobal.addEventListener('click', function(event) {
+    event.preventDefault();
 
-            // Recopilar enunciados de preguntas
-            const preguntas = {};
-            form.querySelectorAll('input.pregunta-enunciado').forEach(input => {
-                const idPregunta = input.getAttribute('data-id');
-                preguntas[idPregunta] = input.value.trim();
-            });
+    const preguntas = {};
+    const preguntas_Nuevas = [];
+    const nuevas_opciones = [];
+    const opciones_a_borrar = window.opcionesEliminadas || [];
 
-            // Recopilar opciones nuevas (sin data-opcion-id)
-            const nuevas_opciones = {};
-            form.querySelectorAll('.opciones-edit-group').forEach(grupo => {
-                const idPregunta = grupo.getAttribute('data-pregunta-id');
-                const opcionesNuevas = [];
-                grupo.querySelectorAll('.opcion-edit-row').forEach(row => {
-                    if (!row.hasAttribute('data-opcion-id')) {
-                        const texto = row.querySelector('input.opcion-edit').value.trim();
-                        if (texto) opcionesNuevas.push(texto);
-                    }
-                });
-                if (opcionesNuevas.length > 0) {
-                    nuevas_opciones[idPregunta] = opcionesNuevas;
+    // Recoger preguntas (nuevas y existentes)
+    const nuevasPreguntasIds = [];
+    document.querySelectorAll('input.pregunta-enunciado').forEach(input => {
+        const idPregunta = input.getAttribute('data-id');
+        const enunciado = input.value.trim();
+
+        if (idPregunta.startsWith('nueva-')) {
+            preguntas_Nuevas.push(enunciado);
+            nuevasPreguntasIds.push(idPregunta);
+        } else {
+            preguntas[idPregunta] = enunciado;
+        }
+    });
+
+    // Recoger nuevas opciones para nuevas preguntas (por orden)
+    nuevasPreguntasIds.forEach(nuevaId => {
+        const grupo = document.querySelector(`.opciones-edit-group[data-pregunta-id="${nuevaId}"]`);
+        const opcionesNuevas = [];
+        if (grupo) {
+            grupo.querySelectorAll('.opcion-edit-row').forEach(row => {
+                if (!row.hasAttribute('data-opcion-id')) {
+                    const texto = row.querySelector('input.opcion-edit').value.trim();
+                    if (texto) opcionesNuevas.push(texto);
                 }
             });
+        }
+        nuevas_opciones.push(opcionesNuevas);
+    });
 
-            // Recopilar opciones a borrar (con data-opcion-id pero que fueron eliminadas)
-            // Para esto, se debe mantener una lista de opciones eliminadas en JS
-            // Aquí asumimos que se mantiene en window.opcionesEliminadas
-            const opciones_a_borrar = window.opcionesEliminadas || [];
-
-            const payload = {
-                preguntas: preguntas,
-                nuevas_opciones: nuevas_opciones,
-                opciones_a_borrar: opciones_a_borrar
-            };
-
-            fetch('../../../controllers/DiagnosticoController.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    accion: 'actualizarDiagnosticoCompleto',
-                    ...payload
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Diagnóstico actualizado correctamente.');
-                    window.location.href = '../Diagnostico/VerDiagnostico.html';
-                } else {
-                    alert('Error al actualizar diagnóstico: ' + data.message);
+    // Recoger nuevas opciones para preguntas existentes
+    document.querySelectorAll('.opciones-edit-group').forEach(grupo => {
+        const idPregunta = grupo.getAttribute('data-pregunta-id');
+        if (!idPregunta.startsWith('nueva-')) {
+            const opcionesNuevas = [];
+            grupo.querySelectorAll('.opcion-edit-row').forEach(row => {
+                if (!row.hasAttribute('data-opcion-id')) {
+                    const texto = row.querySelector('input.opcion-edit').value.trim();
+                    if (texto) opcionesNuevas.push(texto);
                 }
-            })
-            .catch(error => {
-                alert('Error en la comunicación con el servidor.');
-                console.error(error);
             });
-        });
+            if (opcionesNuevas.length > 0) {
+                if (!nuevas_opciones_existentes) nuevas_opciones_existentes = {};
+                nuevas_opciones_existentes[idPregunta] = opcionesNuevas;
+            }
+        }
+    });
+
+    // Armar payload para el backend
+    const payload = {
+        preguntas: preguntas,
+        preguntas_nuevas: preguntas_Nuevas,
+        nuevas_opciones: nuevas_opciones, // array alineado con preguntas_nuevas
+        nuevas_opciones_existentes: typeof nuevas_opciones_existentes !== 'undefined' ? nuevas_opciones_existentes : {},
+        opciones_a_borrar: opciones_a_borrar
+    };
+
+    // Enviar al backend
+    fetch('../../../controllers/DiagnosticoController.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accion: 'actualizarDiagnosticoCompleto', ...payload })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Diagnóstico actualizado correctamente.');
+            window.location.href = '../Diagnostico/VerDiagnostico.html';
+        } else {
+            alert('Error al actualizar diagnóstico: ' + data.message);
+        }
+    })
+    .catch(error => {
+        alert('Error en la comunicación con el servidor.');
+        console.error(error);
+    });
+});
+
 
         // Inicializar array para opciones eliminadas
         window.opcionesEliminadas = [];

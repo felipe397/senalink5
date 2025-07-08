@@ -43,10 +43,11 @@
     // Cargar preguntas dinámicamente desde el backend
     document.addEventListener('DOMContentLoaded', function() {
         fetch('../../../controllers/DiagnosticoController.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ accion: 'obtenerDiagnosticoCompleto' })
-        })
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ accion: 'obtenerDiagnosticoCompleto' })
+            })
+
         .then(res => res.json())
         .then(data => {
             if (data.success && data.preguntas) {
