@@ -58,13 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
         // Cargar programas inicialmente
         cargarProgramasPorEstado(estadoActual);
 
-        // Buscar por nombre o ficha
+        // Buscar por nombre o ficha solo en el estado filtrado
         inputBusqueda.addEventListener("input", function () {
             const q = this.value.toLowerCase();
             if (q.length >= 1) {
                 const filtrados = programas.filter(p =>
-                    p.nombre_programa.toLowerCase().includes(q) ||
-                    p.ficha.toLowerCase().includes(q)
+                    (p.nombre_programa && p.nombre_programa.toLowerCase().includes(q)) ||
+                    (p.codigo && p.codigo.toLowerCase().includes(q))
                 );
                 renderProgramas(filtrados);
             } else {
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 card.innerHTML = `
                     <div class="card-text">
                         <h2 class="card-title">${programa.nombre_programa}</h2>
-                        <p class="card-subtitle">Código: ${programa.ficha}</p>
+                        <p class="card-subtitle">Código: ${programa.codigo}</p>
                     </div>
                 `;
                 card.style.cursor = 'pointer';
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else if (!data || Object.keys(data).length === 0) {
                     alert("No se encontraron datos para el programa solicitado.");
                 } else {
-                    const campos = ['codigo', 'ficha', 'nivel_formacion', 'sector_programa', 'nombre_programa', 'habilidades_requeridas', 'fecha_finalizacion', 'estado'];
+                    const campos = ['codigo', 'ficha', 'nivel_formacion', 'sector_programa', 'etapa_ficha','sector_economico', 'nombre_programa', 'habilidades_requeridas', 'duracion_programa','fecha_finalizacion', 'estado'];
                     campos.forEach(campo => {
                         const elemento = document.getElementById(campo);
                         if (elemento) {
