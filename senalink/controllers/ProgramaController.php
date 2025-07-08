@@ -120,16 +120,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
                 $data = $programa->listarProgramasDisponibles();
                 echo json_encode($data);
                 break;
-            case 'listarProgramasEnCurso':
-                $data = $programa->listarProgramasEnCurso();
-                echo json_encode($data);
+            case 'listarProgramasEnEjecucion':
+                header('Content-Type: application/json');
+                try {
+                    if (!method_exists($programa, 'listarProgramasEnEjecucion')) {
+                        http_response_code(500);
+                        echo json_encode(['error' => 'No existe el método listarProgramasEnEjecucion en ProgramaFormacion']);
+                        exit;
+                    }
+                    $data = $programa->listarProgramasEnEjecucion();
+                    if ($data === false) {
+                        http_response_code(500);
+                        echo json_encode(['error' => 'Error al obtener los programas en ejecución']);
+                        exit;
+                    }
+                    echo json_encode($data);
+                } catch (Exception $e) {
+                    http_response_code(500);
+                    echo json_encode(['error' => 'Error interno: ' . $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+                }
                 break;
             case 'listarProgramasFinalizados':
+                header('Content-Type: application/json');
                 $data = $programa->listarProgramasFinalizados();
-                echo json_encode($data);
-                break;
-            case 'listarProgramasEnEjecucion':
-                $data = $programa->listarProgramasEnCurso();
                 echo json_encode($data);
                 break;
             case 'DetallePrograma':
