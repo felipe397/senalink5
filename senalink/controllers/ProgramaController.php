@@ -19,10 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     $ficha               = $_POST['ficha'] ?? null;
     $nivel_formacion     = $_POST['nivel_formacion'] ?? null;
     $sector_programa     = $_POST['sector_programa'] ?? null;
+    $etapa_ficha        = $_POST['etapa_ficha'] ?? null;
+    $sector_economico   = $_POST['sector_economico'] ?? null;
+    $duracion_programa      = $_POST['duracion_programa'] ?? null;
+    $nombre_ocupacion    = $_POST['nombre_ocupacion'] ?? null;
     $nombre_programa     = $_POST['nombre_programa'] ?? null;
-    $duracion_meses      = $_POST['duracion_meses'] ?? null;
-    $estado              = $_POST['estado'] ?? 'Disponible';
     $habilidades         = $_POST['habilidades_requeridas'] ?? null;
+    $estado              = $_POST['estado'] ?? 'Disponible';
     $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
 
     // Validaciones
@@ -41,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         $errores[] = "Fecha de finalización inválida.";
     }
 
-    if (!$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$nombre_programa ||
-        !$duracion_meses || !$estado || !$habilidades || !$fecha_finalizacion) {
+    if (!$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$nombre_programa || !$etapa_ficha || !$sector_economico ||
+        !$duracion_programa || !$estado || !$habilidades || !$fecha_finalizacion) {
         $errores[] = "Todos los campos son obligatorios.";
     }
 
@@ -57,9 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         'codigo' => $codigo,
         'ficha' => $ficha,
         'nivel_formacion' => $nivel_formacion,
+        'etapa_ficha' => $etapa_ficha,
+        'sector_economico' => $sector_economico,
         'sector_programa' => $sector_programa,
         'nombre_programa' => $nombre_programa,
-        'duracion_meses' => $duracion_meses,
+        'nombre_ocupacion' => $nombre_ocupacion,
+        'duracion_programa' => $duracion_programa,
         'estado' => $estado,
         'habilidades_requeridas' => $habilidades,
         'fecha_finalizacion' => $fecha_finalizacion
@@ -79,9 +85,12 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_P
     $codigo              = $_POST['codigo'] ?? null;
     $ficha               = $_POST['ficha'] ?? null;
     $nivel_formacion     = $_POST['nivel_formacion'] ?? null;
+    $etapa_ficha        = $_POST['etapa_ficha'] ?? null;
     $sector_programa     = $_POST['sector_programa'] ?? null;
+    $sector_economico   = $_POST['sector_economico'] ?? null;
     $nombre_programa     = $_POST['nombre_programa'] ?? null;
-    $duracion_meses      = $_POST['duracion_meses'] ?? null;
+    $nombre_ocupacion    = $_POST['nombre_ocupacion'] ?? null;
+    $duracion_programa      = $_POST['duracion_programa'] ?? null;
     $estado              = $_POST['estado'] ?? 'Disponible';
     $habilidades         = $_POST['habilidades_requeridas'] ?? null;
     $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
@@ -99,8 +108,11 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_P
         'ficha' => $ficha,
         'nivel_formacion' => $nivel_formacion,
         'sector_programa' => $sector_programa,
+        'etapa_ficha' => $etapa_ficha,
+        'sector_economico' => $sector_economico,
         'nombre_programa' => $nombre_programa,
-        'duracion_meses' => $duracion_meses,
+        'nombre_ocupacion' => $nombre_ocupacion,
+        'duracion_programa' => $duracion_programa,
         'estado' => $estado,
         'habilidades_requeridas' => $habilidades,
         'fecha_finalizacion' => $fecha_finalizacion
