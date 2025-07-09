@@ -318,7 +318,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .gov{
-    background-color: #003399;
+    background-color: var(--Secundary-980);
 }
 .gov__container{
     margin: auto;
