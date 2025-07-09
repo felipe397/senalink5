@@ -5,6 +5,8 @@ class Conexion {
     public static function conectar() {
         if (self::$conn === null) {
             // $host = 'localhost'; // Cambia esto si tu servidor MySQL está en otro host
+            // $host = 'localhost:8111'; 
+            // $host = 'localhost'; // Cambia esto si tu servidor MySQL está en otro host
             // $host = 'localhost:3307'; 
             $host = 'localhost:8111'; 
             $db = 'senalink';
@@ -22,4 +24,3 @@ class Conexion {
         return self::$conn;
     }
 }
-?>

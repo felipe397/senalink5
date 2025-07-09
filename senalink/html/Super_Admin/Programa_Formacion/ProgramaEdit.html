@@ -57,20 +57,33 @@
                     </select>
                     <select class="select_container" id="sector_programa" name="sector_programa" required>
                         <option selected disabled value="">Sector del programa</option>
-                        <option>Industrial</option>
-                        <option>Primario</option>
-                        <option>Servicios</option>
+                        <option>INDUSTRIA</option>
+                        <option>SERVICIOS</option>
                     </select>
-                    <input class="input-field" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required />
-                    <input class="input-field" id="duracion_meses" name="duracion_meses" placeholder="Duración (meses)" type="number" required />
+                    <select class="select_container" id="etapa_ficha" name="etapa_ficha" required>
+                        <option selected disabled value="">Etapa Ficha</option>
+                        <option>LECTIVA</option>
+                        <option>PRACTICA</option>
+                    </select>
+                    <select class="select_container" id="sector_economico" name="sector_economico" required>
+                        <option selected disabled value="">Sector Económico</option>
+                        <option>INDUSTRIA</option>
+                        <option>SERVICIOS</option>
+                        <option>TEXTILES</option>
+                        <option>ELECTRICIDAD</option>
+                        <option>CONSTRUCCIÓN</option>
+                    </select>        
 
+                    <input class="input-field" id="nombre_ocupacion" name="nombre_ocupacion" placeholder="Nombre de Ocupación" type="text" required pattern="[\p{L}\s.]+" title="El nombre solo debe contener letras, espacios y puntos." />
+                    <input class="input-field" id="duracion_programa" name="duracion_programa" placeholder="Duración(Horas)" type="number" min="1" required title="La duración debe ser un número positivo." />
+                    <input class="input-field" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required />
                     <select class="select_container" id="estado" name="estado" required>
                         <option value="" disabled selected>Estado</option>
-                        <option>En Ejecución</option>
-                        <option>Finalizado</option>
+                        <option value="En Ejecucion">En Ejecución</option>
+                        <option value="Finalizado">Finalizado</option>
                     </select>
 
-                    <input class="input-field" id="habilidades_requeridas" name="habilidades_requeridas" placeholder="Habilidades requeridas" type="text" required />
+                    <input class="input-field" id="habilidades_requeridas" name="habilidades_requeridas" placeholder="Habilidades requeridas" type="text" />
                     <input class="input-field" id="fecha_finalizacion" name="fecha_finalizacion" placeholder="Fecha de finalización" type="date" required />
 
                 </div>
@@ -96,11 +109,29 @@
                             document.getElementById('codigo').value = data.codigo || '';
                             document.getElementById('ficha').value = data.ficha || '';
                             document.getElementById('nivel_formacion').value = data.nivel_formacion || '';
-                            document.getElementById('sector_programa').value = data.sector_programa || '';
+                            // Selección robusta para selects (ignora tildes y mayúsculas)
+                            function setSelectValue(selectId, value) {
+                                const select = document.getElementById(selectId);
+                                if (!select) return;
+                                const normalizar = v => v ? v.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim() : '';
+                                const valorNormalizado = normalizar(value);
+                                let found = false;
+                                for (let opt of select.options) {
+                                    if (normalizar(opt.value) === valorNormalizado || normalizar(opt.text) === valorNormalizado) {
+                                        select.value = opt.value;
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (!found) select.selectedIndex = 0;
+                            }
+                            setSelectValue('sector_programa', data.sector_programa);
+                            setSelectValue('etapa_ficha', data.etapa_ficha);
+                            setSelectValue('sector_economico', data.sector_economico);
+                            document.getElementById('nombre_ocupacion').value = data.nombre_ocupacion || '';
+                            document.getElementById('duracion_programa').value = data.duracion_programa || '';
                             document.getElementById('nombre_programa').value = data.nombre_programa || '';
-                            document.getElementById('duracion_meses').value = data.duracion_meses || '';
-                            document.getElementById('estado').value = data.estado || '';
-                            document.getElementById('descripcion').value = data.descripcion || '';
+                            setSelectValue('estado', data.estado);
                             document.getElementById('habilidades_requeridas').value = data.habilidades_requeridas || '';
                             document.getElementById('fecha_finalizacion').value = data.fecha_finalizacion || '';
                         } else {
