@@ -111,32 +111,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Parte del detalle del programa
     const id = new URLSearchParams(window.location.search).get('id');
-    if (id) {
-        fetch(`../../../controllers/ProgramaController.php?action=DetallePrograma&id=${id}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status}`);
+if (id) {
+    fetch('../../controllers/ProgramaController.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            accion: 'detallePrograma',
+            id: id
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (!data.success || !data.programa) {
+            alert("No se encontraron datos para el programa solicitado.");
+        } else {
+            const p = data.programa;
+            const campos = ['codigo', 'ficha', 'nivel_formacion', 'sector_programa', 'etapa_ficha', 'sector_economico', 'nombre_ocupacion', 'nombre_programa', 'habilidades_requeridas', 'duracion_programa', 'fecha_finalizacion', 'estado'];
+            campos.forEach(campo => {
+                const elemento = document.getElementById(campo);
+                if (elemento) {
+                    elemento.textContent = p[campo] || "";
                 }
-                return response.json();
-            })
-            .then(data => {
-                if (data.error) {
-                    alert("Error al obtener los detalles del programa: " + data.error);
-                } else if (!data || Object.keys(data).length === 0) {
-                    alert("No se encontraron datos para el programa solicitado.");
-                } else {
-                    const campos = ['codigo', 'ficha', 'nivel_formacion', 'sector_programa', 'etapa_ficha','sector_economico', 'nombre_ocupacion','nombre_programa', 'habilidades_requeridas', 'duracion_programa','fecha_finalizacion', 'estado'];
-                    campos.forEach(campo => {
-                        const elemento = document.getElementById(campo);
-                        if (elemento) {
-                            elemento.textContent = data[campo] || "";
-                        }
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error al cargar los detalles del programa:', error);
-                alert("Error al cargar los detalles del programa. Por favor, intenta nuevamente.");
             });
-    }
+        }
+    })
+    .catch(error => {
+        console.error('Error al cargar los detalles del programa:', error);
+        alert("Error al cargar los detalles del programa. Por favor, intenta nuevamente.");
+    });
+}
+
 });

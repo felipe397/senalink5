@@ -47,7 +47,7 @@
             <div id="preguntas-container"></div>
             <!-- Botones -->
             <div class="form__buttons">
-                <button type="button" class="btn" id="btnAgregarPregunta">➕ Agregar Pregunta</button>
+                <button type="button" class="btn" id="btnAgregarPregunta">Agregar Pregunta</button>
                 <a href="../Diagnostico/VerDiagnostico.html" class="btn">Gestión</a>
                 <button type="button" id="btnGuardarDiagnostico" class="btn">Guardar</button>
                 <button type="button" onclick="goBack()" class="btn">Volver</button>
@@ -74,35 +74,42 @@
             input.value = pregunta.enunciado;
             input.setAttribute('data-id', pregunta.id);
             preguntaDiv.appendChild(input);
-            // Botón eliminar pregunta
             const btnEliminarPregunta = document.createElement('button');
             btnEliminarPregunta.type = 'button';
             btnEliminarPregunta.className = 'btn-eliminar';
-            btnEliminarPregunta.title = 'Eliminar pregunta';
             btnEliminarPregunta.innerText = '🗑️';
             btnEliminarPregunta.onclick = function () {
-            if (confirm('¿Seguro que deseas eliminar esta pregunta?')) {
-                if (!String(pregunta.id).startsWith('nueva-')) {
-                    fetch('../../../controllers/DiagnosticoController.php', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ accion: 'eliminarPregunta', idPregunta: pregunta.id })
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            preguntaDiv.remove();
-                            opcionesDiv.remove();
-                        } else {
-                            alert('No se pudo eliminar la pregunta');
-                        }
-                    });
-                } else {
-                    preguntaDiv.remove();
-                    opcionesDiv.remove();
+                if (confirm('¿Seguro que deseas eliminar esta pregunta?')) {
+                    if (!String(pregunta.id).startsWith('nueva-')) {
+                        fetch('../../../controllers/DiagnosticoController.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ accion: 'eliminarPregunta', idPregunta: pregunta.id })
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log('Respuesta eliminarPregunta:', data); // <-- Para depuración
+                            if (data.success) {
+                                // Elimina el div de la pregunta
+                                if (preguntaDiv && preguntaDiv.parentNode) preguntaDiv.parentNode.removeChild(preguntaDiv);
+                                // Elimina el contenedor de opciones usando el id correcto
+                                const opcionesDiv = document.getElementById('opciones-' + pregunta.id);
+                                if (opcionesDiv && opcionesDiv.parentNode) opcionesDiv.parentNode.removeChild(opcionesDiv);
+                            } else {
+                                alert('No se pudo eliminar la pregunta');
+                            }
+                        })
+                        .catch(err => {
+                            alert('Error al eliminar la pregunta');
+                            console.error(err);
+                        });
+                    } else {
+                        if (preguntaDiv && preguntaDiv.parentNode) preguntaDiv.parentNode.removeChild(preguntaDiv);
+                        const opcionesDiv = document.getElementById('opciones-' + pregunta.id);
+                        if (opcionesDiv && opcionesDiv.parentNode) opcionesDiv.parentNode.removeChild(opcionesDiv);
+                    }
                 }
-            }
-        };
+            };
             preguntaDiv.appendChild(btnEliminarPregunta);
             // Botón guardar enunciado
             const btnGuardar = document.createElement('button');
@@ -123,7 +130,7 @@
             // Opciones
             const opcionesDiv = document.createElement('div');
             opcionesDiv.className = 'opciones-edit-group';
-            opcionesDiv.id = 'opciones' + pregunta.id + '-edit';
+            opcionesDiv.id = 'opciones-' + pregunta.id; // <-- usa siempre este formato
             opcionesDiv.setAttribute('data-pregunta-id', pregunta.id);
             if (pregunta.opciones && pregunta.opciones.length > 0) {
                 pregunta.opciones.forEach(opcion => {
@@ -173,18 +180,8 @@
             inputPregunta.setAttribute('data-id', nuevaId);
             preguntaDiv.appendChild(inputPregunta);
 
-            // Botón eliminar pregunta
-            const btnEliminarPregunta = document.createElement('button');
-            btnEliminarPregunta.type = 'button';
-            btnEliminarPregunta.className = 'btn-eliminar';
-            btnEliminarPregunta.innerText = '🗑️';
-            btnEliminarPregunta.onclick = function () {
-                preguntaDiv.remove();
-                document.getElementById('opciones-' + nuevaId).remove();
-            };
-            preguntaDiv.appendChild(btnEliminarPregunta);
-
             container.appendChild(preguntaDiv);
+
 
             // Crear contenedor de opciones
             const opcionesDiv = document.createElement('div');
@@ -292,6 +289,7 @@
     const preguntas = {};
     const preguntas_Nuevas = [];
     const nuevas_opciones = [];
+    const nuevas_opciones_existentes = {};
     const opciones_a_borrar = window.opcionesEliminadas || [];
 
     // Recoger preguntas (nuevas y existentes)
@@ -360,7 +358,7 @@
     .then(data => {
         if (data.success) {
             alert('Diagnóstico actualizado correctamente.');
-            window.location.href = '../Diagnostico/VerDiagnostico.html';
+            window.location.href = 'VerDiagnostico.html';
         } else {
             alert('Error al actualizar diagnóstico: ' + data.message);
         }

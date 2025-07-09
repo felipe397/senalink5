@@ -19,28 +19,13 @@ if (!in_array($rol, $roles_permitidos)) {
 }
 
 
-// Validar campos según rol
 if ($rol === 'empresa') {
-    if (!ctype_digit($nit) || intval($nit) <= 0) {
-        $errores[] = "El NIT debe ser un número positivo.";
-    }
-} else {
-    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        $errores[] = "Correo electrónico no válido.";
-    }
-}
-
-if (!empty($errores)) {
-    echo "⚠️ Errores de validación:<br>" . implode("<br>", $errores);
-    exit;
-}
-
-// Consulta a la base de datos según rol
-if ($rol === 'empresa') {
+    // Buscar el usuario empresa por NIT
     $query = "SELECT * FROM usuarios WHERE nit = :identificador AND rol = 'empresa' AND estado = 'activo'";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':identificador', $nit);
 } else {
+    // Buscar el usuario por correo y rol
     $query = "SELECT * FROM usuarios WHERE correo = :identificador AND rol = :rol AND estado = 'activo'";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':identificador', $correo);
@@ -50,23 +35,24 @@ if ($rol === 'empresa') {
 $stmt->execute();
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Verificar existencia y contraseña
+// ✅ Verificar existencia y contraseña
 if ($usuario) {
     if (password_verify($contrasena, $usuario['contrasena'])) {
+        // Guardar datos en sesión
         $_SESSION['user_id'] = $usuario['id'];
         $_SESSION['rol'] = $usuario['rol'];
 
-        // Redireccionar según rol
-        switch ($rol) {
-            case 'empresa':
+        // ✅ Redirigir según rol y si hizo el diagnóstico
+        if ($rol === 'empresa') {
+            if ($usuario['diagnostico_realizado']) {
                 header("Location: ../html/Empresa/Home.html");
-                break;
-            case 'AdminSENA':
-                header("Location: ../html/AdminSENA/Home.html");
-                break;
-            case 'super_admin':
-                header("Location: ../html/Super_Admin/Home.html");
-                break;
+            } else {
+                header("Location: ../html/formulario.php");
+            }
+        } elseif ($rol === 'AdminSENA') {
+            header("Location: ../html/AdminSENA/Home.html");
+        } elseif ($rol === 'super_admin') {
+            header("Location: ../html/Super_Admin/Home.html");
         }
         exit;
     } else {

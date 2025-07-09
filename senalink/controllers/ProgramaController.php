@@ -12,6 +12,7 @@ require_once '../config/Conexion.php';
 
 $programa = new ProgramaFormacion();
 
+
 // 🚀 CREAR PROGRAMA
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'crear') {
     // Recolectar datos
@@ -176,10 +177,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     }
     exit;
 }
-// 🔍 DETALLE DE UN PROGRAMA
-else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'DetallePrograma' && isset($_GET['id'])) {
-    $detalle = $programa->getById($_GET['id']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
-    echo json_encode($detalle);
+    $data = json_decode(file_get_contents('php://input'), true);
+    
+    if (isset($data['accion']) && $data['accion'] === 'detallePrograma' && isset($data['id'])) {
+        $programa = new ProgramaFormacion();
+        $detalle = $programa->getById($data['id']);
+
+        if ($detalle) {
+            echo json_encode(['success' => true, 'programa' => $detalle]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Programa no encontrado.']);
+        }
+        exit;
+    }
+
+    echo json_encode(['success' => false, 'message' => 'Acción inválida o ID faltante.']);
     exit;
 }

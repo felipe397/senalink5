@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -274,117 +277,83 @@
     </div>
 
     <script>
-    // Obtener ID de empresa desde sesión
-const empresaId = <?php echo json_encode($_SESSION['user_id'] ?? 0); ?>;
-
+const empresaId = <?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'null' ?>;
 class DiagnosticoApp {
     constructor() {
         this.initElements();
         this.initEvents();
-        this.checkDiagnosticoStatus();
+        this.cargarPreguntasDiagnostico(); // ya no se valida si el diagnóstico fue completado
     }
 
     initElements() {
-        // Elementos principales
         this.elements = {
-            diagnosticoCompletado: document.getElementById('diagnostico-completado'),
             formularioDiagnostico: document.getElementById('formulario-diagnostico'),
             resultadosDiagnostico: document.getElementById('resultados-diagnostico'),
             preguntasDinamicas: document.getElementById('preguntas-dinamicas'),
-            recomendacionesGuardadas: document.getElementById('recomendaciones-guardadas'),
             recomendaciones: document.getElementById('recomendaciones'),
             btnEnviar: document.getElementById('btn-enviar')
         };
     }
 
     initEvents() {
-        // Configurar eventos
         this.elements.btnEnviar.addEventListener('click', () => this.enviarRespuestas());
-        
-        // Configurar filtros para ambas secciones de recomendaciones
         document.querySelectorAll('#aplicar-filtros').forEach(btn => {
             btn.addEventListener('click', (e) => this.aplicarFiltros(e));
         });
     }
 
-    async checkDiagnosticoStatus() {
-        try {
-            const data = await this.fetchData('diagnosticoCompletado', { empresaId });
-            
-            if (data.completado) {
-                this.showSection('diagnostico-completado');
-                this.cargarRecomendacionesGuardadas();
-            } else {
-                this.cargarPreguntasDiagnostico();
-            }
-        } catch (error) {
-            console.error('Error verificando estado del diagnóstico:', error);
-            this.showError('No se pudo verificar el estado del diagnóstico. Intenta recargar la página.');
-        }
-    }
-
     async cargarPreguntasDiagnostico() {
         try {
             const data = await this.fetchData('obtenerDiagnosticoCompleto');
-            
             if (data.success && data.preguntas) {
                 this.renderPreguntasDinamicas(data.preguntas);
             } else {
-                this.showError('No se pudieron cargar las preguntas. Por favor intenta más tarde.', 'preguntas-dinamicas');
+                this.showError('No se pudieron cargar las preguntas.', 'preguntas-dinamicas');
             }
         } catch (error) {
             console.error('Error cargando preguntas:', error);
-            this.showError('Error al cargar las preguntas del diagnóstico.', 'preguntas-dinamicas');
-        }
-    }
-
-    async cargarRecomendacionesGuardadas() {
-        try {
-            const recomendaciones = await this.fetchData('obtenerRecomendaciones', { empresaId });
-            
-            if (recomendaciones.length > 0) {
-                this.renderRecomendaciones(recomendaciones, 'recomendaciones-guardadas');
-            } else {
-                this.showInfo('No se encontraron recomendaciones guardadas.', 'recomendaciones-guardadas');
-            }
-        } catch (error) {
-            console.error('Error cargando recomendaciones:', error);
-            this.showError('Error al cargar recomendaciones guardadas.', 'recomendaciones-guardadas');
+            this.showError('Error al cargar preguntas.', 'preguntas-dinamicas');
         }
     }
 
     async enviarRespuestas() {
         const { selects, inputs, respuestas, todasRespondidas } = this.validarRespuestas();
-        
         if (!todasRespondidas) {
             this.showError('Por favor responde todas las preguntas');
             return;
         }
-        
+
         try {
-            const data = await this.fetchData('procesarRespuestas', { 
-                empresaId, 
-                respuestas 
-            });
-            
-            if (data.success) {
-                this.showSection('resultados-diagnostico');
-                this.renderRecomendaciones(data.recomendaciones, 'recomendaciones');
-            } else {
-                this.showError(data.message || 'Error al procesar respuestas');
-            }
-        } catch (error) {
-            console.error('Error enviando respuestas:', error);
-            this.showError('Error al enviar las respuestas. Por favor intenta nuevamente.');
-        }
+    const data = await this.fetchData('procesarRespuestas', {
+        empresaId: empresaId,      // ✅ Lo mandas aquí
+        respuestas: respuestas     // ✅ Y las respuestas también
+    });
+
+    if (data.success) {
+        console.log('✔ Mostrando resultados de diagnóstico');
+        this.showSection('resultados-diagnostico');
+        console.log('📦 Recomendaciones recibidas:', data.recomendaciones);
+        this.renderRecomendaciones(data.recomendaciones, 'recomendaciones');
+        localStorage.setItem('recomendaciones', JSON.stringify(data.recomendaciones));
+
+        // Redirigir a la vista Home.html de empresas
+        window.location.href = 'Empresa/Home.html';
+    } else {
+        this.showError(data.message || 'Error al procesar respuestas');
     }
+} catch (error) {
+    console.error('Error enviando respuestas:', error);
+    this.showError('Error al enviar las respuestas.');
+}
+    }
+
 
     validarRespuestas() {
         const selects = this.elements.preguntasDinamicas.querySelectorAll('select');
         const inputs = this.elements.preguntasDinamicas.querySelectorAll('input[type="text"]');
         const respuestas = {};
         let todasRespondidas = true;
-        
+
         selects.forEach((select, index) => {
             if (!select.value || select.value === 'Seleccione una opción') {
                 todasRespondidas = false;
@@ -394,7 +363,7 @@ class DiagnosticoApp {
                 select.classList.remove('error');
             }
         });
-        
+
         inputs.forEach((input, index) => {
             if (!input.value.trim()) {
                 todasRespondidas = false;
@@ -404,100 +373,52 @@ class DiagnosticoApp {
                 input.classList.remove('error');
             }
         });
-        
+
         return { selects, inputs, respuestas, todasRespondidas };
     }
 
-    // Reemplaza tu función aplicarFiltros con esta versión mejorada
-plicarFiltros(event) {
-    try {
-        const btn = event.target;
-        const contenedor = btn.closest('.recomendaciones-container');
-        
-        if (!contenedor) {
-            console.error('No se encontró el contenedor de recomendaciones');
-            return;
-        }
-        
-        const contenedorId = contenedor.id;
-        const filtrosContainer = document.getElementById(`${contenedorId}-container`);
-        
-        if (!filtrosContainer) {
-            console.error('No se encontró el contenedor de filtros');
-            return;
-        }
-        
-        const filtros = {
-            nivel: Array.from(filtrosContainer.querySelectorAll('input[name="nivel"]:checked')).map(el => el.value),
-            duracion: filtrosContainer.querySelector('select[name="duracion"]').value
-        };
-        
-        const cards = document.querySelectorAll(`#${contenedorId} .recomendacion-card`);
-        
-        cards.forEach(card => {
-            const nivel = card.dataset.nivel;
-            const duracionMeses = parseInt(card.dataset.duracion) / 48;
-            
-            const cumpleNivel = filtros.nivel.includes(nivel);
-            const cumpleDuracion = filtros.duracion === 'all' || 
-                                  (filtros.duracion === '6' && duracionMeses <= 6) ||
-                                  (filtros.duracion === '12' && duracionMeses <= 12) ||
-                                  (filtros.duracion === '24' && duracionMeses <= 24);
-            
-            card.style.display = cumpleNivel && cumpleDuracion ? 'block' : 'none';
-        });
-    } catch (error) {
-        console.error('Error al aplicar filtros:', error);
-    }
-}
+    aplicarFiltros(event) {
+        try {
+            const btn = event.target;
+            const contenedor = btn.closest('.recomendaciones-container');
+            const contenedorId = contenedor.id;
+            const filtrosContainer = document.getElementById(`${contenedorId}-container`);
 
-    getFiltrosActuales(contenedorId) {
-        return {
-            nivel: Array.from(document.querySelectorAll(
-                `#${contenedorId}-container input[name="nivel"]:checked`
-            )).map(el => el.value),
-            duracion: document.querySelector(
-                `#${contenedorId}-container select[name="duracion"]`
-            ).value
-        };
-    }
+            const filtros = {
+                nivel: Array.from(filtrosContainer.querySelectorAll('input[name="nivel"]:checked')).map(el => el.value),
+                duracion: filtrosContainer.querySelector('select[name="duracion"]').value
+            };
 
-    cumpleFiltroDuracion(filtroDuracion, duracionMeses) {
-        switch(filtroDuracion) {
-            case '6': return duracionMeses <= 6;
-            case '12': return duracionMeses <= 12;
-            case '24': return duracionMeses <= 24;
-            default: return true;
+            const cards = contenedor.querySelectorAll('.recomendacion-card');
+            cards.forEach(card => {
+                const nivel = card.dataset.nivel;
+                const duracionMeses = parseInt(card.dataset.duracion) / 48;
+
+                const cumpleNivel = filtros.nivel.includes(nivel);
+                const cumpleDuracion = filtros.duracion === 'all' ||
+                    (filtros.duracion === '6' && duracionMeses <= 6) ||
+                    (filtros.duracion === '12' && duracionMeses <= 12) ||
+                    (filtros.duracion === '24' && duracionMeses <= 24);
+
+                card.style.display = cumpleNivel && cumpleDuracion ? 'block' : 'none';
+            });
+        } catch (error) {
+            console.error('Error aplicando filtros:', error);
         }
     }
 
     renderPreguntasDinamicas(preguntas) {
         this.elements.preguntasDinamicas.innerHTML = '';
-        
-        const fieldsetGeneral = document.createElement('fieldset');
-        fieldsetGeneral.innerHTML = '<legend>Datos Generales de la Empresa</legend>';
-        
-        const fieldsetNecesidades = document.createElement('fieldset');
-        fieldsetNecesidades.innerHTML = '<legend>Necesidades de Formación</legend>';
-        
-        preguntas.forEach((pregunta, index) => {
-            const preguntaDiv = this.crearElementoPregunta(pregunta);
-            
-            if (index < 3) {
-                fieldsetGeneral.appendChild(preguntaDiv);
-            } else {
-                fieldsetNecesidades.appendChild(preguntaDiv);
-            }
+        preguntas.forEach(pregunta => {
+            const div = this.crearElementoPregunta(pregunta);
+            this.elements.preguntasDinamicas.appendChild(div);
         });
-        
-        this.elements.preguntasDinamicas.appendChild(fieldsetGeneral);
-        this.elements.preguntasDinamicas.appendChild(fieldsetNecesidades);
     }
 
     crearElementoPregunta(pregunta) {
         const preguntaDiv = document.createElement('div');
         preguntaDiv.className = 'pregunta-container';
-        
+
         const label = document.createElement('label');
         label.textContent = pregunta.enunciado;
         preguntaDiv.appendChild(label);
@@ -507,28 +428,28 @@ plicarFiltros(event) {
         } else {
             preguntaDiv.appendChild(this.crearInputTexto());
         }
-        
+
         return preguntaDiv;
     }
 
     crearSelectOpciones(opciones) {
         const select = document.createElement('select');
         select.required = true;
-        
+
         const optDefault = document.createElement('option');
         optDefault.value = '';
         optDefault.selected = true;
         optDefault.disabled = true;
         optDefault.textContent = 'Seleccione una opción';
         select.appendChild(optDefault);
-        
-        opciones.forEach(opc => {
-            const opt = document.createElement('option');
-            opt.value = opc.texto;
-            opt.textContent = opc.texto;
-            select.appendChild(opt);
+
+        opciones.forEach(op => {
+            const option = document.createElement('option');
+            option.value = op.texto;
+            option.textContent = op.texto;
+            select.appendChild(option);
         });
-        
+
         return select;
     }
 
@@ -542,35 +463,30 @@ plicarFiltros(event) {
 
     renderRecomendaciones(recomendaciones, contenedorId) {
         const cont = this.elements[contenedorId] || document.getElementById(contenedorId);
+        cont.classList.remove('hidden');
         cont.innerHTML = '';
-        
+
         if (!recomendaciones?.length) {
-            this.showInfo('No encontramos programas que coincidan exactamente con tus necesidades.', contenedorId);
+            this.showInfo('No encontramos programas que coincidan con tus necesidades.', contenedorId);
             return;
         }
-        
-        // Agrupar por área temática
+
         const grupos = this.agruparPorArea(recomendaciones);
-        
-        // Mostrar por grupos
         for (const [area, programas] of Object.entries(grupos)) {
             const grupoDiv = this.crearGrupoArea(area, programas);
             cont.appendChild(grupoDiv);
         }
-        
-        // Configurar eventos para botones de detalle
+
         this.configurarBotonesDetalle();
     }
 
     agruparPorArea(recomendaciones) {
         const grupos = {};
-        
-        recomendaciones.forEach(programa => {
-            const area = programa.sector_economico || 'General';
+        recomendaciones.forEach(prog => {
+            const area = prog.sector_economico || 'General';
             if (!grupos[area]) grupos[area] = [];
-            grupos[area].push(programa);
+            grupos[area].push(prog);
         });
-        
         return grupos;
     }
 
@@ -578,115 +494,84 @@ plicarFiltros(event) {
         const grupoDiv = document.createElement('div');
         grupoDiv.className = 'grupo-area';
         grupoDiv.innerHTML = `<h3 class="area-titulo">${area}</h3>`;
-        
-        programas.forEach(programa => {
-            grupoDiv.appendChild(this.crearCardPrograma(programa));
-        });
-        
+        programas.forEach(prog => grupoDiv.appendChild(this.crearCardPrograma(prog)));
         return grupoDiv;
     }
 
-    crearCardPrograma(programa) {
-        const duracionMeses = (programa.duracion_programa / 48).toFixed(1);
-        const isTecnologo = programa.nivel_formacion === 'Tecnologo';
-        
+    crearCardPrograma(prog) {
+        const meses = (prog.duracion_programa / 48).toFixed(1);
         const card = document.createElement('div');
         card.className = 'recomendacion-card';
-        card.dataset.nivel = programa.nivel_formacion;
-        card.dataset.duracion = programa.duracion_programa;
-        
+        card.dataset.nivel = prog.nivel_formacion;
+        card.dataset.duracion = prog.duracion_programa;
+
         card.innerHTML = `
             <div class="card-header">
-                <h3>${programa.nombre_programa}</h3>
-                <span class="badge ${isTecnologo ? 'badge-tecnologo' : 'badge-tecnico'}">
-                    ${programa.nivel_formacion}
+                <h3>${prog.nombre_programa}</h3>
+                <span class="badge ${prog.nivel_formacion === 'Tecnologo' ? 'badge-tecnologo' : 'badge-tecnico'}">
+                    ${prog.nivel_formacion}
                 </span>
             </div>
             <div class="card-body">
-                <p><i class="fas fa-clock"></i> <strong>Duración:</strong> ${duracionMeses} meses (${programa.duracion_programa} horas)</p>
-                <p><i class="fas fa-briefcase"></i> <strong>Salida ocupacional:</strong> ${programa.nombre_ocupacion}</p>
-                <p><i class="fas fa-calendar-alt"></i> <strong>Disponible hasta:</strong> ${new Date(programa.fecha_finalizacion).toLocaleDateString()}</p>
-                <button class="btn-detalle" data-id="${programa.id}">
-                    <i class="fas fa-info-circle"></i> Ver detalles completos
-                </button>
+                <p><strong>Duración:</strong> ${meses} meses</p>
+                <p><strong>Ocupación:</strong> ${prog.nombre_ocupacion}</p>
+                <p><strong>Hasta:</strong> ${new Date(prog.fecha_finalizacion).toLocaleDateString()}</p>
             </div>`;
-        
         return card;
     }
 
     configurarBotonesDetalle() {
         document.querySelectorAll('.btn-detalle').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const programaId = e.target.dataset.id;
-                this.mostrarDetallePrograma(programaId);
+                const id = e.target.dataset.id;
+                console.log('Ver detalle de programa:', id);
             });
         });
     }
 
-    mostrarDetallePrograma(programaId) {
-        // Aquí podrías implementar la lógica para mostrar más detalles
-        // Por ejemplo, abrir un modal o redirigir a otra página
-        console.log('Mostrando detalles del programa ID:', programaId);
-        // Ejemplo: window.location.href = `detalle-programa.php?id=${programaId}`;
-    }
-
     async fetchData(action, extraData = {}) {
-        const response = await fetch('../controllers/DiagnosticoController.php', {
+        const res = await fetch('../controllers/DiagnosticoController.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ accion: action, ...extraData })
         });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        return await response.json();
+        return await res.json();
     }
 
-    showSection(sectionId) {
-        // Ocultar todas las secciones primero
-        Object.values(this.elements).forEach(el => {
-            if (el?.classList) el.classList.add('hidden');
-        });
-        
-        // Mostrar la sección solicitada
-        if (this.elements[sectionId]) {
-            this.elements[sectionId].classList.remove('hidden');
-        } else {
-            document.getElementById(sectionId)?.classList.remove('hidden');
+showSection(sectionId) {
+    console.log('🔍 Ejecutando showSection con ID:', sectionId);
+
+    Object.values(this.elements).forEach(el => {
+        if (el?.classList) {
+            el.classList.add('hidden');
         }
+    });
+
+    const seccion = this.elements[sectionId] || document.getElementById(sectionId);
+    if (seccion) {
+        console.log('✅ Mostrando sección:', sectionId, seccion);
+        seccion.classList.remove('hidden');
+
+        // Opcional: Forzar scroll para verlo
+        seccion.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        console.warn('⚠ No se encontró el elemento con ID:', sectionId);
     }
+}
+
+
 
     showError(message, containerId = null) {
-        const container = containerId ? 
-            (this.elements[containerId] || document.getElementById(containerId)) : 
-            this.elements.preguntasDinamicas;
-        
-        if (container) {
-            container.innerHTML = `
-                <div class="error-message">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <p>${message}</p>
-                </div>`;
-        } else {
-            alert(message);
-        }
+        const container = containerId ? (this.elements[containerId] || document.getElementById(containerId)) : this.elements.preguntasDinamicas;
+        container.innerHTML = `<div class="error-message"><p>${message}</p></div>`;
     }
 
     showInfo(message, containerId) {
         const container = this.elements[containerId] || document.getElementById(containerId);
-        if (container) {
-            container.innerHTML = `
-                <div class="info-message">
-                    <i class="fas fa-info-circle"></i>
-                    <p>${message}</p>
-                </div>`;
-        }
+        container.innerHTML = `<div class="info-message"><p>${message}</p></div>`;
     }
 }
 
-// Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     new DiagnosticoApp();
 });

@@ -10,7 +10,7 @@ class Diagnostico {
     private $db;
 
     public function __construct($data = []) {
-        $this->db = Conexion::conectar(); // Establece conexión a la BD
+        $this->db = Conexion::conectar(); // Conexión única en la instancia
 
         $this->id = $data['id'] ?? null;
         $this->empresa_id = $data['empresa_id'] ?? null;
@@ -18,7 +18,7 @@ class Diagnostico {
         $this->estado = $data['estado'] ?? null;
     }
 
-    // ✅ Obtener preguntas con sus opciones
+    // ✅ Obtener todas las preguntas con sus opciones asociadas
     public function obtenerPreguntasConOpciones() {
         $stmt = $this->db->query("SELECT * FROM preguntas");
         $preguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -32,37 +32,40 @@ class Diagnostico {
         return $preguntas;
     }
 
-    // ✅ Actualizar enunciado de una pregunta existente
+    // ✅ Actualizar el enunciado de una pregunta existente
     public function actualizarPregunta($id, $enunciado) {
         $stmt = $this->db->prepare("UPDATE preguntas SET enunciado = ? WHERE id = ?");
         return $stmt->execute([$enunciado, $id]);
     }
 
-    // ✅ Insertar nueva opción a una pregunta existente
+    // ✅ Insertar una nueva opción a una pregunta
     public function insertarOpcion($idPregunta, $texto) {
         $stmt = $this->db->prepare("INSERT INTO opciones (id_pregunta, texto) VALUES (?, ?)");
         return $stmt->execute([$idPregunta, $texto]);
     }
 
-    // ✅ Eliminar una opción existente
+    // ✅ Eliminar una opción específica
     public function eliminarOpcion($idOpcion) {
         $stmt = $this->db->prepare("DELETE FROM opciones WHERE id = ?");
         return $stmt->execute([$idOpcion]);
     }
+
+    // ✅ Insertar una nueva pregunta y devolver su ID
     public function insertarPregunta($enunciado) {
-        $conn = Conexion::conectar();
-        $stmt = $conn->prepare("INSERT INTO preguntas (enunciado) VALUES (?)");
+        $stmt = $this->db->prepare("INSERT INTO preguntas (enunciado) VALUES (?)");
         $stmt->execute([$enunciado]);
-        return $conn->lastInsertId(); // Devuelve el ID de la nueva pregunta
+        return $this->db->lastInsertId(); // Devuelve el ID generado
     }
-   public function eliminarPregunta($idPregunta) {
-    $conn = Conexion::conectar();
-    // Elimina primero las opciones asociadas
-    $stmt = $conn->prepare("DELETE FROM opciones WHERE pregunta_id = ?");
-    $stmt->execute([$idPregunta]);
-    // Luego elimina la pregunta
-    $stmt2 = $conn->prepare("DELETE FROM preguntas WHERE id = ?");
-    return $stmt2->execute([$idPregunta]);
-}
+
+    // ✅ Eliminar una pregunta y sus opciones asociadas
+    public function eliminarPregunta($idPregunta) {
+        // Primero elimina opciones asociadas
+        $stmt = $this->db->prepare("DELETE FROM opciones WHERE id_pregunta = ?");
+        $stmt->execute([$idPregunta]);
+
+        // Luego elimina la pregunta
+        $stmt2 = $this->db->prepare("DELETE FROM preguntas WHERE id = ?");
+        return $stmt2->execute([$idPregunta]);
+    }
 }
 ?>
