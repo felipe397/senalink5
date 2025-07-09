@@ -6,7 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
         menu.classList.toggle('menu-open');
         content.classList.toggle('content-shift');
     }
-
+    function entrarConGestion() {
+        sessionStorage.setItem("desdeGestion", "1");
+        window.location.href = "../../formulario.php";
+    }
     // Add event listener to the menu toggle button
     const menuToggle = document.getElementById('menu-toggle');
     if (menuToggle) {
@@ -22,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.warn("Elemento 'menu-toggle' no encontrado. No se agregó el event listener.");
     }
 });
+
 
 
 
