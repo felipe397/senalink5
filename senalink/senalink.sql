@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-07-2025 a las 05:36:36
+-- Tiempo de generación: 09-07-2025 a las 18:37:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -77,6 +77,40 @@ CREATE TABLE `diagnosticos_empresariales` (
   `fecha_realizacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `diagnosticos_empresariales`
+--
+
+INSERT INTO `diagnosticos_empresariales` (`id`, `empresa_id`, `resultado`, `fecha_realizacion`) VALUES
+(1, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Asistentes administrativos\",\"pregunta3\":\"Tecn\\u00f3logo\",\"pregunta4\":\"Log\\u00edstica y transporte\"}', '2025-07-09 02:41:11'),
+(2, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Servicios\"}', '2025-07-09 03:05:46'),
+(3, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Servicios\"}', '2025-07-09 03:13:11'),
+(4, 0, '[]', '2025-07-09 03:13:23'),
+(5, 0, '[]', '2025-07-09 03:13:24'),
+(6, 0, '[]', '2025-07-09 03:13:24'),
+(7, 0, '[]', '2025-07-09 03:13:25'),
+(8, 0, '[]', '2025-07-09 03:13:25'),
+(9, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Servicios\"}', '2025-07-09 03:20:22'),
+(10, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Servicios\"}', '2025-07-09 03:22:05'),
+(11, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Servicios\"}', '2025-07-09 03:24:01'),
+(12, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 03:33:43'),
+(13, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 03:41:00'),
+(14, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 03:47:39'),
+(15, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 03:49:11'),
+(16, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 03:51:28'),
+(17, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 03:52:29'),
+(18, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 03:55:25'),
+(19, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 04:01:22'),
+(20, 0, '{\"pregunta1\":\"Industrial\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 04:01:48'),
+(21, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 04:02:49'),
+(22, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 04:12:26'),
+(23, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 04:13:48'),
+(24, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 04:16:20'),
+(25, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 04:19:37'),
+(26, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 04:24:58'),
+(27, 0, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Mec\\u00e1nicos de Motos\",\"pregunta3\":\"T\\u00e9cnico\",\"pregunta4\":\"Industrial\"}', '2025-07-09 04:28:18'),
+(30, 39, '{\"pregunta1\":\"Servicios\",\"pregunta2\":\"Auxiliares t\\u00e9cnicos en electr\\u00f3nica\",\"pregunta3\":\"Tecn\\u00f3logo\",\"pregunta4\":\"Electricidad\"}', '2025-07-09 06:23:50');
+
 -- --------------------------------------------------------
 
 --
@@ -94,51 +128,48 @@ CREATE TABLE `opciones` (
 --
 
 INSERT INTO `opciones` (`id`, `id_pregunta`, `texto`) VALUES
-(17, 1, 'Construcción'),
-(18, 1, 'Educación'),
-(19, 1, 'Electricidad'),
-(20, 1, 'Industrial'),
-(21, 1, 'Salud'),
-(22, 1, 'Servicios'),
-(23, 1, 'Textiles'),
-(24, 1, 'Transporte'),
-(25, 2, 'Asistentes administrativos'),
-(26, 2, 'Desarrolladores de software'),
-(27, 2, 'Técnicos electricistas'),
-(28, 2, 'Auxiliares contables'),
-(29, 2, 'Operarios de maquinaria'),
-(30, 2, 'Diseñadores gráficos'),
-(31, 2, 'Inspectores de calidad'),
-(32, 2, 'Agentes de servicio al cliente'),
-(33, 2, 'Personal logístico'),
-(34, 2, 'Mecánicos de mantenimiento'),
 (35, 3, 'Técnico'),
 (36, 3, 'Tecnólogo'),
-(37, 4, 'Procesos administrativos y financieros'),
-(38, 4, 'Soporte técnico y mantenimiento'),
-(39, 4, 'Producción y manufactura'),
-(40, 4, 'Logística y transporte'),
-(41, 4, 'Atención al cliente y ventas'),
-(42, 4, 'Procesos educativos o formativos'),
-(43, 5, 'Tecnologías de la información'),
-(44, 5, 'Administración y contabilidad'),
-(45, 5, 'Diseño y multimedia'),
-(46, 5, 'Mecánica y mantenimiento'),
-(47, 5, 'Electricidad y electrónica'),
-(48, 5, 'Textil y confección'),
-(49, 5, 'Salud y seguridad laboral'),
-(50, 5, 'Logística y transporte'),
-(51, 5, 'Atención al cliente'),
-(52, 6, 'Administración y gestión empresarial'),
-(53, 6, 'Servicios financieros'),
-(54, 6, 'Electricidad y electrónica'),
-(55, 6, 'Mecánica y mantenimiento'),
-(56, 6, 'Tecnologías de la información'),
-(57, 6, 'Textil, diseño y confección'),
-(58, 6, 'Salud y seguridad laboral'),
-(59, 6, 'Construcción y obras civiles'),
-(60, 6, 'Logística y transporte'),
-(61, 6, 'Atención al cliente y ventas');
+(63, 1, 'Industrial'),
+(64, 1, 'Servicios'),
+(65, 8, 'Servicios'),
+(66, 8, 'Electricidad'),
+(67, 8, 'Industrial'),
+(68, 8, 'Textiles'),
+(69, 8, 'Construcción'),
+(70, 2, 'Auxiliares de información y servicio al cliente'),
+(71, 2, 'Mecánicos Industriales'),
+(72, 2, 'Oficiales de Construcción'),
+(73, 2, 'Técnicos en Construcción y Arquitectura'),
+(74, 2, 'Auxiliares técnicos en electrónica'),
+(75, 2, 'Dibujantes Técnicos'),
+(76, 2, 'Mecánicos de vehículos automotores'),
+(77, 2, 'Técnicos en mecánica y construcción mecánica'),
+(78, 2, 'Patronistas de Productos de Tela, Cuero y Piel'),
+(79, 2, 'Electricistas de Vehículos Automotores'),
+(80, 2, 'Electricistas Residenciales'),
+(81, 2, 'Técnicos en automatización e instrumentación'),
+(82, 2, 'Supervisores de ajustadores de máquinas herramientas'),
+(83, 2, 'Ajustadores y operadores de máquinas herramientas'),
+(84, 2, 'Sastres, Modistos, Peleteros y Sombrereros'),
+(85, 2, 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos'),
+(86, 2, 'Mecánicos de Motos'),
+(87, 2, 'Instaladores Residenciales y Comerciales'),
+(88, 2, 'Supervisores de electricidad y telecomunicaciones'),
+(89, 2, 'Operadores de Cámara de Cine y Televisión'),
+(90, 2, 'Ensambladores e Inspectores de Muebles y Accesorios'),
+(91, 2, 'Supervisores de Fabricación de Productos de Tela, Cuero y Piel'),
+(92, 2, 'Operadores de Máquinas Herramientas'),
+(93, 2, 'Supervisores de mecánica'),
+(94, 2, 'Productores, directores artísticos y ocupaciones relacionadas'),
+(95, 2, 'Pintores y Empapeladores'),
+(96, 2, 'Topógrafos'),
+(97, 2, 'Pintores, escultores y otros artistas visuales'),
+(98, 2, 'Soldadores'),
+(99, 2, 'Electricistas Industriales'),
+(100, 2, 'Técnicos de aire acondicionado y refrigeración'),
+(101, 2, 'Técnicos en electrónica'),
+(102, 2, 'Técnicos en Diseño y Arte Gráfico');
 
 -- --------------------------------------------------------
 
@@ -182,9 +213,7 @@ INSERT INTO `preguntas` (`id`, `enunciado`, `fecha_creacion`) VALUES
 (1, '¿A qué sector productivo pertenece su empresa?', '2025-07-01 22:09:30'),
 (2, '¿En qué tipo de ocupación considera que se necesita talento humano?', '2025-07-01 22:09:30'),
 (3, 'Que nivel de formacion considera mas adecuado para su empresa?', '2025-07-01 22:09:30'),
-(4, '¿Qué tipo de procesos predominan en su operación diaria?', '2025-07-01 22:09:30'),
-(5, '¿Qué área temática desea fortalecer dentro de su empresa?', '2025-07-01 22:09:30'),
-(6, '¿Qué área ocupacional considera más relevante para su empresa?', '2025-07-01 22:09:30');
+(8, '¿Que sector considera que es requerido en la empresa?', '2025-07-09 02:53:03');
 
 -- --------------------------------------------------------
 
@@ -196,7 +225,7 @@ CREATE TABLE `programas_formacion` (
   `id` int(11) NOT NULL,
   `nombre_programa` varchar(50) NOT NULL,
   `duracion_programa` int(11) NOT NULL,
-  `nivel_formacion` enum('Tecnico','Tecnologo') DEFAULT NULL,
+  `nivel_formacion` varchar(50) DEFAULT NULL,
   `estado` enum('En ejecucion','Finalizado') DEFAULT NULL,
   `fecha_creacion` timestamp NULL DEFAULT NULL,
   `ficha` int(11) DEFAULT NULL,
@@ -204,9 +233,9 @@ CREATE TABLE `programas_formacion` (
   `fecha_finalizacion` date NOT NULL,
   `descripcion` text DEFAULT NULL,
   `codigo` int(11) NOT NULL,
-  `sector_programa` enum('Industrial','Primario','Servicios') DEFAULT NULL,
-  `nombre_ocupacion` varchar(255) DEFAULT NULL,
-  `sector_economico` enum('Industria','Servicios','Textiles','Construccion','Electricidad') DEFAULT NULL,
+  `sector_programa` varchar(50) DEFAULT NULL,
+  `nombre_ocupacion` varchar(100) DEFAULT NULL,
+  `sector_economico` varchar(50) DEFAULT NULL,
   `etapa_ficha` enum('Lectiva','Practica') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -250,10 +279,10 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (40, 'MANTENIMIENTO DE VEHICULOS LIVIANOS', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-11-12', NULL, 838109, 'Servicios', 'Mecánicos de vehículos automotores', 'Industria', 'Lectiva'),
 (41, 'CONSTRUCCION DE EDIFICACIONES', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-03-29', NULL, 836138, '', 'Oficiales de Construcción', 'Construccion', 'Lectiva'),
 (42, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-01-14', NULL, 524300, 'Servicios', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
-(43, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-01-14', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'Industria', 'Lectiva'),
+(43, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-01-14', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'servicios', 'Lectiva'),
 (44, 'CONSTRUCCION, MANTENIMIENTO Y REPARACION DE ESTRUC', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-12-15', NULL, 836138, '', 'Oficiales de Construcción', 'Construccion', 'Lectiva'),
 (45, 'ELABORACION DE PRENDAS DE VESTIR SOBRE MEDIDAS', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-12-29', NULL, 842200, '', 'Sastres, Modistos, Peleteros y Sombrereros', 'Textiles', 'Lectiva'),
-(46, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-03-06', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'Industria', 'Lectiva'),
+(46, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-03-06', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'servicios', 'Lectiva'),
 (47, 'CONSTRUCCION EN EDIFICACIONES.', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-12-15', NULL, 223104, '', 'Técnicos en Construcción y Arquitectura', 'Construccion', 'Lectiva'),
 (48, 'CARPINTERIA DE ALUMINIO', 1792, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-04-27', NULL, 841100, '', 'Instaladores Residenciales y Comerciales', 'Servicios', 'Lectiva'),
 (49, 'ELABORACION DE PRENDAS DE VESTIR SOBRE MEDIDAS', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-04-29', NULL, 842200, '', 'Sastres, Modistos, Peleteros y Sombrereros', 'Textiles', 'Lectiva'),
@@ -286,7 +315,7 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (76, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 836138, '', 'Soldadores', 'Industria', 'Lectiva'),
 (77, 'MANTENIMIENTO Y ENSAMBLE DE EQUIPOS ELECTRONICOS.', 2304, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 839317, 'Servicios', 'Auxiliares técnicos en electrónica', 'Electricidad', 'Lectiva'),
 (78, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 524300, '', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
-(79, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 838318, '', 'Mecánicos de motos', 'Industria', 'Lectiva'),
+(79, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 838318, 'Servicios', 'Mecánicos de motos', 'servicios', 'Lectiva'),
 (80, 'MANTENIMIENTO ELECTROMECANICO INDUSTRIAL .', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 223213, '', 'Técnicos en mecánica y construcción mecánica', 'Industria', 'Lectiva'),
 (81, 'PATRONAJE INDUSTRIAL DE PRENDAS DE VESTIR', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 524500, '', 'Patronistas de Productos de Tela, Cuero y Piel', 'Textiles', 'Lectiva'),
 (82, 'MANTENIMIENTO DE AUTOMATISMOS INDUSTRIALES..', 2352, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 224315, '', 'Técnicos en automatización e instrumentación', 'Industria', 'Lectiva'),
@@ -306,7 +335,7 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (96, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 836138, '', 'Soldadores', 'Industria', 'Lectiva'),
 (97, 'MANTENIMIENTO Y ENSAMBLE DE EQUIPOS ELECTRONICOS.', 2304, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 839317, 'Servicios', 'Auxiliares técnicos en electrónica', 'Electricidad', 'Lectiva'),
 (98, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 524300, '', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
-(99, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 838318, '', 'Mecánicos de motos', 'Industria', 'Lectiva'),
+(99, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 838318, 'Servicios', 'Mecánicos de motos', 'servicios', 'Lectiva'),
 (100, 'MANTENIMIENTO ELECTROMECANICO INDUSTRIAL .', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 223213, '', 'Técnicos en mecánica y construcción mecánica', 'Industria', 'Lectiva'),
 (101, 'PATRONAJE INDUSTRIAL DE PRENDAS DE VESTIR', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 524500, '', 'Patronistas de Productos de Tela, Cuero y Piel', 'Textiles', 'Lectiva'),
 (102, 'MANTENIMIENTO DE AUTOMATISMOS INDUSTRIALES..', 2352, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 224315, '', 'Técnicos en automatización e instrumentación', 'Industria', 'Lectiva'),
@@ -409,10 +438,10 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (199, 'MANTENIMIENTO DE VEHICULOS LIVIANOS', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-11-12', NULL, 838109, 'Servicios', 'Mecánicos de vehículos automotores', 'Industria', 'Lectiva'),
 (200, 'CONSTRUCCION DE EDIFICACIONES', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-03-29', NULL, 836138, '', 'Oficiales de Construcción', 'Construccion', 'Lectiva'),
 (201, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-01-14', NULL, 524300, 'Servicios', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
-(202, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-01-14', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'Industria', 'Lectiva'),
+(202, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-01-14', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'servicios', 'Lectiva'),
 (203, 'CONSTRUCCION, MANTENIMIENTO Y REPARACION DE ESTRUC', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-12-15', NULL, 836138, '', 'Oficiales de Construcción', 'Construccion', 'Lectiva'),
 (204, 'ELABORACION DE PRENDAS DE VESTIR SOBRE MEDIDAS', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-12-29', NULL, 842200, '', 'Sastres, Modistos, Peleteros y Sombrereros', 'Textiles', 'Lectiva'),
-(205, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-03-06', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'Industria', 'Lectiva'),
+(205, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-03-06', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'servicios', 'Lectiva'),
 (206, 'CONSTRUCCION EN EDIFICACIONES.', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-12-15', NULL, 223104, '', 'Técnicos en Construcción y Arquitectura', 'Construccion', 'Lectiva'),
 (207, 'CARPINTERIA DE ALUMINIO', 1792, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-04-27', NULL, 841100, '', 'Instaladores Residenciales y Comerciales', 'Servicios', 'Lectiva'),
 (208, 'ELABORACION DE PRENDAS DE VESTIR SOBRE MEDIDAS', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-04-29', NULL, 842200, '', 'Sastres, Modistos, Peleteros y Sombrereros', 'Textiles', 'Lectiva'),
@@ -445,7 +474,7 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (235, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 836138, '', 'Soldadores', 'Industria', 'Lectiva'),
 (236, 'MANTENIMIENTO Y ENSAMBLE DE EQUIPOS ELECTRONICOS.', 2304, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 839317, 'Servicios', 'Auxiliares técnicos en electrónica', 'Electricidad', 'Lectiva'),
 (237, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 524300, '', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
-(238, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 838318, '', 'Mecánicos de motos', 'Industria', 'Lectiva'),
+(238, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 838318, 'Servicios', 'Mecánicos de motos', 'servicios', 'Lectiva'),
 (239, 'MANTENIMIENTO ELECTROMECANICO INDUSTRIAL .', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 223213, '', 'Técnicos en mecánica y construcción mecánica', 'Industria', 'Lectiva'),
 (240, 'PATRONAJE INDUSTRIAL DE PRENDAS DE VESTIR', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 524500, '', 'Patronistas de Productos de Tela, Cuero y Piel', 'Textiles', 'Lectiva'),
 (241, 'MANTENIMIENTO DE AUTOMATISMOS INDUSTRIALES..', 2352, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 224315, '', 'Técnicos en automatización e instrumentación', 'Industria', 'Lectiva'),
@@ -461,12 +490,12 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (251, 'CONSTRUCCION EN EDIFICACIONES', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-14', NULL, 223104, '', 'Técnicos en Construcción y Arquitectura', 'Construccion', 'Lectiva'),
 (252, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-14', NULL, 524300, '', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
 (253, 'DESARROLLO DE MEDIOS GRAFICOS VISUALES', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-14', NULL, 522309, '', 'Técnicos en Diseño y Arte Gráfico', 'Industria', 'Lectiva'),
-(254, 'ELECTRICIDAD INDUSTRIAL', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 821222, '', 'Supervisores de electricidad y telecomunicaciones', 'Electricidad', 'Lectiva'),
-(255, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 836138, '', 'Soldadores', 'Industria', 'Lectiva');
+(254, 'ELECTRICIDAD INDUSTRIAL', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 821222, '', 'Supervisores de electricidad y telecomunicaciones', 'Electricidad', 'Lectiva');
 INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`, `nivel_formacion`, `estado`, `fecha_creacion`, `ficha`, `habilidades_requeridas`, `fecha_finalizacion`, `descripcion`, `codigo`, `sector_programa`, `nombre_ocupacion`, `sector_economico`, `etapa_ficha`) VALUES
+(255, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 836138, '', 'Soldadores', 'Industria', 'Lectiva'),
 (256, 'MANTENIMIENTO Y ENSAMBLE DE EQUIPOS ELECTRONICOS.', 2304, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 839317, 'Servicios', 'Auxiliares técnicos en electrónica', 'Electricidad', 'Lectiva'),
 (257, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 524300, '', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
-(258, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 838318, '', 'Mecánicos de motos', 'Industria', 'Lectiva'),
+(258, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 838318, 'Servicios', 'Mecánicos de motos', 'servicios', 'Lectiva'),
 (259, 'MANTENIMIENTO ELECTROMECANICO INDUSTRIAL .', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 223213, '', 'Técnicos en mecánica y construcción mecánica', 'Industria', 'Lectiva'),
 (260, 'PATRONAJE INDUSTRIAL DE PRENDAS DE VESTIR', 2208, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 524500, '', 'Patronistas de Productos de Tela, Cuero y Piel', 'Textiles', 'Lectiva'),
 (261, 'MANTENIMIENTO DE AUTOMATISMOS INDUSTRIALES..', 2352, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-07-22', NULL, 224315, '', 'Técnicos en automatización e instrumentación', 'Industria', 'Lectiva'),
@@ -541,12 +570,12 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (330, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2026-02-19', NULL, 524300, '', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
 (331, 'DESARROLLO DE MEDIOS GRAFICOS VISUALES', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-06-26', NULL, 522309, '', 'Técnicos en Diseño y Arte Gráfico', 'Industria', 'Lectiva'),
 (332, 'ELECTRICIDAD INDUSTRIAL', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-04-22', NULL, 821222, '', 'Supervisores de electricidad y telecomunicaciones', 'Electricidad', 'Practica'),
-(333, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-04-21', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'Industria', 'Lectiva'),
+(333, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-04-21', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'servicios', 'Lectiva'),
 (334, 'MANTENIMIENTO Y ENSAMBLE DE EQUIPOS ELECTRONICOS.', 2304, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-12-15', NULL, 839317, '', 'Auxiliares técnicos en electrónica', 'Electricidad', 'Lectiva'),
 (335, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2026-12-15', NULL, 524300, '', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
 (336, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-06-26', NULL, 524300, '', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
 (337, 'MANTENIMIENTO ELECTROMECANICO INDUSTRIAL .', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2026-04-21', NULL, 223213, '', 'Técnicos en mecánica y construcción mecánica', 'Industria', 'Lectiva'),
-(338, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-01-14', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'Industria', 'Lectiva'),
+(338, 'MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2026-01-14', NULL, 838318, 'Servicios', 'Mecánicos de Motos', 'servicios', 'Lectiva'),
 (339, 'MANTENIMIENTO ELECTROMECANICO INDUSTRIAL .', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-04-22', NULL, 223213, '', 'Técnicos en mecánica y construcción mecánica', 'Industria', 'Lectiva'),
 (340, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'Tecnologo', 'En ejecucion', NULL, NULL, NULL, '2025-12-10', NULL, 524300, '', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'Textiles', 'Lectiva'),
 (341, 'PATRONAJE INDUSTRIAL DE PRENDAS DE VESTIR', 2208, 'Tecnico', 'En ejecucion', NULL, NULL, NULL, '2025-07-14', NULL, 524500, '', 'Patronistas de Productos de Tela, Cuero y Piel', 'Textiles', 'Lectiva');
@@ -615,28 +644,30 @@ CREATE TABLE `usuarios` (
   `primer_apellido` varchar(50) NOT NULL,
   `segundo_apellido` varchar(50) DEFAULT NULL,
   `tipo_documento` enum('Cedula de ciudadania','Cedula de extranjeria','Permiso especial de permanencia','Permiso de proteccion temporal') DEFAULT NULL,
-  `numero_documento` bigint(20) NOT NULL
+  `numero_documento` bigint(20) NOT NULL,
+  `diagnostico_realizado` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`) VALUES
-(15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'Frisby S.A', '1234567891', NULL, 'Frisby', 'Industrial', '', NULL, '', NULL, NULL, 0),
-(16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', 'Cedula de ciudadania', 12345678),
-(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, '3001234567', NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567),
-(19, 'chicaalzateb@gmail.com', '$2y$10$MuUNkZMGj0EGdwCLTGe4fO8oLkfYNxZlcKJeAoURY9bIrjVPkkajm', 'empresa', 'Activo', '2025-06-17 12:23:36', '4422', 'direccion ejemplo', 'Braulio ejemplo sas', '1234567891', NULL, 'Braulio', 'Industrial', '', NULL, '', NULL, NULL, 0),
-(24, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$gQp4g5O5jRPd8zenNWy7eOQO8SZ2gmp3J/ygVK5dFxMUUg9/Mvtae', 'empresa', 'Activo', '2025-06-30 09:07:53', '4721233', 'Arabia', 'Monster y cuates', '345333555', NULL, 'Edwin Manito', 'Industrial', '', NULL, '', NULL, NULL, 0),
-(25, 'osoriolopezjuanfelipe@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, '322222222', NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', 'Cedula de ciudadania', 23456789),
-(26, 'crisberx1@gmail.com', '$2y$10$FLuzp334nlTSHgt5jg5.4.8GCP4cEHA4r9Gbifj6gPGjFtbBLsUky', 'empresa', 'Activo', '2025-07-02 01:49:59', '987654321', 'Villaverde', 'Migue Monster cuates', '31222333', NULL, 'Migue', 'Agricola', '', NULL, '', NULL, NULL, 0),
-(29, 'crisberx12@gmail.com', '$2y$10$FsATLOq0VUFelBfI6cLTDu/0x6bRBL2Dz74NwlXFtxeMUPYCNcoee', 'empresa', 'Activo', '2025-07-02 01:51:27', '9876543212', 'Villaverde 1', 'Migue Monster cuates xd', '312223333', NULL, 'Miguel', 'Servicios', '', NULL, '', NULL, NULL, 0),
-(33, 'alejito@gmail.com', '$2y$10$IFmSsKZuEZdGg2bAolpJwuov/vHyg48taJiICN6FXCaXwBO9PD9LW', 'empresa', 'Activo', '2025-07-02 02:02:49', '333666999', 'Islas canarias', 'Alejo asa', '3122233344', NULL, 'alejo', 'Agricola', '', NULL, '', NULL, NULL, 0),
-(34, 'raiba1234@gmail.com', '$2y$10$fpJ9K2vdlpo97P5KkxWYbepSefOUr2vJU9Ben0n.UdZDQoJlXbtae', 'empresa', 'Activo', '2025-07-02 02:27:52', '999888777', 'Villaverde', 'Raigosa INC', '312223334', NULL, 'Chocolates ruth', 'Agricola', '', NULL, '', NULL, NULL, 0),
-(35, 'appleinc@gmail.com', '$2y$10$3y.5xMj8T.TIhXX3DmIq9.YOxGSE6/9w7S7YX4dD1aG77zXkmDtr.', 'empresa', 'Activo', '2025-07-02 06:20:20', '111222333', 'Beverly Hills', 'Apple INC', '321897654', NULL, 'Steve Jobs', 'Agricola', '', NULL, '', NULL, NULL, 0),
-(36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, '3024345634', NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cedula de ciudadania', 1111111111),
-(37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, '3024345635', NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cedula de ciudadania', 2222222222),
-(38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, '3024345636', NULL, NULL, NULL, 'Edwin', NULL, 'Banol', 'Cardona', 'Cedula de ciudadania', 3333333333);
+INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`, `diagnostico_realizado`) VALUES
+(15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'Frisby S.A', '1234567891', NULL, 'Frisby', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
+(16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', 'Cedula de ciudadania', 12345678, 0),
+(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, '3001234567', NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567, 0),
+(19, 'chicaalzateb@gmail.com', '$2y$10$MuUNkZMGj0EGdwCLTGe4fO8oLkfYNxZlcKJeAoURY9bIrjVPkkajm', 'empresa', 'Activo', '2025-06-17 12:23:36', '4422', 'direccion ejemplo', 'Braulio ejemplo sas', '1234567891', NULL, 'Braulio', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
+(24, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$gQp4g5O5jRPd8zenNWy7eOQO8SZ2gmp3J/ygVK5dFxMUUg9/Mvtae', 'empresa', 'Activo', '2025-06-30 09:07:53', '4721233', 'Arabia', 'Monster y cuates', '345333555', NULL, 'Edwin Manito', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
+(25, 'osoriolopezjuanfelipe@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, '322222222', NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', 'Cedula de ciudadania', 23456789, 0),
+(26, 'crisberx1@gmail.com', '$2y$10$FLuzp334nlTSHgt5jg5.4.8GCP4cEHA4r9Gbifj6gPGjFtbBLsUky', 'empresa', 'Activo', '2025-07-02 01:49:59', '987654321', 'Villaverde', 'Migue Monster cuates', '31222333', NULL, 'Migue', 'Agricola', '', NULL, '', NULL, NULL, 0, 0),
+(29, 'crisberx12@gmail.com', '$2y$10$FsATLOq0VUFelBfI6cLTDu/0x6bRBL2Dz74NwlXFtxeMUPYCNcoee', 'empresa', 'Activo', '2025-07-02 01:51:27', '9876543212', 'Villaverde 1', 'Migue Monster cuates xd', '312223333', NULL, 'Miguel', 'Servicios', '', NULL, '', NULL, NULL, 0, 0),
+(33, 'alejito@gmail.com', '$2y$10$IFmSsKZuEZdGg2bAolpJwuov/vHyg48taJiICN6FXCaXwBO9PD9LW', 'empresa', 'Activo', '2025-07-02 02:02:49', '333666999', 'Islas canarias', 'Alejo asa', '3122233344', NULL, 'alejo', 'Agricola', '', NULL, '', NULL, NULL, 0, 0),
+(34, 'raiba1234@gmail.com', '$2y$10$fpJ9K2vdlpo97P5KkxWYbepSefOUr2vJU9Ben0n.UdZDQoJlXbtae', 'empresa', 'Activo', '2025-07-02 02:27:52', '999888777', 'Villaverde', 'Raigosa INC', '312223334', NULL, 'Chocolates ruth', 'Agricola', '', NULL, '', NULL, NULL, 0, 0),
+(35, 'appleinc@gmail.com', '$2y$10$3y.5xMj8T.TIhXX3DmIq9.YOxGSE6/9w7S7YX4dD1aG77zXkmDtr.', 'empresa', 'Activo', '2025-07-02 06:20:20', '111222333', 'Beverly Hills', 'Apple INC', '321897654', NULL, 'Steve Jobs', 'Agricola', '', NULL, '', NULL, NULL, 0, 0),
+(36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, '3024345634', NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cedula de ciudadania', 1111111111, 0),
+(37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, '3024345635', NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cedula de ciudadania', 2222222222, 0),
+(38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, '3024345636', NULL, NULL, NULL, 'Edwin', NULL, 'Banol', 'Cardona', 'Cedula de ciudadania', 3333333333, 0),
+(39, 'breih2005@gmail.com', '$2y$10$dqqZTdHs6P3E5NL7k4m8GejSUSEYUM13u4WKOMyflVyO/GaUpPnre', 'empresa', 'Activo', '2025-07-09 12:50:41', '246812345', 'cr 6 calle 9-12 primavera azul', 'pinturas sas', '1234567891', NULL, 'johana delgado', 'Servicios', '', NULL, '', NULL, NULL, 0, 1);
 
 --
 -- Disparadores `usuarios`
@@ -723,13 +754,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `diagnosticos_empresariales`
 --
 ALTER TABLE `diagnosticos_empresariales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT de la tabla `password_resets`
@@ -741,7 +772,7 @@ ALTER TABLE `password_resets`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `programas_formacion`
@@ -771,7 +802,7 @@ ALTER TABLE `reportes_usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Restricciones para tablas volcadas
