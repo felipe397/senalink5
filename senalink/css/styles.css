@@ -134,6 +134,7 @@ img{
     max-width: 100.9rem;
     height: auto;
     overflow: hidden;
+    padding-bottom: 2.5rem;
 }
 
 .slider-frame img {
