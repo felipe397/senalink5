@@ -4,7 +4,7 @@ require_once '../models/UsuarioModel.php';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id = isset($_POST['id']) ? trim($_POST['id']) : null;
     $nit = isset($_POST['nit']) ? trim($_POST['nit']) : null;
-    $representante_legal = isset($_POST['representante']) ? trim($_POST['representante']) : null;
+    $representante_legal = isset($_POST['representante_legal']) ? trim($_POST['representante_legal']) : null;
     $razon_social = isset($_POST['razon_social']) ? trim($_POST['razon_social']) : null;
     $telefono = isset($_POST['telefono']) ? trim($_POST['telefono']) : null;
     $correo = isset($_POST['correo']) ? trim($_POST['correo']) : null;
