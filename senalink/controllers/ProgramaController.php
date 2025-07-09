@@ -3,8 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../models/Programa.php';
@@ -25,8 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     $duracion_programa      = $_POST['duracion_programa'] ?? null;
     $nombre_ocupacion    = $_POST['nombre_ocupacion'] ?? null;
     $nombre_programa     = $_POST['nombre_programa'] ?? null;
-    $habilidades         = $_POST['habilidades_requeridas'] ?? null;
-    $estado              = $_POST['estado'] ?? 'Disponible';
+    $estado              = $_POST['estado'] ?? 'En ejecucion';
     $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
 
     // Validaciones
@@ -34,11 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
 
     if (!is_numeric($codigo) || intval($codigo) <= 0) $errores[] = "El código debe ser numérico y positivo.";
     if (!is_numeric($ficha) || intval($ficha) <= 0) $errores[] = "La ficha debe ser numérica y positiva.";
-    if (!is_numeric($duracion_meses) || intval($duracion_meses) <= 0) $errores[] = "La duración debe ser un número positivo.";
+    if (!is_numeric($duracion_programa) || intval($duracion_programa) <= 0) $errores[] = "La duración debe ser un número positivo.";
 
     if (!preg_match('/^[\p{L}\s.]+$/u', $nombre_programa)) $errores[] = "Nombre inválido.";
-    if (!preg_match('/^[\p{L}\p{N}\s.,]+$/u', $descripcion)) $errores[] = "Descripción inválida.";
-    if (!preg_match('/^[\p{L}\p{N}\s.,]+$/u', $habilidades)) $errores[] = "Habilidades inválidas.";
 
     $fechaMinima = '1957-06-21';
     if (!$fecha_finalizacion || strtotime($fecha_finalizacion) < strtotime($fechaMinima)) {
@@ -46,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     }
 
     if (!$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$nombre_programa || !$etapa_ficha || !$sector_economico ||
-        !$duracion_programa || !$estado || !$habilidades || !$fecha_finalizacion) {
+        !$duracion_programa || !$estado  || !$fecha_finalizacion) {
         $errores[] = "Todos los campos son obligatorios.";
     }
 
@@ -68,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         'nombre_ocupacion' => $nombre_ocupacion,
         'duracion_programa' => $duracion_programa,
         'estado' => $estado,
-        'habilidades_requeridas' => $habilidades,
         'fecha_finalizacion' => $fecha_finalizacion
     ]);
 
@@ -93,12 +89,11 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_P
     $nombre_ocupacion    = $_POST['nombre_ocupacion'] ?? null;
     $duracion_programa      = $_POST['duracion_programa'] ?? null;
     $estado              = $_POST['estado'] ?? 'Disponible';
-    $habilidades         = $_POST['habilidades_requeridas'] ?? null;
     $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
 
     // Validaciones básicas
     if (!$id || !$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$nombre_programa ||
-        !$duracion_meses || !$estado || !$descripcion || !$habilidades || !$fecha_finalizacion) {
+        !$duracion_meses || !$estado || !$fecha_finalizacion) {
         echo "⚠️ Todos los campos son obligatorios.";
         exit;
     }
@@ -115,7 +110,6 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_P
         'nombre_ocupacion' => $nombre_ocupacion,
         'duracion_programa' => $duracion_programa,
         'estado' => $estado,
-        'habilidades_requeridas' => $habilidades,
         'fecha_finalizacion' => $fecha_finalizacion
     ]);
 

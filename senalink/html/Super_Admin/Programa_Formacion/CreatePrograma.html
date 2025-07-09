@@ -69,7 +69,7 @@
     
 
         <!-- Duración: solo números positivos -->
-        <input class="input-field" name="duracion_programa" placeholder="Duración (meses)" type="number" min="1" required 
+        <input class="input-field" name="duracion_programa" placeholder="Duración (Horas)" type="number" min="1" required 
             title="La duración debe ser un número positivo."/>
 
         <!-- Estado -->
@@ -96,10 +96,7 @@
         </select>
 
 
-        <!-- Habilidades requeridas: letras, números, espacios, comas y puntos -->
-        <input class="input-field" name="habilidades_requeridas" placeholder="Habilidades requeridas" type="text" required 
-            pattern="[\p{L}\p{N}\s.,]+"
-            title="Solo se permiten letras, números, espacios, comas y puntos."/>
+
 
         <!-- Fecha: mayor a 1957-06-21 -->
         <input class="input-field" name="fecha_finalizacion" placeholder="Fecha de finalización" type="date" required 
