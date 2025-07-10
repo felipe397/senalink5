@@ -162,6 +162,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         const el = document.getElementById(campo);
                         if (el) el.textContent = p[campo] || "";
                     });
+
+                    // Ocultar botón "Actualizar" si estado es "Finalizado"
+                    const btnActualizar = document.getElementById('btnActualizar');
+                    if (btnActualizar && p.estado && p.estado.toLowerCase() === 'finalizado') {
+                        btnActualizar.style.display = 'none';
+                    } else if (btnActualizar) {
+                        btnActualizar.style.display = 'inline-block';
+                    }
                 }
             })
             .catch(error => {

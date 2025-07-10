@@ -78,26 +78,6 @@
     <script src="../../../js/script.js"></script>
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/viewprogramasformacion.js"></script>
-
-    <script>
-    document.getElementById('ProgReporte').addEventListener('click', function() {
-        const programaId = new URLSearchParams(window.location.search).get('id');
-        if (programaId) {
-            window.location.href = `ProgramaReport.html?id=${programaId}`;
-        } else {
-            alert('No se encontró el ID del programa.');
-        }
-    });
-
-    // Actualizar el enlace "Actualizar" con el id del programa
-    document.addEventListener("DOMContentLoaded", function () {
-        const programaId = new URLSearchParams(window.location.search).get('id');
-        const btnActualizar = document.getElementById('btnActualizar');
-        if (programaId && btnActualizar) {
-            btnActualizar.href = `ProgramaEdit.html?id=${programaId}`;
-        }
-    });
-    </script>
     <div class="footer__crud">
     <footer>
         <p>© Todos los derechos reservados. SenaLink</p>

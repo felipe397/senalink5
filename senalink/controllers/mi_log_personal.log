@@ -3036,3 +3036,24 @@ Recomendaciones encontradas: Array
         )
 
 )
+SQL: SELECT * FROM programas_formacion WHERE 1=1 AND LOWER(sector_programa) LIKE ? AND LOWER(nombre_ocupacion) LIKE ? AND nivel_formacion LIKE ? AND sector_economico IN (?,?,?,?,?)Params: Array
+(
+    [0] => %industrial%
+    [1] => %mecánicos de motos%
+    [2] => %Tecnólogo%
+    [3] => industrial
+    [4] => electricidad
+    [5] => construccion
+    [6] => textiles
+    [7] => servicios
+)
+Respuestas recibidas: Array
+(
+    [pregunta1] => Industrial
+    [pregunta2] => Mecánicos de Motos
+    [pregunta3] => Tecnólogo
+    [pregunta4] => Industrial
+)
+Recomendaciones encontradas: Array
+(
+)

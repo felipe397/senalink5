@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-07-2025 a las 11:28:51
+-- Tiempo de generación: 10-07-2025 a las 17:44:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -258,7 +258,7 @@ CREATE TABLE `programas_formacion` (
 --
 
 INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`, `nivel_formacion`, `estado`, `ficha`, `fecha_finalizacion`, `codigo`, `sector_programa`, `nombre_ocupacion`, `sector_economico`, `etapa_ficha`) VALUES
-(1, 'MARKETING DIGITAL PARA EL SISTEMA MODA', 2208, 'TÉCNICO', 'En ejecucion', 3158891, '2027-02-28', 135329, 'INDUSTRIAL', 'Auxiliares de información y servicio al cliente', 'SERVICIOS', 'Lectiva'),
+(1, 'MARKETING DIGITAL PARA EL SISTEMA MODA', 2208, 'TECNICO', 'Finalizado', 3158891, '2027-02-28', 135329, 'INDUSTRIA', 'Auxiliares de información y servicio al cliente', 'SERVICIOS', 'Lectiva'),
 (2, 'MECANICA DE MAQUINARIA INDUSTRIAL', 2208, 'TÉCNICO', 'En ejecucion', 2915418, '2025-05-25', 837101, 'INDUSTRIAL', 'Mecánicos Industriales', 'INDUSTRIAL', 'Practica'),
 (3, 'MECANICA DE MAQUINARIA INDUSTRIAL', 2208, 'TÉCNICO', 'En ejecucion', 3155930, '2026-06-02', 837101, 'INDUSTRIAL', 'Mecánicos Industriales', 'INDUSTRIAL', 'Lectiva'),
 (4, 'CONSTRUCCION, MANTENIMIENTO Y REPARACION DE ESTRUC', 2208, 'TÉCNICO', 'En ejecucion', 3077333, '2025-12-15', 836136, 'INDUSTRIAL', 'Oficiales de Construcción', 'CONSTRUCCION', 'Lectiva'),
@@ -460,14 +460,14 @@ INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_cr
 (15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'Frisby S.A', '1234567891', NULL, 'Frisby', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
 (16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', 'Cedula de ciudadania', 12345678, 0),
 (17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, '3001234567', NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567, 0),
-(19, 'chicaalzateb@gmail.com', '$2y$10$MuUNkZMGj0EGdwCLTGe4fO8oLkfYNxZlcKJeAoURY9bIrjVPkkajm', 'empresa', 'Activo', '2025-06-17 12:23:36', '4422', 'direccion ejemplo', 'Braulio ejemplo sas', '1234567891', NULL, 'Braulio', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
-(24, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$gQp4g5O5jRPd8zenNWy7eOQO8SZ2gmp3J/ygVK5dFxMUUg9/Mvtae', 'empresa', 'Activo', '2025-06-30 09:07:53', '4721233', 'Arabia', 'Monster y cuates', '345333555', NULL, 'Edwin Manito', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
+(19, 'chicaalzateb@gmail.com', '$2y$10$MuUNkZMGj0EGdwCLTGe4fO8oLkfYNxZlcKJeAoURY9bIrjVPkkajm', 'empresa', 'Activo', '2025-06-17 12:23:36', '4422', 'direccion ejemplo', 'Grupo Exito S.A', '1234567891', NULL, 'Thomas Velázquez', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
+(24, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$gQp4g5O5jRPd8zenNWy7eOQO8SZ2gmp3J/ygVK5dFxMUUg9/Mvtae', 'empresa', 'Activo', '2025-06-30 09:07:53', '4721233', 'Arabia', 'Falabella', '345333555', NULL, 'Gabriel Turizo', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
 (25, 'osoriolopezjuanfelipe@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, '322222222', NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', 'Cedula de ciudadania', 23456789, 0),
-(26, 'crisberx1@gmail.com', '$2y$10$FLuzp334nlTSHgt5jg5.4.8GCP4cEHA4r9Gbifj6gPGjFtbBLsUky', 'empresa', 'Activo', '2025-07-02 01:49:59', '987654321', 'Villaverde', 'Migue Monster cuates', '31222333', NULL, 'Migue', 'Agricola', '', NULL, '', NULL, NULL, 0, 0),
-(29, 'crisberx12@gmail.com', '$2y$10$FsATLOq0VUFelBfI6cLTDu/0x6bRBL2Dz74NwlXFtxeMUPYCNcoee', 'empresa', 'Activo', '2025-07-02 01:51:27', '9876543212', 'Villaverde 1', 'Migue Monster cuates xd', '312223333', NULL, 'Miguel', 'Servicios', '', NULL, '', NULL, NULL, 0, 0),
-(33, 'alejito@gmail.com', '$2y$10$IFmSsKZuEZdGg2bAolpJwuov/vHyg48taJiICN6FXCaXwBO9PD9LW', 'empresa', 'Activo', '2025-07-02 02:02:49', '333666999', 'Islas canarias', 'Alejo asa', '3122233344', NULL, 'alejo', 'Agricola', '', NULL, '', NULL, NULL, 0, 0),
-(34, 'raiba1234@gmail.com', '$2y$10$fpJ9K2vdlpo97P5KkxWYbepSefOUr2vJU9Ben0n.UdZDQoJlXbtae', 'empresa', 'Activo', '2025-07-02 02:27:52', '999888777', 'Villaverde', 'Raigosa INC', '312223334', NULL, 'Chocolates ruth', 'Agricola', '', NULL, '', NULL, NULL, 0, 0),
-(35, 'appleinc@gmail.com', '$2y$10$3y.5xMj8T.TIhXX3DmIq9.YOxGSE6/9w7S7YX4dD1aG77zXkmDtr.', 'empresa', 'Activo', '2025-07-02 06:20:20', '111222333', 'Beverly Hills', 'Apple INC', '321897654', NULL, 'Steve Jobs', 'Agricola', '', NULL, '', NULL, NULL, 0, 0),
+(26, 'crisberx1@gmail.com', '$2y$10$FLuzp334nlTSHgt5jg5.4.8GCP4cEHA4r9Gbifj6gPGjFtbBLsUky', 'empresa', 'Activo', '2025-07-02 01:49:59', '987654321', 'Villaverde', 'Samsung', '31222333', NULL, 'Juan Pablo Torres', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
+(29, 'crisberx12@gmail.com', '$2y$10$FsATLOq0VUFelBfI6cLTDu/0x6bRBL2Dz74NwlXFtxeMUPYCNcoee', 'empresa', 'Activo', '2025-07-02 01:51:27', '9876543212', 'Samaria 1', 'Coca Cola', '312223333', NULL, 'Miguel Grajales', 'Servicios', '', NULL, '', NULL, NULL, 0, 0),
+(33, 'alejito@gmail.com', '$2y$10$IFmSsKZuEZdGg2bAolpJwuov/vHyg48taJiICN6FXCaXwBO9PD9LW', 'empresa', 'Activo', '2025-07-02 02:02:49', '333666999', 'Islas canarias', 'Carulla', '3122233344', NULL, 'Alejandro Salazar', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
+(34, 'raiba1234@gmail.com', '$2y$10$fpJ9K2vdlpo97P5KkxWYbepSefOUr2vJU9Ben0n.UdZDQoJlXbtae', 'empresa', 'Activo', '2025-07-02 02:27:52', '999888777', 'Villaverde', 'Hershey\'s', '312223334', NULL, 'Samuel Monsalve Gomez', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
+(35, 'appleinc@gmail.com', '$2y$10$3y.5xMj8T.TIhXX3DmIq9.YOxGSE6/9w7S7YX4dD1aG77zXkmDtr.', 'empresa', 'Activo', '2025-07-02 06:20:20', '111222333', 'Beverly Hills', 'Apple INC', '321897654', NULL, 'Steve Jobs', 'Servicios', '', NULL, '', NULL, NULL, 0, 0),
 (36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, '3024345634', NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cedula de ciudadania', 1111111111, 0),
 (37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, '3024345635', NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cedula de ciudadania', 2222222222, 0),
 (38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, '3024345636', NULL, NULL, NULL, 'Edwin', NULL, 'Banol', 'Cardona', 'Cedula de ciudadania', 3333333333, 0),
