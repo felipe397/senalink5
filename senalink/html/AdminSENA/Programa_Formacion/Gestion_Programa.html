@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../../css/styles.css"> 
     <link rel="shortcut icon " href="../../../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
 </head>
-<body>
+<body data-context="vista2">
     <header class="gov" id="inicio">
         <div class="gov__container">
             <a href="https://www.gov.co/" target="_blank">
@@ -33,9 +33,8 @@
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink">
         </div>
     <ul class="menu__list">
-        <li class="menu__item"><img src="../../../icon/alternativa-corporativa.svg" alt="" class="menu__icon"><a href="../../Super_Admin/Empresa/Gestion_Empresa.html" class="menu__link">Empresas</a></li>
         <li class="menu__item"><img src="../../../icon/programa formacion.png" alt="" class="menu__icon"><a href="Gestion_Programa.html" class="menu__link">Programa de formacion</a></li>
-        <li class="menu__item"><img src="../../../icon/crear_programa.png" alt="" class="menu__icon"><a href="CreatePrograma.html" class="menu__link">Crear Programa</a></li>
+        <li class="menu__item"><img src="../../../icon/crear_programa.png" alt="" class="menu__icon"><a href="CreatePrograma.php" class="menu__link">Crear Programa</a></li>
         <li class="menu__item"><img src="../../../icon/volver.png" alt="" class="menu__icon"><a href="../Home.html" class="menu__link">Volver</a></li>
     </ul>
     </nav>
@@ -45,9 +44,10 @@
         <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
         
         <section class="search-container">
+            <i class="fas fa-search search-icon"></i>
             <input type="text" placeholder="Buscar...">
             <div class="dropdown">
-                <button id="estadoDropdownBtn"><img src="../../../icon/filtrar.png" style="width:32px; height:32px;"></button>
+                <button id="estadoDropdownBtn"><img src="../../../icon/filtrar.png" class=" filter__img"></button>
                 <div id="estadoDropdownMenu" class="dropdown-menu">
                     <a href="#" id="filtro-ejecucion" data-estado="En ejecucion">En ejecución</a>
                     <a href="#" id="filtro-finalizado" data-estado="Finalizado">Finalizado</a>
@@ -64,7 +64,7 @@
     <script src="../../../js/filter.js"></script> <!-- Agregar el JavaScript para el menú -->
 <div class="linea-azul-difuminada"></div>
 <footer>
-    <p>@ Todos los derechos reservados.SenaLink</p>
+    <p>© Todos los derechos reservados. SenaLink</p>
   </footer>
 </body>
 </html>

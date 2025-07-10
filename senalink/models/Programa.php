@@ -10,6 +10,8 @@ class ProgramaFormacion
     public function __construct()
     {
         $this->db = Conexion::conectar();
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     }
 
 
@@ -27,31 +29,36 @@ class ProgramaFormacion
         }
     }
 
-    public function crear($data)
-    {
-        if (!$this->db) {
-            header('Content-Type: application/json');
-            http_response_code(500);
-            echo json_encode(['error' => 'No hay conexión a la base de datos']);
-            exit;
-        }
-        $sql = "INSERT INTO programas_formacion
-        (codigo, ficha, nivel_formacion, nombre_programa, duracion_programa, estado,fecha_finalizacion,sector_programa,sector_economico,etapa_ficha,nombre_ocupacion)
-        VALUES (:codigo, :ficha, :nivel_formacion, :nombre_programa, :duracion_programa, :estado,:fecha_finalizacion,:sector_programa, :sector_economico, :etapa_ficha, :nombre_ocupacion)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':codigo', $data['codigo']);
-        $stmt->bindParam(':ficha', $data['ficha']);
-        $stmt->bindParam(':nivel_formacion', $data['nivel_formacion']);
-        $stmt->bindParam(':nombre_programa', $data['nombre_programa']);
-        $stmt->bindParam(':duracion_programa', $data['duracion_programa']);
-        $stmt->bindParam(':fecha_finalizacion', $data['fecha_finalizacion']);
-        $stmt->bindParam(':sector_programa', $data['sector_programa']);
-        $stmt->bindParam(':estado', $data['estado']);
-        $stmt->bindParam(':sector_economico', $data['sector_economico']);
-        $stmt->bindParam(':etapa_ficha', $data['etapa_ficha']);
-        $stmt->bindParam(':nombre_ocupacion', $data['nombre_ocupacion']);
-        return $stmt->execute();
+public function crear($data)
+{
+    if (!$this->db) {
+        return false;
     }
+
+    $sql = "INSERT INTO programas_formacion
+        (codigo, ficha, nivel_formacion, nombre_programa, duracion_programa, estado, fecha_finalizacion, sector_programa, sector_economico, etapa_ficha, nombre_ocupacion)
+        VALUES (:codigo, :ficha, :nivel_formacion, :nombre_programa, :duracion_programa, :estado, :fecha_finalizacion, :sector_programa, :sector_economico, :etapa_ficha, :nombre_ocupacion)";
+    
+    $stmt = $this->db->prepare($sql);
+
+    $stmt->bindParam(':codigo', $data['codigo']);
+    $stmt->bindParam(':ficha', $data['ficha']);
+    $stmt->bindParam(':nivel_formacion', $data['nivel_formacion']);
+    $stmt->bindParam(':nombre_programa', $data['nombre_programa']);
+    $stmt->bindParam(':duracion_programa', $data['duracion_programa']);
+    $stmt->bindParam(':fecha_finalizacion', $data['fecha_finalizacion']);
+    $stmt->bindParam(':sector_programa', $data['sector_programa']);
+    $stmt->bindParam(':estado', $data['estado']);
+    $stmt->bindParam(':sector_economico', $data['sector_economico']);
+    $stmt->bindParam(':etapa_ficha', $data['etapa_ficha']);
+    $stmt->bindParam(':nombre_ocupacion', $data['nombre_ocupacion']);
+
+    return $stmt->execute() && $stmt->rowCount() > 0;
+}
+
+
+
+
 
     public function getById($id)
     {

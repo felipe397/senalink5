@@ -52,8 +52,9 @@
 
                     <select class="select_container" id="nivel_formacion" name="nivel_formacion" required>
                         <option value="" disabled selected>Nivel de formación</option>
-                        <option value="Tecnico">Técnico</option>
-                        <option value="Tecnologo">Tecnólogo</option>
+                        <option value="TECNICO">Técnico</option>
+                        <option value="TECNOLOGO">Tecnólogo</option>
+
                     </select>
                     <select class="select_container" id="sector_programa" name="sector_programa" required>
                         <option selected disabled value="">Sector del programa</option>
@@ -83,7 +84,6 @@
                         <option value="Finalizado">Finalizado</option>
                     </select>
 
-                    <input class="input-field" id="habilidades_requeridas" name="habilidades_requeridas" placeholder="Habilidades requeridas" type="text" />
                     <input class="input-field" id="fecha_finalizacion" name="fecha_finalizacion" placeholder="Fecha de finalización" type="date" required />
 
                 </div>
@@ -108,7 +108,8 @@
                             document.getElementById('programa_id').value = programaId;
                             document.getElementById('codigo').value = data.codigo || '';
                             document.getElementById('ficha').value = data.ficha || '';
-                            document.getElementById('nivel_formacion').value = data.nivel_formacion || '';
+                            setSelectValue('nivel_formacion', data.nivel_formacion);
+
                             // Selección robusta para selects (ignora tildes y mayúsculas)
                             function setSelectValue(selectId, value) {
                                 const select = document.getElementById(selectId);
@@ -132,7 +133,6 @@
                             document.getElementById('duracion_programa').value = data.duracion_programa || '';
                             document.getElementById('nombre_programa').value = data.nombre_programa || '';
                             setSelectValue('estado', data.estado);
-                            document.getElementById('habilidades_requeridas').value = data.habilidades_requeridas || '';
                             document.getElementById('fecha_finalizacion').value = data.fecha_finalizacion || '';
                         } else {
                             alert('Error al cargar los datos del programa.');

@@ -65,14 +65,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     try {
         $creado = UsuarioModel::crear($datos);
         if ($creado) {
-            header('Content-Type: application/json');
-            echo json_encode(['success' => true, 'message' => 'Usuario creado correctamente']);
-            exit;
-        } else {
-            header('Content-Type: application/json');
-            echo json_encode(['success' => false, 'error' => 'Error al crear el usuario.']);
+            if ($rol === 'AdminSENA') {
+                header("Location: ../html/Super_Admin/Funcionarios/Gestion_funcionario.html");
+            } else {
+                header("Location: ../html/index.html");
+            }
             exit;
         }
+
+
     } catch (Exception $e) {
         header('Content-Type: application/json');
         echo json_encode(['success' => false, 'error' => $e->getMessage()]);

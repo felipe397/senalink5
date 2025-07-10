@@ -1,22 +1,15 @@
 <?php
-require_once '../Config/conexion.php'; // Llama tu clase de conexión
-
-if ($conexion->connect_error) {
-    die("Conexión fallida: " . $conexion->connect_error);
-}
+require_once '../Config/conexion.php'; // Asegúrate que aquí se crea un objeto PDO llamado $conexion
 
 $busqueda = $_GET['q'] ?? '';
 $sql = "SELECT * FROM empresas WHERE nombre LIKE ? OR nit LIKE ?";
 $stmt = $conexion->prepare($sql);
 $like = "%$busqueda%";
-$stmt->bind_param("ss", $like, $like);
+$stmt->bindValue(1, $like);
+$stmt->bindValue(2, $like);
 $stmt->execute();
-$resultado = $stmt->get_result();
 
-$empresas = [];
-while ($fila = $resultado->fetch_assoc()) {
-    $empresas[] = $fila;
-}
+$empresas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 header('Content-Type: application/json');
 echo json_encode($empresas);

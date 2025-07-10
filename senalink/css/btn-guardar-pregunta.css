@@ -31,7 +31,7 @@
 
 .btn-guardar-pregunta {
     display: none;
-    background: #34c759;
+    background: #39a900;
     border: none;
     border-radius: 8px;
     width: 40px;
@@ -47,9 +47,7 @@
     align-items: center;
     justify-content: center;
 }
-.btn-guardar-pregunta:active {
-    background: #28a745;
-}
+
 .btn-guardar-pregunta img {
     width: 24px;
     height: 24px;

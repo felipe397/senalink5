@@ -5,7 +5,7 @@
  */
 
 // Constantes de configuración de la base de datos
-define('DB_HOST', 'localhost:3307'); // Cambia el puerto si es necesario
+define('DB_HOST', 'localhost'); // Cambia el puerto si es necesario
 // define('DB_HOST', 'localhost:8111'); // Otra opción de puerto si es
 define('DB_NAME', 'senalink');
 define('DB_USER', 'root');

@@ -12,21 +12,19 @@ require_once '../config/Conexion.php';
 
 $programa = new ProgramaFormacion();
 
-
 // 🚀 CREAR PROGRAMA
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'crear') {
-    // Recolectar datos
     $codigo              = $_POST['codigo'] ?? null;
     $ficha               = $_POST['ficha'] ?? null;
     $nivel_formacion     = $_POST['nivel_formacion'] ?? null;
     $sector_programa     = $_POST['sector_programa'] ?? null;
-    $etapa_ficha        = $_POST['etapa_ficha'] ?? null;
-    $sector_economico   = $_POST['sector_economico'] ?? null;
-    $duracion_programa      = $_POST['duracion_programa'] ?? null;
+    $etapa_ficha         = $_POST['etapa_ficha'] ?? null;
+    $sector_economico    = $_POST['sector_economico'] ?? null;
+    $duracion_programa   = $_POST['duracion_programa'] ?? null;
     $nombre_ocupacion    = $_POST['nombre_ocupacion'] ?? null;
     $nombre_programa     = $_POST['nombre_programa'] ?? null;
     $estado              = $_POST['estado'] ?? 'En ejecucion';
-    $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
+    $fecha_finalizacion  = date('Y-m-d', strtotime($_POST['fecha_finalizacion'] ?? ''));
 
     // Validaciones
     $errores = [];
@@ -35,25 +33,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     if (!is_numeric($ficha) || intval($ficha) <= 0) $errores[] = "La ficha debe ser numérica y positiva.";
     if (!is_numeric($duracion_programa) || intval($duracion_programa) <= 0) $errores[] = "La duración debe ser un número positivo.";
 
-    if (!preg_match('/^[\p{L}\s.]+$/u', $nombre_programa)) $errores[] = "Nombre inválido.";
+    if (!preg_match('/^[\p{L}\s.]+$/u', $nombre_programa)) $errores[] = "El nombre del programa contiene caracteres inválidos.";
+    if (!preg_match('/^[\p{L}\s.]+$/u', $nombre_ocupacion)) $errores[] = "El nombre de la ocupación contiene caracteres inválidos.";
 
     $fechaMinima = '1957-06-21';
     if (!$fecha_finalizacion || strtotime($fecha_finalizacion) < strtotime($fechaMinima)) {
-        $errores[] = "Fecha de finalización inválida.";
+        $errores[] = "La fecha de finalización no puede ser anterior al 21 de junio de 1957.";
     }
 
-    if (!$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$nombre_programa || !$etapa_ficha || !$sector_economico ||
-        !$duracion_programa || !$estado  || !$fecha_finalizacion) {
+    if (
+        !$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$etapa_ficha ||
+        !$sector_economico || !$duracion_programa || !$estado || !$fecha_finalizacion ||
+        !$nombre_ocupacion || !$nombre_programa
+    ) {
         $errores[] = "Todos los campos son obligatorios.";
     }
 
-    // Si hay errores
     if (!empty($errores)) {
         echo "⚠️ Errores encontrados:<br>" . implode("<br>", $errores);
         exit;
     }
 
-    // Intentar crear
+    // Crear programa
     $resultado = $programa->crear([
         'codigo' => $codigo,
         'ficha' => $ficha,
@@ -69,36 +70,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     ]);
 
     if ($resultado) {
-        header("Location: ../html/Super_Admin/Programa_Formacion/Gestion_Programa.html");
+        $rol = $_SESSION['rol'] ?? '';
+        switch ($rol) {
+            case 'super_admin':
+                header("Location: ../html/Super_Admin/Programa_Formacion/Gestion_Programa.html");
+                break;
+            case 'AdminSENA':
+                header("Location: ../html/AdminSENA/Programa_Formacion/Gestion_Programa.html");
+                break;
+            default:
+                header("Location: ../html/index.html");
+                break;
+        }
+        exit;
     } else {
-        echo "❌ Error al guardar el programa.";
+        header("Location: ../html/Super_Admin/Programa_Formacion/Crear_Programa.php?error=1");
+        exit;
     }
-    exit;
 }
 
 // ✏️ ACTUALIZAR PROGRAMA
-else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'actualizar') {
+elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'actualizar') {
     $id = $_POST['id'] ?? null;
     $codigo              = $_POST['codigo'] ?? null;
     $ficha               = $_POST['ficha'] ?? null;
     $nivel_formacion     = $_POST['nivel_formacion'] ?? null;
-    $etapa_ficha        = $_POST['etapa_ficha'] ?? null;
+    $etapa_ficha         = $_POST['etapa_ficha'] ?? null;
     $sector_programa     = $_POST['sector_programa'] ?? null;
-    $sector_economico   = $_POST['sector_economico'] ?? null;
+    $sector_economico    = $_POST['sector_economico'] ?? null;
     $nombre_programa     = $_POST['nombre_programa'] ?? null;
     $nombre_ocupacion    = $_POST['nombre_ocupacion'] ?? null;
-    $duracion_programa      = $_POST['duracion_programa'] ?? null;
+    $duracion_programa   = $_POST['duracion_programa'] ?? null;
     $estado              = $_POST['estado'] ?? 'Disponible';
     $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
 
-    // Validaciones básicas
-    if (!$id || !$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$nombre_programa ||
-        !$duracion_meses || !$estado || !$fecha_finalizacion) {
+    if (
+        !$id || !$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$nombre_programa ||
+        !$duracion_programa || !$estado || !$fecha_finalizacion
+    ) {
         echo "⚠️ Todos los campos son obligatorios.";
         exit;
     }
 
-    // Intentar actualizar
     $resultado = $programa->update($id, [
         'codigo' => $codigo,
         'ficha' => $ficha,
@@ -114,49 +127,49 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_P
     ]);
 
     if ($resultado) {
-        header("Location: ../html/Super_Admin/Programa_Formacion/Gestion_Programa.html");
+        $rol = $_SESSION['rol'] ?? '';
+        switch ($rol) {
+            case 'super_admin':
+                header("Location: ../html/Super_Admin/Programa_Formacion/Gestion_Programa.html");
+                break;
+            case 'AdminSENA':
+                header("Location: ../html/AdminSENA/Programa_Formacion/Gestion_Programa.html");
+                break;
+            default:
+                header("Location: ../html/index.html");
+                break;
+        }
     } else {
         echo "❌ Error al actualizar el programa.";
     }
     exit;
 }
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+
+// 📄 CONSULTAS GET
+elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+    header('Content-Type: application/json');
     try {
         switch ($_GET['action']) {
             case 'listarProgramasDisponibles':
-                $data = $programa->listarProgramasDisponibles();
-                echo json_encode($data);
+                echo json_encode($programa->listarProgramasDisponibles());
                 break;
             case 'listarProgramasEnEjecucion':
-                header('Content-Type: application/json');
-                try {
-                    if (!method_exists($programa, 'listarProgramasEnEjecucion')) {
-                        http_response_code(500);
-                        echo json_encode(['error' => 'No existe el método listarProgramasEnEjecucion en ProgramaFormacion']);
-                        exit;
-                    }
-                    $data = $programa->listarProgramasEnEjecucion();
-                    if ($data === false) {
-                        http_response_code(500);
-                        echo json_encode(['error' => 'Error al obtener los programas en ejecución']);
-                        exit;
-                    }
-                    echo json_encode($data);
-                } catch (Exception $e) {
+                if (!method_exists($programa, 'listarProgramasEnEjecucion')) {
                     http_response_code(500);
-                    echo json_encode(['error' => 'Error interno: ' . $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+                    echo json_encode(['error' => 'No existe el método listarProgramasEnEjecucion']);
+                    break;
                 }
+                $data = $programa->listarProgramasEnEjecucion();
+                echo json_encode($data ?: []);
                 break;
             case 'listarProgramasFinalizados':
-                header('Content-Type: application/json');
-                $data = $programa->listarProgramasFinalizados();
-                echo json_encode($data);
+                echo json_encode($programa->listarProgramasFinalizados());
                 break;
             case 'DetallePrograma':
                 if (!isset($_GET['id'])) {
                     http_response_code(400);
                     echo json_encode(['error' => 'Falta el parámetro ID']);
-                    exit;
+                    break;
                 }
                 $detalle = $programa->obtenerDetallePrograma($_GET['id']);
                 echo json_encode($detalle ?: []);
@@ -171,19 +184,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     }
     exit;
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+// 🧪 PETICIONES POST con JSON (AJAX)
+elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
     $data = json_decode(file_get_contents('php://input'), true);
-    
-    if (isset($data['accion']) && $data['accion'] === 'detallePrograma' && isset($data['id'])) {
-        $programa = new ProgramaFormacion();
-        $detalle = $programa->getById($data['id']);
 
-        if ($detalle) {
-            echo json_encode(['success' => true, 'programa' => $detalle]);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Programa no encontrado.']);
-        }
+    if (isset($data['accion']) && $data['accion'] === 'detallePrograma' && isset($data['id'])) {
+        $detalle = $programa->getById($data['id']);
+        echo json_encode([
+            'success' => (bool)$detalle,
+            'programa' => $detalle ?? null,
+            'message' => $detalle ? null : 'Programa no encontrado.'
+        ]);
         exit;
     }
 

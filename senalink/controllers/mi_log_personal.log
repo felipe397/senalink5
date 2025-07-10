@@ -2766,3 +2766,273 @@ Recomendaciones encontradas: Array
         )
 
 )
+SQL: SELECT * FROM programas_formacion WHERE 1=1 AND LOWER(sector_programa) LIKE ? AND LOWER(nombre_ocupacion) LIKE ? AND nivel_formacion LIKE ? AND sector_economico IN (?,?,?,?,?)Params: Array
+(
+    [0] => %servicios%
+    [1] => %mecánicos de motos%
+    [2] => %Técnico%
+    [3] => industrial
+    [4] => electricidad
+    [5] => construccion
+    [6] => textiles
+    [7] => servicios
+)
+Respuestas recibidas: Array
+(
+    [pregunta1] => Servicios
+    [pregunta2] => Mecánicos de Motos
+    [pregunta3] => Técnico
+    [pregunta4] => Industrial
+)
+Recomendaciones encontradas: Array
+(
+    [0] => Array
+        (
+            [id] => 43
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => Tecnico
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2026-01-14
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => Servicios
+            [nombre_ocupacion] => Mecánicos de Motos
+            [sector_economico] => servicios
+            [etapa_ficha] => Lectiva
+        )
+
+    [1] => Array
+        (
+            [id] => 46
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => Tecnico
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2026-03-06
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => Servicios
+            [nombre_ocupacion] => Mecánicos de Motos
+            [sector_economico] => servicios
+            [etapa_ficha] => Lectiva
+        )
+
+    [2] => Array
+        (
+            [id] => 79
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => Tecnico
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2025-07-22
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => Servicios
+            [nombre_ocupacion] => Mecánicos de motos
+            [sector_economico] => servicios
+            [etapa_ficha] => Lectiva
+        )
+
+    [3] => Array
+        (
+            [id] => 99
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => Tecnico
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2025-07-22
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => Servicios
+            [nombre_ocupacion] => Mecánicos de motos
+            [sector_economico] => servicios
+            [etapa_ficha] => Lectiva
+        )
+
+    [4] => Array
+        (
+            [id] => 202
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => Tecnico
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2026-01-14
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => Servicios
+            [nombre_ocupacion] => Mecánicos de Motos
+            [sector_economico] => servicios
+            [etapa_ficha] => Lectiva
+        )
+
+    [5] => Array
+        (
+            [id] => 205
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => Tecnico
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2026-03-06
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => Servicios
+            [nombre_ocupacion] => Mecánicos de Motos
+            [sector_economico] => servicios
+            [etapa_ficha] => Lectiva
+        )
+
+    [6] => Array
+        (
+            [id] => 238
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => Tecnico
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2025-07-22
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => Servicios
+            [nombre_ocupacion] => Mecánicos de motos
+            [sector_economico] => servicios
+            [etapa_ficha] => Lectiva
+        )
+
+    [7] => Array
+        (
+            [id] => 258
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => Tecnico
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2025-07-22
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => Servicios
+            [nombre_ocupacion] => Mecánicos de motos
+            [sector_economico] => servicios
+            [etapa_ficha] => Lectiva
+        )
+
+    [8] => Array
+        (
+            [id] => 333
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => Tecnico
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2025-04-21
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => Servicios
+            [nombre_ocupacion] => Mecánicos de Motos
+            [sector_economico] => servicios
+            [etapa_ficha] => Lectiva
+        )
+
+    [9] => Array
+        (
+            [id] => 338
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => Tecnico
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2026-01-14
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => Servicios
+            [nombre_ocupacion] => Mecánicos de Motos
+            [sector_economico] => servicios
+            [etapa_ficha] => Lectiva
+        )
+
+)
+SQL: SELECT * FROM programas_formacion WHERE 1=1 AND LOWER(sector_programa) LIKE ? AND LOWER(nombre_ocupacion) LIKE ? AND nivel_formacion LIKE ? AND sector_economico IN (?,?,?,?,?)Params: Array
+(
+    [0] => %servicios%
+    [1] => %mecánicos de motos%
+    [2] => %Técnico%
+    [3] => industrial
+    [4] => electricidad
+    [5] => construccion
+    [6] => textiles
+    [7] => servicios
+)
+Respuestas recibidas: Array
+(
+    [pregunta1] => Servicios
+    [pregunta2] => Mecánicos de Motos
+    [pregunta3] => Técnico
+    [pregunta4] => Industrial
+)
+Recomendaciones encontradas: Array
+(
+    [0] => Array
+        (
+            [id] => 36
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => TÉCNICO
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 2920871
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2025-06-03
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => SERVICIOS
+            [nombre_ocupacion] => Mecánicos de Motos
+            [sector_economico] => INDUSTRIAL
+            [etapa_ficha] => Lectiva
+        )
+
+    [1] => Array
+        (
+            [id] => 120
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => TÉCNICO
+            [estado] => En ejecucion
+            [fecha_creacion] => 
+            [ficha] => 3064630
+            [habilidades_requeridas] => 
+            [fecha_finalizacion] => 2026-01-14
+            [descripcion] => 
+            [codigo] => 838318
+            [sector_programa] => SERVICIOS
+            [nombre_ocupacion] => Mecánicos de Motos
+            [sector_economico] => INDUSTRIAL
+            [etapa_ficha] => Lectiva
+        )
+
+)

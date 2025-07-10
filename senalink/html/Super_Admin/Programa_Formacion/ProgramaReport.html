@@ -31,56 +31,81 @@
         </div>
     </header>
     <div class="linea-verde"></div>
-    <div class="table">
-        <main class="table-container">
-            <table>
-                <tr>
-                    <th>Código</th>
-                    <td id="codigo"></td>
-                </tr>
-                <tr>
-                    <th>Ficha</th>
-                    <td id="ficha"></td>
-                </tr>
-                <tr>
-                    <th>Nivel de formación</th>
-                    <td id="nivel_formacion"></td>
-                </tr>
-                <tr>
-                    <th>Nombre del programa</th>
-                    <td id="nombre_programa"></td>
-                </tr>
-                <tr>
-                    <th>Habilidades requeridas</th>
-                    <td id="habilidades_requeridas"></td>
-                </tr>
-                <tr>
-                    <th>Fecha de finalización</th>
-                    <td id="fecha_finalizacion"></td>
-                </tr>
-                <tr>
-                    <th>Estado</th>
-                    <td id="estado"></td>
-                </tr>
-            </table>
-             <!-- Botón para generar el PDF -->
-            <button class="btn__report">Descargar</button>
+    <!-- ... encabezado y estilos iguales ... -->
 
-            <!-- Formulario oculto que se enviará al hacer clic en el botón -->
-            <form id="formReporte" action="../../../reportes/reporte_programa.php" method="POST" target="_blank" style="display: none;">
-                <input type="hidden" name="codigo">
-                <input type="hidden" name="ficha">
-                <input type="hidden" name="nivel_formacion">
-                <input type="hidden" name="nombre_programa">
-                <input type="hidden" name="descripcion">
-                <input type="hidden" name="habilidades_requeridas">
-                <input type="hidden" name="fecha_finalizacion">
-                <input type="hidden" name="estado">
-            </form>
-        </main>
-    </div>
+<div class="table">
+    <main class="table-container">
+        <table>
+            <tr>
+                <th>Código</th>
+                <td id="codigo"></td>
+            </tr>
+            <tr>
+                <th>Ficha</th>
+                <td id="ficha"></td>
+            </tr>
+            <tr>
+                <th>Nivel de formación</th>
+                <td id="nivel_formacion"></td>
+            </tr>
+            <tr>
+                <th>Nombre del programa</th>
+                <td id="nombre_programa"></td>
+            </tr>
+            <tr>
+                <th>Duración del programa</th>
+                <td id="duracion_programa"></td>
+            </tr>
+            <tr>
+                <th>Nombre de la ocupación</th>
+                <td id="nombre_ocupacion"></td>
+            </tr>
+            <tr>
+                <th>Sector del programa</th>
+                <td id="sector_programa"></td>
+            </tr>
+            <tr>
+                <th>Etapa ficha</th>
+                <td id="etapa_ficha"></td>
+            </tr>
+            <tr>
+                <th>Sector económico</th>
+                <td id="sector_economico"></td>
+            </tr>
+            <tr>
+                <th>Fecha de finalización</th>
+                <td id="fecha_finalizacion"></td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td id="estado"></td>
+            </tr>
+        </table>
+
+        <!-- Botón para generar el PDF -->
+        <button class="btn__report">Descargar</button>
+        <button onclick="goBack()" class="btn__report" type="button">Volver</button>
+
+        <!-- Formulario oculto con todos los campos -->
+        <form id="formReporte" action="../../../reportes/reporte_programa.php" method="POST" target="_blank" style="display: none;">
+            <input type="hidden" name="codigo">
+            <input type="hidden" name="ficha">
+            <input type="hidden" name="nivel_formacion">
+            <input type="hidden" name="nombre_programa">
+            <input type="hidden" name="duracion_programa">
+            <input type="hidden" name="nombre_ocupacion">
+            <input type="hidden" name="sector_programa">
+            <input type="hidden" name="etapa_ficha">
+            <input type="hidden" name="sector_economico">
+            <input type="hidden" name="fecha_finalizacion">
+            <input type="hidden" name="estado">
+        </form>
+    </main>
+</div>
+
 
     <script src="../../../js/viewprogramareport.js"></script>
+    <script src="../../../js/backbutton.js"></script>
 
     <!-- Footer -->
     <div class="linea-azul-difuminada"></div>

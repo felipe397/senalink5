@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdf->AddPage();
 
     // (Opcional) Logo en el encabezado
-     $pdf->Image('../img/logo-sena-green0.png', 10, 6, 30);
+    $pdf->Image('../img/logo-sena-green0.png', 10, 6, 20);
     // $pdf->Ln(20);
 
     // Título
