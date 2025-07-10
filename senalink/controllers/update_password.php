@@ -31,8 +31,9 @@ if ($stmt->rowCount() > 0) {
     // Eliminar token usado
     $pdo->prepare("DELETE FROM password_resets WHERE token = ?")->execute([$token]);
 
-    // Redirigir
-    header('Location: ../html/index.html?reset=success');
+    // Marcar éxito en la sesión y redirigir a la página de nueva contraseña
+    $_SESSION['password_changed'] = true;
+    header('Location: ../html/index.html');
     exit;
 } else {
     die("Token inválido o expirado.");

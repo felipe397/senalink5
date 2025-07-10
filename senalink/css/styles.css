@@ -1,21 +1,4 @@
-/* Botón eliminar para EditDiagnostico */
-.btn-eliminar {
-    background-color: var(--Secundary-950) !important;
-    color: var(--white) !important;
-    border: none;
-    border-radius: 0.4rem;
-    padding: 0.6rem 1.2rem;
-    cursor: pointer;
-    font-size: 1.6rem;
-    margin-left: 0.5rem;
-    transition: background 0.2s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.btn-eliminar:hover {
-    background-color: var(--Secundary-800) !important;
-}
+
 @import url(variables.css);
 
 html {
@@ -307,15 +290,14 @@ img{
 }
 
 .paginacion button.activo {
-    background-color: #60bfbf;
+    background-color: var(--Secundary-700);
     font-weight: bold;
 }
 
 .filter__img{
-    width: 3.5rem;
-    height: 3.5rem;
-    margin-right: 0.8rem;
-    color: var(--black);
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: 1.2rem;
 }
 .menu {
     display: flex;

@@ -28,6 +28,7 @@
     <main class="container__forms--login">
       <img src="../img/logo-proyecto1.png" alt="Logo Senalink" class="logo__senalink" />
 
+      <!-- Mensaje de éxito de cambio de contraseña -->
       <form action="../controllers/login.php" method="POST">
         <!-- Campo de correo (visible solo para AdminSENA y Super Admin) -->
         <div id="correoGroup">
@@ -35,8 +36,7 @@
                 placeholder="Correo electrónico"
                 type="email"
                 title="Ingrese un correo electrónico válido."
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-           />
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"/>
         </div>
 
         <!-- Campo de NIT (solo visible para empresa): solo números positivos -->
@@ -80,8 +80,18 @@
     </main>
   </div>
   <script src="../js/changerol.js"></script>
-<script src="../js/viewpassword.js"></script>
-<script src="../js/EmpresaInhabilitado.js"></script>
+  <script src="../js/viewpassword.js"></script>
+  <script src="../js/EmpresaInhabilitado.js"></script>
+  <script>
+    // Mostrar mensaje de éxito si viene el parámetro reset=success
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('reset') === 'success') {
+        const msg = document.getElementById('success-message');
+        if (msg) msg.style.display = 'block';
+      }
+    });
+  </script>
 
 </body>
 </html>

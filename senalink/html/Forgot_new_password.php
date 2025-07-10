@@ -6,7 +6,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>SenaLink - Nueva Contraseña</title>
-    <link href="../css/Inputs.css" rel="stylesheet"/>
+    <link href="../css/crud.css" rel="stylesheet"/>
     <link rel="shortcut icon " href="../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
 </head>
 <body>
@@ -54,7 +54,6 @@
       </form>
   </main>
   </div>         
-  <div class="linea-azul-difuminada"></div>
   <footer>
     <p>© Todos los derechos reservados. SenaLink</p>
   </footer>
@@ -75,6 +74,11 @@
       }
       setupTogglePassword('new_password', 'toggle-password-button');
       setupTogglePassword('confirm_password', 'toggle-password-button');
+
+      // Mostrar alerta si la contraseña fue cambiada exitosamente
+      <?php if (isset($_SESSION['password_changed']) && $_SESSION['password_changed'] === true): ?>
+        <?php unset($_SESSION['password_changed']); ?>
+      <?php endif; ?>
     });
   </script>
 </body>

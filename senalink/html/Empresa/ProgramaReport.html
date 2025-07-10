@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SenaLink</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../css/crud.css">
+    <link rel="shortcut icon " href="../../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
+</head>
+<body>
+    <header class="gov" id="inicio">
+        <div class="gov__container">
+            <a href="https://www.gov.co/" target="_blank">
+                <img loading="lazy" src="../../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
+            </a>
+        </div>
+    </header>
+    <header class="header__login">
+        <div class="header__left">
+            
+        </div>
+
+        <div class="header__center">
+        </div>
+
+        <div class="header__right">
+            <img src="../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
+        </div>
+    </header>
+    <div class="linea-verde"></div>
+<!-- ... encabezado y estilos iguales ... -->
+
+<div class="table">
+    <main class="table-container">
+        <table>
+            <tr>
+                <th>Código</th>
+                <td id="codigo"></td>
+            </tr>
+            <tr>
+                <th>Ficha</th>
+                <td id="ficha"></td>
+            </tr>
+            <tr>
+                <th>Nivel de formación</th>
+                <td id="nivel_formacion"></td>
+            </tr>
+            <tr>
+                <th>Nombre del programa</th>
+                <td id="nombre_programa"></td>
+            </tr>
+            <tr>
+                <th>Duración del programa</th>
+                <td id="duracion_programa"></td>
+            </tr>
+            <tr>
+                <th>Nombre de la ocupación</th>
+                <td id="nombre_ocupacion"></td>
+            </tr>
+            <tr>
+                <th>Sector del programa</th>
+                <td id="sector_programa"></td>
+            </tr>
+            <tr>
+                <th>Etapa ficha</th>
+                <td id="etapa_ficha"></td>
+            </tr>
+            <tr>
+                <th>Sector económico</th>
+                <td id="sector_economico"></td>
+            </tr>
+            <tr>
+                <th>Fecha de finalización</th>
+                <td id="fecha_finalizacion"></td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td id="estado"></td>
+            </tr>
+        </table>
+
+        <!-- Botón para generar el PDF -->
+        <button class="btn__report">Descargar</button>
+        <button onclick="goBack()" class="btn__report" type="button">Volver</button>
+
+        <!-- Formulario oculto con todos los campos -->
+        <form id="formReporte" action="../../reportes/reporte_programa.php" method="POST" target="_blank" style="display: none;">
+            <input type="hidden" name="codigo">
+            <input type="hidden" name="ficha">
+            <input type="hidden" name="nivel_formacion">
+            <input type="hidden" name="nombre_programa">
+            <input type="hidden" name="duracion_programa">
+            <input type="hidden" name="nombre_ocupacion">
+            <input type="hidden" name="sector_programa">
+            <input type="hidden" name="etapa_ficha">
+            <input type="hidden" name="sector_economico">
+            <input type="hidden" name="fecha_finalizacion">
+            <input type="hidden" name="estado">
+        </form>
+    </main>
+</div>
+
+
+    <script src="../../js/viewprogramareport.js"></script>
+    <script src="../../js/backbutton.js"></script>
+
+    <!-- Footer -->
+    <div class="linea-azul-difuminada"></div>
+    <footer>
+        <p>@ Todos los derechos reservados. SenaLink</p>
+    </footer>
+
+</body>
+</html>
