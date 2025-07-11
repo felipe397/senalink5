@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".cardh__container");
-    const inputBusqueda = document.querySelector('.search-container input');
+    // Buscar el input de búsqueda por clase específica si existe, si no, usar el primero dentro de search-container
+    let inputBusqueda = document.querySelector('.input-busqueda');
+    if (!inputBusqueda) {
+        inputBusqueda = document.querySelector('.search-container input');
+    }
     const filtroEjecucion = document.getElementById('filtro-ejecucion');
     const filtroFinalizado = document.getElementById('filtro-finalizado');
     const contexto = document.body.dataset.context || "vista1";
@@ -176,5 +180,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Error al cargar los detalles del programa:', error);
                 alert("Error al cargar los detalles del programa. Por favor, intenta nuevamente.");
             });
+    }
+    // Botón de reporte para AdminSENA
+    const btnReporte = document.getElementById('ProgReporte');
+    if (btnReporte && id) {
+        btnReporte.addEventListener('click', function (e) {
+            e.preventDefault();
+            // Redirigir a la vista de reporte HTML del programa
+            window.location.href = `ProgramaReport.html?id=${id}`;
+        });
     }
 });

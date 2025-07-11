@@ -1,0 +1,19 @@
+const q = inputBusqueda?.value.trim().toLowerCase();
+    if (!q) return lista;
+    return lista.filter(p =>
+        (p.nombre_programa && p.nombre_programa.toLowerCase().includes(q)) ||
+        (p.codigo && p.codigo.toLowerCase().includes(q))
+    );
+}
+=======
+function filtrarPorBusqueda(lista) {
+    const q = inputBusqueda?.value.trim().toLowerCase();
+    console.log("Busqueda ingresada:", q); // Log para verificar texto de búsqueda
+    if (!q) return lista;
+    const filtrados = lista.filter(p =>
+        (p.nombre_programa && p.nombre_programa.toLowerCase().includes(q)) ||
+        (p.codigo && p.codigo.toLowerCase().includes(q))
+    );
+    console.log("Resultados filtrados:", filtrados); // Log para verificar resultados filtrados
+    return filtrados;
+}

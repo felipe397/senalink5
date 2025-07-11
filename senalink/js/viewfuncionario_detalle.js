@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnInhabilitar = document.getElementById('btn-inhabilitar');
     const btnHabilitar = document.getElementById('btn-habilitar');
     const estadoSpan = document.getElementById('estado');
-    const btnActualizar = document.querySelector('a.buttons__crud[href="FuncionarioEdit.html"]');
+    // Buscar el botón de actualizar por id o clase
+    const btnActualizar = document.getElementById('linkActualizar') || document.querySelector('a.buttons__crud[href="#"]');
     const btnReporte = document.getElementById('btnReporte');
 
     // Ocultar/mostrar botones según estado

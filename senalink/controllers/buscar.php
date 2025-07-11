@@ -2,7 +2,7 @@
 require_once '../Config/conexion.php'; // Asegúrate que aquí se crea un objeto PDO llamado $conexion
 
 $busqueda = $_GET['q'] ?? '';
-$sql = "SELECT * FROM empresas WHERE nombre LIKE ? OR nit LIKE ?";
+$sql = "SELECT * FROM Usuarios WHERE nombre LIKE ? OR nit LIKE ?";
 $stmt = $conexion->prepare($sql);
 $like = "%$busqueda%";
 $stmt->bindValue(1, $like);
