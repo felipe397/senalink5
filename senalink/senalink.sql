@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-07-2025 a las 17:44:51
+-- Tiempo de generación: 16-07-2025 a las 22:15:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -258,12 +258,12 @@ CREATE TABLE `programas_formacion` (
 --
 
 INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`, `nivel_formacion`, `estado`, `ficha`, `fecha_finalizacion`, `codigo`, `sector_programa`, `nombre_ocupacion`, `sector_economico`, `etapa_ficha`) VALUES
-(1, 'MARKETING DIGITAL PARA EL SISTEMA MODA', 2208, 'TECNICO', 'Finalizado', 3158891, '2027-02-28', 135329, 'INDUSTRIA', 'Auxiliares de información y servicio al cliente', 'SERVICIOS', 'Lectiva'),
+(1, 'MARKETING DIGITAL PARA EL SISTEMA MODA', 2208, 'TECNICO', 'En ejecucion', 3158891, '2027-02-28', 135329, 'INDUSTRIA', 'Auxiliares de información y servicio al cliente', 'SERVICIOS', 'Lectiva'),
 (2, 'MECANICA DE MAQUINARIA INDUSTRIAL', 2208, 'TÉCNICO', 'En ejecucion', 2915418, '2025-05-25', 837101, 'INDUSTRIAL', 'Mecánicos Industriales', 'INDUSTRIAL', 'Practica'),
 (3, 'MECANICA DE MAQUINARIA INDUSTRIAL', 2208, 'TÉCNICO', 'En ejecucion', 3155930, '2026-06-02', 837101, 'INDUSTRIAL', 'Mecánicos Industriales', 'INDUSTRIAL', 'Lectiva'),
 (4, 'CONSTRUCCION, MANTENIMIENTO Y REPARACION DE ESTRUC', 2208, 'TÉCNICO', 'En ejecucion', 3077333, '2025-12-15', 836136, 'INDUSTRIAL', 'Oficiales de Construcción', 'CONSTRUCCION', 'Lectiva'),
 (5, 'CONSTRUCCION DE INFRAESTRUCTURA VIAL', 3984, 'TECNÓLOGO', 'En ejecucion', 2716120, '2025-06-13', 223107, 'INDUSTRIAL', 'Técnicos en Construcción y Arquitectura', 'CONSTRUCCION', 'Lectiva'),
-(6, 'MANTENIMIENTO Y ENSAMBLE DE EQUIPOS ELECTRONICOS.', 2304, 'TÉCNICO', 'En ejecucion', 3158973, '2027-02-28', 839317, 'INDUSTRIAL', 'Auxiliares técnicos en electrónica', 'ELECTRICIDAD', 'Lectiva'),
+(6, 'MANTENIMIENTO Y ENSAMBLE DE EQUIPOS ELECTRONICOS.', 2304, 'TECNICO', 'En ejecucion', 3158973, '2027-02-28', 839317, 'INDUSTRIA', 'Auxiliares técnicos en electrónica', 'ELECTRICIDAD', 'Lectiva'),
 (7, 'DIBUJO DIGITAL DE ARQUITECTURA E INGENIERIA', 2208, 'TÉCNICO', 'En ejecucion', 3146802, '2026-05-09', 225224, 'INDUSTRIAL', 'Dibujantes Técnicos', 'SERVICIOS', 'Lectiva'),
 (8, 'MANTENIMIENTO DE VEHICULOS LIVIANOS', 2208, 'TÉCNICO', 'En ejecucion', 2917239, '2025-05-26', 838109, 'SERVICIOS', 'Mecánicos de vehículos automotores', 'INDUSTRIAL', 'Lectiva'),
 (9, 'CONSTRUCCION EN EDIFICACIONES.', 3984, 'TECNÓLOGO', 'En ejecucion', 3097887, '2026-10-06', 223104, 'INDUSTRIAL', 'Técnicos en Construcción y Arquitectura', 'CONSTRUCCION', 'Lectiva'),
@@ -457,22 +457,15 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`, `diagnostico_realizado`) VALUES
-(15, '1@gmail.com', '$2y$10$2Zl9GXH61P.hQvAF/4S6c.rjVB9KbL65Do.xFnvkWM/AfQYQjxwUS', 'empresa', 'Activo', '2025-05-13 12:41:32', '4721', 'cr 6 calle 9-12 primavera azul', 'Frisby S.A', '1234567891', NULL, 'Frisby', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
-(16, 'brauliolapampara@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', 'Cedula de ciudadania', 12345678, 0),
+(16, 'braulioloodio@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '4444444', NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', '', 12345678, 0),
 (17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, '3001234567', NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567, 0),
-(19, 'chicaalzateb@gmail.com', '$2y$10$MuUNkZMGj0EGdwCLTGe4fO8oLkfYNxZlcKJeAoURY9bIrjVPkkajm', 'empresa', 'Activo', '2025-06-17 12:23:36', '4422', 'direccion ejemplo', 'Grupo Exito S.A', '1234567891', NULL, 'Thomas Velázquez', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
-(24, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$gQp4g5O5jRPd8zenNWy7eOQO8SZ2gmp3J/ygVK5dFxMUUg9/Mvtae', 'empresa', 'Activo', '2025-06-30 09:07:53', '4721233', 'Arabia', 'Falabella', '345333555', NULL, 'Gabriel Turizo', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
 (25, 'osoriolopezjuanfelipe@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, '322222222', NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', 'Cedula de ciudadania', 23456789, 0),
-(26, 'crisberx1@gmail.com', '$2y$10$FLuzp334nlTSHgt5jg5.4.8GCP4cEHA4r9Gbifj6gPGjFtbBLsUky', 'empresa', 'Activo', '2025-07-02 01:49:59', '987654321', 'Villaverde', 'Samsung', '31222333', NULL, 'Juan Pablo Torres', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
-(29, 'crisberx12@gmail.com', '$2y$10$FsATLOq0VUFelBfI6cLTDu/0x6bRBL2Dz74NwlXFtxeMUPYCNcoee', 'empresa', 'Activo', '2025-07-02 01:51:27', '9876543212', 'Samaria 1', 'Coca Cola', '312223333', NULL, 'Miguel Grajales', 'Servicios', '', NULL, '', NULL, NULL, 0, 0),
-(33, 'alejito@gmail.com', '$2y$10$IFmSsKZuEZdGg2bAolpJwuov/vHyg48taJiICN6FXCaXwBO9PD9LW', 'empresa', 'Activo', '2025-07-02 02:02:49', '333666999', 'Islas canarias', 'Carulla', '3122233344', NULL, 'Alejandro Salazar', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
-(34, 'raiba1234@gmail.com', '$2y$10$fpJ9K2vdlpo97P5KkxWYbepSefOUr2vJU9Ben0n.UdZDQoJlXbtae', 'empresa', 'Activo', '2025-07-02 02:27:52', '999888777', 'Villaverde', 'Hershey\'s', '312223334', NULL, 'Samuel Monsalve Gomez', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
-(35, 'appleinc@gmail.com', '$2y$10$3y.5xMj8T.TIhXX3DmIq9.YOxGSE6/9w7S7YX4dD1aG77zXkmDtr.', 'empresa', 'Activo', '2025-07-02 06:20:20', '111222333', 'Beverly Hills', 'Apple INC', '321897654', NULL, 'Steve Jobs', 'Servicios', '', NULL, '', NULL, NULL, 0, 0),
 (36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, '3024345634', NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cedula de ciudadania', 1111111111, 0),
 (37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, '3024345635', NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cedula de ciudadania', 2222222222, 0),
 (38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, '3024345636', NULL, NULL, NULL, 'Edwin', NULL, 'Banol', 'Cardona', 'Cedula de ciudadania', 3333333333, 0),
-(39, 'breih2005@gmail.com', '$2y$10$dqqZTdHs6P3E5NL7k4m8GejSUSEYUM13u4WKOMyflVyO/GaUpPnre', 'empresa', 'Activo', '2025-07-09 12:50:41', '246812345', 'cr 6 calle 9-12 primavera azul', 'pinturas sas', '1234567891', NULL, 'johana delgado', 'Servicios', '', NULL, '', NULL, NULL, 0, 1),
-(44, 'miguelmarin@gmail.com', '$2y$10$IfGPyP2FX2UTeaf/yi.TK.BMjprDOU5nmtMUwRXqzAvXeCGxBFUwG', 'AdminSENA', 'Activo', '2025-07-10 14:23:17', NULL, '', NULL, '1234567891', NULL, NULL, NULL, 'miguel', 'angel', 'lopez', 'marin', 'Cedula de ciudadania', 1122334455, 0);
+(44, 'miguelmarin@gmail.com', '$2y$10$IfGPyP2FX2UTeaf/yi.TK.BMjprDOU5nmtMUwRXqzAvXeCGxBFUwG', 'AdminSENA', 'Activo', '2025-07-10 14:23:17', NULL, '', NULL, '1234567891', NULL, NULL, NULL, 'miguel', 'angel', 'lopez', 'marin', 'Cedula de ciudadania', 1122334455, 0),
+(45, 'felipeosorio@gmail.com', '$2y$10$SHDidYvcH8jiAe0/NNyDVOJOSegNPE2SOA7uP6kNZW.bt2t1p7SMW', 'AdminSENA', 'Activo', '2025-07-17 00:47:27', NULL, '', NULL, '3156907026', NULL, NULL, NULL, 'pele', 'felipe', 'pamparoso', 'migue', 'Cedula de ciudadania', 1121506109, 0),
+(46, 'jj2673782@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', '123456789', 'Calle 8 N 12 A', 'Frisby S.A', '3156907026', NULL, 'Frisby', 'Industrial', '', NULL, '', NULL, NULL, 0, 0);
 
 --
 -- Disparadores `usuarios`
@@ -548,6 +541,7 @@ ALTER TABLE `reportes_usuarios`
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `correo` (`correo`),
+  ADD UNIQUE KEY `numero_documento` (`numero_documento`),
   ADD UNIQUE KEY `nit` (`nit`),
   ADD UNIQUE KEY `nickname` (`nickname`);
 
@@ -607,7 +601,7 @@ ALTER TABLE `reportes_usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Restricciones para tablas volcadas
