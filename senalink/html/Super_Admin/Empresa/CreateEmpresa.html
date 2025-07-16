@@ -37,29 +37,29 @@
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
             
                 <!-- FORMULARIO DE REGISTRO -->
-                <form action="../../../controllers/UsuarioController.php" method="POST">
+                <form action="../../../controllers/UsuarioController.php" method="POST" class="validated-form">
                     <input type="hidden" name="accion" value="crearUsuario" />
                     <div class="inputs__container">
                         <input class="input-field" name="nit" placeholder="Número NIT" type="text" required/>
                         <input class="input-field" name="representante_legal" placeholder="Representante legal" type="text" required/>
                         <input class="input-field" name="razon_social" placeholder="Razon social" type="text" required/>
                         <input class="input-field" name="telefono" placeholder="Número telefónico" type="text" required/>
-                        <input class="input-field" name="correo" placeholder="Correo electrónico" type="email" required/>
-                        <input class="input-field" name="direccion" placeholder="Dirección" type="text" required/>
-                        <select class="select_container" name="tipo_empresa">
-                            <option selected disabled>Sector Económico</option>
-                            <option>Industrial</option>
-                            <option>Servicios</option> 
-                        </select>
-                    <div class="box__password">
-                        <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" required />
-                        <button type="button" id="togglePassword">
-                        <img class="icon__pass" id="viewPassword" src="../../../img/icons8-invisible-24.png" alt="Ver contraseña">
-                        </button>
-                    </div>    
-                        <input class="input-field" type="hidden" name="rol" value="empresa" required/>
-                        <input type="hidden" name="accion" value="crearUsuario" />
-                    </div>
+                        <input class="input-field" name="correo" placeholder="Correo electrónico" type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" title="Por favor ingresa un correo válido con dominio correcto" required/>
+                    <input class="input-field" name="direccion" placeholder="Dirección" type="text" required/>
+                    <select class="select_container" name="tipo_empresa">
+                        <option selected disabled>Sector Económico</option>
+                        <option>Industrial</option>
+                        <option>Servicios</option> 
+                    </select>
+                <div class="box__password">
+                    <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" pattern=".{14}" title="La contraseña debe tener exactamente 14 caracteres" required />
+                    <button type="button" id="togglePassword">
+                    <img class="icon__pass" id="viewPassword" src="../../../img/icons8-invisible-24.png" alt="Ver contraseña">
+                    </button>
+                </div>    
+                    <input class="input-field" type="hidden" name="rol" value="empresa" required/>
+                    <input type="hidden" name="accion" value="crearUsuario" />
+                </div>
 
                     <div class="buttons__container">
                         <button type="submit" class="buttons__crud">Crear</button>

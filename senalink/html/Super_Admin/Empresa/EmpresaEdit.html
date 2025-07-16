@@ -36,10 +36,10 @@
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
             
             <!-- FORMULARIO DE REGISTRO EMPRESA -->
-            <form action="../../../controllers/update_empresa.php" method="POST" id="empresaForm">
+            <form action="../../../controllers/update_empresa.php" method="POST" id="empresaForm" class="validated-form">
                 <input type="hidden" name="id" id="empresa_id" value="">
                 <div class="inputs__container">
-                    <input class="input-field" name="nit" id="nit" placeholder="Número NIT" type="text" required/>
+                    <input class="input-field" name="nit" id="nit" placeholder="Número NIT" type="text" required readonly/>
                     <input class="input-field" name="representante_legal" id="representante_legal" placeholder="Representante legal" type="text" required/>
                     <input class="input-field" name="razon_social" id="razon_social" placeholder="Razón social" type="text" required/>
                     <input class="input-field" name="telefono" id="telefono" placeholder="Número telefónico" type="text" required/>

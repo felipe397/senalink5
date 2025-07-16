@@ -1,0 +1,29 @@
+/* Estilos para tooltip de error en validación de formularios */
+
+.input-error {
+  border-color: #ffc107 !important;
+  outline: none;
+}
+
+.error-tooltip {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1.5px solid #ffc107;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 10000;
+}
+
+.error-tooltip .error-icon {
+  margin-right: 6px;
+  font-size: 1.2rem;
+}

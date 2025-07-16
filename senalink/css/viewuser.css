@@ -147,52 +147,52 @@
 }
 
 .marker {
-  font-weight: bold;
-  font-size: 1.125rem;
-  color: #c53030;
-  user-select: none;
+  font-weight: bold; /* Texto en negrita */
+  font-size: 1.125rem; /* Tamaño de fuente específico */
+  color: #c53030; /* Color rojo para resaltar */
+  user-select: none; /* El usuario no puede seleccionar el texto */
 }
 
 .marker.right {
-  margin-left: auto;
+  margin-left: auto; /* Empuja el elemento a la derecha en un flex container */
 }
 
 .btn {
-  border: none;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  border: none; /* Sin borde */
+  border-radius: 0.375rem; /* Bordes redondeados */
+  cursor: pointer; /* Cursor tipo mano al pasar */
+  transition: background 0.3s ease; /* Transición suave al cambiar el fondo */
 }
 
 .btn.edit {
-  background-color: var(--Secundary-950);
-  color: white;
+  background-color: var(--Secundary-950); /* Fondo oscuro personalizado */
+  color: white; /* Texto blanco */
 }
 
 a{
-  color: var(--white);
+  color: var(--white); /* Enlaces en blanco */
 }
 
 .btn.edit:hover {
-  background-color: var(--Secundary-950);;
+  background-color: var(--Secundary-950); /* Fondo más oscuro al pasar el mouse */
 }
 footer {
-    background-color: var(--Secundary-950);
-    color: white;
-    text-align: center;
-    width: 100%;
-    padding: 1rem;
+    background-color: var(--Secundary-950); /* Fondo del footer */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centra el texto */
+    width: 100%; /* Ocupa todo el ancho */
+    padding: 1rem; /* Espaciado interno */
 }
 
 .linea-azul-difuminada {
 
-  width: 100%;
-  height: 30px;
-  background: linear-gradient(to top, rgb(0, 48, 77) 1px, transparent 50%);
+  width: 100%; /* Ancho completo */
+  height: 30px; /* Alto de la línea */
+  background: linear-gradient(to top, rgb(0, 48, 77) 1px, transparent 50%); /* Degradado azul difuminado */
 }
 
 .gov{
-    background-color: var(--Secundary-980);
+    background-color: var(--Secundary-980); /* Fondo especial para barra gov */
 }
 .gov__container{
     margin: auto;

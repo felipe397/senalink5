@@ -70,7 +70,9 @@
             </table>
 
             <!-- Botón para generar el PDF -->
+            <!-- Botón para generar el PDF -->
             <button class="btn__report">Descargar</button>
+            <button onclick="goBack()" class="btn__report" type="button">Volver</button>
 
             <!-- Formulario oculto que se enviará al hacer clic en el botón -->
             <form id="formReporte" action="../../../reportes/reporte_empresa.php" method="POST" target="_blank" style="display: none;">
@@ -87,6 +89,7 @@
     </div>
 
     <script src="../../../js/viewempresareport.js"></script>
+    <script src="../../../js/backbutton.js"></script>
 
     <!-- Footer -->
     <div class="linea-azul-difuminada"></div>

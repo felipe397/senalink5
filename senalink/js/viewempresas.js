@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById('representante').textContent = data.representante_legal;
                     document.getElementById('razon_social').textContent = data.razon_social;
                     document.getElementById('telefono').textContent = data.telefono;
-                    document.getElementById('correo').textContent = data.correo.trim();
+                    document.getElementById('correo').textContent = (data.correo || '').trim();
                     document.getElementById('ubicacion').textContent = data.direccion;
                     document.getElementById('tipo_empresa').textContent = data.tipo_empresa;
                     document.getElementById('estado').textContent = data.estado;
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     const btnInhabilitar = document.getElementById('btn-inhabilitar');
                     const btnHabilitar = document.getElementById('btn-habilitar');
-                    if (data.estado.toLowerCase() === 'activo') {
+                    if ((data.estado || '').toLowerCase() === 'activo') {
                         if (btnInhabilitar) btnInhabilitar.style.display = 'inline-block';
                         if (btnHabilitar) btnHabilitar.style.display = 'none';
                     } else {
