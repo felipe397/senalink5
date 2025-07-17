@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         if (!filter_var($datos['correo'], FILTER_VALIDATE_EMAIL)) $errores[] = 'Correo inválido.';
         if (UsuarioModel::existeNIT($datos['nit'])) $errores[] = 'El NIT ya está registrado.';
         if (UsuarioModel::existeCorreo($datos['correo'])) $errores[] = 'El correo ya está registrado.';
-        if (strlen($contrasena) < 8) $errores[] = 'La contraseña debe tener al menos 8 caracteres.';
+        if (strlen($contrasena) < 8) $errores[] = 'La contraseña debe tener al menos 12 caracteres.';
         $datos['contrasena'] = password_hash($contrasena, PASSWORD_DEFAULT);
     } elseif ($rol === 'AdminSENA') {
         $datos['primer_nombre'] = trim($_POST['primer_nombre'] ?? '');
@@ -50,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         if (!filter_var($datos['correo'], FILTER_VALIDATE_EMAIL)) $errores[] = 'Correo inválido.';
         if (UsuarioModel::existeCorreo($datos['correo'])) $errores[] = 'El correo ya está registrado.';
         if (!ctype_digit($datos['numero_documento']) || intval($datos['numero_documento']) <= 0) $errores[] = 'Número de documento inválido.';
-        if (strlen($contrasena) < 8) $errores[] = 'La contraseña debe tener al menos 8 caracteres.';
+        if (UsuarioModel::existeNumeroDocumento($datos['numero_documento'])) $errores[] = 'El número de documento ya está registrado.';
+        if (strlen($contrasena) < 12) $errores[] = 'La contraseña debe tener al menos 12 caracteres.';
         $datos['contrasena'] = password_hash($contrasena, PASSWORD_DEFAULT);
     } else {
         $errores[] = 'Rol no válido.';
@@ -65,11 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     try {
         $creado = UsuarioModel::crear($datos);
         if ($creado) {
-            if ($rol === 'AdminSENA') {
-                header("Location: ../html/Super_Admin/Funcionarios/Gestion_funcionario.html");
-            } else {
-                header("Location: ../html/index.html");
-            }
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true, 'redirect' => 'http://localhost/senalink5/senalink5/senalink/html/index.html']);
             exit;
         }
 
@@ -167,7 +165,7 @@ if (
 
 if (php_sapi_name() !== 'cli') {
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && empty($_GET['action'])) {
-        echo '<script>window.location.href = "/senalink5/senalink/html/index.html";</script>';
+        echo '<script>window.location.href = "http://localhost/senalink5/senalink5/senalink/html/index.html";</script>';
         exit;
     }
     // Si es una petición AJAX o con action inválida, responder JSON

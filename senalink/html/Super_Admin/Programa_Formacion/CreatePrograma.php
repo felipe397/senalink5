@@ -34,7 +34,7 @@
         </div>
     </header>
 
-    <div class="linea-verde"></div>
+    
 
     <div class="container">
         <main class="container__crud">

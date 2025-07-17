@@ -51,7 +51,7 @@
                             <option>Servicios</option> 
                         </select>
                     <div class="box__password">
-                        <input class="input-field" name="contrasena" id="contrasena" placeholder="Contraseña" type="password" required />
+                        <input class="input-field" name="contrasena" id="contrasena" placeholder="Contraseña" type="password" pattern=".{12,}" title="La contraseña debe tener al menos 12 caracteres" required />
                         <button type="button" id="togglePassword">
                         <img class="icon__pass" id="viewPassword" src="../../img/icons8-invisible-24.png" alt="Ver contraseña">
                         </button>

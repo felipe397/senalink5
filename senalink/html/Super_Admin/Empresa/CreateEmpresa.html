@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../../../css/crud.css">
     <link rel="stylesheet" href="../../../css/Inputs.css">
+    <link rel="stylesheet" href="../../../css/alert.css">
     <link rel="shortcut icon " href="../../../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
 </head>
 <body>
@@ -37,7 +38,7 @@
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
             
                 <!-- FORMULARIO DE REGISTRO -->
-                <form action="../../../controllers/UsuarioController.php" method="POST" class="validated-form">
+                <form id="createUserForm" action="../../../controllers/UsuarioController.php" method="POST" class="validated-form">
                     <input type="hidden" name="accion" value="crearUsuario" />
                     <div class="inputs__container">
                         <input class="input-field" name="nit" placeholder="Número NIT" type="text" required/>
@@ -52,7 +53,7 @@
                         <option>Servicios</option> 
                     </select>
                 <div class="box__password">
-                    <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" pattern=".{14}" title="La contraseña debe tener exactamente 14 caracteres" required />
+<input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" pattern=".{12,}" title="La contraseña debe tener al menos 12 caracteres" required />
                     <button type="button" id="togglePassword">
                     <img class="icon__pass" id="viewPassword" src="../../../img/icons8-invisible-24.png" alt="Ver contraseña">
                     </button>
@@ -69,25 +70,65 @@
         </main>
         </div>
         <script src="../../../js/backbutton.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const passwordInput = document.querySelector('input[name="contrasena"]');
-                const toggleButton = document.querySelector(".box__password button");
-                const eyeIcon = document.getElementById("viewPassword");
+        <script src="../../../js/alert.js"></script>
+        <script src="../../../js/formValidation.js"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const passwordInput = document.querySelector('input[name="contrasena"]');
+                        const toggleButton = document.querySelector(".box__password button");
+                        const eyeIcon = document.getElementById("viewPassword");
+                        const form = document.getElementById('createUserForm');
 
-                toggleButton.addEventListener("click", function (e) {
-                    e.preventDefault(); // evita que el botón haga submit
+                        toggleButton.addEventListener("click", function (e) {
+                            e.preventDefault(); // evita que el botón haga submit
 
-                    const isPassword = passwordInput.type === "password";
-                    passwordInput.type = isPassword ? "text" : "password";
+                            const isPassword = passwordInput.type === "password";
+                            passwordInput.type = isPassword ? "text" : "password";
 
-                    // Opcional: cambia el ícono según el estado
-                    eyeIcon.src = isPassword 
-                    ? "../../../img/icons8-eye-24.png" // imagen de ojo abierto
-                    : "../../../img/icons8-invisible-24.png";      // imagen de ojo cerrado
-                });
-                });
-        </script>
+                            // Opcional: cambia el ícono según el estado
+                            eyeIcon.src = isPassword 
+                            ? "../../../img/icons8-eye-24.png" // imagen de ojo abierto
+                            : "../../../img/icons8-invisible-24.png";      // imagen de ojo cerrado
+                        });
+
+                        form.addEventListener('submit', function(event) {
+                            event.preventDefault();
+                            if (passwordInput.value.length < 12) {
+                                passwordInput.setCustomValidity('La contraseña debe tener al menos 12 caracteres.');
+                                passwordInput.reportValidity();
+                                return;
+                            } else {
+                                passwordInput.setCustomValidity('');
+                            }
+
+                            const formData = new FormData(form);
+                            fetch(form.action, {
+                                method: 'POST',
+                                body: formData
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    showAlert('Usuario creado correctamente', 'success');
+                                    setTimeout(() => {
+                                        window.location.href = data.redirect || window.location.href;
+                                    }, 1500);
+                                } else {
+                                    if (data.errors) {
+                                        data.errors.forEach(error => showAlert(error, 'error'));
+                                    } else if (data.error) {
+                                        showAlert(data.error, 'error');
+                                    } else {
+                                        showAlert('Error desconocido', 'error');
+                                    }
+                                }
+                            })
+                            .catch(error => {
+                                showAlert('Error en la comunicación con el servidor', 'error');
+                            });
+                        });
+                    });
+                </script>
  <footer>
     <p>©  Todos los derechos reservados.SenaLink</p>
 </footer>

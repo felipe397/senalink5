@@ -35,6 +35,8 @@ if ($rol === 'empresa') {
 $stmt->execute();
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
+header('Content-Type: application/json');
+
 // ✅ Verificar existencia y contraseña
 if ($usuario) {
     if (password_verify($contrasena, $usuario['contrasena'])) {
@@ -42,24 +44,36 @@ if ($usuario) {
         $_SESSION['user_id'] = $usuario['id'];
         $_SESSION['rol'] = $usuario['rol'];
 
-        // ✅ Redirigir según rol y si hizo el diagnóstico
+        // Enviar respuesta JSON con URL de redirección
         if ($rol === 'empresa') {
-            if ($usuario['diagnostico_realizado']) {
-                header("Location: ../html/Empresa/Home.html");
-            } else {
-                header("Location: ../html/formulario.php");
-            }
+            $redirect = $usuario['diagnostico_realizado'] ? '../html/Empresa/Home.html' : '../html/formulario.php';
         } elseif ($rol === 'AdminSENA') {
-            header("Location: ../html/AdminSENA/Home.html");
+            $redirect = '../html/AdminSENA/Home.html';
         } elseif ($rol === 'super_admin') {
-            header("Location: ../html/Super_Admin/Home.html");
+            $redirect = '../html/Super_Admin/Home.html';
+        } else {
+            $redirect = '../html/index.html';
         }
+
+        echo json_encode(['success' => true, 'redirect' => $redirect]);
         exit;
     } else {
-        echo "❌ Contraseña incorrecta.";
+        // Contraseña incorrecta
+        if ($rol === 'empresa') {
+            $msg = 'El NIT o la contraseña son incorrectos.';
+        } else {
+            $msg = 'El correo o la contraseña son inválidos.';
+        }
+        echo json_encode(['success' => false, 'error' => $msg]);
         exit;
     }
 } else {
-    echo "❌ Usuario no encontrado.";
+    // Usuario no encontrado
+    if ($rol === 'empresa') {
+        $msg = 'El NIT o la contraseña son incorrectos.';
+    } else {
+        $msg = 'El correo o la contraseña son inválidos.';
+    }
+    echo json_encode(['success' => false, 'error' => $msg]);
     exit;
 }

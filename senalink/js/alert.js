@@ -1,11 +1,10 @@
 // Función reutilizable para mostrar alertas personalizadas en cualquier HTML
 // Uso: showAlert('Mensaje', 'success'|'error'|'warning', selectorDondeInsertar)
 
-function showAlert(message, type = 'error', insertBeforeSelector = '.container') {
+function showAlert(message, type = 'error', insertBeforeSelector) {
   // Elimina alertas previas
   const prev = document.querySelector('.alert-box');
   if (prev) prev.remove();
-
 
   let alert = document.createElement('div');
   alert.className = 'alert-box';
@@ -19,7 +18,8 @@ function showAlert(message, type = 'error', insertBeforeSelector = '.container')
   if (type === 'success') {
     iconSpan.innerHTML = '&#10004;'; // check mark
   } else if (type === 'error') {
-    iconSpan.innerHTML = '&#10006;'; // cross mark
+    // Usar icono diferente para error para no confundir con botón de cierre
+    iconSpan.innerHTML = '&#9940;'; // heavy multiplication x
   } else if (type === 'warning') {
     iconSpan.innerHTML = '&#9888;'; // warning sign
   }
@@ -29,35 +29,60 @@ function showAlert(message, type = 'error', insertBeforeSelector = '.container')
   let closeBtn = document.createElement('button');
   closeBtn.className = 'close-btn';
   closeBtn.innerHTML = '&times;';
+  // Añadir estilos inline para asegurar tamaño y estilo correcto
+  closeBtn.style.width = '1.2rem';
+  closeBtn.style.height = '1.2rem';
+  closeBtn.style.display = 'flex';
+  closeBtn.style.alignItems = 'center';
+  closeBtn.style.justifyContent = 'center';
+  closeBtn.style.borderRadius = '50%';
+  closeBtn.style.padding = '0';
+  closeBtn.style.margin = '0';
+  closeBtn.style.background = 'transparent';
+  closeBtn.style.border = 'none';
+  closeBtn.style.cursor = 'pointer';
+  closeBtn.style.fontWeight = 'bold';
+  closeBtn.style.lineHeight = '1';
+  closeBtn.style.color = 'inherit';
   closeBtn.onclick = () => {
     alert.classList.add('hide');
     setTimeout(() => alert.remove(), 400);
   };
-  alert.appendChild(closeBtn);
+
+  // Crear contenedor para mensaje y botón para alinearlos horizontalmente
+  let contentWrapper = document.createElement('div');
+  contentWrapper.style.display = 'flex';
+  contentWrapper.style.alignItems = 'center';
+  contentWrapper.style.justifyContent = 'space-between';
+  contentWrapper.style.width = '100%';
 
   // Añadir mensaje
   let messageSpan = document.createElement('span');
   messageSpan.className = 'alert-message';
   messageSpan.innerHTML = message;
-  alert.appendChild(messageSpan);
+
+  contentWrapper.appendChild(messageSpan);
+  contentWrapper.appendChild(closeBtn);
+  alert.appendChild(contentWrapper);
 
   // Insertar alerta centrada y encima del container
-  const container = document.querySelector(insertBeforeSelector);
+  let container;
+  if (insertBeforeSelector) {
+    container = document.querySelector(insertBeforeSelector);
+  } else {
+    container = document.querySelector('.container__crud') || document.body;
+  }
   if (container) {
-    // Crear un contenedor para posicionar la alerta encima y centrada
-    let wrapper = document.createElement('div');
-    wrapper.style.position = 'absolute';
-    wrapper.style.top = '0';
-    wrapper.style.left = '50%';
-    wrapper.style.transform = 'translateX(-50%)';
-    wrapper.style.width = '100%';
-    wrapper.style.display = 'flex';
-    wrapper.style.justifyContent = 'center';
-    wrapper.style.zIndex = '9999';
-    wrapper.style.marginBottom = '1rem';
-    wrapper.appendChild(alert);
-    container.style.position = 'relative'; // Asegurar que el container sea relativo para posicionar el wrapper
-    container.prepend(wrapper);
+    // Insertar la alerta en body con posición fija y top ajustado para que aparezca entre header y container
+    alert.style.position = 'fixed';
+    alert.style.top = '129px';  // Ajustar para que quede un poco más abajo, entre header y container
+    alert.style.left = '50%';
+    alert.style.transform = 'translateX(-50%)';
+    alert.style.width = 'auto';
+    alert.style.maxWidth = '440px';
+    alert.style.marginBottom = '0';
+    alert.style.zIndex = '9999';
+    document.body.prepend(alert);
   } else {
     document.body.prepend(alert);
   }

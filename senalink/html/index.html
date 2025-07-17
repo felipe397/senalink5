@@ -29,7 +29,7 @@
       <img src="../img/logo-proyecto1.png" alt="Logo Senalink" class="logo__senalink" />
 
       <!-- Mensaje de éxito de cambio de contraseña -->
-      <form action="../controllers/login.php" method="POST">
+      <form id="loginForm" action="../controllers/login.php" method="POST">
         <!-- Campo de correo (visible solo para AdminSENA y Super Admin) -->
         <div id="correoGroup">
           <input name="correo"
@@ -82,6 +82,7 @@
   <script src="../js/changerol.js"></script>
   <script src="../js/viewpassword.js"></script>
   <script src="../js/EmpresaInhabilitado.js"></script>
+  <script src="../js/alert.js"></script>
   <script>
     // Mostrar mensaje de éxito si viene el parámetro reset=success
     document.addEventListener('DOMContentLoaded', function() {
@@ -90,6 +91,29 @@
         const msg = document.getElementById('success-message');
         if (msg) msg.style.display = 'block';
       }
+
+      // Manejar submit del formulario con fetch para mostrar alertas
+      const form = document.getElementById('loginForm');
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        fetch(form.action, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            window.location.href = data.redirect || window.location.href;
+          } else {
+            showAlert(data.error || 'Error desconocido', 'error');
+          }
+        })
+        .catch(() => {
+          showAlert('Error en la comunicación con el servidor', 'error');
+        });
+      });
     });
   </script>
 

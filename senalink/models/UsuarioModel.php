@@ -59,6 +59,33 @@ class UsuarioModel {
         return $stmt->fetchColumn() > 0;
     }
 
+    // Verificar si la razón social ya existe
+    public static function existeRazonSocial($razon_social) {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE razon_social = :razon_social");
+        $stmt->bindValue(':razon_social', $razon_social);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+
+    // Verificar si el teléfono ya existe
+    public static function existeTelefono($telefono) {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE telefono = :telefono");
+        $stmt->bindValue(':telefono', $telefono);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+
+    // Verificar si el número de documento ya existe
+    public static function existeNumeroDocumento($numero_documento) {
+        $db = Conexion::conectar();
+        $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE numero_documento = :numero_documento");
+        $stmt->bindValue(':numero_documento', $numero_documento);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+
     public static function crear($datos) {
     try {
         $db = Conexion::conectar();
@@ -116,11 +143,11 @@ class UsuarioModel {
             $sql = "INSERT INTO usuarios (
                         correo, contrasena, rol, estado, fecha_creacion,
                         direccion, telefono,primer_nombre,segundo_nombre,
-                        primer_apellido,segundo_apellido,numero_documento,tipo_documento
+                        primer_apellido,segundo_apellido
                     ) VALUES (
                         :correo, :contrasena, :rol, :estado, :fecha_creacion,
                         :direccion, :telefono,:primer_nombre,:segundo_nombre,
-                        :primer_apellido,:segundo_apellido,:numero_documento,:tipo_documento
+                        :primer_apellido,:segundo_apellido
                     )";
 
             $stmt = $db->prepare($sql);
@@ -135,8 +162,6 @@ class UsuarioModel {
             $stmt->bindValue(':segundo_nombre', $datos['segundo_nombre']);
             $stmt->bindValue(':primer_apellido', $datos['primer_apellido']);
             $stmt->bindValue(':segundo_apellido', $datos['segundo_apellido']);
-            $stmt->bindValue(':numero_documento', $datos['numero_documento']);
-            $stmt->bindValue(':tipo_documento', $datos['tipo_documento']);
         }
 
         return $stmt->execute();
