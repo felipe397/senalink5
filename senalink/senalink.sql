@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2025 a las 22:35:15
+-- Tiempo de generación: 21-07-2025 a las 22:20:52
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -387,45 +387,6 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `reportes_diagnosticos`
---
-
-CREATE TABLE `reportes_diagnosticos` (
-  `id` int(11) NOT NULL,
-  `empresa_id` int(11) NOT NULL,
-  `fecha_generacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  `formato` enum('PDF','XML') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `reportes_programas`
---
-
-CREATE TABLE `reportes_programas` (
-  `id` int(11) NOT NULL,
-  `generado_por` int(11) NOT NULL,
-  `fecha_generacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  `formato` enum('PDF','XML') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `reportes_usuarios`
---
-
-CREATE TABLE `reportes_usuarios` (
-  `id` int(11) NOT NULL,
-  `generado_por` int(11) NOT NULL,
-  `fecha_generacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  `formato` enum('PDF','XML') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -436,13 +397,13 @@ CREATE TABLE `usuarios` (
   `rol` enum('empresa','AdminSENA','super_admin') DEFAULT NULL,
   `estado` enum('Activo','Suspendido','Desactivado') DEFAULT 'Activo',
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  `nit` varchar(50) DEFAULT NULL,
+  `nit` bigint(20) DEFAULT NULL,
   `direccion` varchar(255) NOT NULL,
   `razon_social` varchar(50) DEFAULT NULL,
-  `telefono` varchar(255) NOT NULL,
+  `telefono` bigint(20) NOT NULL,
   `nickname` varchar(100) DEFAULT NULL,
   `representante_legal` varchar(100) DEFAULT NULL,
-  `tipo_empresa` enum('Agricola','Industrial','Servicios','Conocimiento, Innovacion y Desarrollo') DEFAULT NULL,
+  `tipo_empresa` enum('INDUSTRIAL','SERVICIOS') DEFAULT NULL,
   `primer_nombre` varchar(50) NOT NULL,
   `segundo_nombre` varchar(50) DEFAULT NULL,
   `primer_apellido` varchar(50) NOT NULL,
@@ -457,19 +418,18 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`, `diagnostico_realizado`) VALUES
-(16, 'correodebraulio@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, '3156907026', NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', '', 12345678, 0),
-(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, '3001234567', NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567, 0),
-(25, 'osoriolopezjuanfelipe9898@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, '322222222', NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', '', 23456789, 0),
-(36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, '3024345634', NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cedula de ciudadania', 1111111111, 0),
-(37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, '3024345635', NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cedula de ciudadania', 2222222222, 0),
-(38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, '3024345636', NULL, NULL, NULL, 'Edwin', NULL, 'Banol', 'Cardona', 'Cedula de ciudadania', 3333333333, 0),
-(44, 'miguelmarin@gmail.com', '$2y$10$IfGPyP2FX2UTeaf/yi.TK.BMjprDOU5nmtMUwRXqzAvXeCGxBFUwG', 'AdminSENA', 'Activo', '2025-07-10 14:23:17', NULL, '', NULL, '1234567891', NULL, NULL, NULL, 'miguel', 'angel', 'lopez', 'marin', 'Cedula de ciudadania', 1122334455, 0),
-(45, 'felipeosorio@gmail.com', '$2y$10$SHDidYvcH8jiAe0/NNyDVOJOSegNPE2SOA7uP6kNZW.bt2t1p7SMW', 'AdminSENA', 'Activo', '2025-07-17 00:47:27', NULL, '', NULL, '3156907026', NULL, NULL, NULL, 'pele', 'felipe', 'pamparoso', 'migue', 'Cedula de ciudadania', 1121506109, 0),
-(46, 'jj2673782@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', '123456789', 'Calle 8 N 12 A', 'Frisby S.A', '3156907026', NULL, 'Frisby', 'Industrial', '', NULL, '', NULL, NULL, 0, 0),
-(48, 'braulioperraloodio@gmail.com', '$2y$10$ZN72f/S9JXqD5Az.ZH0nfOdlAtbZSdYshlkDsgRFYvmy/NtUTz4uC', 'AdminSENA', 'Desactivado', '2025-07-18 01:49:54', NULL, '', NULL, '3152928734', NULL, NULL, NULL, 'pele', 'SEBASTIAN', 'Osorio', 'marulanda', 'Cedula de ciudadania', 1234567898, 0),
-(49, 'braulioloodioperrazungamk@gmail.com', '$2y$10$oyPTJwGYPDHyUF8x1rh6I.J3Y.ttapB4aNtsUNck.m/O1ar7i7FY.', 'AdminSENA', 'Activo', '2025-07-18 02:14:34', NULL, '', NULL, '3152928626', NULL, NULL, NULL, 'Braulio', 'odio', 'perra', 'zunga', 'Cedula de ciudadania', 987654321, 0),
-(53, 'braulioloodioperramk@gmail.com', '$2y$10$jUM4n08y4S2vHtjdVLjCceEiAUi9nYPkeSt.M.oIWhGcqIXYXTCWC', 'empresa', 'Activo', '2025-07-18 02:40:46', '4721', 'Calle 8 N 12 A', 'Frisby S.A', '3156907026', NULL, 'Frisby', 'Industrial', '', NULL, '', NULL, NULL, NULL, 0),
-(54, 'braulioloodioperra@gmail.com', '$2y$10$1a02kFD/W9jQdFdVoOSfKe.1T4pKT9W7BDBHP81fnYFFh.y9Oh4XC', 'AdminSENA', 'Activo', '2025-07-18 03:18:10', NULL, '', NULL, '3152928725', NULL, NULL, NULL, 'Juan', 'SEBASTIAN', 'Chica', 'Sebas', 'Cedula de ciudadania', 123456789, 0);
+(16, 'correodebraulioperra@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, 3156907026, NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', '', 12345678, 0),
+(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, 3001234567, NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567, 0),
+(25, 'osoriolopezjuanfelipe9898@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, 322222222, NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', '', 23456789, 0),
+(36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, 3024345634, NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cedula de ciudadania', 1111111111, 0),
+(37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, 3024345635, NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cedula de ciudadania', 2222222222, 0),
+(38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, 3024345636, NULL, NULL, NULL, 'Edwin', NULL, 'Banol', 'Cardona', 'Cedula de ciudadania', 3333333333, 0),
+(44, 'miguelmarin@gmail.com', '$2y$10$IfGPyP2FX2UTeaf/yi.TK.BMjprDOU5nmtMUwRXqzAvXeCGxBFUwG', 'AdminSENA', 'Activo', '2025-07-10 14:23:17', NULL, '', NULL, 1234567891, NULL, NULL, NULL, 'miguel', 'angel', 'lopez', 'marin', 'Cedula de ciudadania', 1122334455, 0),
+(45, 'felipeosorio@gmail.com', '$2y$10$SHDidYvcH8jiAe0/NNyDVOJOSegNPE2SOA7uP6kNZW.bt2t1p7SMW', 'AdminSENA', 'Activo', '2025-07-17 00:47:27', NULL, '', NULL, 3156907026, NULL, NULL, NULL, 'pele', 'felipe', 'pamparoso', 'migue', 'Cedula de ciudadania', 1121506109, 0),
+(46, 'correodebraulio@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', 123456789, 'Calle 8 N 12 A', 'Frisby S.A', 3156907026, NULL, 'Frisby', 'INDUSTRIAL', '', NULL, '', NULL, NULL, 0, 0),
+(48, 'braulioperraloodio@gmail.com', '$2y$10$ZN72f/S9JXqD5Az.ZH0nfOdlAtbZSdYshlkDsgRFYvmy/NtUTz4uC', 'AdminSENA', 'Desactivado', '2025-07-18 01:49:54', NULL, '', NULL, 3152928734, NULL, NULL, NULL, 'pele', 'SEBASTIAN', 'Osorio', 'marulanda', 'Cedula de ciudadania', 1234567898, 0),
+(49, 'braulioloodioperrazungamk@gmail.com', '$2y$10$oyPTJwGYPDHyUF8x1rh6I.J3Y.ttapB4aNtsUNck.m/O1ar7i7FY.', 'AdminSENA', 'Activo', '2025-07-18 02:14:34', NULL, '', NULL, 3152928626, NULL, NULL, NULL, 'Braulio', 'odio', 'perra', 'zunga', 'Cedula de ciudadania', 987654321, 0),
+(54, 'braulioloodioperra@gmail.com', '$2y$10$1a02kFD/W9jQdFdVoOSfKe.1T4pKT9W7BDBHP81fnYFFh.y9Oh4XC', 'AdminSENA', 'Activo', '2025-07-18 03:18:10', NULL, '', NULL, 3152928725, NULL, NULL, NULL, 'Juan', 'SEBASTIAN', 'Chica', 'Sebas', 'Cedula de ciudadania', 123456789, 0);
 
 --
 -- Disparadores `usuarios`
@@ -520,26 +480,6 @@ ALTER TABLE `programas_formacion`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `reportes_diagnosticos`
---
-ALTER TABLE `reportes_diagnosticos`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `reportes_programas`
---
-ALTER TABLE `reportes_programas`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `generado_por` (`generado_por`);
-
---
--- Indices de la tabla `reportes_usuarios`
---
-ALTER TABLE `reportes_usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `generado_por` (`generado_por`);
-
---
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -547,7 +487,9 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `correo` (`correo`),
   ADD UNIQUE KEY `numero_documento` (`numero_documento`),
   ADD UNIQUE KEY `nit` (`nit`),
-  ADD UNIQUE KEY `nickname` (`nickname`);
+  ADD UNIQUE KEY `nickname` (`nickname`),
+  ADD UNIQUE KEY `nit_2` (`nit`),
+  ADD UNIQUE KEY `razon_social` (`razon_social`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -584,24 +526,6 @@ ALTER TABLE `programas_formacion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
--- AUTO_INCREMENT de la tabla `reportes_diagnosticos`
---
-ALTER TABLE `reportes_diagnosticos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `reportes_programas`
---
-ALTER TABLE `reportes_programas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `reportes_usuarios`
---
-ALTER TABLE `reportes_usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -616,18 +540,6 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `opciones`
   ADD CONSTRAINT `opciones_ibfk_1` FOREIGN KEY (`id_pregunta`) REFERENCES `preguntas` (`id`) ON DELETE CASCADE;
-
---
--- Filtros para la tabla `reportes_programas`
---
-ALTER TABLE `reportes_programas`
-  ADD CONSTRAINT `reportes_programas_ibfk_1` FOREIGN KEY (`generado_por`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
-
---
--- Filtros para la tabla `reportes_usuarios`
---
-ALTER TABLE `reportes_usuarios`
-  ADD CONSTRAINT `reportes_usuarios_ibfk_1` FOREIGN KEY (`generado_por`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -51,11 +51,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function renderEmpresas(empresas) {
             container.innerHTML = "";
+            // Validar que empresas sea un array
+            if (!Array.isArray(empresas)) {
+                container.innerHTML = "<p>Error al cargar las empresas. Intenta recargar la página.</p>";
+                return;
+            }
             if (empresas.length === 0) {
                 container.innerHTML = "<p>No se encontraron empresas.</p>";
                 return;
             }
             empresas.forEach(empresa => {
+                // Validar que empresa tenga los campos esperados
+                if (!empresa || !empresa.razon_social || !empresa.nit) return;
                 const card = document.createElement("article");
                 card.classList.add("cardh");
                 card.innerHTML = `
@@ -163,18 +170,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Si la respuesta es JSON, mostrar solo el mensaje
                         try {
                             const res = JSON.parse(data);
-                            if (message) {
-                                alert(res.message);
+                            if (res.message) {
+                                showAlert(res.message, 'success');
                             } else {
-                                alert(data);
+                                showAlert(data, 'error');
                             }
                         } catch (e) {
-                            alert(data);
+                            showAlert(data, 'error');
                         }
                         if (window.opener && window.opener.recargarEmpresas) {
                             window.opener.recargarEmpresas();
                         }
-                        window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
+                        setTimeout(() => {
+                            window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
+                        }, 1500);
                     })
                     .catch(error => console.error('Error:', error));
             });
@@ -198,23 +207,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     try {
                         const res = JSON.parse(data);
                         if (res.message) {
-                            alert(message);
+                            showAlert(res.message, 'success');
                         } else {
-                            alert(data);
+                            showAlert(data, 'error');
                         }
                     } catch (e) {
-                        alert(data);
+                        showAlert(data, 'error');
                     }
                     if (window.opener && window.opener.recargarEmpresas) {
                         window.opener.recargarEmpresas();
                     }
                     // Redirigir según el tipo de usuario (empresa o AdminSENA)
                     const params = new URLSearchParams(window.location.search);
-                    if (params.get('tipo') === 'funcionario' || params.get('rol') === 'AdminSENA') {
-                        window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Funcionarios/Gestion_Funcionario.html';
-                    } else {
-                        window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
-                    }
+                    setTimeout(() => {
+                        if (params.get('tipo') === 'funcionario' || params.get('rol') === 'AdminSENA') {
+                            window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Funcionarios/Gestion_Funcionario.html';
+                        } else {
+                            window.location.href = '/senalink5/senalink5/senalink/html/Super_Admin/Empresa/Gestion_Empresa.html';
+                        }
+                    }, 1500);
                 })
                 .catch(error => console.error('Error:', error));
         });

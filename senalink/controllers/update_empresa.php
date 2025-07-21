@@ -11,15 +11,52 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $ubicacion = isset($_POST['ubicacion']) ? trim($_POST['ubicacion']) : null;
     $tipo_empresa = isset($_POST['tipo_empresa']) ? trim($_POST['tipo_empresa']) : null;
 
-    if ($id !== null && $nit !== '' && $representante_legal !== '' && $razon_social !== '' && $telefono !== '' && $correo !== '' && $ubicacion !== '' && $tipo_empresa !== '') {
-        // Validar que tipo_empresa sea una de las opciones válidas
-        $opciones_validas = ['Agrícola', 'Industrial', 'Servicios', 'Conocimiento, Innovacion y Desarrollo'];
-        if (!in_array($tipo_empresa, $opciones_validas)) {
-            echo "⚠️ El tipo de empresa no es válido.";
-            exit;
-        }
+    header('Content-Type: application/json');
+    $errores = [];
 
-        $usuarioModel = new UsuarioModel();
+    if ($id === null || $nit === '' || $representante_legal === '' || $razon_social === '' || $telefono === '' || $correo === '' || $ubicacion === '' || $tipo_empresa === '') {
+        $errores[] = 'Todos los campos son obligatorios.';
+    }
+
+    // Validar tipo_empresa
+    $opciones_validas = ['INDUSTRIAL', 'SERVICIOS'];
+    if (!in_array($tipo_empresa, $opciones_validas)) {
+        $errores[] = 'El tipo de empresa no es válido.';
+    }
+
+    // Validar formato de correo
+    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        $errores[] = 'Correo inválido.';
+    }
+
+    $usuarioModel = new UsuarioModel();
+
+    // Validar NIT: debe ser numérico y positivo
+    if (!ctype_digit($nit) || intval($nit) <= 0) {
+        $errores[] = 'NIT inválido.';
+    } else {
+        // Verificar si el NIT ya existe en otra empresa (excluyendo la actual)
+        if ($usuarioModel->existeNIT($nit, $id)) {
+            $errores[] = 'El NIT ya está registrado en otra empresa.';
+        }
+    }
+
+    // Validar que la razón social sea única (excluyendo la actual)
+    if ($usuarioModel->existeRazonSocial($razon_social, $id)) {
+        $errores[] = 'La razón social ya está registrada en otra empresa.';
+    }
+
+    // Verificar si el correo ya existe en otra empresa (excluyendo la actual)
+    if ($usuarioModel->existeCorreo($correo, $id)) {
+        $errores[] = 'El correo ya está registrado en otra empresa.';
+    }
+
+    if (!empty($errores)) {
+        echo json_encode(['success' => false, 'errors' => $errores]);
+        exit;
+    }
+
+    try {
         $resultado = $usuarioModel->updateEmpresa($id, [
             'nit' => $nit,
             'representante_legal' => $representante_legal,
@@ -31,14 +68,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ]);
 
         if ($resultado) {
-            header("Location: ../html/Super_Admin/Empresa/Gestion_Empresa.html");
-            exit();
+            echo json_encode(['success' => true, 'message' => 'Datos actualizados correctamente']);
         } else {
-            echo "❌ Error al actualizar la empresa.";
+            echo json_encode(['success' => false, 'error' => 'Error al actualizar la empresa.']);
         }
-    } else {
-        echo "⚠️ Todos los campos son obligatorios.";
+    } catch (Exception $e) {
+        // Devolver mensaje completo para diagnóstico
+        echo json_encode(['success' => false, 'error' => 'Excepción al actualizar la empresa: ' . $e->getMessage()]);
     }
 } else {
-    echo "⛔ Método no permitido.";
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'error' => 'Método no permitido.']);
 }

@@ -33,11 +33,17 @@ class UsuarioModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Verificar si el correo ya existe
-    public static function existeCorreo($correo) {
+    // Verificar si el correo ya existe, excluyendo un ID opcional
+    public static function existeCorreo($correo, $excludeId = null) {
         $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE correo = :correo");
-        $stmt->bindValue(':correo', $correo);
+        if ($excludeId) {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE correo = :correo AND id != :id");
+            $stmt->bindValue(':correo', $correo);
+            $stmt->bindValue(':id', $excludeId, PDO::PARAM_INT);
+        } else {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE correo = :correo");
+            $stmt->bindValue(':correo', $correo);
+        }
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }
@@ -50,20 +56,32 @@ class UsuarioModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Verificar si el NIT ya existe
-    public static function existeNIT($nit) {
+    // Verificar si el NIT ya existe, excluyendo un ID opcional
+    public static function existeNIT($nit, $excludeId = null) {
         $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE nit = :nit");
-        $stmt->bindValue(':nit', $nit);
+        if ($excludeId) {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE nit = :nit AND id != :id");
+            $stmt->bindValue(':nit', $nit);
+            $stmt->bindValue(':id', $excludeId, PDO::PARAM_INT);
+        } else {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE nit = :nit");
+            $stmt->bindValue(':nit', $nit);
+        }
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }
 
-    // Verificar si la razón social ya existe
-    public static function existeRazonSocial($razon_social) {
+    // Verificar si la razón social ya existe, excluyendo un ID opcional
+    public static function existeRazonSocial($razon_social, $excludeId = null) {
         $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE razon_social = :razon_social");
-        $stmt->bindValue(':razon_social', $razon_social);
+        if ($excludeId) {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE razon_social = :razon_social AND id != :id");
+            $stmt->bindValue(':razon_social', $razon_social);
+            $stmt->bindValue(':id', $excludeId, PDO::PARAM_INT);
+        } else {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE razon_social = :razon_social");
+            $stmt->bindValue(':razon_social', $razon_social);
+        }
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }
@@ -171,25 +189,35 @@ class UsuarioModel {
 }
 
 public function updateEmpresa($id, $data) {
-    $sql = "UPDATE usuarios SET 
-            nit = :nit,
-            representante_legal = :representante_legal,
-            razon_social = :razon_social,
-            telefono = :telefono,
-            correo = :correo,
-            direccion = :direccion,
-            tipo_empresa = :tipo_empresa
-            WHERE id = :id AND rol = 'empresa'";
-    $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':nit', $data['nit']);
-    $stmt->bindValue(':representante_legal', $data['representante_legal']);
-    $stmt->bindValue(':razon_social', $data['razon_social']);
-    $stmt->bindValue(':telefono', $data['telefono']);
-    $stmt->bindValue(':correo', $data['correo']);
-    $stmt->bindValue(':direccion', $data['direccion']);
-    $stmt->bindValue(':tipo_empresa', $data['tipo_empresa']);
-    $stmt->bindValue(':id', $id);
-    return $stmt->execute();
+    try {
+        $sql = "UPDATE usuarios SET 
+                nit = :nit,
+                representante_legal = :representante_legal,
+                razon_social = :razon_social,
+                telefono = :telefono,
+                correo = :correo,
+                direccion = :direccion,
+                tipo_empresa = :tipo_empresa
+                WHERE id = :id AND rol = 'empresa'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':nit', $data['nit']);
+        $stmt->bindValue(':representante_legal', $data['representante_legal']);
+        $stmt->bindValue(':razon_social', $data['razon_social']);
+        $stmt->bindValue(':telefono', $data['telefono']);
+        $stmt->bindValue(':correo', $data['correo']);
+        $stmt->bindValue(':direccion', $data['direccion']);
+        $stmt->bindValue(':tipo_empresa', $data['tipo_empresa']);
+        $stmt->bindValue(':id', $id);
+        $result = $stmt->execute();
+        if (!$result) {
+            $errorInfo = $stmt->errorInfo();
+            throw new Exception("Error SQL: " . $errorInfo[2]);
+        }
+        return $result;
+    } catch (Exception $e) {
+        error_log("Error en updateEmpresa: " . $e->getMessage());
+        throw $e;
+    }
 }
 
 public static function listarEmpresas() {

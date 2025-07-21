@@ -39,7 +39,7 @@
             
                 <!-- FORMULARIO DE REGISTRO -->
                 <form id="createUserForm" action="../../../controllers/UsuarioController.php" method="POST" class="validated-form">
-                    <input type="hidden" name="accion" value="crearUsuario" />
+                    <input type="hidden" name="accion" value="crearEmpresa" />
                     <div class="inputs__container">
                         <input class="input-field" name="nit" placeholder="Número NIT" type="text" required/>
                         <input class="input-field" name="representante_legal" placeholder="Representante legal" type="text" required/>
@@ -49,8 +49,8 @@
                     <input class="input-field" name="direccion" placeholder="Dirección" type="text" required/>
                     <select class="select_container" name="tipo_empresa">
                         <option selected disabled>Sector Económico</option>
-                        <option>Industrial</option>
-                        <option>Servicios</option> 
+                        <option>INDUSTRIAL</option>
+                        <option>SERVICIOS</option> 
                     </select>
                 <div class="box__password">
 <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password" pattern=".{12,}" title="La contraseña debe tener al menos 12 caracteres" required />
@@ -59,7 +59,6 @@
                     </button>
                 </div>    
                     <input class="input-field" type="hidden" name="rol" value="empresa" required/>
-                    <input type="hidden" name="accion" value="crearUsuario" />
                 </div>
 
                     <div class="buttons__container">

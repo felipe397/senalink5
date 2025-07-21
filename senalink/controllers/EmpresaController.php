@@ -36,10 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
 
 // POST action filtrarPorEstado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($_POST['accion'] === 'filtrarPorEstado') {
+    if (isset($_POST['accion']) && $_POST['accion'] === 'filtrarPorEstado') {
         $estado = $_POST['estado'];
         $empresas = UsuarioModel::getEmpresasPorEstado($estado);
-
         if (empty($empresas)) {
             echo "<p>No se encontraron empresas con estado $estado.</p>";
         } else {
@@ -57,6 +56,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
         exit;
+    }
+
+    // Validación para crear empresa: razón social única
+    if (isset($_POST['accion']) && $_POST['accion'] === 'crearEmpresa') {
+        header('Content-Type: application/json');
+        $razon_social = isset($_POST['razon_social']) ? trim($_POST['razon_social']) : '';
+        if (UsuarioModel::existeRazonSocial($razon_social)) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'La razón social ya está registrada. Por favor ingrese una diferente.'
+            ]);
+            exit;
+        }
+        // Aquí iría el código para crear la empresa normalmente...
+        // Ejemplo:
+        // $resultado = UsuarioModel::crear($_POST);
+        // if ($resultado) {
+        //     echo json_encode(['success' => true, 'message' => 'Empresa creada correctamente']);
+        // } else {
+        //     echo json_encode(['success' => false, 'error' => 'Error al crear la empresa']);
+        // }
+        // exit;
     }
 }
 ?>
