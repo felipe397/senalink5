@@ -75,7 +75,7 @@ function showAlert(message, type = 'error', insertBeforeSelector) {
   if (container) {
     // Insertar la alerta en body con posición fija y top ajustado para que aparezca entre header y container
     alert.style.position = 'fixed';
-    alert.style.top = '129px';  // Ajustar para que quede un poco más abajo, entre header y container
+    alert.style.top = '119px';  // Ajustar para que quede un poco más abajo, entre header y container
     alert.style.left = '50%';
     alert.style.transform = 'translateX(-50%)';
     alert.style.width = 'auto';

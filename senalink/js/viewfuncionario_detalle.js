@@ -61,16 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: formData
                 })
                     .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            window.location.href = 'Gestion_Funcionario.html';
-                        } else {
-                            alert(data.error || 'Error al actualizar estado');
-                        }
-                    })
-                    .catch(error => {
-                        alert('Error al actualizar estado');
-                    });
+.then(data => {
+    if (data.success) {
+        showAlert('Estado actualizado correctamente', 'success');
+        setTimeout(() => {
+            window.location.href = 'Gestion_Funcionario.html';
+        }, 1500);
+    } else {
+        alert(data.error || 'Error al actualizar estado');
+    }
+})
+.catch(error => {
+    alert('Error al actualizar estado');
+});
             });
         });
     }
@@ -87,16 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: formData
             })
                 .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        window.location.href = 'Gestion_Funcionario.html';
-                    } else {
-                        alert(data.error || 'Error al actualizar estado');
-                    }
-                })
-                .catch(error => {
-                    alert('Error al actualizar estado');
-                });
+.then(data => {
+    if (data.success) {
+        showAlert('Estado actualizado correctamente', 'success');
+        setTimeout(() => {
+            window.location.href = 'Gestion_Funcionario.html';
+        }, 1500);
+    } else {
+        alert(data.error || 'Error al actualizar estado');
+    }
+})
+.catch(error => {
+    alert('Error al actualizar estado');
+});
         });
     }
 });

@@ -92,13 +92,50 @@
 
                         form.addEventListener('submit', function(event) {
                             event.preventDefault();
-                            if (passwordInput.value.length < 12) {
-                                passwordInput.setCustomValidity('La contraseña debe tener al menos 12 caracteres.');
-                                passwordInput.reportValidity();
-                                return;
-                            } else {
-                                passwordInput.setCustomValidity('');
+                            // Validación frontend de todos los campos
+                            const nit = form.nit.value.trim();
+                            const representante_legal = form.representante_legal.value.trim();
+                            const razon_social = form.razon_social.value.trim();
+                            const telefono = form.telefono.value.trim();
+                            const correo = form.correo.value.trim();
+                            const direccion = form.direccion.value.trim();
+                            const tipo_empresa = form.tipo_empresa.value;
+                            const contrasena = passwordInput.value;
+                            let valid = true;
+
+                            if (!nit.match(/^\d+$/)) {
+                                showAlert('El NIT debe ser un número válido.', 'error');
+                                valid = false;
                             }
+                            if (!representante_legal) {
+                                showAlert('El representante legal es obligatorio.', 'error');
+                                valid = false;
+                            }
+                            if (!razon_social) {
+                                showAlert('La razón social es obligatoria.', 'error');
+                                valid = false;
+                            }
+                            if (!telefono.match(/^\d{7,15}$/)) {
+                                showAlert('El teléfono debe tener entre 7 y 15 dígitos numéricos.', 'error');
+                                valid = false;
+                            }
+                            if (!correo.match(/^\S+@\S+\.\S+$/)) {
+                                showAlert('El correo electrónico no es válido.', 'error');
+                                valid = false;
+                            }
+                            if (!direccion) {
+                                showAlert('La dirección es obligatoria.', 'error');
+                                valid = false;
+                            }
+                            if (!tipo_empresa || tipo_empresa === 'Sector Económico') {
+                                showAlert('Debe seleccionar un sector económico.', 'error');
+                                valid = false;
+                            }
+                            if (contrasena.length < 12) {
+                                showAlert('La contraseña debe tener al menos 12 caracteres.', 'error');
+                                valid = false;
+                            }
+                            if (!valid) return;
 
                             const formData = new FormData(form);
                             fetch(form.action, {
@@ -113,11 +150,32 @@
                                         window.location.href = data.redirect || window.location.href;
                                     }, 1500);
                                 } else {
-                                    if (data.errors) {
-                                        data.errors.forEach(error => showAlert(error, 'error'));
-                                    } else if (data.error) {
+                                    let anyError = false;
+                                    // Mostrar todos los mensajes posibles de error específicos
+                                    if (data.errors && Array.isArray(data.errors)) {
+                                        data.errors.forEach(error => {
+                                            if (error) {
+                                                showAlert(error, 'error');
+                                                anyError = true;
+                                            }
+                                        });
+                                    }
+                                    if (data.error) {
                                         showAlert(data.error, 'error');
-                                    } else {
+                                        anyError = true;
+                                    }
+                                    if (data.message) {
+                                        showAlert(data.message, 'error');
+                                        anyError = true;
+                                    }
+                                    // Si hay campos adicionales con mensajes de error específicos
+                                    Object.keys(data).forEach(key => {
+                                        if (key !== 'success' && key !== 'redirect' && typeof data[key] === 'string' && data[key] && !['error','message'].includes(key)) {
+                                            showAlert(data[key], 'error');
+                                            anyError = true;
+                                        }
+                                    });
+                                    if (!anyError) {
                                         showAlert('Error desconocido', 'error');
                                     }
                                 }

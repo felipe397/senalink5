@@ -30,7 +30,7 @@ if (
     !preg_match('/[0-9]/', $contrasena_input) ||
     !preg_match('/[\W_]/', $contrasena_input) // Caracteres especiales
 ) {
-    $errores[] = "La contraseña debe tener al menos 14 caracteres, incluyendo mayúsculas, minúsculas, números y un carácter especial.";
+    $errores[] = "La contraseña debe tener al menos 12 caracteres, incluyendo mayúsculas, minúsculas, números y un carácter especial.";
 }
 
 // Validar dirección

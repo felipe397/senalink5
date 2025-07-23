@@ -62,10 +62,38 @@
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/alert.js"></script>
     <script>
+
+        // Guardar valores originales
+      let originalValues = {};
+
+      function getFormValues() {
+          return {
+              nit: document.getElementById('nit').value,
+              representante_legal: document.getElementById('representante_legal').value,
+              razon_social: document.getElementById('razon_social').value,
+              telefono: document.getElementById('telefono').value,
+              correo: document.getElementById('correo').value,
+              ubicacion: document.getElementById('ubicacion').value,
+              tipo_empresa: document.getElementById('tipo_empresa').value,
+          };
+      }
+
+      function valuesChanged(current, original) {
+          return Object.keys(original).some(key => current[key] != original[key]);
+      }
+
+
+
         document.addEventListener("DOMContentLoaded", function () {
         // Manejo de submit por fetch para mostrar alerta de éxito
         const form = document.getElementById('empresaForm');
         form.addEventListener('submit', function(event) {
+            const currentValues = getFormValues();
+            if (!valuesChanged(currentValues, originalValues)) {
+                // No hacer nada si no hay cambios
+                event.preventDefault();
+                return;
+            }
             event.preventDefault();
             const formData = new FormData(form);
             fetch(form.action, {
@@ -120,6 +148,8 @@
                             document.getElementById('correo').value = data.correo || '';
                             document.getElementById('ubicacion').value = data.direccion || '';
                             document.getElementById('tipo_empresa').value = data.tipo_empresa || '';
+                            // Guardar valores originales después de cargar los datos
+                            originalValues = getFormValues();
                         } else {
                             alert('Error al cargar los datos de la empresa.');
                         }

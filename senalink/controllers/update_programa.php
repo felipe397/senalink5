@@ -1,7 +1,9 @@
 <?php
-session_start(); // Asegúrate de iniciar sesión
+session_start();
 
 require_once '../models/Programa.php';
+
+header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id = $_POST['id'] ?? null;
@@ -39,26 +41,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ]);
 
         if ($resultado) {
-            // ✅ Redirección según el rol de sesión
             $rol = $_SESSION['rol'] ?? '';
-            switch ($rol) {
-                case 'super_admin':
-                    header("Location: ../html/Super_Admin/Programa_Formacion/Gestion_Programa.html");
-                    break;
-                case 'AdminSENA':
-                    header("Location: ../html/AdminSENA/Programa_Formacion/Gestion_Programa.html");
-                    break;
-                default:
-                    header("Location: ../html/index.html");
-                    break;
-            }
-            exit;
+            echo json_encode([
+                'success' => true,
+                'rol' => $rol
+            ]);
         } else {
-            echo "❌ Error al actualizar el programa.";
+            echo json_encode([
+                'success' => false,
+                'error' => 'Error al actualizar el programa.'
+            ]);
         }
     } else {
-        echo "⚠️ Todos los campos son obligatorios.";
+        echo json_encode([
+            'success' => false,
+            'error' => 'Todos los campos son obligatorios.'
+        ]);
     }
 } else {
-    echo "⛔ Método no permitido.";
+    echo json_encode([
+        'success' => false,
+        'error' => 'Método no permitido.'
+    ]);
 }
