@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../../../css/crud.css">
     <link rel="shortcut icon" href="../../../img/Favicon1.png">
+    <style>
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
     <header class="gov" id="inicio">
@@ -26,7 +34,7 @@
         </div>
     </header>
 
-    <div class="linea-verde"></div>
+    
 
     <div class="container">
         <main class="container__crud">

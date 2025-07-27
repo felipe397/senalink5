@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8"/>
@@ -37,7 +36,7 @@
         <main class="container__crud">
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
 
-                <form action="../../../controllers/update_adminsena.php" method="POST" id="funcionarioForm" class="validated-form">
+          <form action="../../../controllers/update_adminsena.php" method="POST" id="funcionarioForm" class="validated-form">
                 <input type="hidden" id="id" name="id" value="">
                 <input type="hidden" name="action" value="update">
                 <div class="inputs__container">
@@ -45,9 +44,9 @@
                     <input class="input-field" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre" type="text"/>
                     <input class="input-field" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" type="text" required/>
                     <input class="input-field" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo apellido" type="text"/>
-                    <input class="input-field" name="correo" id="correo" placeholder="Correo electrónico" type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" title="Por favor ingresa un correo válido con dominio correcto" required/>
+                    <input class="input-field" name="correo" id="correo" placeholder="Correo electrónico" type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Por favor ingresa un correo válido con dominio correcto" required/>
                     <input class="input-field" name="telefono" id="telefono" placeholder="Numero de telefono" type="number" pattern="\\d{7,10}" title="El número de teléfono debe tener entre 7 y 10 dígitos" required/>
-                    <input class="input-field" name="numero_documento" id="numero_documento" placeholder="Numero de documento" type="text"  required readonly/>
+                    <input class="input-field" name="numero_documento" id="numero_documento" placeholder="Numero de documento" type="text" readonly readonly style="background:#e9ecef;cursor:not-allowed;" />
                     <input class="input-field" id="tipo_documento_mostrar" placeholder="Tipo de documento" type="text" readonly style="background:#e9ecef;cursor:not-allowed;" />
                     <input type="hidden" name="tipo_documento" id="tipo_documento" />
                 </div>
@@ -130,6 +129,15 @@
           // Validaciones personalizadas
           const correo = document.getElementById('correo').value.trim();
           const telefono = document.getElementById('telefono').value.trim();
+          // Quitar validación para numero_documento porque es readonly
+          // const numeroDocumento = document.getElementById('numero_documento').value.trim();
+          const numeroDocumento = document.getElementById('numero_documento');
+          if (numeroDocumento.hasAttribute('readonly')) {
+            numeroDocumento.setCustomValidity('');
+          }
+          // Quitar validación para primer_nombre
+          const primerNombre = document.getElementById('primer_nombre');
+          primerNombre.setCustomValidity('');
           if (!correo.match(/^\S+@\S+\.\S+$/)) {
             showAlert('Por favor ingresa un correo electrónico válido.', 'error', '.container');
             return;

@@ -30,7 +30,6 @@
             <img src="../../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
         </div>
         </header>
-    <div class="linea-verde"></div>
     <div class="container">
         <main class="container__crud">
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
@@ -56,10 +55,11 @@
             </div>
             <!-- Botones CRUD -->
             <div class="buttons__container">
-                <a href="#" class="buttons__crud" id="btnActualizar">Actualizar</a>
+                <a href="ProgramaEdit.html?id=" class="buttons__crud" id="btnActualizar">Actualizar</a>
                 <a href="Gestion_Programa.html" class="buttons__crud">Listar</a>
                 <a href="#" class="buttons__crud" id="ProgReporte">Reporte</a>
                 <button onclick="goBack()" class="buttons__crud">Volver</button>
+
             </div>
 
             <!-- Modal de Confirmación -->
@@ -77,19 +77,6 @@
     <script src="../../../js/script.js"></script>
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/viewprogramasformacion.js"></script>
-    <script>
-    // Asegura que el botón Actualizar lleve el id correcto
-    document.addEventListener('DOMContentLoaded', function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id');
-        if (id) {
-            const btnActualizar = document.getElementById('btnActualizar');
-            if (btnActualizar) {
-                btnActualizar.href = `ProgramaEdit.html?id=${id}`;
-            }
-        }
-    });
-    </script>
 
     <script>
     document.getElementById('ProgReporte').addEventListener('click', function() {

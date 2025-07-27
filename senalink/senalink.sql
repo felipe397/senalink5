@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-07-2025 a las 22:20:52
+-- Tiempo de generación: 28-07-2025 a las 00:13:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -382,7 +382,8 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (122, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'TECNÓLOGO', 'En ejecucion', 2834702, '2025-12-10', 524300, 'INDUSTRIAL', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'TEXTILES', 'Lectiva'),
 (123, 'PATRONAJE INDUSTRIAL DE PRENDAS DE VESTIR', 2208, 'TÉCNICO', 'En ejecucion', 2928915, '2025-07-14', 524500, 'INDUSTRIAL', 'Patronistas de Productos de Tela, Cuero y Piel', 'TEXTILES', 'Lectiva'),
 (162, 'ANÁLISIS Y DESARROLLO DE SOFTWARE', 3894, 'TECNOLOGO', 'En ejecucion', 2899410, '2026-03-12', 228118, 'SERVICIOS', 'Técnicos en Tecnologías de la Información', 'SERVICIOS', 'Lectiva'),
-(163, 'ANÁLISIS Y DESARROLLO DE SOFTWARE', 3984, 'TECNOLOGO', 'En ejecucion', 3147206, '2027-05-09', 228118, 'SERVICIOS', 'Técnicos en Tecnologías de la Información', 'Servicios', 'Lectiva');
+(163, 'ANÁLISIS Y DESARROLLO DE SOFTWARE', 3984, 'TECNOLOGO', 'En ejecucion', 3147206, '2027-05-09', 228118, 'SERVICIOS', 'Técnicos en Tecnologías de la Información', 'Servicios', 'Lectiva'),
+(164, 'Audiovisuales y redes sociales', 20, 'TECNICO', 'Finalizado', 2896476, '2025-07-31', 2899988, 'INDUSTRIA', 'hacer videos de tiktok', 'INDUSTRIA', 'Lectiva');
 
 -- --------------------------------------------------------
 
@@ -397,8 +398,8 @@ CREATE TABLE `usuarios` (
   `rol` enum('empresa','AdminSENA','super_admin') DEFAULT NULL,
   `estado` enum('Activo','Suspendido','Desactivado') DEFAULT 'Activo',
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  `nit` bigint(20) DEFAULT NULL,
-  `direccion` varchar(255) NOT NULL,
+  `nit` varchar(9) DEFAULT NULL,
+  `direccion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `razon_social` varchar(50) DEFAULT NULL,
   `telefono` bigint(20) NOT NULL,
   `nickname` varchar(100) DEFAULT NULL,
@@ -408,7 +409,7 @@ CREATE TABLE `usuarios` (
   `segundo_nombre` varchar(50) DEFAULT NULL,
   `primer_apellido` varchar(50) NOT NULL,
   `segundo_apellido` varchar(50) DEFAULT NULL,
-  `tipo_documento` enum('Cedula de ciudadania','Cedula de extranjeria','Permiso especial de permanencia','Permiso de proteccion temporal') DEFAULT NULL,
+  `tipo_documento` enum('Cédula de ciudadanía','Cédula de extranjería') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `numero_documento` bigint(20) DEFAULT NULL,
   `diagnostico_realizado` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -418,18 +419,20 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`, `diagnostico_realizado`) VALUES
-(16, 'correodebraulioperra@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, 3156907026, NULL, NULL, NULL, 'Braulio', '', 'Chica', 'Alzate', '', 12345678, 0),
-(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, 3001234567, NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cedula de ciudadania', 3001234567, 0),
-(25, 'osoriolopezjuanfelipe9898@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, 322222222, NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', '', 23456789, 0),
-(36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, 3024345634, NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cedula de ciudadania', 1111111111, 0),
-(37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, 3024345635, NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cedula de ciudadania', 2222222222, 0),
-(38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, 3024345636, NULL, NULL, NULL, 'Edwin', NULL, 'Banol', 'Cardona', 'Cedula de ciudadania', 3333333333, 0),
-(44, 'miguelmarin@gmail.com', '$2y$10$IfGPyP2FX2UTeaf/yi.TK.BMjprDOU5nmtMUwRXqzAvXeCGxBFUwG', 'AdminSENA', 'Activo', '2025-07-10 14:23:17', NULL, '', NULL, 1234567891, NULL, NULL, NULL, 'miguel', 'angel', 'lopez', 'marin', 'Cedula de ciudadania', 1122334455, 0),
-(45, 'felipeosorio@gmail.com', '$2y$10$SHDidYvcH8jiAe0/NNyDVOJOSegNPE2SOA7uP6kNZW.bt2t1p7SMW', 'AdminSENA', 'Activo', '2025-07-17 00:47:27', NULL, '', NULL, 3156907026, NULL, NULL, NULL, 'pele', 'felipe', 'pamparoso', 'migue', 'Cedula de ciudadania', 1121506109, 0),
-(46, 'correodebraulio@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', 123456789, 'Calle 8 N 12 A', 'Frisby S.A', 3156907026, NULL, 'Frisby', 'INDUSTRIAL', '', NULL, '', NULL, NULL, 0, 0),
-(48, 'braulioperraloodio@gmail.com', '$2y$10$ZN72f/S9JXqD5Az.ZH0nfOdlAtbZSdYshlkDsgRFYvmy/NtUTz4uC', 'AdminSENA', 'Desactivado', '2025-07-18 01:49:54', NULL, '', NULL, 3152928734, NULL, NULL, NULL, 'pele', 'SEBASTIAN', 'Osorio', 'marulanda', 'Cedula de ciudadania', 1234567898, 0),
-(49, 'braulioloodioperrazungamk@gmail.com', '$2y$10$oyPTJwGYPDHyUF8x1rh6I.J3Y.ttapB4aNtsUNck.m/O1ar7i7FY.', 'AdminSENA', 'Activo', '2025-07-18 02:14:34', NULL, '', NULL, 3152928626, NULL, NULL, NULL, 'Braulio', 'odio', 'perra', 'zunga', 'Cedula de ciudadania', 987654321, 0),
-(54, 'braulioloodioperra@gmail.com', '$2y$10$1a02kFD/W9jQdFdVoOSfKe.1T4pKT9W7BDBHP81fnYFFh.y9Oh4XC', 'AdminSENA', 'Activo', '2025-07-18 03:18:10', NULL, '', NULL, 3152928725, NULL, NULL, NULL, 'Juan', 'SEBASTIAN', 'Chica', 'Sebas', 'Cedula de ciudadania', 123456789, 0);
+(16, 'correodebraulioperra@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Desactivado', '2025-06-13 03:32:23', NULL, '', NULL, 3156907026, NULL, NULL, NULL, 'Breiner', '', 'Chica', 'Alzate', '', 12345678, 0),
+(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, 3001234567, NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cédula de ciudadanía', 3001234567, 0),
+(25, 'osoriolopezjuanfelipe9898@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Desactivado', '2025-07-01 02:13:30', NULL, '', NULL, 322222222, NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', '', 23456789, 0),
+(36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, 3024345634, NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cédula de ciudadanía', 1111111111, 0),
+(37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, 3024345635, NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cédula de ciudadanía', 2222222222, 0),
+(38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, 3024345636, NULL, NULL, NULL, 'Edwin', NULL, 'Banol', 'Cardona', 'Cédula de ciudadanía', 3333333333, 0),
+(44, 'miguelmarin@gmail.com', '$2y$10$IfGPyP2FX2UTeaf/yi.TK.BMjprDOU5nmtMUwRXqzAvXeCGxBFUwG', 'AdminSENA', 'Activo', '2025-07-10 14:23:17', NULL, '', NULL, 1234567891, NULL, NULL, NULL, 'miguel', 'angel', 'lopez', 'marin', 'Cédula de ciudadanía', 1122334455, 0),
+(45, 'felipeosorio@gmail.com', '$2y$10$SHDidYvcH8jiAe0/NNyDVOJOSegNPE2SOA7uP6kNZW.bt2t1p7SMW', 'AdminSENA', 'Activo', '2025-07-17 00:47:27', NULL, '', NULL, 3156907026, NULL, NULL, NULL, 'pele', 'felipe', 'pamparoso', 'crack', 'Cédula de ciudadanía', 1121506109, 0),
+(46, 'correodebrauliomk@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', '123456789', 'Calle 8 N 12 A', 'Frisby S.A', 3156907026, NULL, 'Frisby', 'INDUSTRIAL', '', NULL, '', NULL, NULL, 0, 0),
+(48, 'brauliomk@gmail.com', '$2y$10$ZN72f/S9JXqD5Az.ZH0nfOdlAtbZSdYshlkDsgRFYvmy/NtUTz4uC', 'AdminSENA', 'Activo', '2025-07-18 01:49:54', NULL, '', NULL, 3152928734, NULL, NULL, NULL, 'pele', 'Felipe', 'Osorio', 'marulanda', 'Cédula de ciudadanía', 1234567898, 0),
+(49, 'braulioloodioperrazungamk@gmail.com', '$2y$10$oyPTJwGYPDHyUF8x1rh6I.J3Y.ttapB4aNtsUNck.m/O1ar7i7FY.', 'AdminSENA', 'Activo', '2025-07-18 02:14:34', NULL, '', NULL, 3152928626, NULL, NULL, NULL, 'Braulio', 'odio', 'perra', 'zunga', 'Cédula de ciudadanía', 987654321, 0),
+(54, 'braulioloodioperra@gmail.com', '$2y$10$1a02kFD/W9jQdFdVoOSfKe.1T4pKT9W7BDBHP81fnYFFh.y9Oh4XC', 'AdminSENA', 'Activo', '2025-07-18 03:18:10', NULL, '', NULL, 3152928725, NULL, NULL, NULL, 'Ruth', 'Danyely', 'Guerrero', 'Figueroa', 'Cédula de ciudadanía', 123456789, 0),
+(58, 'correo@gmail.com', '$2y$10$QqUK2zUb.g6M4k.2LJd2Ie6JCUPysL4VD4wSSHYJ6bb1F/pbuftFu', 'empresa', 'Activo', '2025-07-28 03:06:26', '567890234', 'Carrera 12 # 5-31', 'Monster y cuates S.A', 3122233378, NULL, 'Chocolates Ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(59, 'andreshenao@gmail.com', '$2y$10$EhmvIxNOmDXpr/dW/VXDmuVZuFGjUsDd648X4QWIuCDkDp4OJYF6a', 'AdminSENA', 'Activo', '2025-07-28 05:03:06', NULL, NULL, NULL, 3156809028, NULL, NULL, NULL, 'Alfonso', 'Andres', 'Lopez', 'Henao', 'Cédula de ciudadanía', 1099765443, 0);
 
 --
 -- Disparadores `usuarios`
@@ -523,13 +526,13 @@ ALTER TABLE `preguntas`
 -- AUTO_INCREMENT de la tabla `programas_formacion`
 --
 ALTER TABLE `programas_formacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- Restricciones para tablas volcadas

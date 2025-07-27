@@ -31,9 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $usuarioModel = new UsuarioModel();
 
-    // Validar NIT: debe ser numérico y positivo
-    if (!ctype_digit($nit) || intval($nit) <= 0) {
-        $errores[] = 'NIT inválido.';
+    // Validar NIT: exactamente 9 dígitos numéricos
+    if (!preg_match('/^\d{9}$/', $nit)) {
+        $errores[] = 'El NIT debe tener exactamente 9 dígitos numéricos.';
     } else {
         // Verificar si el NIT ya existe en otra empresa (excluyendo la actual)
         if ($usuarioModel->existeNIT($nit, $id)) {
@@ -41,6 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
+    // Validar tipo societario en razón social
+    if (!preg_match('/\b(S\.A\.?|S\.A\.S\.?|LTDA)\b/i', $razon_social)) {
+        $errores[] = 'La razón social debe incluir el tipo societario: S.A, S.A.S o LTDA.';
+    }
     // Validar que la razón social sea única (excluyendo la actual)
     if ($usuarioModel->existeRazonSocial($razon_social, $id)) {
         $errores[] = 'La razón social ya está registrada en otra empresa.';

@@ -87,10 +87,16 @@ class UsuarioModel {
     }
 
     // Verificar si el teléfono ya existe
-    public static function existeTelefono($telefono) {
+    public static function existeTelefono($telefono, $excludeId = null) {
         $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE telefono = :telefono");
-        $stmt->bindValue(':telefono', $telefono);
+        if ($excludeId) {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE telefono = :telefono AND id != :id");
+            $stmt->bindValue(':telefono', $telefono);
+            $stmt->bindValue(':id', $excludeId, PDO::PARAM_INT);
+        } else {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE telefono = :telefono");
+            $stmt->bindValue(':telefono', $telefono);
+        }
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }

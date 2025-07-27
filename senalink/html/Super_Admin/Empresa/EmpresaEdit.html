@@ -94,6 +94,13 @@
                 event.preventDefault();
                 return;
             }
+            // Validación tipo societario en razón social
+            const razonSocial = document.getElementById('razon_social').value.trim();
+            if (!/(S\.A\.?|S\.A\.S\.?|LTDA)/i.test(razonSocial)) {
+                event.preventDefault();
+                showAlert('La razón social debe incluir el tipo societario: S.A, S.A.S o LTDA.', 'error');
+                return;
+            }
             event.preventDefault();
             const formData = new FormData(form);
             fetch(form.action, {

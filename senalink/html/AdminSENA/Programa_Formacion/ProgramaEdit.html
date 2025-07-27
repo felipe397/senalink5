@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../../../css/crud.css">
+    <link rel="stylesheet" href="../../../css/alert.css">
     <link rel="shortcut icon" href="../../../img/Favicon1.png">
 </head>
 
@@ -32,14 +33,14 @@
         </div>
     </header>
 
-    <div class="linea-verde"></div>
+    
 
     <!-- Contenido principal -->
     <div class="container">
         <main class="container__crud">
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"/>
 
-            <form action="../../../controllers/update_programa.php" method="POST" id="programaForm">
+            <form action="http://localhost/senalink5/senalink5/senalink/controllers/update_programa.php" method="POST" id="programaForm">
                 <input type="hidden" name="origen" value="Super_Admin">
                 <div class="inputs__container">
 
@@ -47,7 +48,7 @@
                     <input type="hidden" id="programa_id" name="id" value="">
                     <input type="hidden" name="action" value="update">
 
-                    <input class="input-field" id="codigo" name="codigo" placeholder="Código" type="number" required readonly />
+                    <input class="input-field" id="codigo" name="codigo" placeholder="Código" type="number" required />
                     <input class="input-field" id="ficha" name="ficha" placeholder="Ficha" type="number" required />
 
                     <select class="select_container" id="nivel_formacion" name="nivel_formacion" required>
@@ -97,55 +98,137 @@
     </div>
 
     <script src="../../../js/backbutton.js"></script>
+    <script src="../../../js/alert.js"></script>
+    <script src="../../../js/formValidation.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const programaId = new URLSearchParams(window.location.search).get('id');
-            if (programaId) {
-                fetch(`http://localhost/senalink5/senalink5/senalink/controllers/ProgramaController.php?action=DetallePrograma&id=${programaId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!data.error) {
-                            document.getElementById('programa_id').value = programaId;
-                            document.getElementById('codigo').value = data.codigo || '';
-                            document.getElementById('ficha').value = data.ficha || '';
-                            setSelectValue('nivel_formacion', data.nivel_formacion);
+// Guardar valores originales
+let originalValues = {};
 
-                            // Selección robusta para selects (ignora tildes y mayúsculas)
-                            function setSelectValue(selectId, value) {
-                                const select = document.getElementById(selectId);
-                                if (!select) return;
-                                const normalizar = v => v ? v.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim() : '';
-                                const valorNormalizado = normalizar(value);
-                                let found = false;
-                                for (let opt of select.options) {
-                                    if (normalizar(opt.value) === valorNormalizado || normalizar(opt.text) === valorNormalizado) {
-                                        select.value = opt.value;
-                                        found = true;
-                                        break;
-                                    }
-                                }
-                                if (!found) select.selectedIndex = 0;
+function getFormValues() {
+    return {
+        codigo: document.getElementById('codigo').value,
+        ficha: document.getElementById('ficha').value,
+        nivel_formacion: document.getElementById('nivel_formacion').value,
+        sector_programa: document.getElementById('sector_programa').value,
+        etapa_ficha: document.getElementById('etapa_ficha').value,
+        sector_economico: document.getElementById('sector_economico').value,
+        nombre_ocupacion: document.getElementById('nombre_ocupacion').value,
+        duracion_programa: document.getElementById('duracion_programa').value,
+        nombre_programa: document.getElementById('nombre_programa').value,
+        estado: document.getElementById('estado').value,
+        fecha_finalizacion: document.getElementById('fecha_finalizacion').value
+    };
+}
+
+function valuesChanged(current, original) {
+    return Object.keys(original).some(key => current[key] != original[key]);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const programaId = new URLSearchParams(window.location.search).get('id');
+    if (programaId) {
+        fetch(`http://localhost/senalink5/senalink5/senalink/controllers/ProgramaController.php?action=DetallePrograma&id=${programaId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.error) {
+                    document.getElementById('programa_id').value = programaId;
+                    document.getElementById('codigo').value = data.codigo || '';
+                    document.getElementById('ficha').value = data.ficha || '';
+                    setSelectValue('nivel_formacion', data.nivel_formacion);
+
+                    // Selección robusta para selects (ignora tildes y mayúsculas)
+                    function setSelectValue(selectId, value) {
+                        const select = document.getElementById(selectId);
+                        if (!select) return;
+                        const normalizar = v => v ? v.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim() : '';
+                        const valorNormalizado = normalizar(value);
+                        let found = false;
+                        for (let opt of select.options) {
+                            if (normalizar(opt.value) === valorNormalizado || normalizar(opt.text) === valorNormalizado) {
+                                select.value = opt.value;
+                                found = true;
+                                break;
                             }
-                            setSelectValue('sector_programa', data.sector_programa);
-                            setSelectValue('etapa_ficha', data.etapa_ficha);
-                            setSelectValue('sector_economico', data.sector_economico);
-                            document.getElementById('nombre_ocupacion').value = data.nombre_ocupacion || '';
-                            document.getElementById('duracion_programa').value = data.duracion_programa || '';
-                            document.getElementById('nombre_programa').value = data.nombre_programa || '';
-                            setSelectValue('estado', data.estado);
-                            document.getElementById('fecha_finalizacion').value = data.fecha_finalizacion || '';
-                        } else {
-                            alert('Error al cargar los datos del programa.');
                         }
-                    })
-                    .catch(error => {
-                        console.error('Error al cargar los datos del programa:', error);
-                        alert('Error al cargar los datos del programa.');
-                    });
-            } else {
-                alert('No se recibió el ID del programa.');
-            }
-        });
+                        if (!found) select.selectedIndex = 0;
+                    }
+                    setSelectValue('sector_programa', data.sector_programa);
+                    setSelectValue('etapa_ficha', data.etapa_ficha);
+                    setSelectValue('sector_economico', data.sector_economico);
+                    document.getElementById('nombre_ocupacion').value = data.nombre_ocupacion || '';
+                    document.getElementById('duracion_programa').value = data.duracion_programa || '';
+                    document.getElementById('nombre_programa').value = data.nombre_programa || '';
+                    setSelectValue('estado', data.estado);
+                    document.getElementById('fecha_finalizacion').value = data.fecha_finalizacion || '';
+                    // Guardar valores originales después de cargar los datos
+                    originalValues = getFormValues();
+                } else {
+                    showAlert('Error al cargar los datos del programa.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error al cargar los datos del programa:', error);
+                showAlert('Error al cargar los datos del programa.', 'error');
+            });
+    } else {
+        showAlert('No se recibió el ID del programa.', 'error');
+    }
+});
+
+const form = document.getElementById('programaForm');
+form.addEventListener('submit', function(event) {
+    const currentValues = getFormValues();
+    if (!valuesChanged(currentValues, originalValues)) {
+        // No hacer nada si no hay cambios
+        event.preventDefault();
+        return;
+    }
+    event.preventDefault();
+    const formData = new FormData(form);
+    const url = 'http://localhost/senalink5/senalink5/senalink/controllers/update_programa.php';
+    fetch(url, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            return response.json();
+        } else {
+            return response.text();
+        }
+    })
+    .then(data => {
+        if (typeof data === 'object' && data !== null && data.success) {
+            showAlert('Datos actualizados correctamente', 'success');
+            setTimeout(() => {
+                if (data.rol === 'super_admin') {
+                    window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/Super_Admin/Programa_Formacion/Gestion_Programa.html';
+                } else if (data.rol === 'AdminSENA') {
+                    window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/AdminSENA/Programa_Formacion/Gestion_Programa.html';
+                } else {
+                    window.location.href = '../html/index.html';
+                }
+            }, 2000);
+        } else if (typeof data === 'string' && data.includes('actualizado')) {
+            showAlert('Datos actualizados correctamente', 'success');
+            setTimeout(() => {
+                window.location.href = 'Gestion_Programa.html';
+            }, 2000);
+        } else if (typeof data === 'object' && data !== null && data.errors) {
+            const mensajes = data.errors.join('<br>');
+            showAlert(mensajes, 'error');
+        } else if (typeof data === 'object' && data !== null && data.error) {
+            showAlert(data.error, 'error');
+        } else {
+            showAlert('Error al actualizar el programa', 'error');
+        }
+    })
+    .catch(() => {
+        showAlert('Error en la comunicación con el servidor', 'error');
+    });
+});
+
     </script>
 
     <div class="linea-azul-difuminada"></div>
