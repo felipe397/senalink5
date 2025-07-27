@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-07-2025 a las 00:13:31
+-- Tiempo de generación: 28-07-2025 a las 00:25:01
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -427,11 +427,11 @@ INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_cr
 (38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, 3024345636, NULL, NULL, NULL, 'Edwin', NULL, 'Banol', 'Cardona', 'Cédula de ciudadanía', 3333333333, 0),
 (44, 'miguelmarin@gmail.com', '$2y$10$IfGPyP2FX2UTeaf/yi.TK.BMjprDOU5nmtMUwRXqzAvXeCGxBFUwG', 'AdminSENA', 'Activo', '2025-07-10 14:23:17', NULL, '', NULL, 1234567891, NULL, NULL, NULL, 'miguel', 'angel', 'lopez', 'marin', 'Cédula de ciudadanía', 1122334455, 0),
 (45, 'felipeosorio@gmail.com', '$2y$10$SHDidYvcH8jiAe0/NNyDVOJOSegNPE2SOA7uP6kNZW.bt2t1p7SMW', 'AdminSENA', 'Activo', '2025-07-17 00:47:27', NULL, '', NULL, 3156907026, NULL, NULL, NULL, 'pele', 'felipe', 'pamparoso', 'crack', 'Cédula de ciudadanía', 1121506109, 0),
-(46, 'correodebrauliomk@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', '123456789', 'Calle 8 N 12 A', 'Frisby S.A', 3156907026, NULL, 'Frisby', 'INDUSTRIAL', '', NULL, '', NULL, NULL, 0, 0),
+(46, 'breineralzate@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', '123456789', 'Carrera 9 # 56-34', 'Frisby S.A', 3104785544, NULL, 'Frisby', 'INDUSTRIAL', '', NULL, '', NULL, NULL, 0, 0),
 (48, 'brauliomk@gmail.com', '$2y$10$ZN72f/S9JXqD5Az.ZH0nfOdlAtbZSdYshlkDsgRFYvmy/NtUTz4uC', 'AdminSENA', 'Activo', '2025-07-18 01:49:54', NULL, '', NULL, 3152928734, NULL, NULL, NULL, 'pele', 'Felipe', 'Osorio', 'marulanda', 'Cédula de ciudadanía', 1234567898, 0),
 (49, 'braulioloodioperrazungamk@gmail.com', '$2y$10$oyPTJwGYPDHyUF8x1rh6I.J3Y.ttapB4aNtsUNck.m/O1ar7i7FY.', 'AdminSENA', 'Activo', '2025-07-18 02:14:34', NULL, '', NULL, 3152928626, NULL, NULL, NULL, 'Braulio', 'odio', 'perra', 'zunga', 'Cédula de ciudadanía', 987654321, 0),
 (54, 'braulioloodioperra@gmail.com', '$2y$10$1a02kFD/W9jQdFdVoOSfKe.1T4pKT9W7BDBHP81fnYFFh.y9Oh4XC', 'AdminSENA', 'Activo', '2025-07-18 03:18:10', NULL, '', NULL, 3152928725, NULL, NULL, NULL, 'Ruth', 'Danyely', 'Guerrero', 'Figueroa', 'Cédula de ciudadanía', 123456789, 0),
-(58, 'correo@gmail.com', '$2y$10$QqUK2zUb.g6M4k.2LJd2Ie6JCUPysL4VD4wSSHYJ6bb1F/pbuftFu', 'empresa', 'Activo', '2025-07-28 03:06:26', '567890234', 'Carrera 12 # 5-31', 'Monster y cuates S.A', 3122233378, NULL, 'Chocolates Ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(58, 'correo@gmail.com', '$2y$10$QqUK2zUb.g6M4k.2LJd2Ie6JCUPysL4VD4wSSHYJ6bb1F/pbuftFu', 'empresa', 'Activo', '2025-07-28 03:06:26', '567890234', 'Carrera 12 # 5-31', 'Monster y cuates S.A', 3104574487, NULL, 'Chocolates Ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
 (59, 'andreshenao@gmail.com', '$2y$10$EhmvIxNOmDXpr/dW/VXDmuVZuFGjUsDd648X4QWIuCDkDp4OJYF6a', 'AdminSENA', 'Activo', '2025-07-28 05:03:06', NULL, NULL, NULL, 3156809028, NULL, NULL, NULL, 'Alfonso', 'Andres', 'Lopez', 'Henao', 'Cédula de ciudadanía', 1099765443, 0);
 
 --
