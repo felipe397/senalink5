@@ -49,10 +49,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($usuarioModel->existeRazonSocial($razon_social, $id)) {
         $errores[] = 'La razón social ya está registrada en otra empresa.';
     }
+    // Validar dirección urbana colombiana
+    $regex_direccion_colombia = '/^(Calle|Carrera|Transversal|Diagonal|Autopista|Vía|Mz|Manzana)?\s?\d{1,3}[A-Za-z]?(?:\s?Bis)?(?:\s?(Sur|Norte|Este|Occidente))?\s?(No\.?|#)\s?\d{1,3}[A-Za-z]?(?:-\d{1,3})?$/i';
+    if (!preg_match($regex_direccion_colombia, $ubicacion)) {
+        $errores[] = 'La dirección no cumple con el formato urbano colombiano.';
+    }
 
     // Verificar si el correo ya existe en otra empresa (excluyendo la actual)
     if ($usuarioModel->existeCorreo($correo, $id)) {
         $errores[] = 'El correo ya está registrado en otra empresa.';
+    }
+    // Verificar si el teléfono ya existe en otra empresa (excluyendo la actual)
+    if ($usuarioModel->existeTelefono($telefono, $id)) {
+        $errores[] = 'El número telefónico ya está registrado en otra empresa.';
     }
 
     if (!empty($errores)) {
