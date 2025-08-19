@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-07-2025 a las 00:25:01
+-- Tiempo de generación: 19-08-2025 a las 04:32:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -381,7 +381,7 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (121, 'MANTENIMIENTO ELECTROMECANICO INDUSTRIAL .', 3984, 'TECNÓLOGO', 'En ejecucion', 2671605, '2025-04-22', 223213, 'INDUSTRIAL', 'Técnicos en mecánica y construcción mecánica', 'INDUSTRIAL', 'Lectiva'),
 (122, 'DESARROLLO DE COLECCIONES PARA LA INDUSTRIA DE LA ', 3984, 'TECNÓLOGO', 'En ejecucion', 2834702, '2025-12-10', 524300, 'INDUSTRIAL', 'Diseñadores de teatro, moda, exhibición y otros diseñadores creativos', 'TEXTILES', 'Lectiva'),
 (123, 'PATRONAJE INDUSTRIAL DE PRENDAS DE VESTIR', 2208, 'TÉCNICO', 'En ejecucion', 2928915, '2025-07-14', 524500, 'INDUSTRIAL', 'Patronistas de Productos de Tela, Cuero y Piel', 'TEXTILES', 'Lectiva'),
-(162, 'ANÁLISIS Y DESARROLLO DE SOFTWARE', 3894, 'TECNOLOGO', 'En ejecucion', 2899410, '2026-03-12', 228118, 'SERVICIOS', 'Técnicos en Tecnologías de la Información', 'SERVICIOS', 'Lectiva'),
+(162, 'ANÁLISIS Y DESARROLLO DE SOFTWARE', 3894, 'TECNOLOGO', 'Finalizado', 2899410, '2026-03-12', 228118, 'SERVICIOS', 'Técnicos en Tecnologías de la Información', 'SERVICIOS', 'Lectiva'),
 (163, 'ANÁLISIS Y DESARROLLO DE SOFTWARE', 3984, 'TECNOLOGO', 'En ejecucion', 3147206, '2027-05-09', 228118, 'SERVICIOS', 'Técnicos en Tecnologías de la Información', 'Servicios', 'Lectiva'),
 (164, 'Audiovisuales y redes sociales', 20, 'TECNICO', 'Finalizado', 2896476, '2025-07-31', 2899988, 'INDUSTRIA', 'hacer videos de tiktok', 'INDUSTRIA', 'Lectiva');
 
@@ -431,7 +431,7 @@ INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_cr
 (48, 'brauliomk@gmail.com', '$2y$10$ZN72f/S9JXqD5Az.ZH0nfOdlAtbZSdYshlkDsgRFYvmy/NtUTz4uC', 'AdminSENA', 'Activo', '2025-07-18 01:49:54', NULL, '', NULL, 3152928734, NULL, NULL, NULL, 'pele', 'Felipe', 'Osorio', 'marulanda', 'Cédula de ciudadanía', 1234567898, 0),
 (49, 'braulioloodioperrazungamk@gmail.com', '$2y$10$oyPTJwGYPDHyUF8x1rh6I.J3Y.ttapB4aNtsUNck.m/O1ar7i7FY.', 'AdminSENA', 'Activo', '2025-07-18 02:14:34', NULL, '', NULL, 3152928626, NULL, NULL, NULL, 'Braulio', 'odio', 'perra', 'zunga', 'Cédula de ciudadanía', 987654321, 0),
 (54, 'braulioloodioperra@gmail.com', '$2y$10$1a02kFD/W9jQdFdVoOSfKe.1T4pKT9W7BDBHP81fnYFFh.y9Oh4XC', 'AdminSENA', 'Activo', '2025-07-18 03:18:10', NULL, '', NULL, 3152928725, NULL, NULL, NULL, 'Ruth', 'Danyely', 'Guerrero', 'Figueroa', 'Cédula de ciudadanía', 123456789, 0),
-(58, 'correo@gmail.com', '$2y$10$QqUK2zUb.g6M4k.2LJd2Ie6JCUPysL4VD4wSSHYJ6bb1F/pbuftFu', 'empresa', 'Activo', '2025-07-28 03:06:26', '567890234', 'Carrera 12 # 5-31', 'Monster y cuates S.A', 3104574487, NULL, 'Chocolates Ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(58, 'correo@gmail.com', '$2y$10$QqUK2zUb.g6M4k.2LJd2Ie6JCUPysL4VD4wSSHYJ6bb1F/pbuftFu', 'empresa', 'Activo', '2025-07-28 03:06:26', '567890234', 'Carrera 12 # 5-31', 'Monster S.A', 3104574487, NULL, 'Chocolates Ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
 (59, 'andreshenao@gmail.com', '$2y$10$EhmvIxNOmDXpr/dW/VXDmuVZuFGjUsDd648X4QWIuCDkDp4OJYF6a', 'AdminSENA', 'Activo', '2025-07-28 05:03:06', NULL, NULL, NULL, 3156809028, NULL, NULL, NULL, 'Alfonso', 'Andres', 'Lopez', 'Henao', 'Cédula de ciudadanía', 1099765443, 0);
 
 --

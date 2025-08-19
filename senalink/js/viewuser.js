@@ -57,6 +57,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             console.error("Rol no reconocido:", userData.rol);
         }
+
+        // Asignar el id al enlace de actualizar
+        const enlaceActualizar = document.getElementById('enlaceActualizar');
+        if (enlaceActualizar && userData.id) {
+            enlaceActualizar.href = `../html/EditFuncionario.html?id=${userData.id}`;
+        }
     })
     .catch(error => {
         console.error("Error en la solicitud:", error);
