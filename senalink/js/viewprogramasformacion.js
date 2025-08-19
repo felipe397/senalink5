@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const filtroFinalizado = document.getElementById('filtro-finalizado');
     const contexto = document.body.dataset.context || "vista1";
 
-    const programasPorPagina = 6;
+    const programasPorPagina = 8;
     let programas = [];
     let paginaActual = 1;
 
