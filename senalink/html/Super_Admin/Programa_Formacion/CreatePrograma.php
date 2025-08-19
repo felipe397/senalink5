@@ -112,7 +112,6 @@
     </div>
 
     <script src="../../../js/backbutton.js"></script>
-    <div class="linea-azul-difuminada"></div>
     <footer>
         <p>© Todos los derechos reservados. SenaLink</p>
     </footer>

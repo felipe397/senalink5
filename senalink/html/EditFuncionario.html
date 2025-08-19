@@ -1,0 +1,173 @@
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SenaLink - Editar Funcionario</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+    <link rel="stylesheet" href="../../../css/crud.css">
+    <link rel="stylesheet" href="../../../css/alert.css">
+    <link rel="shortcut icon " href="../../../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
+    <link rel="stylesheet" href="../../../css/formValidation.css">
+</head>
+<body>
+    <header class="gov" id="inicio">
+        <div class="gov__container">
+            <a href="https://www.gov.co/" target="_blank">
+                <img loading="lazy" src="../../../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
+            </a>
+        </div>
+    </header>
+    <header class="header__login">
+        <div class="header__left">
+            
+        </div>
+
+        <div class="header__center">
+        </div>
+
+        <div class="header__right">
+            <img src="../../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
+        </div>
+    </header>
+    
+    
+    <div class="container">
+        <main class="container__crud">
+            <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
+
+          <form action="../../../controllers/update_adminsena.php" method="POST" id="funcionarioForm" class="validated-form">
+                <input type="hidden" id="id" name="id" value="">
+                <input type="hidden" name="action" value="update">
+                <div class="inputs__container">
+                    <input class="input-field" name="primer_nombre" id="primer_nombre" placeholder="Primer nombre" type="text" required/>
+                    <input class="input-field" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo nombre" type="text"/>
+                    <input class="input-field" name="primer_apellido" id="primer_apellido" placeholder="Primer apellido" type="text" required/>
+                    <input class="input-field" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo apellido" type="text"/>
+                    <input class="input-field" name="correo" id="correo" placeholder="Correo electrónico" type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Por favor ingresa un correo válido con dominio correcto" required/>
+                    <input class="input-field" name="telefono" id="telefono" placeholder="Numero de telefono" type="number" pattern="\\d{7,10}" title="El número de teléfono debe tener entre 7 y 10 dígitos" required/>
+                    <input class="input-field" name="numero_documento" id="numero_documento" placeholder="Numero de documento" type="text" readonly readonly style="background:#e9ecef;cursor:not-allowed;" />
+                    <input class="input-field" id="tipo_documento_mostrar" placeholder="Tipo de documento" type="text" readonly style="background:#e9ecef;cursor:not-allowed;" />
+                    <input type="hidden" name="tipo_documento" id="tipo_documento" />
+                </div>
+                <div class="buttons__container">
+                    <button type="submit" class="buttons__crud">Guardar</button>
+                    <button type="button" onclick="goBack()" class="buttons__crud">Volver</button>
+                </div>
+            </form>
+        </main>
+    </div>
+    <script src="../../../js/backbutton.js"></script>
+    <script src="../../../js/alert.js"></script>
+    <script src="../../../js/formValidation.js"></script>
+    <script>
+
+      // Guardar valores originales
+      let originalValues = {};
+
+      function getFormValues() {
+          return {
+              primer_nombre: document.getElementById('primer_nombre').value,
+              segundo_nombre: document.getElementById('segundo_nombre').value,
+              primer_apellido: document.getElementById('primer_apellido').value,
+              segundo_apellido: document.getElementById('segundo_apellido').value,
+              correo: document.getElementById('correo').value,
+              telefono: document.getElementById('telefono').value,
+              numero_documento: document.getElementById('numero_documento').value,
+              tipo_documento: document.getElementById('tipo_documento').value,
+          };
+      }
+
+      function valuesChanged(current, original) {
+          return Object.keys(original).some(key => current[key] != original[key]);
+      }
+
+
+
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const id = new URLSearchParams(window.location.search).get('id');
+        if (id) {
+          fetch(`../../../controllers/UsuarioController.php?action=detalleUsuario&id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+              if (data.success && data.data) {
+                document.getElementById('id').value = id;
+                document.getElementById('primer_nombre').value = data.data.primer_nombre || '';
+                document.getElementById('segundo_nombre').value = data.data.segundo_nombre || '';
+                document.getElementById('primer_apellido').value = data.data.primer_apellido || '';
+                document.getElementById('segundo_apellido').value = data.data.segundo_apellido || '';
+                document.getElementById('correo').value = data.data.correo || '';
+                document.getElementById('telefono').value = data.data.telefono || '';
+                document.getElementById('numero_documento').value = data.data.numero_documento || '';
+                // Mostrar tipo de documento en input readonly y guardar en hidden
+                document.getElementById('tipo_documento_mostrar').value = data.data.tipo_documento || '';
+                document.getElementById('tipo_documento').value = data.data.tipo_documento || '';
+                // Guardar valores originales después de cargar los datos
+                originalValues = getFormValues();
+              } else {
+                showAlert('Error al cargar los datos del AdminSENA.', 'error', '.container');
+              }
+            })
+            .catch(error => {
+              console.error('Error al cargar los datos del AdminSENA:', error);
+              showAlert('Error al cargar los datos del AdminSENA.', 'error', '.container');
+            });
+        } else {
+          // Redirigir automáticamente si no hay id
+          window.location.href = 'Gestion_Funcionario.html';
+        }
+
+        document.getElementById('funcionarioForm').addEventListener('submit', function (e) {
+          const currentValues = getFormValues();
+          if (!valuesChanged(currentValues, originalValues)) {
+            // No hacer nada si no hay cambios
+            e.preventDefault();
+            return;
+          }
+          e.preventDefault();
+          // Validaciones personalizadas
+          const correo = document.getElementById('correo').value.trim();
+          const telefono = document.getElementById('telefono').value.trim();
+          // Quitar validación para numero_documento porque es readonly
+          // const numeroDocumento = document.getElementById('numero_documento').value.trim();
+          const numeroDocumento = document.getElementById('numero_documento');
+          if (numeroDocumento.hasAttribute('readonly')) {
+            numeroDocumento.setCustomValidity('');
+          }
+          // Quitar validación para primer_nombre
+          const primerNombre = document.getElementById('primer_nombre');
+          primerNombre.setCustomValidity('');
+          if (!correo.match(/^\S+@\S+\.\S+$/)) {
+            showAlert('Por favor ingresa un correo electrónico válido.', 'error', '.container');
+            return;
+          } else if (telefono.length < 7) {
+            showAlert('El número de teléfono debe tener al menos 7 dígitos.', 'warning', '.container');
+            return;
+          }
+          // Si pasa validación, enviar al backend
+          const formData = new FormData(this);
+          fetch('../../../controllers/update_adminsena.php', {
+            method: 'POST',
+            body: formData
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                showAlert('<span class="alert-icon">&#10003;</span><span class="alert-title alert-success-text">¡Datos actualizados correctamente!</span>', 'success', '.container');
+                setTimeout(() => { window.location.href = 'Gestion_Funcionario.html'; }, 1500);
+              } else {
+                showAlert(data.error || 'Error al actualizar los datos', 'error', '.container');
+              }
+            })
+            .catch(error => {
+              showAlert('Error al actualizar los datos.', 'error', '.container');
+            });
+        });
+      });
+    </script>
+</body>
+</html>
+<footer>
+    <p>© Todos los derechos reservados.SenaLink</p>
+</footer>
