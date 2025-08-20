@@ -58,6 +58,7 @@
     <p>© Todos los derechos reservados. SenaLink</p>
   </footer>
   <script src="../js/viewpassword.js"></script>
+  <script src="../js/control_inactividad.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       function setupTogglePassword(inputName, buttonClass) {

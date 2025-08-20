@@ -37,7 +37,7 @@
 
 
 .gobierno {
-    background-color: #04324d;
+    background-color: var(--Secundary-950);
     color: var(--white);
 }
 
@@ -85,7 +85,7 @@
 }
 
 .more-information {
-    background-color: white;
+    background-color: var(--white);
     font-size: 0.75rem;
     padding: 3rem 1.7rem;
 

@@ -61,6 +61,7 @@
     <script src="../js/alert.js"></script>
   <script src="../js/formValidation.js"></script>
   <script src="../js/viewfuncionario_detalle_edit.js"></script>
+    <script src="../js/control_inactividad.js"></script>
     <script>
 
       // Guardar valores originales
@@ -98,6 +99,7 @@
                 document.getElementById('primer_apellido').value = data.data.primer_apellido || '';
                 document.getElementById('segundo_apellido').value = data.data.segundo_apellido || '';
                 document.getElementById('telefono').value = data.data.telefono || '';
+                document.getElementById('correo').value = data.data.correo || '';
                 document.getElementById('numero_documento').value = data.data.numero_documento || '';
                 // Mostrar tipo de documento en input readonly y guardar en hidden
                 document.getElementById('tipo_documento_mostrar').value = data.data.tipo_documento || '';
@@ -161,7 +163,7 @@
           }
           // Si pasa validación, enviar al backend
           const formData = new FormData(this);
-          fetch('../../../controllers/update_adminsena.php', {
+          fetch('../controllers/update_adminsena.php', {
             method: 'POST',
             body: formData
           })

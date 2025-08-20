@@ -112,6 +112,7 @@
     </div>
 
     <script src="../../../js/backbutton.js"></script>
+    <script src="../../../js/control_inactividad.js"></script>
     <footer>
         <p>© Todos los derechos reservados. SenaLink</p>
     </footer>

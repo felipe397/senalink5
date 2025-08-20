@@ -1,5 +1,5 @@
 /* Botón de guardar (check) para inputs de pregunta */
-
+@import url(variables.css);
 /* Contenedor para input y botón */
 .pregunta-input-group {
     display: flex;
@@ -31,7 +31,7 @@
 
 .btn-guardar-pregunta {
     display: none;
-    background: #39a900;
+    background: var(--Primary-900);
     border: none;
     border-radius: 8px;
     width: 40px;

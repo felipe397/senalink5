@@ -58,11 +58,68 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Rol no reconocido:", userData.rol);
         }
 
-        // Asignar el id al enlace de actualizar
-        const enlaceActualizar = document.getElementById('enlaceActualizar');
-        if (enlaceActualizar && userData.id) {
-            enlaceActualizar.href = `../html/EditFuncionario.html?id=${userData.id}`;
+        // Redirigir al formulario de edición correcto según el rol
+        const btnActualizar = document.querySelector('.actions .btn.edit');
+        if (btnActualizar && userData.id) {
+            let url = '';
+            if (userData.rol === 'empresa') {
+                url = `../html/EditEmpresa.html?id=${userData.id}`;
+            } else if (userData.rol === 'AdminSENA') {
+                url = `../html/EditFuncionario.html?id=${userData.id}`;
+            } else if (userData.rol === 'super_admin') {
+                url = `../html/EditSuper_Admin.html?id=${userData.id}`;
+            }
+            btnActualizar.onclick = function() {
+                window.location.href = url;
+            };
         }
+
+        // --- Cierre de sesión por inactividad según rol ---
+        // Requiere que userData.rol esté disponible en el scope global o accesible tras login
+        let inactividadTimeout;
+        let tiempoMaxInactividad = 600000; // default 10 min
+        let mensajeInactividad = 'Tu sesión ha finalizado por inactividad.';
+
+        function definirTiempoInactividad(rol) {
+            if (rol === 'empresa') {
+                tiempoMaxInactividad = 15 * 60 * 1000; // 15 minutos
+                mensajeInactividad = 'Tu sesión de empresa ha finalizado por inactividad.';
+            } else if (rol === 'super_admin' || rol === 'AdminSENA') {
+                tiempoMaxInactividad = 10 * 60 * 1000; // 10 minutos
+                mensajeInactividad = 'Tu sesión de administrador ha finalizado por inactividad.';
+            }
+        }
+
+        function cerrarSesionPorInactividad() {
+            // Mostrar alerta usando showAlert de alert.js
+            if (typeof showAlert === 'function') {
+                showAlert(mensajeInactividad, 'warning');
+            } else {
+                alert(mensajeInactividad);
+            }
+            setTimeout(function() {
+                window.location.href = '../html/index.html';
+            }, 1500);
+            // Aquí podrías limpiar storage/cookies si es necesario
+        }
+
+        function reiniciarTemporizadorInactividad() {
+            clearTimeout(inactividadTimeout);
+            inactividadTimeout = setTimeout(cerrarSesionPorInactividad, tiempoMaxInactividad);
+        }
+
+        // Inicializar control de inactividad tras obtener el rol
+        // Llama a esto después de obtener userData.rol
+        function iniciarControlInactividad(rol) {
+            definirTiempoInactividad(rol);
+            ['mousemove', 'keydown', 'scroll', 'click'].forEach(function(evt) {
+                window.addEventListener(evt, reiniciarTemporizadorInactividad);
+            });
+            reiniciarTemporizadorInactividad();
+        }
+
+        iniciarControlInactividad(userData.rol);
+        // --- Fin cierre de sesión por inactividad ---
     })
     .catch(error => {
         console.error("Error en la solicitud:", error);

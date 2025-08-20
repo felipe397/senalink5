@@ -35,7 +35,7 @@ button{
 
 .btn.edit {
   background-color: var(--Secundary-950);
-  color: white;
+  color: var(--white);
 }
 
 
@@ -71,7 +71,7 @@ button{
   height: 5.6rem;
   padding: 1rem;
   margin: 1rem 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--white);
   border-radius: 4px;
   font-size: var(--h4-font-size);
 }
@@ -81,7 +81,7 @@ button{
   background-color: var(--white);
   padding: 4rem;
   border-radius: 0.8rem;
-  box-shadow: 0.5rem 0.5rem 2rem rgba(0, 48, 77, 1);
+  box-shadow: 0.5rem 0.5rem 2rem var(--Secundary-950);
   text-align: center;
   width: 60rem;
   max-width: 100%;
@@ -181,7 +181,7 @@ button{
   background-color: white;
   padding: 4rem;
   border-radius: 0.8rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 1rem var(--black);
 
 }
 
@@ -237,7 +237,7 @@ table {
 }
 .table-container {
   background-color: var(--white);
-  border: 1px solid #ccc;
+  border: 1px solid var(--white);
   border-radius: 5px;
   padding: 1rem;
   
@@ -272,7 +272,7 @@ td {
 .btn__report {
   width: 100%;
   margin-top: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--white);
   font-size: var(--h4-font-size);
   cursor: pointer;
   border-radius: 0.4rem;
@@ -320,7 +320,7 @@ td {
   width: 100%;
   padding: 1rem 4rem 1rem 1rem;
   font-size: var(--h4-font-size);
-  border: 1px solid #ccc;
+  border: 1px solid var(--white);
   border-radius: 5px;
 }
 
@@ -396,7 +396,7 @@ td {
     color: #1a3d5d;
   }
   .disable-button {
-    background-color: #1a3d5d;
+    background-color: var(--Secundary-950);
     color: var(--white);
   }
   
@@ -465,7 +465,7 @@ footer{
 
   width: 100%;
   height: 30px;
-  background: linear-gradient(to top, rgb(0, 48, 77) 1px, transparent 50%);
+  background: linear-gradient(to top, var(--Secundary-950) 1px, transparent 50%);
 }
 .gov{
     background-color:var(--Secundary-980);

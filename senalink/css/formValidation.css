@@ -1,5 +1,5 @@
 /* Estilos para tooltip de error en validación de formularios */
-
+@import url(variables.css);
 .input-error {
   border-color: #ffc107 !important;
   outline: none;

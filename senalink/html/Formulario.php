@@ -90,7 +90,7 @@ session_start();
         </form>
     </div>
 
-
+    <script src="../js/control_inactividad.js"></script>
     <script>
          var empresaId = <?php echo isset($_SESSION['empresa_id']) ? intval($_SESSION['empresa_id']) : 'null'; ?>;
 class DiagnosticoApp {

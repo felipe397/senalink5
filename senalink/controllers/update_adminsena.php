@@ -81,17 +81,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $usuarioModel = new UsuarioModel();
-    $resultado = $usuarioModel->actualizarAdminSENA([
-        'id' => $id,
-        'primer_nombre' => $primer_nombre,
-        'segundo_nombre' => $segundo_nombre,
-        'primer_apellido' => $primer_apellido,
-        'segundo_apellido' => $segundo_apellido,
-        'correo' => $correo,
-        'telefono' => $telefono,
-        'numero_documento' => $numero_documento,
-        'tipo_documento' => $tipo_documento
-    ]);
+    // Detectar el rol del usuario actual
+    $usuarioActual = UsuarioModel::obtenerUsuarioPorId($id);
+    if ($usuarioActual && $usuarioActual['rol'] === 'super_admin') {
+        // Actualizar super_admin (sin modificar correo)
+        $resultado = $usuarioModel->actualizarSuperAdmin([
+            'id' => $id,
+            'primer_nombre' => $primer_nombre,
+            'segundo_nombre' => $segundo_nombre,
+            'primer_apellido' => $primer_apellido,
+            'segundo_apellido' => $segundo_apellido,
+            'telefono' => $telefono,
+            'numero_documento' => $numero_documento,
+            'tipo_documento' => $tipo_documento
+        ]);
+    } else {
+        // Actualizar AdminSENA (correo editable)
+        $resultado = $usuarioModel->actualizarAdminSENA([
+            'id' => $id,
+            'primer_nombre' => $primer_nombre,
+            'segundo_nombre' => $segundo_nombre,
+            'primer_apellido' => $primer_apellido,
+            'segundo_apellido' => $segundo_apellido,
+            'correo' => $correo,
+            'telefono' => $telefono,
+            'numero_documento' => $numero_documento,
+            'tipo_documento' => $tipo_documento
+        ]);
+    }
 
     if ($resultado) {
         echo json_encode(['success' => true]);

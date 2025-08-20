@@ -169,6 +169,12 @@
   color: white; /* Texto blanco */
 }
 
+.enlaceActualizar.btn.edit {
+  background-color: var(--Secundary-950); /* Fondo oscuro personalizado */
+  color: white; /* Texto blanco */
+}
+
+
 a{
   color: var(--white); /* Enlaces en blanco */
 }

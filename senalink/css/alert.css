@@ -1,4 +1,5 @@
 /* Estilos para alertas compactas y adaptables */
+@import url(variables.css);
 .alert-box {
   position: absolute;
   top: -3rem;
@@ -14,27 +15,27 @@
   font-weight: 600;
   font-family: Arial, sans-serif;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  color: #000;
+  color: var(--black);
   cursor: default;
   user-select: none;
   transition: opacity 0.3s ease;
   z-index: 9999;
   background-color: #d4edda;
-  border: 1.5px solid #28a745;
-  color: #155724;
+  border: 1.5px solid var(--Primary-900);
+  color: var(--Primary-900);
 }
 
 .alert-box.success {
-  background-color: #d4edda;
-  border-color: #28a745;
-  color: #155724;
+  background-color: var(--white);
+  border-color: var(--Primary-900);
+  color: var(--Primary-900);
   padding: 0.75rem 1.5rem 0.75rem 3rem;
   border-radius: 8px;
-  box-shadow: 0 0 5px #28a745aa;
+  box-shadow: 0 0 5px var(--Primary-900);
 }
 .alert-box.success .alert-icon {
   color: white;
-  background-color: #28a745;
+  background-color: var(--Primary-900);
   border-radius: 50%;
   padding: 0.2rem 0.4rem;
   font-size: 1.2rem;
