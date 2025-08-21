@@ -111,10 +111,10 @@ p{
   text-align: center;
 }
 .container {
-  background-color: white;
+  background-color: var(--white);
   padding: 4rem;
   border-radius: 0.8rem;
-  box-shadow: 0.5rem 0.5rem 2rem rgba(0, 48, 77, 1);
+  box-shadow: 0.5rem 0.5rem 2rem var(--Secundary-950);
 
 }
 .container__crud--disable{
@@ -128,13 +128,13 @@ p{
   background-color:var(--Gray-200);
   padding: 4rem;
   border-radius: 0.8rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 1rem var(--black);
 }
 .table-container {
   width: 50rem;
   margin: 0 auto;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: var(--white);
+  border: 1px solid var(--Gray-300);
   border-radius: 5px;
   overflow: hidden;
   padding: 1rem;
@@ -196,16 +196,16 @@ td {
     top: 0;
     width: 100%; /* Ancho completo */
     height: 100%; /* Alto completo */
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--black);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--black);
   }
   
   .modal-content {
-    background-color: white;
+    background-color: var(--white);
     margin: 15% auto; /* Centra la ventana */
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid var(--Gray-300);
     width: 50rem; /* Ancho de la ventana */
     text-align: center; /* Centra el texto */
     border-radius: 0.8rem;

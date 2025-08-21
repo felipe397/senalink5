@@ -197,7 +197,7 @@
 
 .footer__terminos-text{
     text-decoration: none;
-    color: #0552c2;
+    color: var(--Secundary-980);
     font-size: 13px;
 }
 @media (max-width: 1200px) {

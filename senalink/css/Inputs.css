@@ -161,10 +161,10 @@
   background-color:var(--white);
   padding: 4rem;
   border-radius: 0.8rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 1rem var(--black);
   width: 60rem;
   border-radius: 0.8rem;
-  box-shadow: 0.5rem 0.5rem 2rem  rgba(0, 48, 77,1);
+  box-shadow: 0.5rem 0.5rem 2rem  var(--Secundary-950);
   text-align: center;
   max-width: 100%;
   margin: 0 auto;

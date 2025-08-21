@@ -98,7 +98,7 @@
                         <option value="Electricidad">Electricidad</option>
                     </select>
 
-                    <input class="input-field" name="fecha_finalizacion" placeholder="Fecha de finalización" type="date" required 
+                    <input class="select_container" name="fecha_finalizacion" placeholder="Fecha de finalización" type="date" required 
                         min="1957-06-21"
                         title="La fecha no puede ser anterior al 21 de junio de 1957."/>
                 </div>

@@ -139,7 +139,7 @@ button{
   background-color: var(--white);
   padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px var(--black);
   text-align: center;
   width: 50rem; /* Ancho fijo */
 }
@@ -159,7 +159,7 @@ button{
   height: 5.6rem;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--Gray-300);
   border-radius: 4px;
   font-size: var(--h4-font-size);
 }
@@ -230,7 +230,7 @@ button{
   padding: 40px; /* Espaciado interno */
   background-color: var(--Gray-200); /* Color de fondo */
   border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+  box-shadow: 0 0 10px var(--black); /* Sombra */
   width: 80rem; /* Asegura que el contenedor use el 100% del ancho disponible hasta el max-width */
 }
 
@@ -281,13 +281,13 @@ button{
   top: 0;
   width: 100%; /* Ancho completo */
   height: 100%; /* Alto completo */
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--black);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--black);
 }
 
 .modal-content {
-  background-color: white;
+  background-color: var(--white);
   margin: 15% auto; /* Centra la ventana */
   padding: 20px;
   border: 1px solid #888;
@@ -315,7 +315,7 @@ button{
   color: #1a3d5d;
 }
 .disable-button {
-  background-color: #1a3d5d;
+  background-color: var(--Secundary-950);
   color: var(--white);
 }
 

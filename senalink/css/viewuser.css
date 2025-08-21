@@ -166,12 +166,12 @@
 
 .btn.edit {
   background-color: var(--Secundary-950); /* Fondo oscuro personalizado */
-  color: white; /* Texto blanco */
+  color: var(--white); /* Texto blanco */
 }
 
 .enlaceActualizar.btn.edit {
   background-color: var(--Secundary-950); /* Fondo oscuro personalizado */
-  color: white; /* Texto blanco */
+  color: var(--white); /* Texto blanco */
 }
 
 
@@ -184,7 +184,7 @@ a{
 }
 footer {
     background-color: var(--Secundary-950); /* Fondo del footer */
-    color: white; /* Texto blanco */
+    color: var(--white); /* Texto blanco */
     text-align: center; /* Centra el texto */
     width: 100%; /* Ocupa todo el ancho */
     padding: 1rem; /* Espaciado interno */

@@ -357,9 +357,9 @@ td {
     top: 0;
     width: 100%; /* Ancho completo */
     height: 100%; /* Alto completo */
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--black);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--black);
     backdrop-filter: blur(0.3rem);
   }
   .content{
@@ -371,7 +371,7 @@ td {
   .modal-content {
     background-color: var(--white);
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid var(--Gray-300);
     width: 50rem; /* Ancho de la ventana */
     text-align: center; /* Centra el texto */
     border-radius: 0.8rem;
@@ -393,7 +393,7 @@ td {
   }
   .cancel-button  {
     background-color: var(--white);
-    color: #1a3d5d;
+    color: var(--Secundary-950);
   }
   .disable-button {
     background-color: var(--Secundary-950);

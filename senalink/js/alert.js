@@ -90,6 +90,6 @@ function showAlert(message, type = 'error', insertBeforeSelector) {
   // Oculta la alerta después de 4 segundos
   setTimeout(() => {
     alert.classList.add('hide');
-    setTimeout(() => alert.remove(), 400);
-  }, 4000);
+    setTimeout(() => alert.remove(), 1000);
+  }, 10000);
 }
