@@ -1,4 +1,10 @@
+
 <?php session_start(); ?>
+<!--
+  Archivo: Forgot_new_password.php
+  Descripción: Página para que el usuario ingrese y confirme una nueva contraseña tras recuperación.
+  Incluye formulario, validaciones y scripts para mostrar/ocultar contraseña.
+-->
 
 <!DOCTYPE html>
 <html lang="es">
@@ -6,10 +12,13 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>SenaLink - Nueva Contraseña</title>
+    <!-- Hoja de estilos principal -->
     <link href="../css/crud.css" rel="stylesheet"/>
+    <!-- Favicon de la pestaña -->
     <link rel="shortcut icon " href="../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
 </head>
 <body>
+  <!-- Encabezado de gobierno -->
   <header class="gov" id="inicio">
         <div class="gov__container">
             <a href="https://www.gov.co/" target="_blank">
@@ -17,49 +26,62 @@
             </a>
         </div>
     </header>
+    <!-- Encabezado principal con logo SENA -->
     <header class="header__login">
         <div class="header__left">
-            
+            <!-- Espacio reservado para elementos a la izquierda del header -->
         </div>
-
         <div class="header__center">
+            <!-- Espacio reservado para elementos centrales del header -->
         </div>
-
         <div class="header__right">
             <img src="../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
         </div>
     </header>
     <div class="linea-verde"></div>
-<div class="container">
-  <main class="container__forms--forgot">
-        <h2>Ingresa tu nueva contraseña</h2>
-        <form action="../controllers/update_password.php" method="POST" id="newPasswordForm">
-          <div class="box__password">
-            <input type="password" name="new_password" placeholder="Nueva contraseña" required/>
-            <button type="button" class="toggle-password-button">
-              <img src="../img/icons8-invisible-24.png" alt="Mostrar/Ocultar contraseña" class="icon__pass" />
-            </button>
-          </div>
-          <div class="box__password">
-            <input type="password" name="confirm_password" placeholder="Confirmar nueva contraseña" required/>
-            <button type="button" class="toggle-password-button">
-              <img src="../img/icons8-invisible-24.png" alt="Mostrar/Ocultar contraseña" class="icon__pass" />
-            </button>
-          </div>
-          <input type="hidden" name="token" value="<?php echo htmlspecialchars($_SESSION['token_recuperacion'] ?? '') ?>" />
-          <div class="buttons__container">
-              <button type="submit" class="btn">Confirmar</button>
-              <a href="index.html" class="btn btn-secondary">Volver</a>
-          </div>
-      </form>
-  </main>
-  </div>         
-  <footer>
-    <p>© Todos los derechos reservados. SenaLink</p>
-  </footer>
-  <script src="../js/viewpassword.js"></script>
+    <!-- Contenedor principal -->
+    <div class="container">
+      <main class="container__forms--forgot">
+            <h2>Ingresa tu nueva contraseña</h2>
+            <!-- Formulario para ingresar y confirmar la nueva contraseña -->
+            <form action="../controllers/update_password.php" method="POST" id="newPasswordForm">
+              <div class="box__password">
+                <!-- Campo para la nueva contraseña -->
+                <input type="password" name="new_password" placeholder="Nueva contraseña" required/>
+                <!-- Botón para mostrar/ocultar contraseña -->
+                <button type="button" class="toggle-password-button">
+                  <img src="../img/icons8-invisible-24.png" alt="Mostrar/Ocultar contraseña" class="icon__pass" />
+                </button>
+              </div>
+              <div class="box__password">
+                <!-- Campo para confirmar la nueva contraseña -->
+                <input type="password" name="confirm_password" placeholder="Confirmar nueva contraseña" required/>
+                <!-- Botón para mostrar/ocultar contraseña -->
+                <button type="button" class="toggle-password-button">
+                  <img src="../img/icons8-invisible-24.png" alt="Mostrar/Ocultar contraseña" class="icon__pass" />
+                </button>
+              </div>
+              <!-- Token oculto para validar la recuperación -->
+              <input type="hidden" name="token" value="<?php echo htmlspecialchars($_SESSION['token_recuperacion'] ?? '') ?>" />
+              <div class="buttons__container">
+                  <!-- Botón para confirmar el cambio de contraseña -->
+                  <button type="submit" class="btn">Confirmar</button>
+                  <!-- Botón para volver al inicio -->
+                  <a href="index.html" class="btn btn-secondary">Volver</a>
+              </div>
+          </form>
+      </main>
+    </div>         
+    <!-- Pie de página -->
+    <footer>
+      <p>© Todos los derechos reservados. SenaLink</p>
+    </footer>
+    <!-- Script para mostrar/ocultar contraseña -->
+    <script src="../js/viewpassword.js"></script>
+
   <script src="../js/control_inactividad.js"></script>
   <script>
+    // Script para mostrar/ocultar la contraseña en los campos
     document.addEventListener("DOMContentLoaded", function () {
       function setupTogglePassword(inputName, buttonClass) {
         const input = document.querySelector('input[name="' + inputName + '"]');

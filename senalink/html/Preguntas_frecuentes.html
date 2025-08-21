@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Preguntas Frecuentes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      color: #222;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: flex;
+      justify-content: center;
+  padding: 0 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    /* Title */
+    h1 {
+      font-weight: 600;
+      color: #ddd;
+      font-size: 48px;
+      letter-spacing: 10px;
+      margin: 0 0 5px 0;
+      user-select: none;
+      text-align: center;
+    }
+
+    /* Subtitle below the title */
+    .subtitle {
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #555;
+      letter-spacing: 0.5px;
+      user-select: none;
+    }
+
+    /* FAQ styles */
+    .faq-item {
+      border-bottom: 1px solid #eee;
+    }
+
+    button.faq-question {
+      background: transparent;
+      border: none;
+      width: 100%;
+      text-align: left;
+      padding: 20px 15px;
+      font-size: 15px;
+      color: #222;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: color 0.2s ease;
+    }
+
+    button.faq-question:hover {
+      color: #000;
+    }
+
+    button.faq-question:focus {
+      outline-offset: 3px;
+      outline: 2px solid #999;
+    }
+
+    /* Plus icon */
+    .faq-question::after {
+      content: '+';
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 1;
+      color: #888;
+      transition: color 0.2s ease, transform 0.3s ease;
+    }
+
+    button.faq-question[aria-expanded="true"]::after {
+      content: '–';
+      color: #333;
+      transform: rotate(0deg);
+    }
+
+    footer{
+    background-color: var(--Secundary-950);
+    color: var(--white);
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+    }
+
+    /* FAQ answer hidden by default */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 15px;
+      font-weight: 400;
+      color: #666;
+      font-size: 14px;
+      line-height: 1.4;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    /* Show answer if expanded */
+    .faq-answer.active {
+      padding: 15px;
+      max-height: 200px; /* enough for 2-3 lines, but no actual content in example so placeholder */
+
+
+
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="region" aria-label="Sección de preguntas frecuentes de Dosmedia">
+
+  <!-- HEADER INSTITUCIONAL INICIO -->
+  <header class="gov" id="inicio" style="width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); background: #4a7ad6; padding: 0; margin-top: 0;">
+    <div class="gov__container" style="display: flex; align-items: center; height: 40px;">
+      <a href="https://www.gov.co/" target="_blank" style="display: flex; align-items: center; text-decoration: none;">
+        <img loading="lazy" src="../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img" style="height: 28px; margin-left: 8px; margin-right: 8px;" />
+        <span style="color: #fff; font-size: 24px; font-weight: 600; letter-spacing: 1px;"></span>
+      </a>
+    </div>
+  </header>
+  <div style="width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); background: #6ebe1e; height: 60px; display: flex; align-items: center; justify-content: flex-end; margin-top: 0;">
+    <img src="../img/logo-sena-white0.png" alt="Logo SENA" style="height: 48px; margin-right: 32px;" />
+  </div>
+    <p class="subtitle" aria-live="polite" aria-atomic="true">Respondemos tus dudas</p>
+
+    <div class="faq-container" style="background: #fff; border-radius: 12px; box-shadow: 0 2px 12px 0 #0001; padding: 24px 0; max-width: 700px; margin: 0 auto;">
+      <section class="faq-list">
+
+      <article class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq1" id="faq1-btn" onclick="toggleFAQ(event)">
+          ¿Qué te ofrecemos en Dosmedia?
+        </button>
+        <div class="faq-answer" id="faq1" role="region" aria-labelledby="faq1-btn" hidden>
+          <!-- Answer content can be inserted here if needed -->
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq2" id="faq2-btn" onclick="toggleFAQ(event)">
+          ¿Por qué es tan importante tener una página web?
+        </button>
+        <div class="faq-answer" id="faq2" role="region" aria-labelledby="faq2-btn" hidden>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq3" id="faq3-btn" onclick="toggleFAQ(event)">
+          ¿Por qué es importante un diseño atractivo en una página web?
+        </button>
+        <div class="faq-answer" id="faq3" role="region" aria-labelledby="faq3-btn" hidden>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq4" id="faq4-btn" onclick="toggleFAQ(event)">
+          ¿Qué debo mire a la hora de construir un servicio de diseño para mi web?
+        </button>
+        <div class="faq-answer" id="faq4" role="region" aria-labelledby="faq4-btn" hidden>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq5" id="faq5-btn" onclick="toggleFAQ(event)">
+          ¿Quién controla el hosting y dominios?
+        </button>
+        <div class="faq-answer" id="faq5" role="region" aria-labelledby="faq5-btn" hidden>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq6" id="faq6-btn" onclick="toggleFAQ(event)">
+          ¿Hay que generar escualidades?
+        </button>
+        <div class="faq-answer" id="faq6" role="region" aria-labelledby="faq6-btn" hidden>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq7" id="faq7-btn" onclick="toggleFAQ(event)">
+          ¿Qué pasos a mí me gusta tu web?
+        </button>
+        <div class="faq-answer" id="faq7" role="region" aria-labelledby="faq7-btn" hidden>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq8" id="faq8-btn" onclick="toggleFAQ(event)">
+          ¿Cómo es el proceso de contratación?
+        </button>
+        <div class="faq-answer" id="faq8" role="region" aria-labelledby="faq8-btn" hidden>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq9" id="faq9-btn" onclick="toggleFAQ(event)">
+          ¿Cómo es el proceso de creación de la web?
+        </button>
+        <div class="faq-answer" id="faq9" role="region" aria-labelledby="faq9-btn" hidden>
+        </div>
+      </article>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    function toggleFAQ(event) {
+      const button = event.currentTarget;
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      const answerId = button.getAttribute('aria-controls');
+      const answer = document.getElementById(answerId);
+
+      if (expanded) {
+        button.setAttribute('aria-expanded', 'false');
+        answer.hidden = true;
+        answer.classList.remove('active');
+      } else {
+        // Close all others for accordion effect
+        const allButtons = document.querySelectorAll('.faq-question');
+        allButtons.forEach(btn => {
+          btn.setAttribute('aria-expanded', 'false');
+          const ans = document.getElementById(btn.getAttribute('aria-controls'));
+          if (ans) {
+            ans.hidden = true;
+            ans.classList.remove('active');
+          }
+        });
+
+        button.setAttribute('aria-expanded', 'true');
+        answer.hidden = false;
+        answer.classList.add('active');
+      }
+    }
+
+<div class="footer">
+    <footer>
+        <p>© Todos los derechos reservados.SenaLink</p>
+    </footer>
+</div>
+  </script>
+</body>
+</html>
+

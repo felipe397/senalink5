@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-08-2025 a las 22:16:25
+-- Tiempo de generación: 21-08-2025 a las 22:29:22
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -427,16 +427,20 @@ INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_cr
 (38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, 3024345636, NULL, NULL, NULL, 'Edwin', '', 'Banol', 'Cardona', 'Cédula de ciudadanía', 3333333333, 0),
 (44, 'miguelmarin@gmail.com', '$2y$10$IfGPyP2FX2UTeaf/yi.TK.BMjprDOU5nmtMUwRXqzAvXeCGxBFUwG', 'AdminSENA', 'Activo', '2025-07-10 14:23:17', NULL, '', NULL, 1234567891, NULL, NULL, NULL, 'miguel', 'angel', 'lopez', 'marin', 'Cédula de ciudadanía', 1122334455, 0),
 (45, 'felipeosorio@gmail.com', '$2y$10$SHDidYvcH8jiAe0/NNyDVOJOSegNPE2SOA7uP6kNZW.bt2t1p7SMW', 'AdminSENA', 'Activo', '2025-07-17 00:47:27', NULL, '', NULL, 3156907026, NULL, NULL, NULL, 'pele', 'felipe', 'pamparoso', 'crack', 'Cédula de ciudadanía', 1121506109, 0),
-(46, 'breineralzate@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', '123456789', 'Carrera 9 # 56-34', 'Frisby S.A', 3104785544, NULL, 'Frisby', 'INDUSTRIAL', '', NULL, '', NULL, NULL, 0, 0),
+(46, 'breineralzatechica@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', '123456789', 'Carrera 9 # 56-34', 'Frisby S.A', 3104785544, NULL, 'Frisby', 'INDUSTRIAL', '', NULL, '', NULL, NULL, 0, 0),
 (48, 'brauliomk@gmail.com', '$2y$10$ZN72f/S9JXqD5Az.ZH0nfOdlAtbZSdYshlkDsgRFYvmy/NtUTz4uC', 'AdminSENA', 'Activo', '2025-07-18 01:49:54', NULL, '', NULL, 3152928734, NULL, NULL, NULL, 'pele', 'Felipe', 'Osorio', 'marulanda', 'Cédula de ciudadanía', 1234567898, 0),
 (49, 'braulioloodioperrazungamk@gmail.com', '$2y$10$oyPTJwGYPDHyUF8x1rh6I.J3Y.ttapB4aNtsUNck.m/O1ar7i7FY.', 'AdminSENA', 'Activo', '2025-07-18 02:14:34', NULL, '', NULL, 3152928626, NULL, NULL, NULL, 'Braulio', 'odio', 'perra', 'zunga', 'Cédula de ciudadanía', 987654321, 0),
 (54, 'braulioloodioperra@gmail.com', '$2y$10$1a02kFD/W9jQdFdVoOSfKe.1T4pKT9W7BDBHP81fnYFFh.y9Oh4XC', 'AdminSENA', 'Activo', '2025-07-18 03:18:10', NULL, '', NULL, 3152928725, NULL, NULL, NULL, 'Ruth', 'Danyely', 'Guerrero', 'Figueroa', 'Cédula de ciudadanía', 123456789, 0),
 (58, 'correo@gmail.com', '$2y$10$QqUK2zUb.g6M4k.2LJd2Ie6JCUPysL4VD4wSSHYJ6bb1F/pbuftFu', 'empresa', 'Activo', '2025-07-28 03:06:26', '567890234', 'Carrera 12 # 5-31', 'Monster S.A', 3104574487, NULL, 'Chocolates Ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
 (59, 'andreshenao@gmail.com', '$2y$10$EhmvIxNOmDXpr/dW/VXDmuVZuFGjUsDd648X4QWIuCDkDp4OJYF6a', 'AdminSENA', 'Activo', '2025-07-28 05:03:06', NULL, NULL, NULL, 3156809028, NULL, NULL, NULL, 'Alfonso', 'Andres', 'Lopez', 'Henao', 'Cédula de ciudadanía', 1099765443, 0),
 (60, 'jj2673782@gmail.com', '$2y$10$sj0gkQC16GTO8PzCkckKlOb9cLvj308yfZAzXNlfSMqtJNhOsmN5K', 'empresa', 'Activo', '2025-08-21 01:41:32', '897654441', 'Carrera 11 #12-12', 'Senalink S.A', 3152928725, NULL, 'Braulio', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(61, 'dovi7523@hotmail.com', '$2y$10$5Lycsl7Qnq0FiJEuPvpFp.aKcmrOieqU9VA1beBo3mN8TAXHbwOVC', 'empresa', 'Activo', '2025-08-21 01:48:59', '556663332', 'Carrera 1 #20-30', 'Headshots S.A.S', 3217774442, NULL, 'Miguel Uribe Turbay', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
-(62, 'edwintrabaje@hotmail.com', '$2y$10$bktMZhSARnUpz72A8Ufg.uXc6DMDpxd1/klvsfnjRANKo4QZPWLAu', 'empresa', 'Activo', '2025-08-21 01:53:13', '444777111', 'Carrera 2 #21-37', 'Edwin manito trabaje S.A', 3226664441, NULL, 'Edwin trabaje', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
-(63, 'migueelmejor@gmail.com', '$2y$10$NbbqptW8ERfIm5fwNL4ycuzGbCcn1XD6sdFJuWfutUUPWFgmOonri', 'AdminSENA', 'Activo', '2025-08-21 02:16:01', NULL, NULL, NULL, 3334445551, NULL, NULL, NULL, 'Migue', 'Lopez', 'Marin', 'Pampara', 'Cédula de ciudadanía', 1088987654, 0);
+(61, 'dovi7523@hotmail.com', '$2y$10$5Lycsl7Qnq0FiJEuPvpFp.aKcmrOieqU9VA1beBo3mN8TAXHbwOVC', 'empresa', 'Desactivado', '2025-08-21 01:48:59', '556663332', 'Carrera 1 #20-30', 'Headshots S.A.S', 3217774442, NULL, 'Miguel Uribe Turbay', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
+(62, 'edwintrabaje@hotmail.com', '$2y$10$bktMZhSARnUpz72A8Ufg.uXc6DMDpxd1/klvsfnjRANKo4QZPWLAu', 'empresa', 'Desactivado', '2025-08-21 01:53:13', '444777111', 'Carrera 2 #21-37', 'Edwin manito trabaje S.A', 3226664441, NULL, 'Edwin trabaje', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
+(63, 'migueelmejor@gmail.com', '$2y$10$NbbqptW8ERfIm5fwNL4ycuzGbCcn1XD6sdFJuWfutUUPWFgmOonri', 'AdminSENA', 'Activo', '2025-08-21 02:16:01', NULL, NULL, NULL, 3334445551, NULL, NULL, NULL, 'Migue', 'Lopez', 'Marin', 'Pampara', 'Cédula de ciudadanía', 1088987654, 0),
+(64, 'edwinadmin123@gmail.com', '$2y$10$TlM5SOPPWX6IBAPhYQeZpu0PVRW8hU61JwUm21W3MpGpNT7zookE6', 'empresa', 'Activo', '2025-08-22 02:58:01', '999666333', 'Calle 8 #12-118', 'Pele S.A', 3112938826, NULL, 'Pele', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(65, 'migueelmejordelmundo@gmail.com', '$2y$10$JzW74fEBosXLrX0nm1aQ2uo///PbjWmVW9La4U3Cc/MxRQvCeV1/u', 'empresa', 'Activo', '2025-08-22 03:25:28', '999777444', 'Calle 9 #12-113', 'Migue grajales S.A', 3128652233, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(66, 'migueelmejordelagalaxia@gmail.com', '$2y$10$AbipquvEj./UHaTPpFfVh.mfQ0cR/gcHkMoldPpJ22CvI43.5IbLi', 'empresa', 'Activo', '2025-08-22 03:27:20', '999777555', 'Calle 9 #12-113', 'Migue grajaless S.A', 3128652244, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(67, 'edwintrabajemanito@gmail.com', '$2y$10$KCXYhluVmJBP2cFNFRw.7OxlG6/25z78X8eVP6CaI9Eg/zABp6dDi', 'empresa', 'Activo', '2025-08-22 03:28:25', '555333111', 'Calle 12 #11-33', 'Minecraft S.A.S', 3146907027, NULL, 'Braulios', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0);
 
 --
 -- Disparadores `usuarios`
@@ -536,7 +540,7 @@ ALTER TABLE `programas_formacion`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- Restricciones para tablas volcadas

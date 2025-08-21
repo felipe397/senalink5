@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<!-- Página de perfil de usuario, muestra datos para empresa o administrativo -->
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Perfil</title>
+  <!-- Hojas de estilo para perfil, alertas, iconos y favicon -->
   <link rel="stylesheet" href="../css/viewuser.css" />
   <link rel="stylesheet" href="../css/alert.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
@@ -11,6 +13,7 @@
   <link rel="shortcut icon " href="../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
 </head>
 <body>
+  <!-- Encabezado institucional de GOV.CO -->
   <header class="gov" id="inicio">
         <div class="gov__container">
             <a href="https://www.gov.co/" target="_blank">
@@ -18,26 +21,30 @@
             </a>
         </div>
     </header>
+<!-- Header principal, muestra logotipo SENA y posible espacio para utilidad futura -->
 <header class="header">
   <div class="header__left">
     <img src="../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
   </div>
 
   <div class="header__center">
+    <!-- Puede incluir elementos centrados (actualmente vacío) -->
   </div>
 
   <div class="header__right">
-    <!-- Espacio vacío o podrías poner un botón u otro logo aquí -->
+    <!-- Espacio disponible para añadir botones, logos o usuario futuro -->
   </div>
 </header>
   <main class="main">
     <div class="card">
       <img src="../img/logo-proyecto1.png" class="logo__Senalink">
+      <!-- Ícono de usuario genérico -->
       <div class="user-avatar">
           <i class="fas fa-user"></i>
       </div>
       <p class="title">Bienvenido Usuario</p>
       <div class="user-info">
+        <!-- Datos de empresa; visibles sólo si es un usuario empresa -->
         <div class="user-details" id="empresa-section" style="display: none;">
           <p><strong>NIT:</strong> <span id="nit"></span></p>
           <p><strong>Razón Social:</strong> <span id="razon_social"></span></p>
@@ -48,6 +55,7 @@
           <p><strong>Dirección:</strong> <span id="direccion_empresa"></span></p>
           <p><strong>Estado:</strong> <span id="estado"></span></p>
         </div>
+        <!-- Datos de admin o funcionario SENA; visible sólo si corresponde -->
         <div class="user-details" id="admin-section" style="display: none;">
           <p><strong>Nombre:</strong> <span id="nombre_admin"></span></p>
           <p><strong>Apellidos:</strong> <span id="apellido_admin"></span></p>
@@ -56,11 +64,14 @@
         </div>
       </div>
       <div class="actions">
-  <button onclick="window.location.href='../html/EditSuper_Admin.html?id='" class="btn edit">Actualizar</button>
-  <button onclick="goBack()" class="btn edit">Volver</button>
+        <!-- Botón de actualización del perfil (redirecciona a edición) -->
+        <button onclick="window.location.href='../html/EditSuper_Admin.html?id='" class="btn edit">Actualizar</button>
+        <!-- Botón para regresar a la pantalla anterior -->
+        <button onclick="goBack()" class="btn edit">Volver</button>
       </div>
     </div>
   </main>
+  <!-- Scripts que controlan navegación, visualización de info y alertas -->
   <script src="../js/backbutton.js"></script>
   <script src="../js/viewuser.js"></script>
   <script src="../js/viewfuncionario_detalle_edit.js"></script>
@@ -71,3 +82,4 @@
   </footer>
 </body>
 </html>
+>

@@ -3273,3 +3273,90 @@ Recomendaciones encontradas: Array
         )
 
 )
+SQL: SELECT * FROM programas_formacion WHERE 1=1 AND LOWER(sector_programa) LIKE ? AND LOWER(nombre_ocupacion) LIKE ? AND nivel_formacion LIKE ? AND sector_economico IN (?,?)Params: Array
+(
+    [0] => %industrial%
+    [1] => %diseñadores de teatro, moda, exhibición y otros diseñadores creativos%
+    [2] => %Técnico%
+    [3] => servicios
+    [4] => industrial
+)
+Respuestas recibidas: Array
+(
+    [pregunta1] => Industrial
+    [pregunta2] => Diseñadores de teatro, moda, exhibición y otros diseñadores creativos
+    [pregunta3] => Técnico
+    [pregunta4] => Servicios
+)
+Recomendaciones encontradas: Array
+(
+)
+SQL: SELECT * FROM programas_formacion WHERE 1=1 AND LOWER(sector_programa) LIKE ? AND LOWER(nombre_ocupacion) LIKE ? AND nivel_formacion LIKE ? AND sector_economico IN (?,?,?,?,?)Params: Array
+(
+    [0] => %industrial%
+    [1] => %sastres, modistos, peleteros y sombrereros%
+    [2] => %Técnico%
+    [3] => industrial
+    [4] => electricidad
+    [5] => construccion
+    [6] => textiles
+    [7] => servicios
+)
+Respuestas recibidas: Array
+(
+    [pregunta1] => Industrial
+    [pregunta2] => Sastres, Modistos, Peleteros y Sombrereros
+    [pregunta3] => Técnico
+    [pregunta4] => Industrial
+)
+Recomendaciones encontradas: Array
+(
+    [0] => Array
+        (
+            [id] => 27
+            [nombre_programa] => ELABORACION DE PRENDAS DE VESTIR SOBRE MEDIDAS
+            [duracion_programa] => 2208
+            [nivel_formacion] => TÉCNICO
+            [estado] => En ejecucion
+            [ficha] => 3080988
+            [fecha_finalizacion] => 2025-12-29
+            [codigo] => 842200
+            [sector_programa] => INDUSTRIAL
+            [nombre_ocupacion] => Sastres, Modistos, Peleteros y Sombrereros
+            [sector_economico] => TEXTILES
+            [etapa_ficha] => Lectiva
+        )
+
+    [1] => Array
+        (
+            [id] => 35
+            [nombre_programa] => ELABORACION DE PRENDAS DE VESTIR SOBRE MEDIDAS
+            [duracion_programa] => 2208
+            [nivel_formacion] => TÉCNICO
+            [estado] => En ejecucion
+            [ficha] => 3086930
+            [fecha_finalizacion] => 2025-12-29
+            [codigo] => 842200
+            [sector_programa] => INDUSTRIAL
+            [nombre_ocupacion] => Sastres, Modistos, Peleteros y Sombrereros
+            [sector_economico] => TEXTILES
+            [etapa_ficha] => Lectiva
+        )
+
+    [2] => Array
+        (
+            [id] => 39
+            [nombre_programa] => ELABORACION DE PRENDAS DE VESTIR SOBRE MEDIDAS
+            [duracion_programa] => 2208
+            [nivel_formacion] => TÉCNICO
+            [estado] => En ejecucion
+            [ficha] => 3087051
+            [fecha_finalizacion] => 2025-12-29
+            [codigo] => 842200
+            [sector_programa] => INDUSTRIAL
+            [nombre_ocupacion] => Sastres, Modistos, Peleteros y Sombrereros
+            [sector_economico] => TEXTILES
+            [etapa_ficha] => Lectiva
+        )
+
+)

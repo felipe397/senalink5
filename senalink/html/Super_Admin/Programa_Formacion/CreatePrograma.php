@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../../../css/crud.css">
+    <link rel="stylesheet" href="../../../css/alert.css">
     <link rel="shortcut icon" href="../../../img/Favicon1.png">
     <style>
         .error-message {
@@ -113,6 +114,7 @@
 
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/control_inactividad.js"></script>
+    <script src="../js/alert.js"></script>
     <footer>
         <p>© Todos los derechos reservados. SenaLink</p>
     </footer>

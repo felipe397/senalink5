@@ -1,15 +1,17 @@
 <!DOCTYPE html>
+<!-- Página principal de inicio de sesión para SenaLink -->
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SenaLink Login</title>
+  <!-- Estilos principales para inputs, alertas y favicon de la página -->
   <link rel="stylesheet" href="../css/Inputs.css" />
   <link rel="stylesheet" href="../css/alert.css" />
   <link rel="shortcut icon" href="../img/Favicon1.png" />
 </head>
 <body>
-<!-- Encabezado del Gobierno -->
+<!-- Encabezado institucional de la página del Gobierno Nacional de Colombia -->
 <header class="gov" id="inicio">
   <div class="gov__container">
       <a href="https://www.gov.co/" target="_blank">
@@ -18,20 +20,20 @@
   </div>
 </header>
 
-  <!-- Contenedor principal -->
+  <!-- Contenedor principal de la interfaz de login -->
   <div class="container">
-    <!-- Lado izquierdo con imagen -->
+    <!-- Sección izquierda con la imagen decorativa -->
     <div class="left_side">
       <img class="imglogin" src="../img/imagen_loginn-Photoroom.png" alt="Imagen de inicio de sesión" />
     </div>
 
-    <!-- Formulario de inicio de sesión -->
+    <!-- Formulario central de autenticación de usuario -->
     <main class="container__forms--login">
       <img src="../img/logo-proyecto1.png" alt="Logo Senalink" class="logo__senalink" />
 
-      <!-- Mensaje de éxito de cambio de contraseña -->
+      <!-- Formulario de ingreso de credenciales -->
       <form id="loginForm" action="../controllers/login.php" method="POST">
-        <!-- Campo de correo (visible solo para AdminSENA y Super Admin) -->
+        <!-- Campo para correo electrónico (mostrado solo para administradores) -->
         <div id="correoGroup">
           <input name="correo"
                 placeholder="Correo electrónico"
@@ -40,7 +42,7 @@
                 pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"/>
         </div>
 
-        <!-- Campo de NIT (solo visible para empresa): solo números positivos -->
+        <!-- Campo de NIT, exclusivo para las empresas (visible vía JavaScript) -->
         <div id="nitGroup" style="display: none;">
           <input name="nit"
                 placeholder="NIT de empresa"
@@ -50,7 +52,7 @@
           />
         </div>
 
-        <!-- Campo común: contraseña con requisitos de seguridad -->
+        <!-- Campo de contraseña con selector de visibilidad -->
         <div class="box__password">
           <input name="contrasena"
                 id="contrasena"
@@ -62,31 +64,35 @@
           </button>
         </div>
 
-        <!-- Selector de rol -->
+        <!-- Selector de rol: define si el login es empresa o administrativo -->
         <select name="rol" id="rol" class="select_container" onchange="toggleFields()" required>
           <option value="empresa">Empresa</option>
           <option value="AdminSENA">Admin SENA</option>
           <option value="super_admin">Super Admin</option>
         </select>
 
-        <!-- Botón de envío -->
+        <!-- Botón para iniciar sesión -->
         <button type="submit" class="login__button">Iniciar Sesión</button>
       </form>
 
+      <!-- Enlace para la recuperación de contraseña -->
       <a href="Forgot.html" class="texto-cambiable">¿Olvidó su contraseña?</a>
 
+      <!-- Opción para crear cuenta, sólo visible bajo ciertas condiciones -->
       <div class="profiles__container">
         <a id="Crear" href="Empresa/CreateEmpresa.html" style="display: none;" class="texto-cambiable">Crear cuenta</a>
       </div>
     </main>
   </div>
+  
+  <!-- Scripts funcionales para la interfaz y la lógica del formulario de login -->
   <script src="../js/changerol.js"></script>
   <script src="../js/viewpassword.js"></script>
   <script src="../js/EmpresaInhabilitado.js"></script>
   <script src="../js/alert.js"></script>
   <script src="../js/control_inactividad.js"></script>
   <script>
-    // Mostrar mensaje de éxito si viene el parámetro reset=success
+    // Al cargar la página, gestiona mensajes de éxito tras restablecer contraseña y envío seguro del formulario
     document.addEventListener('DOMContentLoaded', function() {
       const params = new URLSearchParams(window.location.search);
       if (params.get('reset') === 'success') {
@@ -94,7 +100,7 @@
         if (msg) msg.style.display = 'block';
       }
 
-      // Manejar submit del formulario con fetch para mostrar alertas
+      // Previene el envío tradicional y maneja login con Ajax para mostrar alertas dinámicas
       const form = document.getElementById('loginForm');
       form.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -121,3 +127,4 @@
 
 </body>
 </html>
+>
