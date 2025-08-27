@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-08-2025 a las 22:29:22
+-- Tiempo de generación: 27-08-2025 a las 22:41:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -437,10 +437,11 @@ INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_cr
 (61, 'dovi7523@hotmail.com', '$2y$10$5Lycsl7Qnq0FiJEuPvpFp.aKcmrOieqU9VA1beBo3mN8TAXHbwOVC', 'empresa', 'Desactivado', '2025-08-21 01:48:59', '556663332', 'Carrera 1 #20-30', 'Headshots S.A.S', 3217774442, NULL, 'Miguel Uribe Turbay', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
 (62, 'edwintrabaje@hotmail.com', '$2y$10$bktMZhSARnUpz72A8Ufg.uXc6DMDpxd1/klvsfnjRANKo4QZPWLAu', 'empresa', 'Desactivado', '2025-08-21 01:53:13', '444777111', 'Carrera 2 #21-37', 'Edwin manito trabaje S.A', 3226664441, NULL, 'Edwin trabaje', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
 (63, 'migueelmejor@gmail.com', '$2y$10$NbbqptW8ERfIm5fwNL4ycuzGbCcn1XD6sdFJuWfutUUPWFgmOonri', 'AdminSENA', 'Activo', '2025-08-21 02:16:01', NULL, NULL, NULL, 3334445551, NULL, NULL, NULL, 'Migue', 'Lopez', 'Marin', 'Pampara', 'Cédula de ciudadanía', 1088987654, 0),
-(64, 'edwinadmin123@gmail.com', '$2y$10$TlM5SOPPWX6IBAPhYQeZpu0PVRW8hU61JwUm21W3MpGpNT7zookE6', 'empresa', 'Activo', '2025-08-22 02:58:01', '999666333', 'Calle 8 #12-118', 'Pele S.A', 3112938826, NULL, 'Pele', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(65, 'migueelmejordelmundo@gmail.com', '$2y$10$JzW74fEBosXLrX0nm1aQ2uo///PbjWmVW9La4U3Cc/MxRQvCeV1/u', 'empresa', 'Activo', '2025-08-22 03:25:28', '999777444', 'Calle 9 #12-113', 'Migue grajales S.A', 3128652233, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(66, 'migueelmejordelagalaxia@gmail.com', '$2y$10$AbipquvEj./UHaTPpFfVh.mfQ0cR/gcHkMoldPpJ22CvI43.5IbLi', 'empresa', 'Activo', '2025-08-22 03:27:20', '999777555', 'Calle 9 #12-113', 'Migue grajaless S.A', 3128652244, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(67, 'edwintrabajemanito@gmail.com', '$2y$10$KCXYhluVmJBP2cFNFRw.7OxlG6/25z78X8eVP6CaI9Eg/zABp6dDi', 'empresa', 'Activo', '2025-08-22 03:28:25', '555333111', 'Calle 12 #11-33', 'Minecraft S.A.S', 3146907027, NULL, 'Braulios', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0);
+(64, 'edwinadmin123@gmail.com', '$2y$10$TlM5SOPPWX6IBAPhYQeZpu0PVRW8hU61JwUm21W3MpGpNT7zookE6', 'empresa', 'Activo', '2025-08-22 02:58:01', '999666333', 'Calle 8 #12-118', 'Juan Valdez S.A', 3112938826, NULL, 'Pele', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(65, 'migueelmejordelmundo@gmail.com', '$2y$10$JzW74fEBosXLrX0nm1aQ2uo///PbjWmVW9La4U3Cc/MxRQvCeV1/u', 'empresa', 'Activo', '2025-08-22 03:25:28', '999777444', 'Calle 9 #12-113', 'Cocosette S.A', 3128652233, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(66, 'migueelmejordelagalaxia@gmail.com', '$2y$10$AbipquvEj./UHaTPpFfVh.mfQ0cR/gcHkMoldPpJ22CvI43.5IbLi', 'empresa', 'Activo', '2025-08-22 03:27:20', '999777555', 'Calle 9 #12-113', 'Rolex S.A', 3128652244, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(67, 'edwintrabajemanito@gmail.com', '$2y$10$KCXYhluVmJBP2cFNFRw.7OxlG6/25z78X8eVP6CaI9Eg/zABp6dDi', 'empresa', 'Activo', '2025-08-22 03:28:25', '555333111', 'Calle 12 #11-33', 'Minecraft S.A.S', 3146907027, NULL, 'Braulios', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(68, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$33vNfs4A26IFGAmXrPDkg.pBoipDrMp0lZ7vLUHj14zTr0K6lXKB6', 'empresa', 'Activo', '2025-08-28 01:33:26', '999888111', 'Carrera 9 #16-18', 'Bombones ruthsita S.A', 3215554321, NULL, 'Bombones ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0);
 
 --
 -- Disparadores `usuarios`
@@ -540,7 +541,7 @@ ALTER TABLE `programas_formacion`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- Restricciones para tablas volcadas
