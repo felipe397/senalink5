@@ -146,13 +146,15 @@ class DiagnosticoApp {
                 respuestas: respuestas
             });
 
-            if (data.success) {
+            if (data.success && data.recomendaciones && data.recomendaciones.length > 0) {
                 this.showSection('resultados-diagnostico');
                 this.renderRecomendaciones(data.recomendaciones, 'recomendaciones');
                 localStorage.setItem('recomendaciones', JSON.stringify(data.recomendaciones));
                 window.location.href = 'Empresa/Home.html';
-            } else {
+            } else if (!data.success) {
                 this.showError(data.message || 'Error al procesar respuestas');
+            } else {
+                this.showError('Debes responder todas las preguntas antes de continuar');
             }
         } catch (error) {
             console.error('Error enviando respuestas:', error);

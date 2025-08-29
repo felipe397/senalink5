@@ -26,29 +26,36 @@ class DiagnosticoController {
 
     // ✅ Procesar respuestas y guardar diagnóstico si hay empresa
     public function procesarRespuestas($empresaId, $respuestas) {
-    try {
-        $conn = Conexion::conectar();
-        $resultadoJson = json_encode($respuestas);
+        try {
+            // Validar que todas las preguntas requeridas estén respondidas (ajusta según tus preguntas esperadas)
+            $preguntasObligatorias = ['pregunta1', 'pregunta2', 'pregunta3', 'pregunta4'];
+            foreach ($preguntasObligatorias as $p) {
+                if (!isset($respuestas[$p]) || trim($respuestas[$p]) === '') {
+                    return ['success' => false, 'message' => 'Debes responder todas las preguntas antes de continuar.'];
+                }
+            }
 
-        // Guardar solo si el ID es válido
-        if ($empresaId && is_numeric($empresaId) && $empresaId > 0) {
-            $query = "INSERT INTO diagnosticos_empresariales (empresa_id, resultado) VALUES (?, ?)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([$empresaId, $resultadoJson]);
-            // ✅ Marcar que la empresa ya hizo el diagnóstico
-            $update = $conn->prepare("UPDATE usuarios SET diagnostico_realizado = 1 WHERE id = ?");
-            $update->execute([$empresaId]);
+            $conn = Conexion::conectar();
+            $resultadoJson = json_encode($respuestas);
 
+            // Guardar solo si el ID es válido
+            if ($empresaId && is_numeric($empresaId) && $empresaId > 0) {
+                $query = "INSERT INTO diagnosticos_empresariales (empresa_id, resultado) VALUES (?, ?)";
+                $stmt = $conn->prepare($query);
+                $stmt->execute([$empresaId, $resultadoJson]);
+                // ✅ Marcar que la empresa ya hizo el diagnóstico
+                $update = $conn->prepare("UPDATE usuarios SET diagnostico_realizado = 1 WHERE id = ?");
+                $update->execute([$empresaId]);
+            }
+
+            $recomendaciones = $this->generarRecomendaciones($respuestas);
+
+            return ['success' => true, 'recomendaciones' => $recomendaciones];
+        } catch (PDOException $e) {
+            error_log("Error en procesarRespuestas: " . $e->getMessage());
+            return ['success' => false, 'message' => 'Error al procesar respuestas: ' . $e->getMessage()];
         }
-
-        $recomendaciones = $this->generarRecomendaciones($respuestas);
-
-        return ['success' => true, 'recomendaciones' => $recomendaciones];
-    } catch (PDOException $e) {
-        error_log("Error en procesarRespuestas: " . $e->getMessage());
-        return ['success' => false, 'message' => 'Error al procesar respuestas: ' . $e->getMessage()];
     }
-}
 
 
     // ✅ Mapear sector económico flexible
