@@ -1,0 +1,251 @@
+@import url(../variables.css);
+  
+  html {
+    font-size: 62.5%; /* Hack permite trabajar con rem */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--Gray-100);
+  }
+  
+  /* Global Styles */
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    font-size: var(--h4-font-size);
+    font-family: var(--h4-font-family);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  /* Links */
+  a {
+    text-decoration: none;
+    color: var(--black);
+  }
+  
+  button{
+    padding: 1.2rem 2.4rem;
+  }
+  .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25rem;
+    height: 100%; /* Set height to full viewport height */
+    background-color: var(--Gray-100); 
+    position: fixed;
+    left: -25rem; /* Oculto inicialmente */
+    transition: left 0.3s;
+    z-index: 1000; /* Asegúrate de que el menú esté por encima del contenido */
+}
+
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu ul li {
+    padding: 2rem 1.5rem; /* Increase padding for better touch targets */
+}
+
+.menu ul li a {
+    color: var(--black);
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+.content {
+    padding: 20px;
+    transition: margin-left 0.3s; /* Transición suave para el margen */
+    margin-left: 0; /* Reset margin-left to prevent shifting */
+}
+.menu-open {
+    left: 0; /* Muestra el menú */
+}
+.menu-toggle {
+    padding: 0 2rem;
+    background: none;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+}
+
+
+.logo__sena {
+    height: 4.8rem; 
+    justify-content: center;
+    padding-right: 1rem;
+  
+}
+
+.logo__senalink{
+  height: 4rem;
+  max-width: 100%;
+}
+
+/* Para evitar que el logo de la izquierda empuje al del centro, todos los contenedores tienen el mismo tamaño (flex: 1) */
+
+
+
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.forgot-password-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forgot-password-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.arrow{
+    cursor: pointer;
+    margin-left:2rem;
+    margin-top: 1rem;
+}
+.forgot-password-container {
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;   /* distancia desde arriba */
+  left: 20px;  /* distancia desde la izquierda */
+  cursor: pointer;
+}
+
+.back-button .arrow {
+  transition: transform 0.2s ease;
+}
+
+.back-button .arrow:hover {
+  transform: scale(1.1); /* efecto de agrandarse */
+  stroke: #007bff;       /* color más llamativo al pasar */
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 2rem;
+  width: 50rem;
+  border-radius: 12px;
+  box-shadow: 0.5rem 0.5rem 2rem  var(--Secundary-950-2);
+}
+.text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+.btn {
+    margin-top: 1rem;
+  border: 1px solid #ccc;
+  font-size: var(--h4-font-size);
+  cursor: pointer;
+  border-radius: 0.4rem;
+  height: 4rem;
+  background-color:var(--Secundary-950-2);
+  color:var(--white);
+}
+.btn:hover {
+    background-color: var(--primary-950);
+}
+.rotate-left {
+  transform: rotate(180deg); /* gira 180 grados */
+}
+
+  
+  
+  /* Input Styles */
+  .form input[type="email"]{
+    width: 100%;
+    height: 5.6rem;
+    padding: 10px;
+    margin: 1rem 0;
+    border: 1px solid var(--Gray-300);
+    border-radius: 0.4rem;
+    font-size: var(--h4-font-size);
+  }
+  
+.form__buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 18px;
+  width: 100%;
+}
+.form__buttons .btn {
+  flex: 1 1 0;
+  min-width: 80px;
+  max-width: 120px;
+  height: 44px;
+  aspect-ratio: 1/1;
+  text-align: center;
+  margin: 0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+  
+  .container a {
+    font-size: var(--h4-font-size);
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    margin: auto;
+  }
+  label{
+    font-size: var(--h4-font-size);
+    font-weight: var(--h3-font-weight);
+    margin-top: 1rem;
+
+  }
+
+  .buttons__container {
+    display: flex;
+    justify-content: space-between;
+}
+  .icons {
+    padding: 0 2rem;
+    margin-left: auto;
+  }
+
+
+@media (max-width: 768px) {
+  .header__login {
+    flex-direction: column; 
+    align-items: center; 
+    height: 11rem;
+  }
+  .header__login .logo__sena {
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+    height: 4.8rem; 
+  }
+  .linea-verde{
+    top: 11rem;
+  }
+  .left_side{
+    display: none;
+  }
+}

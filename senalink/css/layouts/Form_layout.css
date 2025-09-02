@@ -1,0 +1,121 @@
+/* Contenedor general del CRUD */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* ocupa toda la altura de la pantalla */
+}
+.container__crud {
+  width: 100%;
+  max-width: 900px;
+  padding: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+/* Logo */
+.logo__senalink {
+    height: 4.8rem;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+/* Layout del formulario */
+.form-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Por defecto 2 columnas */
+  gap: 20px;
+}
+/* Cada campo */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #333;
+}
+
+.input-field, 
+.select_container {
+    height:5.6rem ;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus, 
+.select_container:focus {
+  border-color: #4a90e2;
+}
+
+/* Contraseña con botón */
+.password-box {
+  display: flex;
+  align-items: center;
+}
+
+.password-box input {
+  flex: 1;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+/* Botones */
+.form-actions {
+  grid-column: span 2; /* Ocupa todo el ancho */
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s;
+}
+
+.btn.primary {
+  background: #4a90e2;
+  color: white;
+}
+
+.btn.primary:hover {
+  background: #357ABD;
+}
+
+.btn.secondary {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn.secondary:hover {
+  background: #c7c7c7;
+}
+/* Tablets pequeñas */
+/* Cuando la pantalla sea menor a 768px → 1 sola columna */
+@media (max-width: 768px) {
+  .form-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Aseguramos que los botones ocupen todo el ancho */
+  .form-actions {
+    grid-column: span 1;
+    justify-content: center; /* Centra los botones */
+  }
+}

@@ -10,7 +10,10 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>SenaLink - Recuperar Contraseña</title>
     <!-- Hoja de estilos principal -->
-    <link href="../css/Inputs.css" rel="stylesheet"/>
+    <link href="../css/Pages/forgot.css" rel="stylesheet"/>
+    <link href="../css/components/forms.css" rel="stylesheet"/>
+    <link href="../css/layouts/layout.css" rel="stylesheet"/>
+    <link href="../css/components/gov.css" rel="stylesheet"/>
     <!-- Favicon de la pestaña -->
     <link rel="shortcut icon " href="../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
 </head>
@@ -23,40 +26,44 @@
             </a>
         </div>
     </header>
-    <!-- Encabezado principal con logos -->
-    <header class="header__login">
-      <div class="header__left">
-        <!-- Espacio reservado para elementos a la izquierda del header -->
-      </div>
-      <div class="header__center">
-        <img src="../img/sena-link-removebg-preview-10.png" alt="Logo Centro" class="logo__Senalink">
-      </div>
-      <div class="header__right">
-        <img src="../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
-      </div>
-    </header>
-    <div class="linea-verde"></div>
     <!-- Contenedor principal -->
-    <div class="container">
-      <!-- Formulario para solicitar código de recuperación -->
-      <form id="forgotForm" class="container__forms--forgot">
-        <h2>¿Olvidaste tu contraseña?</h2>
-        <p>Escribe tu correo electrónico y te enviaremos <br> un código de recuperación para acceder a tu cuenta</p>
-        <!-- Campo para ingresar el correo electrónico -->
-        <input name="correo" placeholder="Correo electrónico" type="email" id="emailInput" required />
-        <!-- Botón para enviar el formulario -->
-        <button id="sendCodeBtn" class="btn" type="submit">Enviar</button>
-        <!-- Mensaje de respuesta (oculto por defecto) -->
-        <p id="message" style="display: none;"></p>
-      </form>
-    </div>        
+    <div class="forgot-password-container">
+      <!-- Flecha de regresar -->
+      <div class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+            class="arrow" 
+            width="24" height="24" 
+            viewBox="0 0 24 24" fill="none" 
+            stroke="currentColor" stroke-width="2.2" 
+            stroke-linecap="round" stroke-linejoin="round" 
+            onclick="history.back();">
+          <path d="M19 12H5"></path>
+          <path d="M12 19l-7-7 7-7"></path>
+        </svg>
+      </div>
+
+      <div class="layout-two-columns">
+        <div class="forgot-password-left">
+          <img src="../img/Forgot_password-removebg-preview.png" alt="Ilustración" />
+        </div>
+        <div class="forgot-password-right">
+          <form class="form">
+            <div class="text">
+              <h2>Recuperar contraseña</h2>
+              <p>Escribe tu correo electrónico y te enviaremos un código de recuperación para acceder a tu cuenta</p>
+            </div>
+            <input name="correo" placeholder="Correo electrónico" type="email" id="emailInput" required />
+            <button id="sendCodeBtn" class="btn" type="submit">Enviar</button>
+          </form>
+          <p id="message" style="display: none;"></p>
+        </div>
+      </div>
+    </div>
+
+    
     <!-- Scripts de funcionalidad -->
     <script src="../js/alert.js"></script>
     <script src="../js/control_inactividad.js"></script>
-    <!-- Pie de página -->
-    <footer>
-      <p>© Todos los derechos reservados. SenaLink</p>
-    </footer>
 </body>
 </html>
 

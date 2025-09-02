@@ -75,12 +75,12 @@
     cursor: pointer;
 }
 .gov{
-    background-color:var(--Secundary-980);
+    background-color:var(--gov-variable);
     
 }
 .gov__container{
     margin: auto;
-    padding: .5rem 1.5rem;
+    padding: 1rem 2.4rem;
     max-width: 1336px;
 }
 .gov__img{
@@ -213,22 +213,12 @@
     cursor: pointer;
     border-radius: 0.4rem;
     height: 4rem;
-    background-color:var(--Secundary-950);
+    background-color:var(--Secundary-950-2);
     color:var(--white);
     margin-top: 2rem;
     padding: 1.2rem 2.4rem;
 }
-.btn {
-  margin: 1rem;
-  border: 1px solid #ccc;
-  font-size: var(--h4-font-size);
-  cursor: pointer;
-  border-radius: 0.4rem;
-  height: 4rem;
-  background-color:var(--Secundary-950);
-  color:var(--white);
-  padding: 1.2rem 2.4rem;
-}
+
 
 .btn.edit {
   background-color: var(--Secundary-950);

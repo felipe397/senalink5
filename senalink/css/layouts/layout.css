@@ -1,0 +1,5 @@
+.layout-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* mitad y mitad */
+  min-height: 100vh; /* pantalla completa */
+}
