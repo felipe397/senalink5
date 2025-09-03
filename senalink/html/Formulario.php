@@ -150,7 +150,7 @@ class DiagnosticoApp {
                 this.showSection('resultados-diagnostico');
                 this.renderRecomendaciones(data.recomendaciones, 'recomendaciones');
                 localStorage.setItem('recomendaciones', JSON.stringify(data.recomendaciones));
-                window.location.href = 'Empresa/Home.html';
+                window.location.href = 'Home2.html';
             } else if (!data.success) {
                 this.showError(data.message || 'Error al procesar respuestas');
             } else {
@@ -313,28 +313,27 @@ class DiagnosticoApp {
         programas.forEach(prog => grupoDiv.appendChild(this.crearCardPrograma(prog)));
         return grupoDiv;
     }
-
     crearCardPrograma(prog) {
         const meses = (prog.duracion_programa / 48).toFixed(1);
         const card = document.createElement('div');
-        card.className = 'recomendacion-card';
+        card.className = 'card';
         card.dataset.nivel = prog.nivel_formacion;
         card.dataset.duracion = prog.duracion_programa;
 
         card.innerHTML = `
-            <div class="card-header">
-                <h3>${prog.nombre_programa}</h3>
-                <span class="badge ${prog.nivel_formacion === 'Tecnologo' ? 'badge-tecnologo' : 'badge-tecnico'}">
-                    ${prog.nivel_formacion}
-                </span>
+            <div class="card-content">
+                <h3 class="card-title">${prog.nombre_programa}</h3>
+                <p class="card-description"><strong>Duración:</strong> ${meses} meses</p>
+                <p class="card-description"><strong>Ocupación:</strong> ${prog.nombre_ocupacion}</p>
+                <p class="card-description"><strong>Hasta:</strong> ${new Date(prog.fecha_finalizacion).toLocaleDateString()}</p>
+                <a class="card-button" href="programa de formacion.html?id=${prog.id}">
+                    Más Información
+                </a>
             </div>
-            <div class="card-body">
-                <p><strong>Duración:</strong> ${meses} meses</p>
-                <p><strong>Ocupación:</strong> ${prog.nombre_ocupacion}</p>
-                <p><strong>Hasta:</strong> ${new Date(prog.fecha_finalizacion).toLocaleDateString()}</p>
-            </div>`;
+        `;
         return card;
     }
+
 
     configurarBotonesDetalle() {
         document.querySelectorAll('.btn-detalle').forEach(btn => {

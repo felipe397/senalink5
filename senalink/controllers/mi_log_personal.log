@@ -11676,3 +11676,39 @@ Recomendaciones encontradas: Array
         )
 
 )
+SQL: SELECT * FROM programas_formacion WHERE 1=1 AND LOWER(sector_programa) LIKE ? AND LOWER(nombre_ocupacion) LIKE ? AND nivel_formacion LIKE ? AND sector_economico IN (?,?)Params: Array
+(
+    [0] => %servicios%
+    [1] => %dibujantes técnicos%
+    [2] => %Técnico%
+    [3] => electricidad
+    [4] => industrial
+)
+Respuestas recibidas: Array
+(
+    [pregunta1] => Servicios
+    [pregunta2] => Dibujantes Técnicos
+    [pregunta3] => Técnico
+    [pregunta4] => Electricidad
+)
+Recomendaciones encontradas: Array
+(
+)
+SQL: SELECT * FROM programas_formacion WHERE 1=1 AND LOWER(sector_programa) LIKE ? AND LOWER(nombre_ocupacion) LIKE ? AND nivel_formacion LIKE ? AND sector_economico IN (?,?)Params: Array
+(
+    [0] => %servicios%
+    [1] => %técnicos en construcción y arquitectura%
+    [2] => %Técnico%
+    [3] => servicios
+    [4] => industrial
+)
+Respuestas recibidas: Array
+(
+    [pregunta1] => Servicios
+    [pregunta2] => Técnicos en Construcción y Arquitectura
+    [pregunta3] => Técnico
+    [pregunta4] => Servicios
+)
+Recomendaciones encontradas: Array
+(
+)

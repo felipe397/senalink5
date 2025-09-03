@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Programas de Formación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        @import url(../../css/variables.css);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(
+                135deg,
+                var(--primary-100) 0%,
+                var(--primary-50) 50%,
+                var(--Gray-50) 100%
+            );
+            color: #333333;
+            line-height: 1.6;
+        }
+        header {
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            background: transparent;
+            background-color: var(--primary-950);
+        }
+
+        .logo {
+            height: 4rem;
+
+        }
+        header nav {
+        display: flex;
+        justify-content: center; /* centra horizontalmente los links */
+        gap: 20px; /* espacio entre los enlaces */
+        margin-left: 0;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight:var(--h2-font-weight)
+        }
+
+        nav a:hover {
+            color: white;
+        }
+        .menu {
+            display: flex;
+            list-style: none;
+        }
+        .menu li {
+            margin-left: 20px;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .menu a:hover {
+            color: #d1c4e9;
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #666666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .recommendations {
+            margin-bottom: 60px;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #6200ea;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        .card-image {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        .card-content {
+            padding: 24px;
+        }
+        .card-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #333333;
+        }
+        .card-description {
+            color: #666666;
+            margin-bottom: 20px;
+        }
+        .card-button {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .card-button:hover {
+            background-color: #4caf50;
+        }
+        .about, .testimonials, .cta {
+            margin-bottom: 60px;
+        }
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .about-text {
+            padding: 20px;
+        }
+        .about-text h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: #6200ea;
+        }
+        .about-image {
+            position: relative;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 12px;
+        }
+        .testimonials .grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .testimonial {
+            background-color: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .testimonial-author {
+            font-weight: 500;
+            margin-top: 12px;
+            color: #6200ea;
+        }
+        .cta-content {
+            background: linear-gradient(135deg, #6200ea, #03dac6);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 12px;
+        }
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        .cta-content p {
+            font-size: 18px;
+            margin-bottom: 24px;
+        }
+        .cta-button {
+            background-color: white;
+            color: #6200ea;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+        .cta-button:hover {
+            background-color: #e8f5e8;
+        }
+        footer {
+            background-color: #333333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            .menu li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#">Product</a>
+            <a href="#">Use cases</a>
+            <a href="#">Resources</a>
+            <a href="#">Pricing</a>
+            <a href="#">Cerrar sesion</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="recommendations" id="recommendations">
+            <h2 class="section-title">Programas Recomendados</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3e3ecf15-5483-403f-aab2-b94ddd94565f.png" alt="Persona trabajando en una laptop con código de programación en pantalla, iluminación moderna con tonos azules y verdes, fondo de oficina elegante y minimalista" />
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Desarrollo Web Full Stack</h3>
+                        <p class="card-description">Aprende a construir aplicaciones web completas con HTML, CSS, JavaScript, Node.js y más. Ideal para principiantes y avanzados.</p>
+                        <a class="card-button" href="#contact">Más Información</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fe173fed-b053-4b99-8246-831920b0d302.png" alt="Vista de un gráfico de datos y análisis en una pantalla de computadora, colores vibrantes con gráficos de barras y líneas ascendentes, ambiente de oficina moderna con luz natural" />
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Ciencia de Datos</h3>
+                        <p class="card-description">Domina Python, SQL, machine learning y análisis de datos. Transfórmate en un experto en data science con proyectos reales.</p>
+                        <a class="card-button" href="#contact">Más Información</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7551bde6-b3f7-47d4-b394-f6dafc366d1b.png" alt="Grupo de personas colaborando en una reunión virtual con gráficos de marketing, tonos cálidos naranjas y amarillos, espacio de coworking con plantas y mesas modernas" />
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Marketing Digital</h3>
+                        <p class="card-description">Aprende SEO, redes sociales, Google Ads y estrategias de marketing digital para crecer tu negocio en el mundo online.</p>
+                        <a class="card-button" href="#contact">Más Información</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <h2 class="section-title">Acerca de Nuestro Programa</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>¿Por qué Elegir FormaLuz?</h3>
+                    <p>En FormaLuz, nos enfocamos en proporcionar educación de calidad accesible para todos. Nuestros programas están diseñados por expertos en la industria, con un enfoque práctico que garantiza tu éxito profesional. Únete a miles de estudiantes que han transformado sus carreras con nosotros.</p>
+                    <p>Ofrecemos soporte personalizado, comunidades de aprendizaje y certificados reconocidos por empresas líderes.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6c42269e-ad8e-4173-bf59-dff53abf050e.png" alt="Estudiantes interactuando en una sala de aprendizaje virtual con libros abiertos y computadoras portátiles, ambiente moderno con paredes blancas y muebles ergonómicos, iluminación suave y natural" />
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials" id="testimonials">
+            <h2 class="section-title">Lo Que Dicen Nuestros Estudiantes</h2>
+            <div class="grid">
+                <div class="testimonial">
+                    <p>"El programa de Desarrollo Web me abrió puertas increíbles. Ahora trabajo como desarrollador senior en una gran empresa."</p>
+                    <div class="testimonial-author">María González</div>
+                </div>
+                <div class="testimonial">
+                    <p>"Gracias a Ciencia de Datos, pude pivotar mi carrera y ahora presto consultoría en IA. Increíble experiencia."</p>
+                    <div class="testimonial-author">Carlos Ramírez</div>
+                </div>
+                <div class="testimonial">
+                    <p>"Marketing Digital me dio las herramientas para hacer crecer mi negocio en línea. Recomiendo totalmente."</p>
+                    <div class="testimonial-author">Ana López</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="cta-content">
+                <h2>¿Listo para Comenzar tu Jornada?</h2>
+                <p>Inscríbete hoy y da el primer paso hacia una carrera exitosa. Descuentos disponibles para los primeros 50 inscritos.</p>
+                <a class="cta-button" href="#contact">Contáctanos</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <p>© 2023 FormaLuz. Todos los derechos reservados.</p>
+        <p>Contáctanos: info@formaluz.com | Teléfono: +1 234 567 8900</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling para navegación
+        document.querySelectorAll('.menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Animación de entrada para cards en scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(card);
+        });
+
+        // Tooltip simple para botones
+        document.querySelectorAll('.card-button, .cta-button').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                const tooltip = document.createElement('div');
+                tooltip.textContent = 'Haz clic para más detalles';
+                tooltip.style.position = 'absolute';
+                tooltip.style.background = '#333';
+                tooltip.style.color = '#fff';
+                tooltip.style.padding = '5px 10px';
+                tooltip.style.borderRadius = '5px';
+                tooltip.style.fontSize = '12px';
+                tooltip.style.pointerEvents = 'none';
+                tooltip.style.zIndex = '1000';
+                const rect = btn.getBoundingClientRect();
+                tooltip.style.left = rect.left + 'px';
+                tooltip.style.top = (rect.top - 30) + 'px';
+                document.body.appendChild(tooltip);
+
+                btn.addEventListener('mouseleave', () => {
+                    document.body.removeChild(tooltip);
+                }, { once: true });
+            });
+        });
+    </script>
+</body>
+</html>
+</content>
+</create_file>
