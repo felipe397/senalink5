@@ -17,12 +17,11 @@
 <header>
   <nav>
     <a href="#">Inicio</a>
-    <a href="#">Gestion</a>
     <a href="#recommendations">Recomendaciones</a>
     <a href="about_us.html">Que es Senalink</a>
     <a href="#contact">Contactenos</a>
-    <a href="#contact">Mi perfil</a>
-    <a href="#">Cerrar sesion</a>
+    <a href="viewuser.html">Mi perfil</a>
+    <a href="#" id="cerrar-sesion">Cerrar sesion</a>
   </nav>
 </header>
 
@@ -93,6 +92,15 @@
     </footer>
 
     <script>
+        // Función cerrar sesión
+        document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Elimina datos de sesión/localStorage
+            sessionStorage.clear();
+            localStorage.clear();
+            // Redirige al login (ajusta la ruta si tu login es diferente)
+            window.location.href = 'index.html';
+        });
         // Smooth scrolling para navegación
         document.querySelectorAll('.menu a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

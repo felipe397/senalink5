@@ -12101,3 +12101,56 @@ Recomendaciones encontradas: Array
         )
 
 )
+SQL: SELECT * FROM programas_formacion WHERE 1=1 AND LOWER(sector_programa) LIKE ? AND LOWER(nombre_ocupacion) LIKE ? AND nivel_formacion LIKE ? AND sector_economico IN (?,?,?,?,?)Params: Array
+(
+    [0] => %servicios%
+    [1] => %mecánicos de motos%
+    [2] => %Técnico%
+    [3] => industrial
+    [4] => electricidad
+    [5] => construccion
+    [6] => textiles
+    [7] => servicios
+)
+Respuestas recibidas: Array
+(
+    [pregunta1] => Servicios
+    [pregunta2] => Mecánicos de Motos
+    [pregunta3] => Técnico
+    [pregunta4] => Industrial
+)
+Recomendaciones encontradas: Array
+(
+    [0] => Array
+        (
+            [id] => 36
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => TÉCNICO
+            [estado] => En ejecucion
+            [ficha] => 2920871
+            [fecha_finalizacion] => 2025-06-03
+            [codigo] => 838318
+            [sector_programa] => SERVICIOS
+            [nombre_ocupacion] => Mecánicos de Motos
+            [sector_economico] => INDUSTRIAL
+            [etapa_ficha] => Lectiva
+        )
+
+    [1] => Array
+        (
+            [id] => 120
+            [nombre_programa] => MANTENIMIENTO DE MOTOCICLETAS Y MOTOCARROS.
+            [duracion_programa] => 2208
+            [nivel_formacion] => TÉCNICO
+            [estado] => En ejecucion
+            [ficha] => 3064630
+            [fecha_finalizacion] => 2026-01-14
+            [codigo] => 838318
+            [sector_programa] => SERVICIOS
+            [nombre_ocupacion] => Mecánicos de Motos
+            [sector_economico] => INDUSTRIAL
+            [etapa_ficha] => Lectiva
+        )
+
+)
