@@ -22,6 +22,18 @@ body {
     height: 100%;
 }
 
+.gov{
+    background-color: var(--gov-variable);
+}
+.gov__container{
+    margin: auto;
+    padding: .5rem 1.5rem;
+    max-width: 1336px;
+}
+.gov__img{
+    height: 2.4rem;
+}
+
 /* Links */
 a {
     text-decoration: none;

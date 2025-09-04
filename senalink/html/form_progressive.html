@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Formulario con Barra de Progreso</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    background: #f5f8fb;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .form-container {
+    max-width: 480px;
+    margin: 3rem auto;
+    background: white;
+    border-radius: 1rem;
+    padding: 2.5rem 3rem 3rem 3rem;
+    box-shadow: 0 4px 30px rgb(0 0 0 / 0.05);
+  }
+
+  /* Progress bar container */
+  .progressbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+  .progressbar::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 2.25rem;
+    right: 2.25rem;
+    height: 3px;
+    background: #d1d9e6;
+    border-radius: 2px;
+    z-index: 0;
+  }
+  .progress-step {
+    background: #e2e8f0;
+    color: #a0aec0;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    z-index: 1;
+    cursor: default;
+    user-select: none;
+    box-shadow: inset 0 0 0 3px #d1d9e6;
+    transition: all 0.4s ease;
+  }
+  .progress-step.active {
+    color: #38bdf8;
+    background: #cffafe;
+    box-shadow: inset 0 0 0 3px #38bdf8;
+  }
+  .progress-step.completed {
+    background: #38bdf8;
+    color: white;
+    box-shadow: none;
+  }
+  .progress-step.completed::after {
+    content: '✓';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    color: white;
+    font-weight: 900;
+  }
+  .progress-step:not(:last-child) {
+    margin-right: 0;
+  }
+  .progress-step-label {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    user-select: none;
+    color: #94a3b8;
+  }
+  .progress-step.active + .progress-step-label {
+    color: #38bdf8;
+    font-weight: 600;
+  }
+
+  /* Progress line fill */
+  .progressbar-fill {
+    position: absolute;
+    top: 1rem;
+    left: 2.25rem;
+    height: 3px;
+    background: #38bdf8;
+    border-radius: 2px;
+    z-index: 0;
+    transition: width 0.5s ease;
+  }
+
+  /* Questions container */
+  .questions {
+    position: relative;
+    min-height: 180px;
+  }
+  .question {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+  .question.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    position: relative;
+  }
+
+  /* Styled question title */
+  h2 {
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Input focus and styling */
+  label {
+    display: block;
+    font-weight: 600;
+    color: #94a3b8;
+    margin: 0.8rem 0 0.25rem 0;
+    cursor: pointer;
+  }
+  input[type="radio"] {
+    display: none;
+  }
+  input[type="radio"] + span {
+    display: inline-block;
+    background: #f1f5f9;
+    padding: 0.65rem 1.25rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    color: #475569;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+  }
+  input[type="radio"]:checked + span {
+    background: #38bdf8;
+    color: white;
+  }
+  input[type="radio"]:focus-visible + span {
+    outline: 3px solid #bae6fd;
+    outline-offset: 2px;
+  }
+
+  /* Next button styling */
+  .btn-next {
+    margin-top: 2.5rem;
+    background: #38bdf8;
+    color: white;
+    border: none;
+    font-weight: 700;
+    padding: 0.85rem 0;
+    width: 100%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  .btn-next:disabled {
+    background: #a5b4fc;
+    cursor: not-allowed;
+  }
+  .btn-next:not(:disabled):hover {
+    background: #0ea5e9;
+  }
+</style>
+</head>
+<body>
+  <main class="form-container" role="main" aria-label="Formulario de preguntas con barra de progreso">
+    <nav class="progressbar" aria-label="Barra de progreso de preguntas">
+      <div class="progressbar-fill" id="progress-fill" style="width: 0;"></div>
+      <div class="progress-step" id="step-1" aria-current="step" tabindex="0" aria-label="Paso 1">
+        1
+        <div class="progress-step-label">Step 1</div>
+      </div>
+      <div class="progress-step" id="step-2" tabindex="-1" aria-label="Paso 2">
+        2
+        <div class="progress-step-label">Step 2</div>
+      </div>
+      <div class="progress-step" id="step-3" tabindex="-1" aria-label="Paso 3">
+        3
+        <div class="progress-step-label">Step 3</div>
+      </div>
+      <div class="progress-step" id="step-4" tabindex="-1" aria-label="Paso 4">
+        4
+        <div class="progress-step-label">Step 4</div>
+      </div>
+    </nav>
+
+    <form id="question-form" aria-live="polite">
+      <section class="questions">
+        <fieldset class="question active" id="question-1" aria-labelledby="q1-title" data-step="1">
+          <legend id="q1-title"><strong>Step 1</strong> <br> What is your favorite color?</legend>
+          <label>
+            <input type="radio" name="q1" value="Red" required />
+            <span>Red</span>
+          </label>
+          <label>
+            <input type="radio" name="q1" value="Blue" />
+            <span>Blue</span>
+          </label>
+          <label>
+            <input type="radio" name="q1" value="Green" />
+            <span>Green</span>
+          </label>
+          <label>
+            <input type="radio" name="q1" value="Yellow" />
+            <span>Yellow</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="question" id="question-2" aria-labelledby="q2-title" data-step="2">
+          <legend id="q2-title"><strong>Step 2</strong> <br> What is your favorite animal?</legend>
+          <label>
+            <input type="radio" name="q2" value="Dog" required />
+            <span>Dog</span>
+          </label>
+          <label>
+            <input type="radio" name="q2" value="Cat" />
+            <span>Cat</span>
+          </label>
+          <label>
+            <input type="radio" name="q2" value="Bird" />
+            <span>Bird</span>
+          </label>
+          <label>
+            <input type="radio" name="q2" value="Fish" />
+            <span>Fish</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="question" id="question-3" aria-labelledby="q3-title" data-step="3">
+          <legend id="q3-title"><strong>Step 3</strong> <br> What kind of music do you prefer?</legend>
+          <label>
+            <input type="radio" name="q3" value="Rock" required />
+            <span>Rock</span>
+          </label>
+          <label>
+            <input type="radio" name="q3" value="Pop" />
+            <span>Pop</span>
+          </label>
+          <label>
+            <input type="radio" name="q3" value="Jazz" />
+            <span>Jazz</span>
+          </label>
+          <label>
+            <input type="radio" name="q3" value="Classical" />
+            <span>Classical</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="question" id="question-4" aria-labelledby="q4-title" data-step="4">
+          <legend id="q4-title"><strong>Step 4</strong> <br> Which season do you like most?</legend>
+          <label>
+            <input type="radio" name="q4" value="Spring" required />
+            <span>Spring</span>
+          </label>
+          <label>
+            <input type="radio" name="q4" value="Summer" />
+            <span>Summer</span>
+          </label>
+          <label>
+            <input type="radio" name="q4" value="Autumn" />
+            <span>Autumn</span>
+          </label>
+          <label>
+            <input type="radio" name="q4" value="Winter" />
+            <span>Winter</span>
+          </label>
+        </fieldset>
+      </section>
+
+      <button type="button" id="next-btn" class="btn-next" disabled aria-label="Siguiente pregunta">Next</button>
+    </form>
+  </main>
+
+<script>
+  (() => {
+    const form = document.getElementById('question-form');
+    const nextBtn = document.getElementById('next-btn');
+    const progressFill = document.getElementById('progress-fill');
+    const progressSteps = [
+      document.getElementById('step-1'),
+      document.getElementById('step-2'),
+      document.getElementById('step-3'),
+      document.getElementById('step-4')
+    ];
+    const questions = Array.from(form.querySelectorAll('.question'));
+    let currentStep = 0;
+
+    // Update progress UI
+    function updateProgress(step) {
+      const percent = (step) / (questions.length - 1) * 100;
+      progressFill.style.width = `${percent}%`;
+
+      progressSteps.forEach((stepEl, index) => {
+        stepEl.classList.remove('active', 'completed');
+        stepEl.removeAttribute('aria-current');
+        stepEl.setAttribute('tabindex', '-1');
+        if (index < step) {
+          stepEl.classList.add('completed');
+        } else if (index === step) {
+          stepEl.classList.add('active');
+          stepEl.setAttribute('aria-current', 'step');
+          stepEl.setAttribute('tabindex', '0');
+          stepEl.focus();
+        }
+      });
+    }
+
+    // Show question by index with smooth transition
+    function showQuestion(index) {
+      questions.forEach((q, i) => {
+        if (i === index) {
+          q.classList.add('active');
+          q.setAttribute('tabindex', '0');
+          q.focus();
+        } else {
+          q.classList.remove('active');
+          q.removeAttribute('tabindex');
+        }
+      });
+      updateProgress(index);
+      // Reset button disabled until answer selected on new question
+      checkSelection();
+    }
+
+    // Check if current question has a selected radio
+    function checkSelection() {
+      const currentQuestion = questions[currentStep];
+      const selected = currentQuestion.querySelector('input[type="radio"]:checked');
+      nextBtn.disabled = !selected;
+      // If last step, change button text to "Finish"
+      if (currentStep === questions.length - 1) {
+        nextBtn.textContent = 'Finish';
+        nextBtn.setAttribute('aria-label', 'Finalizar formulario');
+      } else {
+        nextBtn.textContent = 'Next';
+        nextBtn.setAttribute('aria-label', 'Siguiente pregunta');
+      }
+    }
+
+    // Listener for radio inputs to enable next button automatically after selection
+    form.addEventListener('change', (e) => {
+      if (e.target && e.target.matches('input[type="radio"]')) {
+        checkSelection();
+      }
+    });
+
+    // Next button click
+    nextBtn.addEventListener('click', () => {
+      if (currentStep < questions.length - 1) {
+        currentStep++;
+        showQuestion(currentStep);
+      } else {
+        // Submit or final confirmation - For demo we just alert selections
+        const answers = {};
+        questions.forEach((q, i) => {
+          const selected = q.querySelector('input[type="radio"]:checked');
+          answers[`Question ${i + 1}`] = selected ? selected.value : 'No selection';
+        });
+        alert('Formulario completado:\n' + Object.entries(answers).map(([q,a])=>`${q}: ${a}`).join('\n'));
+        // Optionally reset form here if desired
+        // location.reload();
+      }
+    });
+
+    // Initialize progress and show first question
+    showQuestion(currentStep);
+  })();
+</script>
+</body>
+</html>
+

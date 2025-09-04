@@ -39,7 +39,7 @@ img{
     overflow: clip;
 }
 .gov{
-    background-color: var(--Secundary-980);
+    background-color: var(--gov-variable);
 }
 .gov__container{
     margin: auto;

@@ -94,7 +94,9 @@
         if (programaId) {
             window.location.href = `ProgramaReport.html?id=${programaId}`;
         } else {
-            alert('No se encontró el ID del programa.');
+            if (typeof showAlert === 'function') {
+                showAlert('No se encontró el ID del programa.', 'error', '.container__crud');
+            }
         }
     });
 

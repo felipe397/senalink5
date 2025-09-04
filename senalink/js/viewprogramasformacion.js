@@ -134,46 +134,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Vista detalle
     const id = new URLSearchParams(window.location.search).get('id');
-    if (id) {
-        const urlDetalle = contexto === "vista1"
-            ? "../../controllers/ProgramaController.php"
-            : "../../../controllers/ProgramaController.php";
-
-        fetch(urlDetalle, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                accion: 'detallePrograma',
-                id: id
-            })
-        })
-            .then(response => {
-                if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-                return response.json();
-            })
-            .then(data => {
-                if (!data.success || !data.programa) {
-                    alert("No se encontraron datos para el programa solicitado.");
-                } else {
-                    const p = data.programa;
-                    const campos = [
-                        'codigo', 'ficha', 'nivel_formacion', 'sector_programa',
-                        'etapa_ficha', 'sector_economico', 'nombre_ocupacion',
-                        'nombre_programa', 'habilidades_requeridas',
-                        'duracion_programa', 'fecha_finalizacion', 'estado'
-                    ];
-                    campos.forEach(campo => {
-                        const el = document.getElementById(campo);
-                        if (el) el.textContent = p[campo] || "";
-                    });
-
-                }
-            })
-            .catch(error => {
-                console.error('Error al cargar los detalles del programa:', error);
-                alert("Error al cargar los detalles del programa. Por favor, intenta nuevamente.");
-            });
+    const errorDiv = document.getElementById('programa-error');
+    if (!id) {
+        if (typeof showAlert === 'function') {
+            showAlert('No se encontró el ID del programa. Por favor, accede desde la lista de programas.', 'error', '.container__crud');
+        }
+        return;
     }
+    const urlDetalle = contexto === "vista1"
+        ? "../../controllers/ProgramaController.php"
+        : "../../../controllers/ProgramaController.php";
+
+    fetch(urlDetalle, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            accion: 'detallePrograma',
+            id: id
+        })
+    })
+        .then(response => {
+            if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+            return response.json();
+        })
+        .then(data => {
+            if (!data.success || !data.programa) {
+                if (typeof showAlert === 'function') {
+                    showAlert('No se encontraron datos para el programa solicitado.', 'error', '.container__crud');
+                }
+            } else {
+                const p = data.programa;
+                const campos = [
+                    'codigo', 'ficha', 'nivel_formacion', 'sector_programa',
+                    'etapa_ficha', 'sector_economico', 'nombre_ocupacion',
+                    'nombre_programa', 'habilidades_requeridas',
+                    'duracion_programa', 'fecha_finalizacion', 'estado'
+                ];
+                campos.forEach(campo => {
+                    const el = document.getElementById(campo);
+                    if (el) el.textContent = p[campo] || "";
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar los detalles del programa:', error);
+            if (typeof showAlert === 'function') {
+                showAlert('Error al cargar los detalles del programa. Por favor, intenta nuevamente.', 'error', '.container__crud');
+            }
+        });
     // Botón de reporte para AdminSENA
     const btnReporte = document.getElementById('ProgReporte');
     if (btnReporte && id) {
