@@ -39,6 +39,7 @@
     <div class="container">
         <main class="container__crud">
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"/>
+            
 
             <form action="http://localhost/senalink5/senalink5/senalink/controllers/update_programa.php" method="POST" id="programaForm">
                 <input type="hidden" name="origen" value="Super_Admin">
@@ -48,10 +49,10 @@
                     <input type="hidden" id="programa_id" name="id" value="">
                     <input type="hidden" name="action" value="update">
 
-                    <input class="input-field" id="codigo" name="codigo" placeholder="Código" type="number" required />
-                    <input class="input-field" id="ficha" name="ficha" placeholder="Ficha" type="number" required />
+                    <input class="input-field" id="codigo" name="codigo" placeholder="Código" type="number" required readonly disabled />
+                    <input class="input-field" id="ficha" name="ficha" placeholder="Ficha" type="number" required readonly disabled/>
 
-                    <select class="select_container" id="nivel_formacion" name="nivel_formacion" required>
+                    <select class="select_container" id="nivel_formacion" name="nivel_formacion" required disabled>
                         <option value="" disabled selected>Nivel de formación</option>
                         <option value="TECNICO">Técnico</option>
                         <option value="TECNOLOGO">Tecnólogo</option>
@@ -67,7 +68,7 @@
                         <option>LECTIVA</option>
                         <option>PRACTICA</option>
                     </select>
-                    <select class="select_container" id="sector_economico" name="sector_economico" required>
+                    <select class="select_container" id="sector_economico" name="sector_economico" required disabled>
                         <option selected disabled value="">Sector Económico</option>
                         <option>INDUSTRIA</option>
                         <option>SERVICIOS</option>
@@ -78,7 +79,7 @@
 
                     <input class="select_container" id="nombre_ocupacion" name="nombre_ocupacion" placeholder="Nombre de Ocupación" type="text" required pattern="[\p{L}\s.]+" title="El nombre solo debe contener letras, espacios y puntos." />
                     <input class="select_container" id="duracion_programa" name="duracion_programa" placeholder="Duración(Horas)" type="number" min="1" required title="La duración debe ser un número positivo." />
-                    <input class="select_container" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required />
+                    <input class="select_container" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required disabled />
                     <select class="select_container" id="estado" name="estado" required>
                         <option value="" disabled selected>Estado</option>
                         <option value="En Ejecucion">En Ejecución</option>
