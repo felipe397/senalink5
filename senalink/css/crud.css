@@ -63,7 +63,7 @@ button{
 /* Botones principales */
 .btn {
   padding: 1.2rem 2.4rem;
-  background-color: var(--Secundary-950);
+  background-color: var(--Secundary-950-2);
   color: var(--white);
   border: none;
   border-radius: 8px;
@@ -210,9 +210,6 @@ button{
 
 }
 
-
-
-
 .p-container{
   text-align: left;
 }
@@ -278,7 +275,7 @@ th, td {
 }
 
 th {
-  background-color: var(--Secundary-900);
+  background-color: var(--Secundary-950-2);
   color:var(--white);
   text-align: center;
 }
@@ -302,7 +299,7 @@ td {
   cursor: pointer;
   border-radius: 0.4rem;
   height: 4rem;
-  background-color:var(--Secundary-950);
+  background-color:var(--Secundary-950-2);
   color:var(--white);
   padding: 1.2rem 2.4rem;
   text-align: center;
@@ -321,7 +318,7 @@ td {
     height: 4rem;
     margin-top: 2rem;
     padding: 1.2rem 2.4rem;
-    background-color: var(--Secundary-950);
+    background-color: var(--Secundary-950-2);
     color: var(--white);
     border: none;
     border-radius: 8px;
@@ -476,7 +473,7 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 footer{
-    background-color: var(--Secundary-950);
+    background-color: var(--Secundary-950-2);
     color: var(--white);
     text-align: center;
     width: 100%;

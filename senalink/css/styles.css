@@ -261,7 +261,7 @@ img{
     padding: 2rem; /* Adequate padding */
     transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
     border-radius: 0.8rem;
-    border: 0.3rem solid var(--Secundary-950); 
+    border: 0.3rem solid var(--Secundary-950-2); 
     margin: 1rem;
     min-width: 0;
     min-height: 0;
@@ -282,7 +282,7 @@ img{
 .paginacion button {
     margin: 0 5px;
     padding: 6px 12px;
-    background-color: var(--Secundary-950);
+    background-color: var(--Secundary-950-2);
     color: var(--white);
     border: none;
     border-radius: 4px;
@@ -290,7 +290,7 @@ img{
 }
 
 .paginacion button.activo {
-    background-color: var(--Secundary-700);
+    background-color: var(--Secundary-800-2);
     font-weight: bold;
 }
 
@@ -431,7 +431,7 @@ width: 100%;
 
 
 footer{
-    background-color: var(--Secundary-950);
+    background-color: var(--Secundary-950-2);
     color: var(--white);
     text-align: center;
     width: 100%;
