@@ -1,5 +1,5 @@
 <?php
-// require_once '../../controllers/session_expiration.php';
+require_once '../../controllers/session_expiration.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -111,7 +111,7 @@
             sessionStorage.clear();
             localStorage.clear();
             // Redirige al login (ajusta la ruta si tu login es diferente)
-            window.location.href = 'index.html';
+            window.location.href = '../index.php';
         });
         // Smooth scrolling para navegación
         document.querySelectorAll('.menu a').forEach(anchor => {
@@ -213,7 +213,7 @@
         });
 
     </script>
-    <!-- <script>
+    <script>
   // Tiempo de inactividad en milisegundos (ejemplo: 15 minutos)
 //   const inactivityTime = 15 * 60 * 1000;
   const inactivityTime = 10 * 1000; // 30 segundos
@@ -235,7 +235,7 @@
   });
 
   resetTimer(); // Iniciar temporizador al cargar la página
-</script> -->
+</script>
 
 </body>
 </html>

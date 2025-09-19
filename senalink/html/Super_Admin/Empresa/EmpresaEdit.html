@@ -24,7 +24,7 @@
     </header>
 
     <div class="container">
-        <main class="container__crud">
+    <main class="container__crud" style="display: inline-block; min-width: 320px; max-width: 500px; width: fit-content; margin: 0 auto; padding: 2rem 2.5rem; box-sizing: border-box;">
             <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink" />
 
             <!-- FORMULARIO DE EDICIÓN EMPRESA -->
@@ -110,8 +110,8 @@
         form.addEventListener('submit', function(event) {
             const currentValues = getFormValues();
             if (!valuesChanged(currentValues, originalValues)) {
-                // No hacer nada si no hay cambios
                 event.preventDefault();
+                showAlert('No se realizaron cambios en los datos.', 'warning', '.container');
                 return;
             }
             // Validación tipo societario en razón social

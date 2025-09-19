@@ -133,7 +133,7 @@
   </script>
 
 <script src="../js/login_attempts.js"></script>
-<!-- <script>
+<script>
   // Función para obtener parámetros URL
 function getQueryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -153,7 +153,7 @@ if (getQueryParam('timeout') === '1') {
   document.getElementById('closeModalBtn').addEventListener('click', () => {
     modal.style.display = 'none';
   });
-} -->
+}
 
 </script>
 </body>

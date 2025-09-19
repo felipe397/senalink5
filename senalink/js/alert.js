@@ -8,9 +8,38 @@ function showAlert(message, type = 'error', insertBeforeSelector) {
 
   let alert = document.createElement('div');
   alert.className = 'alert-box';
-  if (type === 'success') alert.classList.add('success');
-  if (type === 'error') alert.classList.add('error');
-  if (type === 'warning') alert.classList.add('warning');
+  // Estilos generales
+  alert.style.fontSize = '1.25rem';
+  alert.style.padding = '2rem 2.5rem';
+  alert.style.borderRadius = '1.2rem';
+  alert.style.boxShadow = '0 6px 32px 0 rgba(0,0,0,0.18)';
+  alert.style.maxWidth = '600px';
+  alert.style.minWidth = '340px';
+  alert.style.width = 'fit-content';
+  alert.style.letterSpacing = '0.01em';
+  alert.style.lineHeight = '1.5';
+  alert.style.fontWeight = '500';
+  alert.style.textAlign = 'center';
+  alert.style.marginTop = '1.5rem';
+  alert.style.marginBottom = '1.5rem';
+  alert.style.border = '2.5px solid #222';
+  alert.style.background = '#fff';
+  alert.style.color = '#222';
+  if (type === 'success') {
+    alert.style.background = '#e6fbe6'; // verde claro
+    alert.style.borderColor = '#1b5e20'; // verde oscuro
+    alert.style.color = '#1b5e20';
+  }
+  if (type === 'error') {
+    alert.style.background = '#ffeaea'; // rojo claro
+    alert.style.borderColor = '#b71c1c'; // rojo oscuro
+    alert.style.color = '#b71c1c';
+  }
+  if (type === 'warning') {
+    alert.style.background = '#fffbe6'; // amarillo claro
+    alert.style.borderColor = '#bfa100'; // amarillo oscuro
+    alert.style.color = '#bfa100';
+  }
 
   // Crear iconos para cada tipo
   let iconSpan = document.createElement('span');

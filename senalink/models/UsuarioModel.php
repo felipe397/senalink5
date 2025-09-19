@@ -118,8 +118,17 @@ class UsuarioModel {
     // Verificar si el número de documento ya existe
     public static function existeNumeroDocumento($numero_documento) {
         $db = Conexion::conectar();
-        $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE numero_documento = :numero_documento");
-        $stmt->bindValue(':numero_documento', $numero_documento);
+        $sql = "SELECT COUNT(*) FROM usuarios WHERE numero_documento = :numero_documento";
+        if (func_num_args() > 1 && func_get_arg(1) !== null) {
+            $id = func_get_arg(1);
+            $sql .= " AND id != :id";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':numero_documento', $numero_documento);
+            $stmt->bindValue(':id', $id);
+        } else {
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':numero_documento', $numero_documento);
+        }
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }

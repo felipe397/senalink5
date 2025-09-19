@@ -214,8 +214,8 @@ const form = document.getElementById('programaForm');
 form.addEventListener('submit', function(event) {
     const currentValues = getFormValues();
     if (!valuesChanged(currentValues, originalValues)) {
-        // No hacer nada si no hay cambios
         event.preventDefault();
+        showAlert('No se realizaron cambios en los datos.', 'warning', '.container');
         return;
     }
     event.preventDefault();

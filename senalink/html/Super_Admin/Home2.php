@@ -28,11 +28,11 @@
   <nav>
     <a href="#">Inicio</a>
     <a href="#recommendations">Recomendaciones</a>
-    <a href="#contact">Contactenos</a>
+    <a href="#contact">Contáctenos</a>
     <a href="../Preguntas_frecuentes.html">Preguntas frecuentes</a>
     <a href="../viewuser.html">Mi perfil</a>
-    <a href="Empresa/Gestion_Empresa.html">Gestion</a>
-    <a href="#" id="cerrar-sesion">Cerrar sesion</a>
+    <a href="Empresa/Gestion_Empresa.html">Gestión</a>
+    <a href="#" id="cerrar-sesion">Cerrar sesión</a>
   </nav>
 </header>
 
@@ -90,8 +90,8 @@
 
         <section class="cta">
             <div class="cta-content">
-                <h2>¿Tienes algun problema?</h2>
-                <p>Comunicate por este medio para resolver cualquier inquietud.</p>
+                <h2>¿Tienes algún problema?</h2>
+                <p>Comunícate por este medio para resolver cualquier inquietud.</p>
                 <a class="cta-button" href="#contact">Contáctanos</a>
             </div>
         </section>
@@ -112,7 +112,7 @@
             sessionStorage.clear();
             localStorage.clear();
             // Redirige al login (ajusta la ruta si tu login es diferente)
-            window.location.href = 'index.html';
+            window.location.href = '../index.php';
         });
         // Smooth scrolling para navegación
         document.querySelectorAll('.menu a').forEach(anchor => {

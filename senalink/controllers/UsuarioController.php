@@ -97,6 +97,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
             $errores[] = 'El número de documento debe tener entre 8 y 10 dígitos.';
         }
         // Validar duplicados de número de documento para creación
+        // Si es edición, pasar el id del usuario para excluirlo de la validación
+        if (isset($datos['id']) && $datos['id'] !== '') {
+            $GLOBALS['usuario_id_edicion'] = $datos['id'];
+        } else {
+            $GLOBALS['usuario_id_edicion'] = null;
+        }
         if (UsuarioModel::existeNumeroDocumento($datos['numero_documento'])) $errores[] = 'El número de documento ya está registrado.';
         if (UsuarioModel::existeTelefono($datos['telefono'])) $errores[] = 'El número telefónico ya está registrado.';
         if (strlen($contrasena) < 12) $errores[] = 'La contraseña debe tener al menos 12 caracteres.';

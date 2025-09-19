@@ -6,12 +6,23 @@ $token = $_POST['token'] ?? '';
 $newPassword = $_POST['new_password'] ?? '';
 $confirmPassword = $_POST['confirm_password'] ?? '';
 
+
 if (!$token || !$newPassword || !$confirmPassword) {
-    die("Faltan datos requeridos.");
+    header('Content-Type: application/json');
+    echo json_encode([
+        'success' => false,
+        'error' => 'Faltan datos requeridos.'
+    ]);
+    exit;
 }
 
 if ($newPassword !== $confirmPassword) {
-    die("Las contraseñas no coinciden.");
+    header('Content-Type: application/json');
+    echo json_encode([
+        'success' => false,
+        'error' => 'Las contraseñas no coinciden.'
+    ]);
+    exit;
 }
 
 $pdo = Conexion::conectar();
@@ -22,8 +33,7 @@ $stmt->execute([$token]);
 
 if ($stmt->rowCount() > 0) {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    $email = $row['email']; // <- este es el nombre correcto de la columna
-    // Cambiar contraseña (con hash seguro)
+    $email = $row['email'];
     $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
     $update = $pdo->prepare("UPDATE usuarios SET contrasena = ? WHERE correo = ?");
     $update->execute([$hashed, $email]);
@@ -31,11 +41,20 @@ if ($stmt->rowCount() > 0) {
     // Eliminar token usado
     $pdo->prepare("DELETE FROM password_resets WHERE token = ?")->execute([$token]);
 
-    // Marcar éxito en la sesión y redirigir a la página de nueva contraseña
+    // Marcar éxito en la sesión
     $_SESSION['password_changed'] = true;
-    header('Location: ../html/index.html');
+    header('Content-Type: application/json');
+    echo json_encode([
+        'success' => true,
+        'redirect' => '../html/index.php'
+    ]);
     exit;
 } else {
-    die("Token inválido o expirado.");
+    header('Content-Type: application/json');
+    echo json_encode([
+        'success' => false,
+        'error' => 'Token inválido o expirado.'
+    ]);
+    exit;
 }
 ?>

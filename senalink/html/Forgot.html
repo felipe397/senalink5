@@ -11,7 +11,8 @@
     <title>SenaLink - Recuperar Contraseña</title>
     <!-- Hoja de estilos principal -->
     <link href="../css/Pages/forgot.css" rel="stylesheet"/>
-    <link href="../css/components/forms.css" rel="stylesheet"/>
+    <link href="../css/Pages/forgot.css" rel="stylesheet"/>
+    <link href="../css/alert.css" rel="stylesheet"/>
     <link href="../css/layouts/layout.css" rel="stylesheet"/>
     <link href="../css/components/gov.css" rel="stylesheet"/>
     <!-- Favicon de la pestaña -->
@@ -47,7 +48,7 @@
           <img src="../img/Forgot_password-removebg-preview.png" alt="Ilustración" />
         </div>
         <div class="forgot-password-right">
-          <form class="form">
+          <form class="form" id="forgotForm">
             <div class="text">
               <h2>Recuperar contraseña</h2>
               <p>Escribe tu correo electrónico y te enviaremos un código de recuperación para acceder a tu cuenta</p>
@@ -64,6 +65,59 @@
     <!-- Scripts de funcionalidad -->
     <script src="../js/alert.js"></script>
     <script src="../js/control_inactividad.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('forgotForm');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const correo = document.getElementById('emailInput').value.trim();
+        if (!correo) {
+          showAlert('Por favor ingresa tu correo electrónico.', 'warning', '.forgot-password-container');
+          return;
+        }
+  showAlert('Enviando correo...', 'warning', '.forgot-password-container');
+  fetch('../controllers/send_code.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'correo=' + encodeURIComponent(correo)
+        })
+        .then(async res => {
+          let data;
+          try {
+            data = await res.json();
+          } catch (e) {
+            const text = await res.text();
+            showAlert(text || 'Error de comunicación con el servidor.', 'error', '.forgot-password-container');
+            return;
+          }
+          if (data.success) {
+            showAlert('Se ha enviado un correo con el código de recuperación. Revisa tu bandeja de entrada o spam.', 'success', '.forgot-password-container');
+          } else if (data.error === 'correo_no_registrado') {
+            showAlert('El correo ingresado no está registrado en el sistema.', 'error', '.forgot-password-container');
+          } else if (data.error === 'correo_invalido') {
+            showAlert('El correo ingresado no es válido.', 'warning', '.forgot-password-container');
+          } else if (data.error === 'envio_fallido') {
+            showAlert((data.error_message ? 'Error SMTP: ' + data.error_message + '<br>' : '') + 'No se pudo enviar el correo. Intenta de nuevo más tarde.', 'error', '.forgot-password-container');
+          } else {
+            showAlert(data.error || 'No se pudo enviar el correo. Intenta de nuevo más tarde.', 'error', '.forgot-password-container');
+          }
+        })
+        .catch(async err => {
+          try {
+            const response = err && err.response;
+            if (response) {
+              const text = await response.text();
+              showAlert(text || 'Error de comunicación con el servidor.', 'error', '.forgot-password-container');
+            } else {
+              showAlert('Error de comunicación con el servidor.', 'error', '.forgot-password-container');
+            }
+          } catch {
+            showAlert('Error de comunicación con el servidor.', 'error', '.forgot-password-container');
+          }
+        });
+      });
+    });
+    </script>
 </body>
 </html>
 

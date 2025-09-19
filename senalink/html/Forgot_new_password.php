@@ -14,6 +14,7 @@
     <title>SenaLink - Nueva Contraseña</title>
     <!-- Hoja de estilos principal -->
     <link href="../css/crud.css" rel="stylesheet"/>
+    <link href="../css/alert.css" rel="stylesheet"/>
     <!-- Favicon de la pestaña -->
     <link rel="shortcut icon " href="../img/Favicon1.png"> <!-- corresponde al favicon en la pestaña -->
 </head>
@@ -38,7 +39,6 @@
             <img src="../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
         </div>
     </header>
-    <div class="linea-verde"></div>
     <!-- Contenedor principal -->
     <div class="container">
       <main class="container__forms--forgot">
@@ -78,9 +78,9 @@
     </footer>
     <!-- Script para mostrar/ocultar contraseña -->
     <script src="../js/viewpassword.js"></script>
-
-  <script src="../js/control_inactividad.js"></script>
-  <script>
+    <script src="../js/alert.js"></script>
+    <script src="../js/control_inactividad.js"></script>
+    <script>
     // Script para mostrar/ocultar la contraseña en los campos
     document.addEventListener("DOMContentLoaded", function () {
       function setupTogglePassword(inputName, buttonClass) {
@@ -98,11 +98,50 @@
       setupTogglePassword('new_password', 'toggle-password-button');
       setupTogglePassword('confirm_password', 'toggle-password-button');
 
-      // Mostrar alerta si la contraseña fue cambiada exitosamente
-      <?php if (isset($_SESSION['password_changed']) && $_SESSION['password_changed'] === true): ?>
-        <?php unset($_SESSION['password_changed']); ?>
-      <?php endif; ?>
+      // Manejar el envío del formulario por AJAX para mostrar alertas con showAlert
+      const form = document.getElementById('newPasswordForm');
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(form);
+        fetch(form.action, {
+          method: 'POST',
+          body: formData
+        })
+        .then(async response => {
+          let data;
+          try {
+            data = await response.json();
+          } catch (e) {
+            // Si la respuesta no es JSON, intentar extraer texto plano
+            const text = await response.text();
+            showAlert(text || 'Error en la comunicación con el servidor', 'error');
+            return;
+          }
+          if (data.success) {
+            showAlert('Contraseña cambiada exitosamente', 'success');
+            setTimeout(() => {
+              window.location.href = data.redirect || '../html/index.php';
+            }, 1200);
+          } else {
+            showAlert(data.error || 'Error desconocido', 'error');
+          }
+        })
+        .catch(async err => {
+          // Si hay error de red, intentar mostrar el mensaje del backend si existe
+          try {
+            const response = err && err.response;
+            if (response) {
+              const text = await response.text();
+              showAlert(text || 'Error en la comunicación con el servidor', 'error');
+            } else {
+              showAlert('Error en la comunicación con el servidor', 'error');
+            }
+          } catch {
+            showAlert('Error en la comunicación con el servidor', 'error');
+          }
+        });
+      });
     });
-  </script>
+    </script>
 </body>
 </html>

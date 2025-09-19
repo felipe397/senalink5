@@ -75,7 +75,7 @@ if ($usuario) {
         } elseif ($rol === 'super_admin') {
             $redirect = '../html/Super_Admin/Home2.php';
         } else {
-            $redirect = '../html/index.html';
+            $redirect = '../html/index.php';
         }
         echo json_encode(['success' => true, 'redirect' => $redirect]);
         exit;

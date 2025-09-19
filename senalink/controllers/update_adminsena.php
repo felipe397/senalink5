@@ -36,13 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['error' => 'El número telefónico ya está registrado en otra cuenta.']);
         exit;
     }
-    if (UsuarioModel::existeNumeroDocumento($numero_documento)) {
-        // Para número de documento, permitir si es el mismo usuario
-        $usuarioActual = UsuarioModel::obtenerUsuarioPorId($id);
-        if ($usuarioActual && $usuarioActual['numero_documento'] !== $numero_documento) {
-            echo json_encode(['error' => 'El número de documento ya está registrado en otra cuenta.']);
-            exit;
-        }
+    if (UsuarioModel::existeNumeroDocumento($numero_documento, $id)) {
+        echo json_encode(['error' => 'El número de documento ya está registrado en otra cuenta.']);
+        exit;
     }
 
     // Validar formato de correo electrónico

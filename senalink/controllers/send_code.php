@@ -28,13 +28,17 @@ try {
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($usuario) {
+        // Eliminar tokens anteriores para este correo
+        $stmt = $conexion->prepare("DELETE FROM password_resets WHERE email = ?");
+        $stmt->execute([$correo]);
+
         $token = bin2hex(random_bytes(32));
         $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
         $stmt = $conexion->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
         $stmt->execute([$correo, $token, $expires]);
 
-        $enlace = "http://localhost/senalink5/senalink5/senalink/controllers/reset_password.php?token=$token";
+        $enlace = "http://localhost/senalink5/senalink/controllers/reset_password.php?token=$token";
 
         $mail = new PHPMailer(true);
 
@@ -76,7 +80,11 @@ try {
             echo json_encode(['success' => true]);
         } catch (Exception $e) {
             error_log("Error al enviar correo: " . $mail->ErrorInfo);
-            echo json_encode(['success' => false, 'error' => 'envio_fallido']);
+            echo json_encode([
+                'success' => false,
+                'error' => 'envio_fallido',
+                'error_message' => $mail->ErrorInfo
+            ]);
         }
     } else {
         echo json_encode(['success' => false, 'error' => 'correo_no_registrado']);

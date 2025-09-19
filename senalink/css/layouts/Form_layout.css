@@ -3,8 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* ocupa toda la altura de la pantalla */
   width: 100%;
+  margin-top: 2rem;
 }
 .container__crud {
   width: 100%;
