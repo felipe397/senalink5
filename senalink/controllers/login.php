@@ -1,5 +1,10 @@
 <?php
 session_start();
+session_unset();
+session_destroy();
+session_start();
+// Luego continúa con la lógica de login
+
 session_regenerate_id(true);
 require_once '../config/conexion.php';
 
@@ -64,11 +69,11 @@ if ($usuario) {
         }
         // Enviar respuesta JSON con URL de redirección
         if ($rol === 'empresa') {
-            $redirect = $usuario['diagnostico_realizado'] ? '../html/Empresa/Home.html' : '../html/formulario.php';
+            $redirect = '../html/Empresa/Home2.php';
         } elseif ($rol === 'AdminSENA') {
-            $redirect = '../html/AdminSENA/Home.html';
+            $redirect = '../html/AdminSENA/Home2.php';
         } elseif ($rol === 'super_admin') {
-            $redirect = '../html/Super_Admin/Home.html';
+            $redirect = '../html/Super_Admin/Home2.php';
         } else {
             $redirect = '../html/index.html';
         }

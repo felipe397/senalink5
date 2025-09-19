@@ -4,10 +4,11 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh; /* ocupa toda la altura de la pantalla */
+  width: 100%;
 }
 .container__crud {
   width: 100%;
-  max-width: 900px;
+  max-width: 120rem;
   padding: 25px;
   background: #fff;
   border-radius: 12px;
@@ -71,7 +72,7 @@
 }
 
 /* Botones */
-.form-actions {
+.btn__container {
   grid-column: span 2; /* Ocupa todo el ancho */
   display: flex;
   gap: 15px;

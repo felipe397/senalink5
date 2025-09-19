@@ -1,14 +1,17 @@
+<?php
+// require_once '../../controllers/session_expiration.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../css/alert.css">
-    <link rel="stylesheet" href="../css/components/gov.css">
-    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../../css/alert.css">
+    <link rel="stylesheet" href="../../css/components/gov.css">
+    <link rel="stylesheet" href="../../css/components/buttons.css">
     <!-- <link rel="stylesheet" href="../../css/layouts/Form_layout.css"> -->
     <!-- <link rel="stylesheet" href="../../css/base.css"> -->
-    <link rel="stylesheet" href="../css/Pages/Home.css">
+    <link rel="stylesheet" href="../../css/Pages/Home.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <title>Senalink-Home</title>
@@ -17,7 +20,7 @@
     <header class="gov" id="inicio">
         <div class="gov__container">
         <a href="https://www.gov.co/" target="_blank">
-            <img loading="lazy" src="../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
+            <img loading="lazy" src="../../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
         </a>
         </div>
     </header>
@@ -26,8 +29,9 @@
     <a href="#">Inicio</a>
     <a href="#recommendations">Recomendaciones</a>
     <a href="#contact">Contactenos</a>
-    <a href="Preguntas_frecuentes.html">Preguntas frecuentes</a>
-    <a href="viewuser.html">Mi perfil</a>
+    <a href="../Preguntas_frecuentes.html">Preguntas frecuentes</a>
+    <a href="../viewuser.html">Mi perfil</a>
+    <a href="Programas_Formacion/Gestion_Programa.html">Gestion</a>
     <a href="#" id="cerrar-sesion">Cerrar sesion</a>
   </nav>
 </header>
@@ -36,17 +40,17 @@
   <div class="Diagnostico">
     <div class="left-content">
 
-      <img src="../img/logo-senalink1.png" alt="" class="logo">
+      <img src="../../img/logo-senalink1.png" alt="" class="logo">
 
       <p class="subtitle">
         El aplicativo que ofreceremos a las empresas brindará diversos servicios asociados a cada programa de formación. Las empresas podrán consultar información detallada sobre los programas de formación disponibles en el CDITI.
       </p>
 
-      <a href="Formulario.php" class="btn">Inicia tu diagnostico</a>
+      <a href="../Formulario.php" class="btn">Inicia tu diagnostico</a>
 
     </div>
       <div class="illustration" aria-label="Ilustración de tarjetas AI">
-      <img src="../img/img_home.png" alt="" class="img_home">
+      <img src="../../img/img_home.png" alt="" class="img_home">
     </div>
   </div>
 
@@ -97,6 +101,8 @@
         <p>© 2025 SenaLink. Todos los derechos reservados.</p>
         <p>Contáctanos: SenaLink@gmail.com | Teléfono: +57 </p>
     </footer>
+
+
 
     <script>
         // Función cerrar sesión
@@ -163,7 +169,7 @@
         });
         const empresaId = sessionStorage.getItem('empresaId'); // o desde PHP con un `<script>`
 
-        fetch('../controllers/DiagnosticoController.php', {
+        fetch('../../controllers/DiagnosticoController.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -208,6 +214,30 @@
         });
 
     </script>
+    <!-- <script>
+  // Tiempo de inactividad en milisegundos (ejemplo: 15 minutos)
+//   const inactivityTime = 15 * 60 * 1000;
+  const inactivityTime = 10 * 1000; // 30 segundos
+
+  let timer;
+
+  function logout() {
+    window.location.href = '../index.php?timeout=1'; // Ajusta ruta login
+  }
+
+  function resetTimer() {
+    clearTimeout(timer);
+    timer = setTimeout(logout, inactivityTime);
+  }
+
+  // Eventos que indican actividad del usuario
+  ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'].forEach(event => {
+    window.addEventListener(event, resetTimer);
+  });
+
+  resetTimer(); // Iniciar temporizador al cargar la página
+</script> -->
+
 </body>
 </html>
 </content>

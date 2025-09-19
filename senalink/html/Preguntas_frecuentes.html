@@ -3,261 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Preguntas Frecuentes</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
-
-    /* Reset & base */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #fff;
-      color: #222;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      display: flex;
-      justify-content: center;
-  padding: 0 20px;
-    }
-
-    .container {
-      max-width: 600px;
-      width: 100%;
-    }
-
-    /* Title */
-    h1 {
-      font-weight: 600;
-      color: #ddd;
-      font-size: 48px;
-      letter-spacing: 10px;
-      margin: 0 0 5px 0;
-      user-select: none;
-      text-align: center;
-    }
-
-    /* Subtitle below the title */
-    .subtitle {
-      font-weight: 600;
-      font-size: 14px;
-      text-align: center;
-      margin-bottom: 40px;
-      color: #555;
-      letter-spacing: 0.5px;
-      user-select: none;
-    }
-
-    /* FAQ styles */
-    .faq-item {
-      border-bottom: 1px solid #eee;
-    }
-
-    button.faq-question {
-      background: transparent;
-      border: none;
-      width: 100%;
-      text-align: left;
-      padding: 20px 15px;
-      font-size: 15px;
-      color: #222;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-      transition: color 0.2s ease;
-    }
-
-    button.faq-question:hover {
-      color: #000;
-    }
-
-    button.faq-question:focus {
-      outline-offset: 3px;
-      outline: 2px solid #999;
-    }
-
-    /* Plus icon */
-    .faq-question::after {
-      content: '+';
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 1;
-      color: #888;
-      transition: color 0.2s ease, transform 0.3s ease;
-    }
-
-    button.faq-question[aria-expanded="true"]::after {
-      content: '–';
-      color: #333;
-      transform: rotate(0deg);
-    }
-
-    footer{
-    background-color: var(--Secundary-950);
-    color: var(--white);
-    text-align: center;
-    width: 100%;
-    padding: 1rem;
-    }
-
-    /* FAQ answer hidden by default */
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 15px;
-      font-weight: 400;
-      color: #666;
-      font-size: 14px;
-      line-height: 1.4;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-    }
-
-    /* Show answer if expanded */
-    .faq-answer.active {
-      padding: 15px;
-      max-height: 200px; /* enough for 2-3 lines, but no actual content in example so placeholder */
-
-
-
-    }
-  </style>
+  <title>Preguntas Frecuentes - SenaLink</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/components/gov.css">
+  <link rel="stylesheet" href="../css/components/buttons.css">
+  <link rel="stylesheet" href="../css/Pages/FAQ.css">
+  <link rel="stylesheet" href="../css/base.css">
 </head>
 <body>
-  <main class="container" role="region" aria-label="Sección de preguntas frecuentes de Dosmedia">
-
-  <!-- HEADER INSTITUCIONAL INICIO -->
-  <header class="gov" id="inicio" style="width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); background: #4a7ad6; padding: 0; margin-top: 0;">
-    <div class="gov__container" style="display: flex; align-items: center; height: 40px;">
-      <a href="https://www.gov.co/" target="_blank" style="display: flex; align-items: center; text-decoration: none;">
-        <img loading="lazy" src="../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img" style="height: 28px; margin-left: 8px; margin-right: 8px;" />
-        <span style="color: #fff; font-size: 24px; font-weight: 600; letter-spacing: 1px;"></span>
+  <header class="gov" id="inicio">
+      <div class="gov__container">
+      <a href="https://www.gov.co/" target="_blank">
+          <img loading="lazy" src="../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
       </a>
-    </div>
+      </div>
   </header>
-  <div style="width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); background: #6ebe1e; height: 60px; display: flex; align-items: center; justify-content: flex-end; margin-top: 0;">
-  <a href="Empresa/Home.html"> <img src="../img/logo-sena-white0.png" alt="Logo SENA" style="height: 48px; margin-right: 32px;" /></a>
-  </div>
-    <p class="subtitle" aria-live="polite" aria-atomic="true">Respondemos tus dudas</p>
+  <h1 class="faq-title">Preguntas Frecuentes - SenaLink</h1>
 
-    <div class="faq-container" style="background: #fff; border-radius: 12px; box-shadow: 0 2px 12px 0 #0001; padding: 24px 0; max-width: 700px; margin: 0 auto;">
-      <section class="faq-list">
-
+  <section class="faq-container" aria-label="Preguntas frecuentes sobre SenaLink">
+    <div class="faq-div">
       <article class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq1" id="faq1-btn" onclick="toggleFAQ(event)">
-          ¿Qué ofrece SenaLink?
+        <button class="faq-question" aria-expanded="false" aria-controls="faq1" id="faq1-btn">
+          ¿Qué es SenaLink y cómo me ayuda como empresa?
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer" id="faq1" role="region" aria-labelledby="faq1-btn" hidden>
-          Senalink permite obtener mediante un formulario recomendar los programas de formación del SENA que más se ajusten a tu perfil, intereses y necesidades. 
+        <div class="faq-answer" id="faq1" role="region" aria-labelledby="faq1-btn">
+          SenaLink es un sistema de gestión de programas de formación que ayuda a las empresas a identificar y recomendar programas de formación adecuados según sus características y necesidades, basándose en un cuestionario diagnóstico.
         </div>
       </article>
 
       <article class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq2" id="faq2-btn" onclick="toggleFAQ(event)">
-          ¿Cómo puedo restaurar mi contraseña si se me olvidó?
+        <button class="faq-question" aria-expanded="false" aria-controls="faq2" id="faq2-btn">
+          ¿Cómo funciona el cuestionario diagnóstico empresarial?
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer" id="faq2" role="region" aria-labelledby="faq2-btn" hidden>
+        <div class="faq-answer" id="faq2" role="region" aria-labelledby="faq2-btn">
+          El cuestionario recopila información sobre el sector productivo, ocupación, nivel de formación, procesos y áreas temáticas de la empresa. Con base en las respuestas, el sistema recomienda programas de formación que mejor se ajustan a sus necesidades.
         </div>
       </article>
 
       <article class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq3" id="faq3-btn" onclick="toggleFAQ(event)">
-          
+        <button class="faq-question" aria-expanded="false" aria-controls="faq3" id="faq3-btn">
+          ¿Puedo editar las preguntas y opciones del cuestionario?
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer" id="faq3" role="region" aria-labelledby="faq3-btn" hidden>
+        <div class="faq-answer" id="faq3" role="region" aria-labelledby="faq3-btn">
+          Sí, el sistema cuenta con una interfaz para crear, actualizar y eliminar preguntas y opciones, asegurando que los datos estén alineados con los filtros reales y que el cuestionario se mantenga actualizado.
         </div>
       </article>
 
       <article class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq4" id="faq4-btn" onclick="toggleFAQ(event)">
-          ¿Qué debo mire a la hora de construir un servicio de diseño para mi web?
+        <button class="faq-question" aria-expanded="false" aria-controls="faq4" id="faq4-btn">
+          ¿Qué hago si no recibo recomendaciones después de completar el cuestionario?
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer" id="faq4" role="region" aria-labelledby="faq4-btn" hidden>
+        <div class="faq-answer" id="faq4" role="region" aria-labelledby="faq4-btn">
+          Verifica que todas las respuestas estén completas y sean correctas. Si el problema persiste, contacta con el soporte técnico para revisar posibles errores en la base de datos o en la configuración del sistema.
         </div>
       </article>
-
-      <article class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq5" id="faq5-btn" onclick="toggleFAQ(event)">
-          ¿Quién controla el hosting y dominios?
-        </button>
-        <div class="faq-answer" id="faq5" role="region" aria-labelledby="faq5-btn" hidden>
-        </div>
-      </article>
-
-      <article class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq6" id="faq6-btn" onclick="toggleFAQ(event)">
-          ¿Hay que generar escualidades?
-        </button>
-        <div class="faq-answer" id="faq6" role="region" aria-labelledby="faq6-btn" hidden>
-        </div>
-      </article>
-
-      <article class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq7" id="faq7-btn" onclick="toggleFAQ(event)">
-          ¿Qué pasos a mí me gusta tu web?
-        </button>
-        <div class="faq-answer" id="faq7" role="region" aria-labelledby="faq7-btn" hidden>
-        </div>
-      </article>
-
-      <article class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq8" id="faq8-btn" onclick="toggleFAQ(event)">
-          ¿Cómo es el proceso de contratación?
-        </button>
-        <div class="faq-answer" id="faq8" role="region" aria-labelledby="faq8-btn" hidden>
-        </div>
-      </article>
-
-      <article class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq9" id="faq9-btn" onclick="toggleFAQ(event)">
-          ¿Cómo es el proceso de creación de la web?
-        </button>
-        <div class="faq-answer" id="faq9" role="region" aria-labelledby="faq9-btn" hidden>
-        </div>
-      </article>
-      </section>
+      <button onclick="goBack()" type="button" class="btn faq">Volver</button>
     </div>
-  </main>
+  </section>
 
   <script>
-    function toggleFAQ(event) {
-      const button = event.currentTarget;
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      const answerId = button.getAttribute('aria-controls');
-      const answer = document.getElementById(answerId);
+    // Funcionalidad para abrir/cerrar preguntas FAQ accesible
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.parentElement;
+        const expanded = button.getAttribute('aria-expanded') === 'true';
 
-      if (expanded) {
-        button.setAttribute('aria-expanded', 'false');
-        answer.hidden = true;
-        answer.classList.remove('active');
-      } else {
-        // Close all others for accordion effect
-        const allButtons = document.querySelectorAll('.faq-question');
-        allButtons.forEach(btn => {
-          btn.setAttribute('aria-expanded', 'false');
-          const ans = document.getElementById(btn.getAttribute('aria-controls'));
-          if (ans) {
-            ans.hidden = true;
-            ans.classList.remove('active');
-          }
+        // Cerrar todos
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('active');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
         });
 
-        button.setAttribute('aria-expanded', 'true');
-        answer.hidden = false;
-        answer.classList.add('active');
-      }
-    }
-
-<div class="footer">
-    <footer>
-        <p>© Todos los derechos reservados.SenaLink</p>
-    </footer>
-</div>
+        // Si estaba cerrado, abrirlo
+        if (!expanded) {
+          item.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
   </script>
+  <script src="../js/backbutton.js"></script>
 </body>
 </html>
-

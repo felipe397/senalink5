@@ -58,7 +58,7 @@
                 id="contrasena"
                 placeholder="Contraseña"
                 type="password"
-                required>
+                required maxlength="50">
           <button type="button" id="togglePassword">
             <img class="icon__pass" id="viewPassword" src="../img/icons8-invisible-24.png" alt="Ver contraseña">
           </button>
@@ -84,7 +84,14 @@
       </div>
     </main>
   </div>
-  
+      <!-- Modal de sesión expirada -->
+  <div class="modal-overlay" id="sessionExpiredModal">
+    <div class="modal">
+      <h2>Sesión Expirada</h2>
+      <p>Su sesión ha expirado por inactividad. Por favor, inicie sesión nuevamente.</p>
+      <button id="closeModalBtn">Aceptar</button>
+    </div>
+  </div>
   <!-- Scripts funcionales para la interfaz y la lógica del formulario de login -->
   <script src="../js/changerol.js"></script>
   <script src="../js/viewpassword.js"></script>
@@ -126,6 +133,29 @@
   </script>
 
 <script src="../js/login_attempts.js"></script>
+<!-- <script>
+  // Función para obtener parámetros URL
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+// Mostrar modal si timeout=1
+if (getQueryParam('timeout') === '1') {
+  const modal = document.getElementById('sessionExpiredModal');
+  modal.style.display = 'flex';
+
+  // Eliminar parámetro timeout sin recargar
+  const url = new URL(window.location);
+  url.searchParams.delete('timeout');
+  window.history.replaceState({}, document.title, url.toString());
+
+  document.getElementById('closeModalBtn').addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+} -->
+
+</script>
 </body>
 </html>
 >

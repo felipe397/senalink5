@@ -14,4 +14,9 @@
     border-radius: 8px;
     cursor: pointer;
     font-size: var(--h4-font-size);
+    text-decoration: none;
   }
+  .faq{
+    margin-top: 2rem;
+    display: flex;
+}
