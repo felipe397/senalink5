@@ -29,7 +29,7 @@ body {
     justify-content:center;
     align-items: center;
     background: transparent;
-    background-color: var(--primary-950);
+    background-color: var(--Secundary-950);
   }
 /* Header principal */
   header nav {

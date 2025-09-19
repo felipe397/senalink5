@@ -133,6 +133,7 @@
   </script>
 
 <script src="../js/login_attempts.js"></script>
+<script src="../js/alert.js"></script>
 <script>
   // Función para obtener parámetros URL
 function getQueryParam(param) {

@@ -150,7 +150,7 @@ class DiagnosticoApp {
                 this.showSection('resultados-diagnostico');
                 this.renderRecomendaciones(data.recomendaciones, 'recomendaciones');
                 localStorage.setItem('recomendaciones', JSON.stringify(data.recomendaciones));
-                window.location.href = 'Home2.html';
+                window.location.href = 'Empresa/Home2.php';
             } else if (!data.success) {
                 this.showError(data.message || 'Error al procesar respuestas');
             } else {

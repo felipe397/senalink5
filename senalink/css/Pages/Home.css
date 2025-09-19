@@ -33,7 +33,7 @@ body {
     justify-content:center;
     align-items: center;
     background: transparent;
-    background-color: var(--primary-950);
+    background-color: var(--Secundary-950);
   }
 
   .logo {
@@ -115,9 +115,9 @@ body {
     position: relative;
     width: 900px;
     height: 400px;
-    background: rgba(0 82 204 / 0.15);
+    background: rgba(136, 30, 207, 0.15);
     border-radius: 16px;
-    box-shadow: 0 0 30px rgba(0 82 204 / 0.6);
+    box-shadow: 0 0 30px rgba(136, 30, 207, 0.58);
     overflow: hidden;
   }
 
