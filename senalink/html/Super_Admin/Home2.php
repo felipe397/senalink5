@@ -97,14 +97,133 @@
         </section>
     </main>
 
-    <footer id="contact">
-        <p>© 2025 SenaLink. Todos los derechos reservados.</p>
-        <p>Contáctanos: SenaLink@gmail.com | Teléfono: +57 </p>
-    </footer>
+        <!-- Modal de contacto mejorado -->
+        <style>
+        @import url(variables.css);    
 
+        #modal-contacto {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-contacto-content {
+            background: #fff;
+            color: #000;
+            padding: 2.5rem 3.5rem;
+            border-radius: 14px;
+            min-width: 420px;
+            max-width: 600px;
+            min-height: 420px;
+            box-shadow: 0 0 32px #000;
+            position: relative;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        .modal-contacto-content form {
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-contacto-content h2 {
+            margin-top: 0;
+            margin-bottom: 1.7rem;
+            font-size: 1.7rem;
+            font-weight: 600;
+        }
+        .modal-contacto-content label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1.15rem;
+        }
+        .modal-contacto-content input,
+        .modal-contacto-content textarea {
+            width: 100%;
+            margin-bottom: 1.2rem;
+            padding: 13px 16px;
+            border-radius: 8px;
+            border: none !important;
+            outline: none !important;
+            font-size: 1.15rem;
+            background: #dad5d5d2;
+            color: #000;
+            box-sizing: border-box;
+            box-shadow: none !important;
+        }
+        .modal-contacto-content textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .modal-contacto-content .modal-contacto-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 0.5rem;
+        }
+        .modal-contacto-content button[type="submit"] {
+            background: var(--primary-950);
+            color: #fff;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        .modal-contacto-content button[type="button"] {
+            background: #444;
+            color: #fff;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        #cerrar-modal-contacto {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        #contacto-exito {
+            color: #4caf50;
+            margin-top: 10px;
+            text-align: center;
+        }
+        </style>
+        <div id="modal-contacto">
+            <div class="modal-contacto-content">
+                <button id="cerrar-modal-contacto">&times;</button>
+                <h2>Contáctanos</h2>
+                <form id="form-contacto">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                    <label for="correo">Correo</label>
+                    <input type="email" id="correo" name="correo" required>
+                    <label for="asunto">Asunto</label>
+                    <input type="text" id="asunto" name="asunto" required>
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" required></textarea>
+                    <div class="modal-contacto-actions">
+                        <button type="button" id="cancelar-contacto">Cancelar</button>
+                        <button type="submit">Enviar</button>
+                    </div>
+                </form>
+                <div id="contacto-exito" style="display:none;">¡Mensaje enviado correctamente!</div>
+            </div>
+        </div>
+        <footer id="contact">
+                <p>© 2025 SenaLink. Todos los derechos reservados.</p>
+                <p>Contáctanos: SenaLink@gmail.com | Teléfono: +57 </p>
+        </footer>
 
-
-    <script>
+        <script>
         // Función cerrar sesión
         document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
             e.preventDefault();
@@ -146,6 +265,33 @@
 
         // Tooltip simple para botones
         document.querySelectorAll('.card-button, .cta-button').forEach(btn => {
+        // Abrir modal de contacto al hacer clic en el botón 'Contáctanos'
+        document.querySelectorAll('.cta-button, [href="#contact"]').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('modal-contacto').style.display = 'flex';
+            });
+        });
+
+        // Cerrar modal de contacto
+        document.getElementById('cerrar-modal-contacto').addEventListener('click', function() {
+            document.getElementById('modal-contacto').style.display = 'none';
+        });
+        document.getElementById('cancelar-contacto').addEventListener('click', function() {
+            document.getElementById('modal-contacto').style.display = 'none';
+        });
+
+        // Enviar formulario de contacto (solo muestra mensaje de éxito, aquí puedes agregar lógica para enviar por AJAX)
+        document.getElementById('form-contacto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Aquí puedes agregar lógica para enviar los datos al backend
+            document.getElementById('contacto-exito').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('modal-contacto').style.display = 'none';
+                document.getElementById('contacto-exito').style.display = 'none';
+                document.getElementById('form-contacto').reset();
+            }, 2000);
+        });
             btn.addEventListener('mouseenter', () => {
                 const tooltip = document.createElement('div');
                 tooltip.textContent = 'Haz clic para más detalles';
@@ -203,7 +349,7 @@
                     <div class="card-content">
                         <h3 class="card-title">${programa.nombre_programa}</h3>
                         <p class="card-description">Código: ${programa.codigo}</p>
-                        <a class="card-button" href="../html/Empresa/Programa de formacion.html?id=${programa.id}">
+                        <a class="card-button" href="Programa de formacion.html?id=${programa.id}">
                             Más Información
                         </a>
                     </div>

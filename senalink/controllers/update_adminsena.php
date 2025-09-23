@@ -80,13 +80,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Detectar el rol del usuario actual
     $usuarioActual = UsuarioModel::obtenerUsuarioPorId($id);
     if ($usuarioActual && $usuarioActual['rol'] === 'super_admin') {
-        // Actualizar super_admin (sin modificar correo)
+        // Actualizar super_admin (correo editable)
         $resultado = $usuarioModel->actualizarSuperAdmin([
             'id' => $id,
             'primer_nombre' => $primer_nombre,
             'segundo_nombre' => $segundo_nombre,
             'primer_apellido' => $primer_apellido,
             'segundo_apellido' => $segundo_apellido,
+            'correo' => $correo,
             'telefono' => $telefono,
             'numero_documento' => $numero_documento,
             'tipo_documento' => $tipo_documento

@@ -7,14 +7,15 @@ class UsuarioModel {
         $this->db = Conexion::conectar();
     }
 
-    // Actualizar datos de un usuario super_admin (sin modificar el correo)
+    // Actualizar datos de un usuario super_admin (correo editable)
     public function actualizarSuperAdmin($data) {
-        $sql = "UPDATE usuarios SET primer_nombre = :primer_nombre, segundo_nombre = :segundo_nombre, primer_apellido = :primer_apellido, segundo_apellido = :segundo_apellido, telefono = :telefono, numero_documento = :numero_documento, tipo_documento = :tipo_documento WHERE id = :id AND rol = 'super_admin'";
+        $sql = "UPDATE usuarios SET primer_nombre = :primer_nombre, segundo_nombre = :segundo_nombre, primer_apellido = :primer_apellido, segundo_apellido = :segundo_apellido, correo = :correo, telefono = :telefono, numero_documento = :numero_documento, tipo_documento = :tipo_documento WHERE id = :id AND rol = 'super_admin'";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':primer_nombre', $data['primer_nombre']);
         $stmt->bindParam(':segundo_nombre', $data['segundo_nombre']);
         $stmt->bindParam(':primer_apellido', $data['primer_apellido']);
         $stmt->bindParam(':segundo_apellido', $data['segundo_apellido']);
+        $stmt->bindParam(':correo', $data['correo']);
         $stmt->bindParam(':telefono', $data['telefono']);
         $stmt->bindParam(':numero_documento', $data['numero_documento']);
         $stmt->bindParam(':tipo_documento', $data['tipo_documento']);

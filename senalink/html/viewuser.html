@@ -68,6 +68,19 @@
   <script src="../js/viewuser.js"></script>
   <script src="../js/alert.js"></script>
   <script src="../js/backbutton.js"></script>
+  <script>
+        // Función cerrar sesión
+        document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Elimina datos de sesión/localStorage
+            sessionStorage.clear();
+            localStorage.clear();
+            // Redirige al login (ajusta la ruta si tu login es diferente)
+            window.location.href = 'index.php';
+        });
+
+  </script>
+
 </body>
 
 </html>

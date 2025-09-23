@@ -202,7 +202,7 @@
                     <div class="card-content">
                         <h3 class="card-title">${programa.nombre_programa}</h3>
                         <p class="card-description">Código: ${programa.codigo}</p>
-                        <a class="card-button" href="../html/Empresa/Programa de formacion.html?id=${programa.id}">
+                        <a class="card-button" href="Programa de formacion.html?id=${programa.id}">
                             Más Información
                         </a>
                     </div>
