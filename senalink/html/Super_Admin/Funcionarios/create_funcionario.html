@@ -4,98 +4,119 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>SenaLink - Crear Administrador</title>
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
-    <link rel="stylesheet" href="../../../css/crud.css">
-    <link rel="stylesheet" href="../../../css/Inputs.css" />
     <link rel="stylesheet" href="../../../css/alert.css" />
+    <link rel="stylesheet" href="../../../css/components/gov.css" />
+    <link rel="stylesheet" href="../../../css/components/buttons.css" />
+    <link rel="stylesheet" href="../../../css/layouts/Form_layout.css" />
+    <link rel="stylesheet" href="../../../css/base.css" />
     <link rel="shortcut icon" href="../../../img/Favicon1.png" />
 </head>
+
 <body>
+    <!-- Header GOV -->
     <header class="gov" id="inicio">
         <div class="gov__container">
             <a href="https://www.gov.co/" target="_blank">
-                <img loading="lazy" src="../../../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
+                <img loading="lazy" src="../../../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img" />
             </a>
         </div>
     </header>
-    <header class="header__login">
-        <div class="header__left">
-        </div>
 
-        <div class="header__center">
-        </div>
-
-        <div class="header__right">
-            <img src="../../../img/logo-sena-white0.png" alt="Logo Izquierda" class="logo__sena">
-        </div>
-    </header>
+    <!-- Contenido principal -->
     <div class="container">
         <main class="container__crud">
-            <img alt="SenaLink Logo" src="../../../img/logo-proyecto1.png" class="logo__senalink"/>
-            
+            <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"/>
+
             <!-- FORMULARIO DE REGISTRO ADMINISTRADOR -->
-            <form id="createUserForm" action="../../../controllers/UsuarioController.php" method="POST">
+            <form id="createUser Form" action="../../../controllers/UsuarioController.php" 
+                  method="POST" 
+                  class="form-layout validated-form">
+
                 <input type="hidden" name="accion" value="crearUsuario" />
-                <div class="inputs__container">
-                    <!-- Primer nombre: solo letras y espacios -->
-                    <input class="input-field" name="primer_nombre" placeholder="Primer nombre" type="text" required
-                        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}$"
-                        title="Solo se permiten letras, tildes y ñ. Mínimo 2 y máximo 50 caracteres."/>
+                <input type="hidden" name="rol" value="AdminSENA" />
 
-                    <!-- Segundo nombre: opcional -->
-                    <input class="input-field" name="segundo_nombre" placeholder="Segundo nombre" type="text"
-                        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{0,50}$"
-                        title="Solo se permiten letras, tildes y ñ. Máximo 50 caracteres."/>
+                <div class="form-group">
+                    <label for="primer_nombre">Primer nombre</label>
+                    <input class="input-field" id="primer_nombre" name="primer_nombre" 
+                           placeholder="Primer nombre" type="text" required
+                           pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}$"
+                           title="Solo se permiten letras, tildes y ñ. Mínimo 2 y máximo 50 caracteres."/>
+                </div>
 
-                    <!-- Primer apellido: obligatorio -->
-                    <input class="input-field" name="primer_apellido" placeholder="Primer apellido" type="text" required
-                        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}$"
-                        title="Solo se permiten letras, tildes y ñ. Mínimo 2 y máximo 50 caracteres."/>
+                <div class="form-group">
+                    <label for="segundo_nombre">Segundo nombre</label>
+                    <input class="input-field" id="segundo_nombre" name="segundo_nombre" 
+                           placeholder="Segundo nombre" type="text"
+                           pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{0,50}$"
+                           title="Solo se permiten letras, tildes y ñ. Máximo 50 caracteres."/>
+                </div>
 
-                    <!-- Segundo apellido: opcional -->
-                    <input class="input-field" name="segundo_apellido" placeholder="Segundo apellido" type="text"
-                        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{0,50}$"
-                        title="Solo se permiten letras, tildes y ñ. Máximo 50 caracteres."/>
+                <div class="form-group">
+                    <label for="primer_apellido">Primer apellido</label>
+                    <input class="input-field" id="primer_apellido" name="primer_apellido" 
+                           placeholder="Primer apellido" type="text" required
+                           pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}$"
+                           title="Solo se permiten letras, tildes y ñ. Mínimo 2 y máximo 50 caracteres."/>
+                </div>
 
-                    <!-- Correo electrónico -->
-                    <input class="input-field" name="correo" placeholder="Correo electrónico" type="email" required
-                        title="Ingrese un correo electrónico válido."/>
+                <div class="form-group">
+                    <label for="segundo_apellido">Segundo apellido</label>
+                    <input class="input-field" id="segundo_apellido" name="segundo_apellido" 
+                           placeholder="Segundo apellido" type="text"
+                           pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{0,50}$"
+                           title="Solo se permiten letras, tildes y ñ. Máximo 50 caracteres."/>
+                </div>
 
-                    <!-- Teléfono: solo números positivos -->
-                    <input class="input-field" name="telefono" placeholder="Número telefónico" type="number" min="1" required
-                        title="El número debe ser positivo."/>
+                <div class="form-group">
+                    <label for="correo">Correo electrónico</label>
+                    <input class="input-field" id="correo" name="correo" 
+                           placeholder="Correo electrónico" type="email" required
+                           title="Ingrese un correo electrónico válido."/>
+                </div>
 
-                    <!-- Documento: solo números positivos -->
-                    <input class="input-field" name="numero_documento" placeholder="Número de documento" type="number" min="1" required
-                        title="El número de documento debe ser positivo."/>
+                <div class="form-group">
+                    <label for="telefono">Número telefónico</label>
+                    <input class="input-field" id="telefono" name="telefono" 
+                           placeholder="Número telefónico" type="number" min="1" required
+                           title="El número debe ser positivo."/>
+                </div>
 
-                    <!-- Tipo de documento -->
-                    <select class="select_container" name="tipo_documento" required>
-                        <option selected disabled value="">Tipo de documento</option>
+                <div class="form-group">
+                    <label for="numero_documento">Número de documento</label>
+                    <input class="input-field" id="numero_documento" name="numero_documento" 
+                           placeholder="Número de documento" type="number" min="1" required
+                           title="El número de documento debe ser positivo."/>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo_documento">Tipo de documento</label>
+                    <select class="input-field" id="tipo_documento" name="tipo_documento" required>
+                        <option value="" disabled selected>Tipo de documento</option>
                         <option value="Cédula de ciudadanía">Cédula de ciudadanía</option>
                         <option value="Cédula de extranjería">Cédula de extranjería</option>
                     </select>
+                </div>
 
-                    <!-- Contraseña: mínimo 8 caracteres con requisitos -->
+                <div class="form-group">
+                    <label for="contrasena">Contraseña</label>
                     <div class="box__password">
-                        <input name="contrasena" id="contrasena" placeholder="Contraseña" type="password"
-                            class="input-field" required
-                            minlength="12"
-                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}$"
-                            title="Mínimo 12 caracteres, una mayúscula, una minúscula, un número y un símbolo." />
+                        <input id="contrasena" name="contrasena" placeholder="Contraseña" type="password"
+                               class="input-field" required
+                               minlength="12"
+                               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}$"
+                               title="Mínimo 12 caracteres, una mayúscula, una minúscula, un número y un símbolo." />
                         <button type="button" id="togglePassword">
                             <img class="icon__pass" id="viewPassword" src="../../../img/icons8-invisible-24.png" alt="Ver contraseña">
                         </button>
                     </div>
-
-                    <!-- Rol oculto -->
-                    <input class="input-field" type="hidden" name="rol" value="AdminSENA" required />
                 </div>
 
-                <div class="buttons__container">
-                    <button type="submit" class="buttons__crud">Crear</button>
-                    <button onclick="goBack()" class="buttons__crud" type="button">Volver</button>
+                <div class="btn__container">
+                    <button type="submit" class="btn">Crear</button>
+                    <button type="button" onclick="goBack()" class="btn">Volver</button>
                 </div>
             </form>
         </main>
