@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 29-08-2025 a las 20:28:51
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 27-09-2025 a las 00:26:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -441,7 +441,8 @@ INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_cr
 (65, 'migueelmejordelmundo@gmail.com', '$2y$10$JzW74fEBosXLrX0nm1aQ2uo///PbjWmVW9La4U3Cc/MxRQvCeV1/u', 'empresa', 'Activo', '2025-08-22 03:25:28', '999777444', 'Calle 9 #12-113', 'Cocosette S.A', 3128652233, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
 (66, 'migueelmejordelagalaxia@gmail.com', '$2y$10$AbipquvEj./UHaTPpFfVh.mfQ0cR/gcHkMoldPpJ22CvI43.5IbLi', 'empresa', 'Activo', '2025-08-22 03:27:20', '999777555', 'Calle 9 #12-113', 'Rolex S.A', 3128652244, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
 (67, 'edwintrabajemanito@gmail.com', '$2y$10$KCXYhluVmJBP2cFNFRw.7OxlG6/25z78X8eVP6CaI9Eg/zABp6dDi', 'empresa', 'Activo', '2025-08-22 03:28:25', '555333111', 'Calle 12 #11-33', 'Minecraft S.A.S', 3146907027, NULL, 'Braulios', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(68, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$33vNfs4A26IFGAmXrPDkg.pBoipDrMp0lZ7vLUHj14zTr0K6lXKB6', 'empresa', 'Activo', '2025-08-28 01:33:26', '999888111', 'Carrera 9 #16-18', 'Bombones ruthsita S.A', 3215554321, NULL, 'Bombones ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0);
+(68, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$33vNfs4A26IFGAmXrPDkg.pBoipDrMp0lZ7vLUHj14zTr0K6lXKB6', 'empresa', 'Activo', '2025-08-28 01:33:26', '999888111', 'Carrera 9 #16-18', 'Bombones ruthsita S.A', 3215554321, NULL, 'Bombones ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(69, 'contacto@eltrigal.com', '$2y$10$cMwoEx6uvNP8ugtnnWOm1.qqZxUsmgK8J9rnBwg0hx2fs3k/c/sjO', 'empresa', 'Activo', '2025-09-27 02:36:33', '985426289', 'Carrera 45 #12-30', 'Panaderia el trigal S.A.S', 3224758522, NULL, 'Carlos gomez', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0);
 
 --
 -- Disparadores `usuarios`
@@ -541,7 +542,7 @@ ALTER TABLE `programas_formacion`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- Restricciones para tablas volcadas
