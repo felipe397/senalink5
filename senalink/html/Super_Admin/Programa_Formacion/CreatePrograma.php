@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>SenaLink - Editar Programa de Formación</title>
+    <title>SenaLink - Crear Programa de Formación</title>
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -131,7 +131,7 @@
                 </div>
 
                 <div class="btn__container">
-                    <button type="submit" class="btn">Actualizar</button>
+                    <button type="submit" class="btn">Crear</button>
                     <button type="button" onclick="goBack()" class="btn">Volver</button>
                 </div>
             </form>
