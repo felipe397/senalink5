@@ -126,7 +126,7 @@
           }
         })
         .catch(() => {
-          showAlert('Error en la comunicación con el servidor', 'error');
+          showAlert('Error Usuario o contraseña incorrectos', 'error');
         });
       });
     });
