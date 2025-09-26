@@ -124,7 +124,7 @@
                     .then(data => {
                         if (data.success) {
                             showAlert('Empresa creada exitosamente', 'success');
-                            setTimeout(() => { window.location.href = '../index.html'; }, 1500);
+                            setTimeout(() => { window.location.href = '../index.php'; }, 1500);
                         } else if (data.errors && data.errors.length) {
                             showAlert(data.errors[0], 'error');
                         } else {

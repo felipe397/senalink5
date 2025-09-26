@@ -57,7 +57,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 header('Content-Type: application/json');
 
-// ✅ Verificar existencia y contraseña
+// Verificar existencia y contraseña
 if ($usuario) {
     if (password_verify($contrasena, $usuario['contrasena'])) {
         // Guardar datos en sesión

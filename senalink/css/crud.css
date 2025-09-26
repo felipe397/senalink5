@@ -415,10 +415,10 @@ td {
   }
   .cancel-button  {
     background-color: var(--white);
-    color: var(--Secundary-950);
+    color: var(--Secundary-950-2);
   }
   .disable-button {
-    background-color: var(--Secundary-950);
+    background-color: var(--Secundary-950-2);
     color: var(--white);
   }
   
