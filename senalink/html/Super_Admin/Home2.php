@@ -28,7 +28,7 @@
   <nav>
     <a href="#">Inicio</a>
     <a href="#recommendations">Recomendaciones</a>
-    <a href="#contact">Contáctenos</a>
+    <a href="#cta-content">Contáctenos</a>
     <a href="../Preguntas_frecuentes.html">Preguntas frecuentes</a>
     <a href="../viewuser.html">Mi perfil</a>
     <a href="Empresa/Gestion_Empresa.html">Gestión</a>
@@ -89,10 +89,10 @@
         </section>
 
         <section class="cta">
-            <div class="cta-content">
+            <div class="cta-content" id="cta-content">
                 <h2>¿Tienes algún problema?</h2>
                 <p>Comunícate por este medio para resolver cualquier inquietud.</p>
-                <a class="cta-button" href="#contact">Contáctanos</a>
+                <a class="cta-button">Contáctanos</a>
             </div>
         </section>
     </main>
@@ -266,7 +266,7 @@
         // Tooltip simple para botones
         document.querySelectorAll('.card-button, .cta-button').forEach(btn => {
         // Abrir modal de contacto al hacer clic en el botón 'Contáctanos'
-        document.querySelectorAll('.cta-button, [href="#contact"]').forEach(btn => {
+        document.querySelectorAll('.cta-button').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.getElementById('modal-contacto').style.display = 'flex';
