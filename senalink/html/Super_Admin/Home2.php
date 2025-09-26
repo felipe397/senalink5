@@ -281,16 +281,39 @@
             document.getElementById('modal-contacto').style.display = 'none';
         });
 
-        // Enviar formulario de contacto (solo muestra mensaje de éxito, aquí puedes agregar lógica para enviar por AJAX)
+        // Enviar formulario de contacto por AJAX a send_contact.php
         document.getElementById('form-contacto').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Aquí puedes agregar lógica para enviar los datos al backend
-            document.getElementById('contacto-exito').style.display = 'block';
-            setTimeout(function() {
-                document.getElementById('modal-contacto').style.display = 'none';
-                document.getElementById('contacto-exito').style.display = 'none';
-                document.getElementById('form-contacto').reset();
-            }, 2000);
+            var form = e.target;
+            var formData = new FormData(form);
+            var exito = document.getElementById('contacto-exito');
+            exito.style.display = 'none';
+            fetch('../../controllers/send_contact.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    exito.textContent = '¡Mensaje enviado correctamente!';
+                    exito.style.color = '#4caf50';
+                    exito.style.display = 'block';
+                    setTimeout(function() {
+                        document.getElementById('modal-contacto').style.display = 'none';
+                        exito.style.display = 'none';
+                        form.reset();
+                    }, 2000);
+                } else {
+                    exito.textContent = data.error || 'Error al enviar el mensaje.';
+                    exito.style.color = '#ff5252';
+                    exito.style.display = 'block';
+                }
+            })
+            .catch(() => {
+                exito.textContent = 'Error de conexión.';
+                exito.style.color = '#ff5252';
+                exito.style.display = 'block';
+            });
         });
             btn.addEventListener('mouseenter', () => {
                 const tooltip = document.createElement('div');

@@ -33,59 +33,65 @@
         </div>
     </header>
 
-    
-
     <!-- Contenido principal -->
     <div class="container">
         <main class="container__crud">
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"/>
 
-            <form action="http://localhost/senalink5/senalink5/senalink/controllers/update_programa.php" method="POST" id="programaForm">
+            <form action="../../../controllers/ProgramaController.php" method="POST" id="programaForm">
                 <input type="hidden" name="origen" value="Super_Admin">
                 <div class="inputs__container">
 
                     <!-- Campos ocultos para actualizar -->
                     <input type="hidden" id="programa_id" name="id" value="">
-                    <input type="hidden" name="action" value="update">
+                    <input type="hidden" name="accion" value="actualizar">
 
-                    <input class="input-field" id="codigo" name="codigo" placeholder="Código" type="number" required readonly disabled />
-                    <input class="input-field" id="ficha" name="ficha" placeholder="Ficha" type="number" required readonly disabled/>
+                    <input class="input-field" id="codigo" name="codigo" placeholder="Código" type="number" min="1" required readonly disabled 
+                        title="El código debe ser un número positivo."/>
+                    <input class="input-field" id="ficha" name="ficha" placeholder="Ficha" type="number" min="1" required readonly disabled 
+                        title="La ficha debe ser un número positivo."/>
 
                     <select class="select_container" id="nivel_formacion" name="nivel_formacion" required disabled>
                         <option value="" disabled selected>Nivel de formación</option>
                         <option value="TECNICO">Técnico</option>
                         <option value="TECNOLOGO">Tecnólogo</option>
-
                     </select>
                     <select class="select_container" id="sector_programa" name="sector_programa" required>
                         <option selected disabled value="">Sector del programa</option>
-                        <option>INDUSTRIA</option>
-                        <option>SERVICIOS</option>
+                        <option value="INDUSTRIAL">INDUSTRIA</option>
+                        <option value="SERVICIOS">SERVICIOS</option>
                     </select>
                     <select class="select_container" id="etapa_ficha" name="etapa_ficha" required>
                         <option selected disabled value="">Etapa Ficha</option>
-                        <option>LECTIVA</option>
-                        <option>PRACTICA</option>
+                        <option value="Lectiva">LECTIVA</option>
+                        <option value="Practica">PRACTICA</option>
                     </select>
                     <select class="select_container" id="sector_economico" name="sector_economico" required disabled>
                         <option selected disabled value="">Sector Económico</option>
-                        <option>INDUSTRIA</option>
-                        <option>SERVICIOS</option>
-                        <option>TEXTILES</option>
-                        <option>ELECTRICIDAD</option>
-                        <option>CONSTRUCCIÓN</option>
+                        <option value="Industria">INDUSTRIA</option>
+                        <option value="Servicios">SERVICIOS</option>
+                        <option value="Textiles">TEXTILES</option>
+                        <option value="Construccion">CONSTRUCCIÓN</option>
+                        <option value="Electricidad">ELECTRICIDAD</option>
                     </select>        
 
-                    <input class="select_container" id="nombre_ocupacion" name="nombre_ocupacion" placeholder="Nombre de Ocupación" type="text" required pattern="[\p{L}\s.]+" title="El nombre solo debe contener letras, espacios y puntos." />
-                    <input class="select_container" id="duracion_programa" name="duracion_programa" placeholder="Duración(Horas)" type="number" min="1" required title="La duración debe ser un número positivo." />
-                    <input class="select_container" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required disabled />
+                    <input class="input-field" id="nombre_ocupacion" name="nombre_ocupacion" placeholder="Nombre de Ocupación" type="text" required 
+                        pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s.]+" 
+                        title="El nombre solo debe contener letras, espacios y puntos." />
+                    <input class="input-field" id="duracion_programa" name="duracion_programa" placeholder="Duración(Horas)" type="number" min="1" required 
+                        title="La duración debe ser un número positivo." />
+                    <input class="input-field" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required disabled 
+                        pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s.]+" 
+                        title="El nombre solo debe contener letras, espacios y puntos."/>
                     <select class="select_container" id="estado" name="estado" required>
-                        <option value="" disabled selected>Estado</option>
-                        <option value="En Ejecucion">En Ejecución</option>
+                        <option value="" disabled selected>Estado del programa</option>
+                        <option value="En ejecucion">En Ejecución</option>
                         <option value="Finalizado">Finalizado</option>
                     </select>
 
-                    <input class="select_container" id="fecha_finalizacion" name="fecha_finalizacion" placeholder="Fecha de finalización" type="date" required />
+                    <input class="input-field" id="fecha_finalizacion" name="fecha_finalizacion" placeholder="Fecha de finalización" type="date" required 
+                        min="1957-06-21"
+                        title="La fecha no puede ser anterior al 21 de junio de 1957."/>
 
                 </div>
 
@@ -96,7 +102,6 @@
             </form>
         </main>
     </div>
-
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/alert.js"></script>
     <script src="../../../js/formValidation.js"></script>
