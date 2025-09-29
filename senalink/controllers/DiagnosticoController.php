@@ -1,244 +1,105 @@
 <?php
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../config/conexion.php';
-require_once '../models/Diagnostico.php';
 
 class DiagnosticoController {
     private $db;
 
     public function __construct() {
-        $this->db = new Conexion();
+        $this->db = Conexion::conectar();
     }
 
-    // ✅ Obtener preguntas con sus opciones
+    // ✅ Obtener preguntas dinámicas desde la BD
     public function obtenerDiagnosticoCompleto() {
         try {
-            $modelo = new Diagnostico();
-            $preguntas = $modelo->obtenerPreguntasConOpciones();
-            return ['success' => true, 'preguntas' => $preguntas];
+            $preguntas = [];
+
+            // Sector del programa
+            $stmt = $this->db->query("SELECT DISTINCT sector_programa FROM programas_formacion WHERE sector_programa IS NOT NULL");
+            $sectores = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            $preguntas[] = ["enunciado" => "¿En qué sector productivo está interesada tu empresa?", "id" => "pregunta1", "opciones" => $sectores];
+
+            // Ocupación
+            $stmt = $this->db->query("SELECT DISTINCT nombre_ocupacion FROM programas_formacion WHERE nombre_ocupacion IS NOT NULL");
+            $ocupaciones = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            $preguntas[] = ["enunciado" => "¿Qué ocupación deseas fortalecer?", "id" => "pregunta2", "opciones" => $ocupaciones];
+
+            // Nivel de formación
+            $stmt = $this->db->query("SELECT DISTINCT nivel_formacion FROM programas_formacion WHERE nivel_formacion IS NOT NULL");
+            $niveles = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            $preguntas[] = ["enunciado" => "¿Qué nivel de formación prefieres?", "id" => "pregunta3", "opciones" => $niveles];
+
+            // Sector económico
+            $stmt = $this->db->query("SELECT DISTINCT sector_economico FROM programas_formacion WHERE sector_economico IS NOT NULL");
+            $sectoresEco = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            $preguntas[] = ["enunciado" => "¿En qué sector económico se encuentra tu empresa?", "id" => "pregunta4", "opciones" => $sectoresEco];
+
+            // Etapa de la ficha
+            $stmt = $this->db->query("SELECT DISTINCT etapa_ficha FROM programas_formacion WHERE etapa_ficha IS NOT NULL");
+            $etapas = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            $preguntas[] = ["enunciado" => "¿Prefieres programas en qué etapa?", "id" => "pregunta5", "opciones" => $etapas];
+
+            // Duración (se define como campo libre)
+            $preguntas[] = ["enunciado" => "¿Duración máxima en meses?", "id" => "pregunta6", "opciones" => []];
+
+            return ["success" => true, "preguntas" => $preguntas];
         } catch (Exception $e) {
-            return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
+            return ["success" => false, "message" => $e->getMessage()];
         }
     }
 
-    // ✅ Procesar respuestas y guardar diagnóstico si hay empresa
-    public function procesarRespuestas($empresaId, $respuestas) {
-        try {
-            // Validar que todas las preguntas requeridas estén respondidas (ajusta según tus preguntas esperadas)
-            $preguntasObligatorias = ['pregunta1', 'pregunta2', 'pregunta3', 'pregunta4'];
-            foreach ($preguntasObligatorias as $p) {
-                if (!isset($respuestas[$p]) || trim($respuestas[$p]) === '') {
-                    return ['success' => false, 'message' => 'Debes responder todas las preguntas antes de continuar.'];
-                }
+    // ✅ Procesar respuestas y recomendar con puntaje
+    public function procesarRespuestas($respuestas) {
+        $sql = "SELECT * FROM programas_formacion 
+                WHERE estado = 'En ejecucion' 
+                AND fecha_finalizacion > CURDATE()";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $programas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $recomendados = [];
+
+        foreach ($programas as $prog) {
+            $score = 0;
+
+            if (!empty($respuestas['pregunta1']) && stripos($prog['sector_programa'], $respuestas['pregunta1']) !== false) $score += 3;
+            if (!empty($respuestas['pregunta2']) && stripos($prog['nombre_ocupacion'], $respuestas['pregunta2']) !== false) $score += 4;
+            if (!empty($respuestas['pregunta3']) && stripos($prog['nivel_formacion'], $respuestas['pregunta3']) !== false) $score += 2;
+            if (!empty($respuestas['pregunta4']) && stripos($prog['sector_economico'], $respuestas['pregunta4']) !== false) $score += 2;
+            if (!empty($respuestas['pregunta5']) && stripos($prog['etapa_ficha'], $respuestas['pregunta5']) !== false) $score += 1;
+            if (!empty($respuestas['pregunta6']) && intval($prog['duracion_programa']) <= intval($respuestas['pregunta6']) * 48) $score += 1;
+
+            if ($score > 0) {
+                $prog['score'] = $score;
+                $recomendados[] = $prog;
             }
-
-            $conn = Conexion::conectar();
-            $resultadoJson = json_encode($respuestas);
-
-            // Guardar solo si el ID es válido
-            if ($empresaId && is_numeric($empresaId) && $empresaId > 0) {
-                $query = "INSERT INTO diagnosticos_empresariales (empresa_id, resultado) VALUES (?, ?)";
-                $stmt = $conn->prepare($query);
-                $stmt->execute([$empresaId, $resultadoJson]);
-                // ✅ Marcar que la empresa ya hizo el diagnóstico
-                $update = $conn->prepare("UPDATE usuarios SET diagnostico_realizado = 1 WHERE id = ?");
-                $update->execute([$empresaId]);
-            }
-
-            $recomendaciones = $this->generarRecomendaciones($respuestas);
-
-            return ['success' => true, 'recomendaciones' => $recomendaciones];
-        } catch (PDOException $e) {
-            error_log("Error en procesarRespuestas: " . $e->getMessage());
-            return ['success' => false, 'message' => 'Error al procesar respuestas: ' . $e->getMessage()];
-        }
-    }
-
-
-    // ✅ Mapear sector económico flexible
-    private function mapearSectorEconomico($sector) {
-        $mapeo = [
-            'servicios'     => ['servicios', 'industrial'],
-            'industrial'    => ['industrial', 'electricidad', 'construccion', 'textiles', 'servicios'],
-            'construccion'  => ['construccion', 'industrial'],
-            'electricidad'  => ['electricidad', 'industrial'],
-            'textiles'      => ['textiles', 'industrial']
-        ];
-        $sector = strtolower(trim($sector));
-        return $mapeo[$sector] ?? null;
-    }
-
-    // ✅ Generar recomendaciones desde respuestas
-    private function generarRecomendaciones($respuestas) {
-        $conn = Conexion::conectar();
-
-        $sector_programa = $respuestas['pregunta1'] ?? null;
-        $ocupacion = $respuestas['pregunta2'] ?? null;
-        $nivel = $respuestas['pregunta3'] ?? null;
-        $sector_economico = $respuestas['pregunta4'] ?? null;
-
-        $sql = "SELECT * FROM programas_formacion WHERE 1=1";
-        $params = [];
-
-        if ($sector_programa) {
-            $sql .= " AND LOWER(sector_programa) LIKE ?";
-            $params[] = '%' . strtolower($sector_programa) . '%';
         }
 
-        if ($ocupacion) {
-            $sql .= " AND LOWER(nombre_ocupacion) LIKE ?";
-            $params[] = '%' . strtolower($ocupacion) . '%';
-        }
-
-        if ($nivel) {
-            $sql .= " AND nivel_formacion LIKE ?";
-            $params[] = "%$nivel%";
-        }
-
-        // Filtro por sector económico mapeado
-        $sectoresRelacionados = $this->mapearSectorEconomico($sector_economico);
-        if ($sectoresRelacionados) {
-            $placeholders = implode(',', array_fill(0, count($sectoresRelacionados), '?'));
-            $sql .= " AND sector_economico IN ($placeholders)";
-            $params = array_merge($params, $sectoresRelacionados);
-        } elseif ($sector_economico) {
-            $sql .= " AND sector_economico = ?";
-            $params[] = $sector_economico;
-        }
-
-        $stmt = $conn->prepare($sql);
-        $stmt->execute($params);
-        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Logs útiles
-        error_log("SQL: $sql", 3, __DIR__ . "/mi_log_personal.log");
-        error_log("Params: " . print_r($params, true), 3, __DIR__ . "/mi_log_personal.log");
-        error_log("Respuestas recibidas: " . print_r($respuestas, true), 3, __DIR__ . "/mi_log_personal.log");
-        error_log("Recomendaciones encontradas: " . print_r($resultados, true), 3, __DIR__ . "/mi_log_personal.log");
-
-        return $resultados;
-    }
-
-    // ✅ Obtener recomendaciones guardadas por empresa
-    public function obtenerRecomendaciones($empresaId = null) {
-        if (!$empresaId) return [];
-
-        try {
-            $conn = Conexion::conectar();
-            $query = "SELECT resultado FROM diagnosticos_empresariales WHERE empresa_id = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([$empresaId]);
-
-            $diagnostico = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($diagnostico) {
-                $respuestas = json_decode($diagnostico['resultado'], true);
-                $recomendaciones = $this->generarRecomendaciones($respuestas);
-
-                error_log("Respuestas desde diagnostico guardado: " . print_r($respuestas, true), 3, __DIR__ . "/mi_log_personal.log");
-                error_log("Recomendaciones desde diagnostico guardado: " . print_r($recomendaciones, true), 3, __DIR__ . "/mi_log_personal.log");
-
-                return $recomendaciones;
-            }
-
-            return [];
-        } catch (PDOException $e) {
-            error_log("Error en obtenerRecomendaciones: " . $e->getMessage());
-            return [];
-        }
-    }
-
-    // ✅ Actualizar enunciados, insertar y eliminar preguntas/opciones
-    public function actualizarDiagnosticoCompleto($datos) {
-        try {
-            $modelo = new Diagnostico();
-
-            if (isset($datos['preguntas'])) {
-                foreach ($datos['preguntas'] as $id => $enunciado) {
-                    $modelo->actualizarPregunta($id, $enunciado);
-                }
-            }
-
-            if (isset($datos['preguntas_nuevas']) && isset($datos['nuevas_opciones'])) {
-                foreach ($datos['preguntas_nuevas'] as $idx => $enunciado) {
-                    $nuevaPreguntaId = $modelo->insertarPregunta($enunciado);
-                    if ($nuevaPreguntaId && !empty($datos['nuevas_opciones'][$idx])) {
-                        foreach ($datos['nuevas_opciones'][$idx] as $texto) {
-                            $modelo->insertarOpcion($nuevaPreguntaId, $texto);
-                        }
-                    }
-                }
-            }
-
-            if (isset($datos['nuevas_opciones_existentes'])) {
-                foreach ($datos['nuevas_opciones_existentes'] as $idPregunta => $opciones) {
-                    foreach ($opciones as $texto) {
-                        $modelo->insertarOpcion($idPregunta, $texto);
-                    }
-                }
-            }
-
-            if (isset($datos['opciones_a_borrar'])) {
-                foreach ($datos['opciones_a_borrar'] as $idOpcion) {
-                    $modelo->eliminarOpcion($idOpcion);
-                }
-            }
-
-            return ['success' => true];
-        } catch (PDOException $e) {
-            error_log("Error en actualizarDiagnosticoCompleto: " . $e->getMessage());
-            return ['success' => false, 'message' => 'Error al actualizar el diagnóstico'];
-        }
+        usort($recomendados, fn($a, $b) => $b['score'] <=> $a['score']);
+        return ["success" => true, "recomendaciones" => $recomendados];
     }
 }
 
-//// 🛠️ Solicitudes HTTP POST
+// ✅ Router de acciones
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
     $controller = new DiagnosticoController();
-    $data = json_decode(file_get_contents('php://input'), true);
+    $data = json_decode(file_get_contents("php://input"), true);
 
-    if (isset($data['accion'])) {
-        switch ($data['accion']) {
-            case 'obtenerDiagnosticoCompleto':
-                echo json_encode($controller->obtenerDiagnosticoCompleto());
-                break;
+    switch ($data['accion'] ?? '') {
+        case 'obtenerDiagnosticoCompleto':
+            echo json_encode($controller->obtenerDiagnosticoCompleto());
+            break;
 
-            case 'procesarRespuestas':
-                if (isset($data['respuestas'])) {
-                    echo json_encode($controller->procesarRespuestas($data['empresaId'] ?? null, $data['respuestas']));
-                } else {
-                    echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
-                }
-                break;
+        case 'procesarRespuestas':
+            echo json_encode($controller->procesarRespuestas($data['respuestas'] ?? []));
+            break;
 
-            case 'obtenerRecomendaciones':
-                echo json_encode($controller->obtenerRecomendaciones($data['empresaId'] ?? null));
-                break;
-
-            case 'actualizarDiagnosticoCompleto':
-                echo json_encode($controller->actualizarDiagnosticoCompleto($data));
-                break;
-
-            case 'eliminarPregunta':
-                if (isset($data['idPregunta'])) {
-                    $modelo = new Diagnostico();
-                    $ok = $modelo->eliminarPregunta($data['idPregunta']);
-                    echo json_encode(['success' => $ok]);
-                } else {
-                    echo json_encode(['success' => false, 'message' => 'ID no especificado']);
-                }
-                break;
-
-            default:
-                echo json_encode(['success' => false, 'message' => 'Acción no válida']);
-                break;
-        }
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Acción no especificada']);
+        default:
+            echo json_encode(["success" => false, "message" => "Acción no válida"]);
+            break;
     }
 }
 ?>
