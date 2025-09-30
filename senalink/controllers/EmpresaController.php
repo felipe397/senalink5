@@ -105,5 +105,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // }
         // exit;
     }
+
+    // POST action actualizarEmpresa
+    if (isset($_POST['accion']) && $_POST['accion'] === 'actualizarEmpresa') {
+        header('Content-Type: application/json');
+        $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+        if ($id <= 0) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'ID de empresa inválido.'
+            ]);
+            exit;
+        }
+
+        $razon_social = isset($_POST['razon_social']) ? trim($_POST['razon_social']) : '';
+        if (UsuarioModel::existeRazonSocial($razon_social, $id)) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'La razón social ya está registrada para otra empresa.'
+            ]);
+            exit;
+        }
+        // Validación tipo societario en razón social
+        if (!preg_match('/\b(S\.A\.?|S\.A\.S\.?|LTDA)\b/i', $razon_social)) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'La razón social debe incluir el tipo societario: S.A, S.A.S o LTDA.'
+            ]);
+            exit;
+        }
+
+        $nit = isset($_POST['nit']) ? trim($_POST['nit']) : '';
+        if (!preg_match('/^\d{9}$/', $nit)) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'El NIT debe tener exactamente 9 dígitos numéricos.'
+            ]);
+            exit;
+        }
+        if (UsuarioModel::existeNIT($nit, $id)) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'El NIT ya está registrado para otra empresa.'
+            ]);
+            exit;
+        }
+
+        $telefono = isset($_POST['telefono']) ? trim($_POST['telefono']) : '';
+        if (!preg_match('/^\d{10}$/', $telefono)) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'El teléfono debe tener exactamente 10 dígitos numéricos.'
+            ]);
+            exit;
+        }
+        if (UsuarioModel::existeTelefono($telefono, $id)) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'El teléfono ya está registrado para otra empresa.'
+            ]);
+            exit;
+        }
+
+        $data = $_POST;
+        require_once '../models/UsuarioModel.php';
+        $model = new UsuarioModel();
+        try {
+            $resultado = $model->updateEmpresa($id, $data);
+            if ($resultado) {
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Empresa actualizada correctamente.'
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'error' => 'Error al actualizar la empresa.'
+                ]);
+            }
+        } catch (Exception $e) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'Error en la base de datos: ' . $e->getMessage()
+            ]);
+        }
+        exit;
+    }
 }
-?>
+
+

@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $razon_social = isset($_POST['razon_social']) ? trim($_POST['razon_social']) : null;
     $telefono = isset($_POST['telefono']) ? trim($_POST['telefono']) : null;
     $correo = isset($_POST['correo']) ? trim($_POST['correo']) : null;
-    $ubicacion = isset($_POST['ubicacion']) ? trim($_POST['ubicacion']) : null;
+    $direccion = isset($_POST['direccion']) ? trim($_POST['direccion']) : null;
     $barrio = isset($_POST['barrio']) ? trim($_POST['barrio']) : null;
     $departamento = isset($_POST['departamento']) ? trim($_POST['departamento']) : null;
     $ciudad = isset($_POST['ciudad']) ? trim($_POST['ciudad']) : null;
@@ -52,11 +52,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($usuarioModel->existeRazonSocial($razon_social, $id)) {
         $errores[] = 'La razón social ya está registrada en otra empresa.';
     }
-    // Validar dirección urbana colombiana
-    $regex_direccion_colombia = '/^(Calle|Carrera|Transversal|Diagonal|Autopista|Vía|Mz|Manzana)?\s?\d{1,3}[A-Za-z]?(?:\s?Bis)?(?:\s?(Sur|Norte|Este|Occidente))?\s?(No\.?|#)\s?\d{1,3}[A-Za-z]?(?:-\d{1,3})?$/i';
-    if (!preg_match($regex_direccion_colombia, $ubicacion)) {
-        $errores[] = 'La dirección no cumple con el formato urbano colombiano.';
+    // Validar dirección urbana colombiana con más tipos de vía
+
+    $regex_direccion_colombia = '/^(Calle|Carrera|Avenida|Transversal|Diagonal|Autopista|Troncal|Variante|Via|Vía|Mz|Manzana|Casa|Peatonal)\\s+\\d+[A-Za-z]?\\s*(Bis)?\\s*(Sur|Norte|Este|Occidente)?\\s*(No\\.?|#)?\\s*\\d+[A-Za-z]?(?:-\\d+)?$/iu';
+    if (!preg_match($regex_direccion_colombia, $direccion)) {
+        // Si no pasa, intenta con formato alternativo sin # o No.
+        $regex_alternativo = '/^(Calle|Carrera|Avenida|Transversal|Diagonal|Autopista|Troncal|Variante|Via|Vía|Mz|Manzana|Casa|Peatonal)\\s+\\d+[A-Za-z]?\\s*(Bis)?\\s*(Sur|Norte|Este|Occidente)?\\s*\\d+[A-Za-z]?(?:-\\d+)?$/iu';
+        if (!preg_match($regex_alternativo, $direccion)) {
+            $errores[] = 'La dirección no cumple con el formato urbano colombiano.';
+        }
     }
+
+
 
     // Verificar si el correo ya existe en otra empresa (excluyendo la actual)
     if ($usuarioModel->existeCorreo($correo, $id)) {
@@ -79,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'razon_social' => $razon_social,
             'telefono' => $telefono,
             'correo' => $correo,
-            'direccion' => $ubicacion,
+            'direccion' => $direccion,
             'barrio' => $barrio,
             'departamento' => $departamento,
             'ciudad' => $ciudad,
@@ -96,6 +103,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo json_encode(['success' => false, 'error' => 'Excepción al actualizar la empresa: ' . $e->getMessage()]);
     }
 } else {
-    header('Content-Type: application/json');
+    if (!headers_sent()) {
+        header('Content-Type: application/json');
+    }
     echo json_encode(['success' => false, 'error' => 'Método no permitido.']);
 }

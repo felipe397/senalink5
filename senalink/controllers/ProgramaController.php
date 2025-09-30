@@ -41,9 +41,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         $errores[] = "La fecha de finalización no puede ser anterior al 21 de junio de 1957.";
     }
     $campos_requeridos = [
-    'codigo', 'ficha', 'nivel_formacion', 'sector_programa', 'etapa_ficha',
-    'sector_economico', 'duracion_programa', 'estado', 'fecha_finalizacion',
-    'nombre_ocupacion', 'nombre_programa'
+        'codigo',
+        'ficha',
+        'nivel_formacion',
+        'sector_programa',
+        'etapa_ficha',
+        'sector_economico',
+        'duracion_programa',
+        'estado',
+        'fecha_finalizacion',
+        'nombre_ocupacion',
+        'nombre_programa'
     ];
 
     foreach ($campos_requeridos as $campo) {
@@ -74,7 +82,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     ]);
 
     if ($resultado) {
-        header("Location: ../html/Super_Admin/Programa_Formacion/CreatePrograma.php?success=1");
+        $rol = $_SESSION['rol'] ?? '';
+        if ($rol === 'AdminSENA') {
+            header("Location: ../html/AdminSENA/Programa_Formacion/Gestion_Programa.html");
+        } else {
+            header("Location: ../html/Super_Admin/Programa_Formacion/CreatePrograma.php?success=1");
+        }
         exit;
     } else {
         header("Location: ../html/Super_Admin/Programa_Formacion/CreatePrograma.php?error=1");
