@@ -135,30 +135,32 @@ class UsuarioModel {
     }
 
     public static function crear($datos) {
-        try {
-            $db = Conexion::conectar();
-            $rol = $datos['rol'];
-
-            if ($rol === 'empresa') {
-                $sql = "INSERT INTO usuarios (
-                            correo, contrasena, rol, estado, fecha_creacion,
-                            nit, direccion, razon_social, telefono, representante_legal, tipo_empresa
-                        ) VALUES (
-                            :correo, :contrasena, :rol, :estado, :fecha_creacion,
-                            :nit, :direccion, :razon_social, :telefono, :representante_legal, :tipo_empresa
-                        )";
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':correo', $datos['correo']);
-                $stmt->bindValue(':contrasena', $datos['contrasena']);
-                $stmt->bindValue(':rol', $rol);
-                $stmt->bindValue(':estado', $datos['estado']);
-                $stmt->bindValue(':fecha_creacion', $datos['fecha_creacion']);
-                $stmt->bindValue(':nit', $datos['nit']);
-                $stmt->bindValue(':direccion', $datos['direccion']);
-                $stmt->bindValue(':razon_social', $datos['razon_social']);
-                $stmt->bindValue(':telefono', $datos['telefono']);
-                $stmt->bindValue(':representante_legal', $datos['representante_legal']);
-                $stmt->bindValue(':tipo_empresa', $datos['tipo_empresa']);
+            try {
+                $db = Conexion::conectar();
+                $rol = $datos['rol'];
+                if ($rol === 'empresa') {
+                    $sql = "INSERT INTO usuarios (
+                                correo, contrasena, rol, estado, fecha_creacion,
+                                nit, direccion, barrio, ciudad, departamento, razon_social, telefono, representante_legal, tipo_empresa
+                            ) VALUES (
+                                :correo, :contrasena, :rol, :estado, :fecha_creacion,
+                                :nit, :direccion, :barrio, :ciudad, :departamento, :razon_social, :telefono, :representante_legal, :tipo_empresa
+                            )";
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':correo', $datos['correo']);
+                    $stmt->bindValue(':contrasena', $datos['contrasena']);
+                    $stmt->bindValue(':rol', $rol);
+                    $stmt->bindValue(':estado', $datos['estado']);
+                    $stmt->bindValue(':fecha_creacion', $datos['fecha_creacion']);
+                    $stmt->bindValue(':nit', $datos['nit']);
+                    $stmt->bindValue(':direccion', $datos['direccion']);
+                    $stmt->bindValue(':barrio', $datos['barrio']);           // <-- Nuevo campo
+                    $stmt->bindValue(':ciudad', $datos['ciudad']);           // <-- Nuevo campo
+                    $stmt->bindValue(':departamento', $datos['departamento']);           // <-- Nuevo campo
+                    $stmt->bindValue(':razon_social', $datos['razon_social']);
+                    $stmt->bindValue(':telefono', $datos['telefono']);
+                    $stmt->bindValue(':representante_legal', $datos['representante_legal']);
+                    $stmt->bindValue(':tipo_empresa', $datos['tipo_empresa']);
             } else if ($rol === 'AdminSENA') {
                 $sql = "INSERT INTO usuarios (
                             correo, contrasena, rol, estado, fecha_creacion,
@@ -220,6 +222,9 @@ class UsuarioModel {
                     telefono = :telefono,
                     correo = :correo,
                     direccion = :direccion,
+                    barrio = :barrio,           -- Nuevo campo
+                    ciudad = :ciudad,           -- Nuevo campo
+                    departamento = :departamento,           -- Nuevo campo
                     tipo_empresa = :tipo_empresa
                     WHERE id = :id AND rol = 'empresa'";
             $stmt = $this->db->prepare($sql);
@@ -229,6 +234,9 @@ class UsuarioModel {
             $stmt->bindValue(':telefono', $data['telefono']);
             $stmt->bindValue(':correo', $data['correo']);
             $stmt->bindValue(':direccion', $data['direccion']);
+            $stmt->bindValue(':barrio', $data['barrio']);           // <-- Nuevo campo
+            $stmt->bindValue(':ciudad', $data['ciudad']);           // <-- Nuevo campo
+            $stmt->bindValue(':departamento', $data['departamento']);           // <-- Nuevo campo
             $stmt->bindValue(':tipo_empresa', $data['tipo_empresa']);
             $stmt->bindValue(':id', $id);
             $result = $stmt->execute();
@@ -242,6 +250,7 @@ class UsuarioModel {
             throw $e;
         }
     }
+
 
     public static function listarEmpresas() {
         $db = Conexion::conectar();

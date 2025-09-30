@@ -97,6 +97,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById('telefono').textContent = data.telefono;
                     document.getElementById('correo').textContent = (data.correo || '').trim();
                     document.getElementById('ubicacion').textContent = data.direccion;
+                    document.getElementById('barrio').textContent = data.barrio;
+                    document.getElementById('ciudad').textContent= data.ciudad;
+                    document.getElementById('departamento').textContent = data.departamento;
                     document.getElementById('tipo_empresa').textContent = data.tipo_empresa;
                     document.getElementById('estado').textContent = data.estado;
 

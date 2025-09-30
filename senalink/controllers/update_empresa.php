@@ -9,12 +9,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $telefono = isset($_POST['telefono']) ? trim($_POST['telefono']) : null;
     $correo = isset($_POST['correo']) ? trim($_POST['correo']) : null;
     $ubicacion = isset($_POST['ubicacion']) ? trim($_POST['ubicacion']) : null;
+    $barrio = isset($_POST['barrio']) ? trim($_POST['barrio']) : null;
+    $departamento = isset($_POST['departamento']) ? trim($_POST['departamento']) : null;
+    $ciudad = isset($_POST['ciudad']) ? trim($_POST['ciudad']) : null;
     $tipo_empresa = isset($_POST['tipo_empresa']) ? trim($_POST['tipo_empresa']) : null;
 
     header('Content-Type: application/json');
     $errores = [];
 
-    if ($id === null || $nit === '' || $representante_legal === '' || $razon_social === '' || $telefono === '' || $correo === '' || $ubicacion === '' || $tipo_empresa === '') {
+    if ($id === null || $nit === '' || $representante_legal === '' || $razon_social === '' || $telefono === '' || $correo === '' || $ubicacion === '' || $barrio === '' || $departamento === '' || $ciudad === '' || $tipo_empresa === '') {
         $errores[] = 'Todos los campos son obligatorios.';
     }
 
@@ -77,6 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'telefono' => $telefono,
             'correo' => $correo,
             'direccion' => $ubicacion,
+            'barrio' => $barrio,
+            'departamento' => $departamento,
+            'ciudad' => $ciudad,
             'tipo_empresa' => $tipo_empresa
         ]);
 

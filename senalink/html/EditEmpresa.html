@@ -55,6 +55,7 @@
           class="logo__senalink"
         />
         <!-- FORMULARIO DE REGISTRO/EDICIÓN DE EMPRESA -->
+
         <form
           action="../controllers/update_empresa.php"
           method="POST"
@@ -138,6 +139,63 @@
             />
           </div>
 
+          <!-- Nuevo campo Barrio -->
+          <div class="form-group">
+            <label for="barrio">Barrio</label>
+            <input
+              id="barrio"
+              class="input-field"
+              name="barrio"
+              type="text"
+              placeholder="Barrio"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="departamentos">Departamento(s)</label>
+              <select id="departamentos" name="departamentos[]" class="select_container" required>
+                <option value="Amazonas">Amazonas</option>
+                <option value="Antioquia">Antioquia</option>
+                <option value="Arauca">Arauca</option>
+                <option value="Atlántico">Atlántico</option>
+                <option value="Bogotá D.C.">Bogotá D.C.</option>
+                <option value="Bolívar">Bolívar</option>
+                <option value="Boyacá">Boyacá</option>
+                <option value="Caldas">Caldas</option>
+                <option value="Caquetá">Caquetá</option>
+                <option value="Casanare">Casanare</option>
+                <option value="Cauca">Cauca</option>
+                <option value="Cesar">Cesar</option>
+                <option value="Chocó">Chocó</option>
+                <option value="Córdoba">Córdoba</option>
+                <option value="Cundinamarca">Cundinamarca</option>
+                <option value="Guainía">Guainía</option>
+                <option value="Guaviare">Guaviare</option>
+                <option value="Huila">Huila</option>
+                <option value="La Guajira">La Guajira</option>
+                <option value="Magdalena">Magdalena</option>
+                <option value="Meta">Meta</option>
+                <option value="Nariño">Nariño</option>
+                <option value="Norte de Santander">Norte de Santander</option>
+                <option value="Putumayo">Putumayo</option>
+                <option value="Quindío">Quindío</option>
+                <option value="Risaralda">Risaralda</option>
+                <option value="San Andrés y Providencia">San Andrés y Providencia</option>
+                <option value="Santander">Santander</option>
+                <option value="Sucre">Sucre</option>
+                <option value="Tolima">Tolima</option>
+                <option value="Valle del Cauca">Valle del Cauca</option>
+                <option value="Vaupés">Vaupés</option>
+                <option value="Vichada">Vichada</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ciudades">Ciudad(es)</label>
+              <select id="ciudades" name="ciudades[]" class="select_container" required>
+                    <!-- Opciones se llenan dinámicamente -->
+              </select>
+          </div>
           <div class="form-group">
             <label for="tipo_empresa">Sector Económico</label>
             <input
@@ -178,12 +236,14 @@
       function getFormValues() {
         return {
           nit: document.getElementById('nit').value,
-          representante_legal: document.getElementById('representante_legal')
-            .value,
+          representante_legal: document.getElementById('representante_legal').value,
           razon_social: document.getElementById('razon_social').value,
           telefono: document.getElementById('telefono').value,
           correo: document.getElementById('correo').value,
           ubicacion: document.getElementById('ubicacion').value,
+          barrio: document.getElementById('barrio').value,       // nuevo
+          ciudad: document.getElementById('ciudad').value,       // nuevo
+          departamento: document.getElementById('departamento').value,       // nuevo
           tipo_empresa: document.getElementById('tipo_empresa').value,
         };
       }
@@ -279,38 +339,120 @@
           fetch(
             `../controllers/EmpresaController.php?action=detalleEmpresa&id=${empresaId}`
           )
-            .then((response) => response.json())
-            .then((data) => {
-              if (!data.error) {
-                // Llena los campos del formulario con los datos recibidos
-                document.getElementById('empresa_id').value = empresaId;
-                document.getElementById('nit').value = data.nit || '';
-                document.getElementById('representante_legal').value =
-                  data.representante_legal || '';
-                document.getElementById('razon_social').value =
-                  data.razon_social || '';
-                document.getElementById('telefono').value = data.telefono || '';
-                document.getElementById('correo').value = data.correo || '';
-                document.getElementById('ubicacion').value =
-                  data.direccion || '';
-                document.getElementById('tipo_empresa').value =
-                  data.tipo_empresa || '';
-                document.getElementById('tipo_empresa_display').value =
-                  data.tipo_empresa || '';
-                // Guarda los valores originales después de cargar los datos
-                originalValues = getFormValues();
-              } else {
-                alert('Error al cargar los datos de la empresa.');
-              }
-            })
-            .catch((error) => {
-              console.error('Error al cargar los datos de la empresa:', error);
-              alert('Error al cargar los datos de la empresa.');
+          .then((response) => response.json())
+        .then((data) => {
+          if (!data.error) {
+            document.getElementById('empresa_id').value = empresaId;
+            document.getElementById('nit').value = data.nit || '';
+            document.getElementById('representante_legal').value =
+              data.representante_legal || '';
+            document.getElementById('razon_social').value =
+              data.razon_social || '';
+            document.getElementById('telefono').value = data.telefono || '';
+            document.getElementById('correo').value = data.correo || '';
+            document.getElementById('ubicacion').value =
+              data.direccion || '';
+            document.getElementById('barrio').value =
+              data.barrio || '';               // nuevo
+            document.getElementById('ciudad').value =
+              data.ciudad || '';               // nuevo
+            document.getElementById('departamento').value =
+              data.departamento || '';               // nuevo
+            document.getElementById('tipo_empresa').value =
+              data.tipo_empresa || '';
+            document.getElementById('tipo_empresa_display').value =
+              data.tipo_empresa || '';
+            originalValues = getFormValues();
+          } else {
+            alert('Error al cargar los datos de la empresa.');
+          }
+        })
+        .catch((error) => {
+          console.error('Error al cargar los datos de la empresa:', error);
+          alert('Error al cargar los datos de la empresa.');
+        });
+    } else {
+      alert('No se recibió el ID de la empresa.');
+    }
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+        // Mapa de departamentos y sus ciudades (ejemplo simplificado)
+        const departamentosCiudades = {       
+        "Amazonas": ["Leticia", "Puerto Nariño"],
+        "Antioquia": ["Medellín", "Bello", "Itagüí", "Envigado", "Rionegro", "Turbo", "Apartadó", "La Ceja", "Sabaneta", "Copacabana", "Girardota", "Marinilla"],
+        "Arauca": ["Arauca", "Arauquita", "Saravena", "Tame", "Fortul"],
+        "Atlántico": ["Barranquilla", "Soledad", "Malambo", "Puerto Colombia", "Sabanalarga"],
+        "Bogotá D.C.": ["Bogotá"],
+        "Bolívar": ["Cartagena", "Magangué", "Turbaco", "Arjona", "San Juan Nepomuceno", "El Carmen de Bolívar"],
+        "Boyacá": ["Tunja", "Duitama", "Sogamoso", "Chiquinquirá", "Paipa", "Puerto Boyacá"],
+        "Caldas": ["Manizales", "Villamaría", "Chinchiná", "La Dorada"],
+        "Caquetá": ["Florencia", "San Vicente del Caguán", "Puerto Rico", "El Doncello"],
+        "Casanare": ["Yopal", "Aguazul", "Villanueva", "Monterrey", "Tauramena"],
+        "Cauca": ["Popayán", "Santander de Quilichao", "Puerto Tejada", "Patía", "Miranda"],
+        "Cesar": ["Valledupar", "Aguachica", "Bosconia", "Curumaní", "La Jagua de Ibirico"],
+        "Chocó": ["Quibdó", "Istmina", "Condoto", "Bahía Solano", "Acandí"],
+        "Córdoba": ["Montería", "Cereté", "Lorica", "Sahagún", "Tierralta", "Planeta Rica"],
+        "Cundinamarca": ["Soacha", "Zipaquirá", "Girardot", "Facatativá", "Fusagasugá", "Chía", "Mosquera", "Cajicá", "Funza", "Madrid"],
+        "Guainía": ["Inírida"],
+        "Guaviare": ["San José del Guaviare"],
+        "Huila": ["Neiva", "Pitalito", "Garzón", "La Plata"],
+        "La Guajira": ["Riohacha", "Maicao", "Uribia", "Fonseca", "San Juan del Cesar"],
+        "Magdalena": ["Santa Marta", "Ciénaga", "Fundación", "Plato", "Aracataca"],
+        "Meta": ["Villavicencio", "Acacías", "Granada", "Puerto López", "Cumaral"],
+        "Nariño": ["Pasto", "Ipiales", "Tumaco", "Túquerres"],
+        "Norte de Santander": ["Cúcuta", "Ocaña", "Pamplona", "Villa del Rosario", "Los Patios"],
+        "Putumayo": ["Mocoa", "Puerto Asís", "Orito", "Villagarzón"],
+        "Quindío": ["Armenia", "Calarcá", "La Tebaida", "Montenegro", "Quimbaya"],
+        "Risaralda": ["Pereira", "Dosquebradas", "Santa Rosa de Cabal", "La Virginia"],
+        "San Andrés y Providencia": ["San Andrés", "Providencia"],
+        "Santander": ["Bucaramanga", "Floridablanca", "Giron", "Piedecuesta", "Barrancabermeja", "Socorro", "San Gil"],
+        "Sucre": ["Sincelejo", "Corozal", "Sampués", "Tolú", "San Marcos"],
+        "Tolima": ["Ibagué", "Espinal", "Melgar", "Honda", "Mariquita"],
+        "Valle del Cauca": ["Cali", "Palmira", "Buenaventura", "Tuluá", "Buga", "Cartago", "Jamundí", "Yumbo"],
+        "Vaupés": ["Mitú"],
+        "Vichada": ["Puerto Carreño"]
+
+
+            // Agrega más departamentos y ciudades según necesites
+        };
+
+        const departamentosSelect = document.getElementById("departamentos");
+        const ciudadesSelect = document.getElementById("ciudades");
+
+        function actualizarCiudades() {
+            // Obtener departamentos seleccionados
+            const seleccionados = Array.from(departamentosSelect.selectedOptions).map(opt => opt.value);
+
+            // Limpiar opciones actuales de ciudades
+            ciudadesSelect.innerHTML = "";
+
+            // Crear un Set para evitar ciudades duplicadas si hay varios departamentos seleccionados
+            const ciudadesSet = new Set();
+
+            // Agregar ciudades de los departamentos seleccionados
+            seleccionados.forEach(depto => {
+                const ciudades = departamentosCiudades[depto] || [];
+                ciudades.forEach(ciudad => ciudadesSet.add(ciudad));
             });
-        } else {
-          alert('No se recibió el ID de la empresa.');
+
+            // Agregar opciones al select de ciudades
+            ciudadesSet.forEach(ciudad => {
+                const option = document.createElement("option");
+                option.value = ciudad;
+                option.textContent = ciudad;
+                ciudadesSelect.appendChild(option);
+            });
+
+            // Si no hay departamentos seleccionados, deshabilitar ciudades
+            ciudadesSelect.disabled = seleccionados.length === 0;
         }
-      });
+
+        // Inicializar ciudades deshabilitadas
+        ciudadesSelect.disabled = true;
+
+        // Escuchar cambios en departamentos
+        departamentosSelect.addEventListener("change", actualizarCiudades);
+    });
     </script>
   </body>
 </html>

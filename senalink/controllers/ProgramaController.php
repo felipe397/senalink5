@@ -40,14 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     if (!$fecha_finalizacion || strtotime($fecha_finalizacion) < strtotime($fechaMinima)) {
         $errores[] = "La fecha de finalización no puede ser anterior al 21 de junio de 1957.";
     }
+    $campos_requeridos = [
+    'codigo', 'ficha', 'nivel_formacion', 'sector_programa', 'etapa_ficha',
+    'sector_economico', 'duracion_programa', 'estado', 'fecha_finalizacion',
+    'nombre_ocupacion', 'nombre_programa'
+    ];
 
-    if (
-        !$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$etapa_ficha ||
-        !$sector_economico || !$duracion_programa || !$estado || !$fecha_finalizacion ||
-        !$nombre_ocupacion || !$nombre_programa
-    ) {
-        $errores[] = "Todos los campos son obligatorios.";
+    foreach ($campos_requeridos as $campo) {
+        if (!isset($_POST[$campo]) || trim($_POST[$campo]) === '') {
+            $errores[] = "El campo $campo es obligatorio.";
+        }
     }
+
 
     if (!empty($errores)) {
         echo "⚠️ Errores encontrados:<br>" . implode("<br>", $errores);
@@ -70,21 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     ]);
 
     if ($resultado) {
-        $rol = $_SESSION['rol'] ?? '';
-        switch ($rol) {
-            case 'super_admin':
-                header("Location: ../html/Super_Admin/Programa_Formacion/Gestion_Programa.html");
-                break;
-            case 'AdminSENA':
-                header("Location: ../html/AdminSENA/Programa_Formacion/Gestion_Programa.html");
-                break;
-            default:
-                header("Location: ../html/index.html");
-                break;
-        }
+        header("Location: ../html/Super_Admin/Programa_Formacion/CreatePrograma.php?success=1");
         exit;
     } else {
-        header("Location: ../html/Super_Admin/Programa_Formacion/Crear_Programa.php?error=1");
+        header("Location: ../html/Super_Admin/Programa_Formacion/CreatePrograma.php?error=1");
         exit;
     }
 }
@@ -105,7 +98,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_PO
     $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
 
     if (
-        !$id || !$codigo || !$ficha || !$nivel_formacion || !$sector_programa || !$nombre_programa ||
+        !$id || !$codigo || !$ficha || !$nivel_formacion || !$etapa_ficha || !$sector_programa || !$nombre_programa ||
         !$duracion_programa || !$estado || !$fecha_finalizacion
     ) {
         echo "⚠️ Todos los campos son obligatorios.";

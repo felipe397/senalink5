@@ -28,8 +28,29 @@
 }
 /* Cada campo */
 .form-group {
+  position: relative;
   display: flex;
   flex-direction: column;
+}
+
+.form-group .toggle-btn {
+  position: absolute;
+  right: 8px; /* separación del borde derecho */
+  top: 65%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+
+
+.form-group .input-field {
+  padding-right: 32px; /* espacio para el botón */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-group label {
@@ -40,7 +61,7 @@
 
 .input-field, 
 .select_container {
-    height:5.6rem ;
+  height:5.6rem ;
   padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -53,23 +74,20 @@
 .select_container:focus {
   border-color: #4a90e2;
 }
-
+  /* Ocultar spinner en inputs number */
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 /* Contraseña con botón */
 .password-box {
   display: flex;
   align-items: center;
 }
 
-.password-box input {
-  flex: 1;
-}
 
-.toggle-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: 6px;
-}
+
 
 /* Botones */
 .btn__container {

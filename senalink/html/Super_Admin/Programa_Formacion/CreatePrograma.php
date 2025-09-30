@@ -36,7 +36,7 @@
                   class="form-layout validated-form">
 
                 <input type="hidden" id="programa_id" name="id" value="">
-                <input type="hidden" name="accion" value="actualizar">
+                <input type="hidden" name="accion" value="crear">
                 <input type="hidden" name="origen" value="Super_Admin">
 
                 <div class="form-group">
@@ -139,7 +139,7 @@
     </div>
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/control_inactividad.js"></script>
-    <script src="../js/alert.js"></script>
+    <script src="../../../js/alert.js"></script>
     <footer>
         <p>© Todos los derechos reservados. SenaLink</p>
     </footer>

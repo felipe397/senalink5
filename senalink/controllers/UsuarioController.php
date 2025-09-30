@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     $datos['estado'] = 'activo';
     $datos['fecha_creacion'] = date('Y-m-d H:i:s');
 
-    // Validación y asignación de campos según el rol
     if ($rol === 'empresa') {
         $datos['nit'] = trim($_POST['nit'] ?? '');
         $datos['representante_legal'] = trim($_POST['representante_legal'] ?? '');
@@ -28,6 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         $datos['telefono'] = trim($_POST['telefono'] ?? '');
         $datos['correo'] = trim($_POST['correo'] ?? '');
         $datos['direccion'] = trim($_POST['direccion'] ?? '');
+        $datos['barrio'] = trim($_POST['barrio'] ?? '');       // <-- Nuevo campo barrio
+        $datos['ciudad'] = trim($_POST['ciudad'] ?? '');       // <-- Nuevo campo ciudad
+        $datos['departamento'] = trim($_POST['departamento'] ?? '');       // <-- Nuevo campo departamento
         $datos['tipo_empresa'] = trim($_POST['tipo_empresa'] ?? '');
         $contrasena = $_POST['contrasena'] ?? '';
 
@@ -47,6 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         if (!preg_match($regex_direccion_colombia, $datos['direccion'])) {
             $errores[] = 'La dirección no cumple con el formato urbano colombiano.';
         }
+
+        // Validar barrio: mínimo 2 caracteres (puedes ajustar según necesidad)
+        if (strlen($datos['barrio']) < 2) {
+            $errores[] = 'El barrio debe tener mínimo 2 caracteres.';
+        }
+
+
         if (!filter_var($datos['correo'], FILTER_VALIDATE_EMAIL)) $errores[] = 'Correo inválido.';
         if (UsuarioModel::existeNIT($datos['nit'])) $errores[] = 'El NIT ya está registrado.';
         if (UsuarioModel::existeCorreo($datos['correo'])) $errores[] = 'El correo ya está registrado.';
@@ -121,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         $creado = UsuarioModel::crear($datos);
         if ($creado) {
             header('Content-Type: application/json');
-            echo json_encode(['success' => true, 'redirect' => 'http://localhost/senalink5/senalink5/senalink/html/index.html']);
+            echo json_encode(['success' => true, 'redirect' => 'http://localhost/senalink5/senalink5/senalink/html/index.php']);
             exit;
         }
     } catch (Exception $e) {
@@ -248,7 +257,7 @@ if (
 // 🟡 Si no coincide ninguna acción y es GET sin 'action', redirigir
 if (php_sapi_name() !== 'cli') {
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && empty($_GET['action'])) {
-        echo '<script>window.location.href = "http://localhost/senalink5/senalink5/senalink/html/index.html";</script>';
+        echo '<script>window.location.href = "http://localhost/senalink5/senalink5/senalink/html/index.php";</script>';
         exit;
     }
     header('Content-Type: application/json');
