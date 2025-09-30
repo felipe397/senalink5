@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const barrio = userData.barrio ? userData.barrio.trim() : '';
         document.getElementById('direccion_empresa').textContent =
           direccion + (direccion && barrio ? ', ' : '') + barrio;
+        document.getElementById('departamento_empresa').textContent = userData.departamento || '';
+        document.getElementById('ciudad_empresa').textContent = userData.ciudad || '';
         document.getElementById('estado').textContent = userData.estado || '';
 
         // Mostrar/ocultar botones según estado

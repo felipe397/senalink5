@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-09-2025 a las 01:47:15
+-- Tiempo de generación: 01-10-2025 a las 00:09:17
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -400,6 +400,9 @@ CREATE TABLE `usuarios` (
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `nit` varchar(9) DEFAULT NULL,
   `direccion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `barrio` varchar(100) DEFAULT NULL,
+  `departamento` varchar(100) DEFAULT NULL,
+  `ciudad` varchar(100) DEFAULT NULL,
   `razon_social` varchar(50) DEFAULT NULL,
   `telefono` bigint(20) NOT NULL,
   `nickname` varchar(100) DEFAULT NULL,
@@ -418,31 +421,31 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`, `diagnostico_realizado`) VALUES
-(16, 'correodebraulioperra@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Desactivado', '2025-06-13 03:32:23', NULL, '', NULL, 3156907026, NULL, NULL, NULL, 'Breiner', '', 'Chica', 'Alzate', '', 12345678, 0),
-(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, 3001234567, NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cédula de ciudadanía', 3001234567, 0),
-(25, 'osoriolopezjuanfelipe9898@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Desactivado', '2025-07-01 02:13:30', NULL, '', NULL, 322222222, NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', '', 23456789, 0),
-(36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, 3024345634, NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cédula de ciudadanía', 1111111111, 0),
-(37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, 3024345635, NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cédula de ciudadanía', 2222222222, 0),
-(38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, 3024345636, NULL, NULL, NULL, 'Edwin', '', 'Banol', 'Cardona', 'Cédula de ciudadanía', 3333333333, 0),
-(44, 'miguelmarin@gmail.com', '$2y$10$IfGPyP2FX2UTeaf/yi.TK.BMjprDOU5nmtMUwRXqzAvXeCGxBFUwG', 'AdminSENA', 'Activo', '2025-07-10 14:23:17', NULL, '', NULL, 1234567891, NULL, NULL, NULL, 'miguel', 'angel', 'Grajales', 'marin', 'Cédula de ciudadanía', 1122334455, 0),
-(45, 'felipeosorio@gmail.com', '$2y$10$SHDidYvcH8jiAe0/NNyDVOJOSegNPE2SOA7uP6kNZW.bt2t1p7SMW', 'AdminSENA', 'Activo', '2025-07-17 00:47:27', NULL, '', NULL, 3156907027, NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', 'Cédula de ciudadanía', 1121506109, 0),
-(46, 'breineralzatechica@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', '123456789', 'Carrera 9 # 56-34', 'Frisby S.A', 3104785544, NULL, 'Frisby', 'INDUSTRIAL', '', NULL, '', NULL, NULL, 0, 0),
-(48, 'braulio@gmail.com', '$2y$10$ZN72f/S9JXqD5Az.ZH0nfOdlAtbZSdYshlkDsgRFYvmy/NtUTz4uC', 'AdminSENA', 'Activo', '2025-07-18 01:49:54', NULL, '', NULL, 3138986543, NULL, NULL, NULL, 'Andres', 'Felipe', 'Osorio', 'marulanda', 'Cédula de ciudadanía', 1234567898, 0),
-(49, 'braulioadmin@gmail.com', '$2y$10$oyPTJwGYPDHyUF8x1rh6I.J3Y.ttapB4aNtsUNck.m/O1ar7i7FY.', 'AdminSENA', 'Activo', '2025-07-18 02:14:34', NULL, '', NULL, 3152928626, NULL, NULL, NULL, 'Braulio', 'Adolfo', 'Perez', 'Idarraga', 'Cédula de ciudadanía', 987654321, 0),
-(54, 'braulioloodioperra@gmail.com', '$2y$10$1a02kFD/W9jQdFdVoOSfKe.1T4pKT9W7BDBHP81fnYFFh.y9Oh4XC', 'AdminSENA', 'Activo', '2025-07-18 03:18:10', NULL, '', NULL, 3152928725, NULL, NULL, NULL, 'Ruth', 'Danyely', 'Guerrero', 'Figueroa', 'Cédula de ciudadanía', 123456789, 0),
-(58, 'correo@gmail.com', '$2y$10$QqUK2zUb.g6M4k.2LJd2Ie6JCUPysL4VD4wSSHYJ6bb1F/pbuftFu', 'empresa', 'Activo', '2025-07-28 03:06:26', '567890234', 'Carrera 12 # 5-31', 'Monster S.A', 3104574487, NULL, 'Chocolates Ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(59, 'andreshenao@gmail.com', '$2y$10$EhmvIxNOmDXpr/dW/VXDmuVZuFGjUsDd648X4QWIuCDkDp4OJYF6a', 'AdminSENA', 'Activo', '2025-07-28 05:03:06', NULL, NULL, NULL, 3156809028, NULL, NULL, NULL, 'Alfonso', 'Andres', 'Lopez', 'Henao', 'Cédula de ciudadanía', 1099765443, 0),
-(60, 'jj2673782@gmail.com', '$2y$10$sj0gkQC16GTO8PzCkckKlOb9cLvj308yfZAzXNlfSMqtJNhOsmN5K', 'empresa', 'Activo', '2025-08-21 01:41:32', '897654441', 'Carrera 11 #12-12', 'Senalink S.A', 3152928725, NULL, 'Braulio', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(61, 'dovi7523@hotmail.com', '$2y$10$5Lycsl7Qnq0FiJEuPvpFp.aKcmrOieqU9VA1beBo3mN8TAXHbwOVC', 'empresa', 'Desactivado', '2025-08-21 01:48:59', '556663332', 'Carrera 1 #20-30', 'Headshots S.A.S', 3217774442, NULL, 'Miguel Uribe Turbay', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
-(62, 'edwintrabaje@hotmail.com', '$2y$10$bktMZhSARnUpz72A8Ufg.uXc6DMDpxd1/klvsfnjRANKo4QZPWLAu', 'empresa', 'Desactivado', '2025-08-21 01:53:13', '444777111', 'Carrera 2 #21-37', 'Edwin manito trabaje S.A', 3226664441, NULL, 'Edwin trabaje', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
-(63, 'migueelmejor@gmail.com', '$2y$10$NbbqptW8ERfIm5fwNL4ycuzGbCcn1XD6sdFJuWfutUUPWFgmOonri', 'AdminSENA', 'Activo', '2025-08-21 02:16:01', NULL, NULL, NULL, 3334445551, NULL, NULL, NULL, 'Miguel', 'Lopez', 'Marin', 'Perez', 'Cédula de ciudadanía', 1088987654, 0),
-(64, 'edwinadmin123@gmail.com', '$2y$10$TlM5SOPPWX6IBAPhYQeZpu0PVRW8hU61JwUm21W3MpGpNT7zookE6', 'empresa', 'Activo', '2025-08-22 02:58:01', '999666333', 'Calle 8 #12-118', 'Juan Valdez S.A', 3112938826, NULL, 'Pele', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(65, 'migueelmejordelmundo@gmail.com', '$2y$10$JzW74fEBosXLrX0nm1aQ2uo///PbjWmVW9La4U3Cc/MxRQvCeV1/u', 'empresa', 'Activo', '2025-08-22 03:25:28', '999777444', 'Calle 9 #12-113', 'Cocosette S.A', 3128652233, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(66, 'migueelmejordelagalaxia@gmail.com', '$2y$10$AbipquvEj./UHaTPpFfVh.mfQ0cR/gcHkMoldPpJ22CvI43.5IbLi', 'empresa', 'Activo', '2025-08-22 03:27:20', '999777555', 'Calle 9 #12-113', 'Rolex S.A', 3128652244, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(67, 'edwintrabajemanito@gmail.com', '$2y$10$KCXYhluVmJBP2cFNFRw.7OxlG6/25z78X8eVP6CaI9Eg/zABp6dDi', 'empresa', 'Activo', '2025-08-22 03:28:25', '555333111', 'Calle 12 #11-33', 'Minecraft S.A.S', 3146907027, NULL, 'Braulios', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(68, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$33vNfs4A26IFGAmXrPDkg.pBoipDrMp0lZ7vLUHj14zTr0K6lXKB6', 'empresa', 'Activo', '2025-08-28 01:33:26', '999888111', 'Carrera 9 #16-18', 'Bombones ruthsita S.A', 3215554321, NULL, 'Bombones ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(69, 'contacto@eltrigal.com', '$2y$10$cMwoEx6uvNP8ugtnnWOm1.qqZxUsmgK8J9rnBwg0hx2fs3k/c/sjO', 'empresa', 'Activo', '2025-09-27 02:36:33', '985426289', 'Carrera 45 #12-30', 'Panaderia el trigal S.A.S', 3224758522, NULL, 'Carlos gomez', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0);
+INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `barrio`, `departamento`, `ciudad`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`, `diagnostico_realizado`) VALUES
+(16, 'correodebraulioperra@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Desactivado', '2025-06-13 03:32:23', NULL, '', NULL, NULL, NULL, NULL, 3156907026, NULL, NULL, NULL, 'Breiner', '', 'Chica', 'Alzate', '', 12345678, 0),
+(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, NULL, NULL, NULL, 3001234567, NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cédula de ciudadanía', 3001234567, 0),
+(25, 'osoriolopezjuanfelipe9898@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Desactivado', '2025-07-01 02:13:30', NULL, '', NULL, NULL, NULL, NULL, 322222222, NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', '', 23456789, 0),
+(36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, NULL, NULL, NULL, 3024345634, NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cédula de ciudadanía', 1111111111, 0),
+(37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, NULL, NULL, NULL, 3024345635, NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cédula de ciudadanía', 2222222222, 0),
+(38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, NULL, NULL, NULL, 3024345636, NULL, NULL, NULL, 'Edwin', '', 'Banol', 'Cardona', 'Cédula de ciudadanía', 3333333333, 0),
+(44, 'miguelmarin@gmail.com', '$2y$10$IfGPyP2FX2UTeaf/yi.TK.BMjprDOU5nmtMUwRXqzAvXeCGxBFUwG', 'AdminSENA', 'Activo', '2025-07-10 14:23:17', NULL, '', NULL, NULL, NULL, NULL, 1234567891, NULL, NULL, NULL, 'miguel', 'angel', 'Grajales', 'marin', 'Cédula de ciudadanía', 1122334455, 0),
+(45, 'felipeosorio@gmail.com', '$2y$10$SHDidYvcH8jiAe0/NNyDVOJOSegNPE2SOA7uP6kNZW.bt2t1p7SMW', 'AdminSENA', 'Activo', '2025-07-17 00:47:27', NULL, '', NULL, NULL, NULL, NULL, 3156907027, NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', 'Cédula de ciudadanía', 1121506109, 0),
+(46, 'breineralzatechica@gmail.com', '$2y$10$hv78hIcC6862iKhcVsQfXuqMFjakdTMy7ig2qkTxLKSqDWt47t7cW', 'empresa', 'Activo', '2025-07-17 01:40:42', '123456789', 'Carrera 9 # 56-34', NULL, NULL, NULL, 'Frisby S.A', 3104785544, NULL, 'Frisby', 'INDUSTRIAL', '', NULL, '', NULL, NULL, 0, 0),
+(48, 'braulio@gmail.com', '$2y$10$ZN72f/S9JXqD5Az.ZH0nfOdlAtbZSdYshlkDsgRFYvmy/NtUTz4uC', 'AdminSENA', 'Activo', '2025-07-18 01:49:54', NULL, '', NULL, NULL, NULL, NULL, 3138986543, NULL, NULL, NULL, 'Andres', 'Felipe', 'Osorio', 'marulanda', 'Cédula de ciudadanía', 1234567898, 0),
+(49, 'braulioadmin@gmail.com', '$2y$10$oyPTJwGYPDHyUF8x1rh6I.J3Y.ttapB4aNtsUNck.m/O1ar7i7FY.', 'AdminSENA', 'Activo', '2025-07-18 02:14:34', NULL, '', NULL, NULL, NULL, NULL, 3152928626, NULL, NULL, NULL, 'Braulio', 'Adolfo', 'Perez', 'Idarraga', 'Cédula de ciudadanía', 987654321, 0),
+(54, 'braulioloodioperra@gmail.com', '$2y$10$1a02kFD/W9jQdFdVoOSfKe.1T4pKT9W7BDBHP81fnYFFh.y9Oh4XC', 'AdminSENA', 'Activo', '2025-07-18 03:18:10', NULL, '', NULL, NULL, NULL, NULL, 3152928725, NULL, NULL, NULL, 'Ruth', 'Danyely', 'Guerrero', 'Figueroa', 'Cédula de ciudadanía', 123456789, 0),
+(58, 'correo@gmail.com', '$2y$10$QqUK2zUb.g6M4k.2LJd2Ie6JCUPysL4VD4wSSHYJ6bb1F/pbuftFu', 'empresa', 'Activo', '2025-07-28 03:06:26', '567890234', 'Carrera 12 # 5-31', NULL, NULL, NULL, 'Monster S.A', 3104574487, NULL, 'Chocolates Ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(59, 'andreshenao@gmail.com', '$2y$10$EhmvIxNOmDXpr/dW/VXDmuVZuFGjUsDd648X4QWIuCDkDp4OJYF6a', 'AdminSENA', 'Activo', '2025-07-28 05:03:06', NULL, NULL, NULL, NULL, NULL, NULL, 3156809028, NULL, NULL, NULL, 'Alfonso', 'Andres', 'Lopez', 'Henao', 'Cédula de ciudadanía', 1099765443, 0),
+(60, 'jj2673782@gmail.com', '$2y$10$sj0gkQC16GTO8PzCkckKlOb9cLvj308yfZAzXNlfSMqtJNhOsmN5K', 'empresa', 'Activo', '2025-08-21 01:41:32', '897654441', 'Carrera 11 #12-12', NULL, NULL, NULL, 'Senalink S.A', 3152928725, NULL, 'Braulio', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(61, 'dovi7523@hotmail.com', '$2y$10$5Lycsl7Qnq0FiJEuPvpFp.aKcmrOieqU9VA1beBo3mN8TAXHbwOVC', 'empresa', 'Desactivado', '2025-08-21 01:48:59', '556663332', 'Carrera 1 #20-30', NULL, NULL, NULL, 'Headshots S.A.S', 3217774442, NULL, 'Miguel Uribe Turbay', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
+(62, 'edwintrabaje@hotmail.com', '$2y$10$bktMZhSARnUpz72A8Ufg.uXc6DMDpxd1/klvsfnjRANKo4QZPWLAu', 'empresa', 'Desactivado', '2025-08-21 01:53:13', '444777111', 'Carrera 2 #21-37', NULL, NULL, NULL, 'Edwin manito trabaje S.A', 3226664441, NULL, 'Edwin trabaje', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
+(63, 'migueelmejor@gmail.com', '$2y$10$NbbqptW8ERfIm5fwNL4ycuzGbCcn1XD6sdFJuWfutUUPWFgmOonri', 'AdminSENA', 'Activo', '2025-08-21 02:16:01', NULL, NULL, NULL, NULL, NULL, NULL, 3334445551, NULL, NULL, NULL, 'Miguel', 'Lopez', 'Marin', 'Perez', 'Cédula de ciudadanía', 1088987654, 0),
+(64, 'edwinadmin123@gmail.com', '$2y$10$TlM5SOPPWX6IBAPhYQeZpu0PVRW8hU61JwUm21W3MpGpNT7zookE6', 'empresa', 'Activo', '2025-08-22 02:58:01', '999666333', 'Calle 8 #12-118', NULL, NULL, NULL, 'Juan Valdez S.A', 3112938826, NULL, 'Pele', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(65, 'migueelmejordelmundo@gmail.com', '$2y$10$JzW74fEBosXLrX0nm1aQ2uo///PbjWmVW9La4U3Cc/MxRQvCeV1/u', 'empresa', 'Activo', '2025-08-22 03:25:28', '999777444', 'Calle 9 #12-113', NULL, NULL, NULL, 'Cocosette S.A', 3128652233, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(66, 'migueelmejordelagalaxia@gmail.com', '$2y$10$AbipquvEj./UHaTPpFfVh.mfQ0cR/gcHkMoldPpJ22CvI43.5IbLi', 'empresa', 'Activo', '2025-08-22 03:27:20', '999777555', 'Calle 9 #12-113', NULL, NULL, NULL, 'Rolex S.A', 3128652244, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(67, 'edwintrabajemanito@gmail.com', '$2y$10$KCXYhluVmJBP2cFNFRw.7OxlG6/25z78X8eVP6CaI9Eg/zABp6dDi', 'empresa', 'Activo', '2025-08-22 03:28:25', '555333111', 'Calle 12 #11-33', NULL, NULL, NULL, 'Minecraft S.A.S', 3146907027, NULL, 'Braulios', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(68, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$33vNfs4A26IFGAmXrPDkg.pBoipDrMp0lZ7vLUHj14zTr0K6lXKB6', 'empresa', 'Activo', '2025-08-28 01:33:26', '999888111', 'Calle 8 #16-18', 'Frailes', 'Risaralda', 'Dosquebradas', 'Bombones ruthsita S.A', 3215554321, NULL, 'Bombones ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(69, 'contacto@eltrigal.com', '$2y$10$cMwoEx6uvNP8ugtnnWOm1.qqZxUsmgK8J9rnBwg0hx2fs3k/c/sjO', 'empresa', 'Activo', '2025-09-27 02:36:33', '985426289', 'Carrera 45 #12-30', NULL, NULL, NULL, 'Panaderia el trigal S.A.S', 3224758522, NULL, 'Carlos gomez', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0);
 
 --
 -- Disparadores `usuarios`
