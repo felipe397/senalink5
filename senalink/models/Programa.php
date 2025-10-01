@@ -29,18 +29,21 @@ class ProgramaFormacion
         }
     }
 
-    public function existeFicha($ficha)
-    {
-        if (!$this->db) {
-            return false;
-        }
-        $sql = "SELECT COUNT(*) FROM programas_formacion WHERE ficha = :ficha";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':ficha', $ficha);
-        $stmt->execute();
-        $count = $stmt->fetchColumn();
-        return $count > 0;
+public function existeFicha($ficha)
+{
+    if (!$this->db) {
+        return false;
     }
+    $fichaInt = intval(trim($ficha));
+    error_log("existeFicha called with ficha: " . $fichaInt);
+    $sql = "SELECT COUNT(*) FROM programas_formacion WHERE ficha = :ficha";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindParam(':ficha', $fichaInt, PDO::PARAM_INT);
+    $stmt->execute();
+    $count = $stmt->fetchColumn();
+    error_log("existeFicha count: " . $count);
+    return $count > 0;
+}
 
 public function crear($data)
 {

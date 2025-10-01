@@ -83,26 +83,36 @@ if (!preg_match('/^\d{3,7}$/', $ficha) || intval($ficha) <= 0) $errores[] = "La 
     }
 
     // Check if ficha already exists
-    if ($programa->existeFicha($ficha)) {
+    $fichaInt = intval($ficha);
+    error_log("Checking ficha existence for: " . $fichaInt);
+    $existeFicha = $programa->existeFicha($fichaInt);
+    error_log("existeFicha result: " . ($existeFicha ? "true" : "false"));
+    if ($existeFicha) {
         header('Content-Type: application/json');
         echo json_encode(['success' => false, 'error' => 'No está permitido crear programas de formación si el número de ficha ya existe en otro programa.']);
         exit;
     }
 
     // Crear programa
-    $resultado = $programa->crear([
-        'codigo' => $codigo,
-        'ficha' => $ficha,
-        'nivel_formacion' => $nivel_formacion,
-        'etapa_ficha' => $etapa_ficha,
-        'sector_economico' => $sector_economico,
-        'sector_programa' => $sector_programa,
-        'nombre_programa' => $nombre_programa,
-        'nombre_ocupacion' => $nombre_ocupacion,
-        'duracion_programa' => $duracion_programa,
-        'estado' => $estado,
-        'fecha_finalizacion' => $fecha_finalizacion
-    ]);
+    try {
+        $resultado = $programa->crear([
+            'codigo' => $codigo,
+            'ficha' => $ficha,
+            'nivel_formacion' => $nivel_formacion,
+            'etapa_ficha' => $etapa_ficha,
+            'sector_economico' => $sector_economico,
+            'sector_programa' => $sector_programa,
+            'nombre_programa' => $nombre_programa,
+            'nombre_ocupacion' => $nombre_ocupacion,
+            'duracion_programa' => $duracion_programa,
+            'estado' => $estado,
+            'fecha_finalizacion' => $fecha_finalizacion
+        ]);
+    } catch (PDOException $e) {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => 'Error en la base de datos: ' . $e->getMessage()]);
+        exit;
+    }
 
     if ($resultado) {
         $rol = $_SESSION['rol'] ?? '';
