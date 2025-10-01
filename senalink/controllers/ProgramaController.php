@@ -62,7 +62,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
 
 
     if (!empty($errores)) {
-        echo "⚠️ Errores encontrados:<br>" . implode("<br>", $errores);
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'errors' => $errores]);
+        exit;
+    }
+
+    // Check if ficha already exists
+    if ($programa->existeFicha($ficha)) {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => 'No está permitido crear programas de formación si el número de ficha ya existe en otro programa.']);
         exit;
     }
 

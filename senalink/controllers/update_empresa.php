@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     header('Content-Type: application/json');
     $errores = [];
 
-    if ($id === null || $nit === '' || $representante_legal === '' || $razon_social === '' || $telefono === '' || $correo === '' || $ubicacion === '' || $barrio === '' || $departamento === '' || $ciudad === '' || $tipo_empresa === '') {
+    if ($id === null || $nit === '' || $representante_legal === '' || $razon_social === '' || $telefono === '' || $correo === '' || $direccion === '' || $barrio === '' || $departamento === '' || $ciudad === '' || $tipo_empresa === '') {
         $errores[] = 'Todos los campos son obligatorios.';
     }
 
@@ -54,10 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     // Validar dirección urbana colombiana con más tipos de vía
 
-    $regex_direccion_colombia = '/^(Calle|Carrera|Avenida|Transversal|Diagonal|Autopista|Troncal|Variante|Via|Vía|Mz|Manzana|Casa|Peatonal)\\s+\\d+[A-Za-z]?\\s*(Bis)?\\s*(Sur|Norte|Este|Occidente)?\\s*(No\\.?|#)?\\s*\\d+[A-Za-z]?(?:-\\d+)?$/iu';
+    // Relaxed regex to accept common Colombian address formats including "Carrera 9 # 56-34"
+    $regex_direccion_colombia = '/^(Calle|Carrera|Avenida|Transversal|Diagonal|Autopista|Troncal|Variante|Via|Vía|Mz|Manzana|Casa|Peatonal)\\s+\\d+[A-Za-z]?\\s*(Bis)?\\s*(Sur|Norte|Este|Occidente)?\\s*(No\\.?|#)?\\s*\\d+([A-Za-z]?)(?:-\\d+)?$/iu';
     if (!preg_match($regex_direccion_colombia, $direccion)) {
         // Si no pasa, intenta con formato alternativo sin # o No.
-        $regex_alternativo = '/^(Calle|Carrera|Avenida|Transversal|Diagonal|Autopista|Troncal|Variante|Via|Vía|Mz|Manzana|Casa|Peatonal)\\s+\\d+[A-Za-z]?\\s*(Bis)?\\s*(Sur|Norte|Este|Occidente)?\\s*\\d+[A-Za-z]?(?:-\\d+)?$/iu';
+        $regex_alternativo = '/^(Calle|Carrera|Avenida|Transversal|Diagonal|Autopista|Troncal|Variante|Via|Vía|Mz|Manzana|Casa|Peatonal)\\s+\\d+[A-Za-z]?\\s*(Bis)?\\s*(Sur|Norte|Este|Occidente)?\\s*\\d+([A-Za-z]?)(?:-\\d+)?$/iu';
         if (!preg_match($regex_alternativo, $direccion)) {
             $errores[] = 'La dirección no cumple con el formato urbano colombiano.';
         }

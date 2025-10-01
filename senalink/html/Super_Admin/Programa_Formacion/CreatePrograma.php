@@ -140,6 +140,45 @@
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/control_inactividad.js"></script>
     <script src="../../../js/alert.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('programaForm');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then((response) => {
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.indexOf('application/json') !== -1) {
+                        return response.json();
+                    } else {
+                        return response.text();
+                    }
+                })
+                .then((data) => {
+                    if (typeof data === 'object' && data !== null && data.success) {
+                        showAlert('Programa creado correctamente', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'Gestion_Programa.html';
+                        }, 2000);
+                    } else if (typeof data === 'object' && data !== null && data.errors) {
+                        const mensajes = data.errors.join('<br>');
+                        showAlert(mensajes, 'error');
+                    } else if (typeof data === 'object' && data !== null && data.error) {
+                        showAlert(data.error, 'error');
+                    } else {
+                        showAlert('Error al crear el programa', 'error');
+                    }
+                })
+                .catch(() => {
+                    showAlert('Error en la comunicación con el servidor', 'error');
+                });
+            });
+        });
+    </script>
     <footer>
         <p>© Todos los derechos reservados. SenaLink</p>
     </footer>

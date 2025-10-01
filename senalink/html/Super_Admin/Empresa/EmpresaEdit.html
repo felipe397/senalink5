@@ -62,6 +62,7 @@
           class="form-layout validated-form"
         >
           <input type="hidden" name="id" id="empresa_id" value="" />
+          <input type="hidden" name="accion" value="actualizarEmpresa" />
 
           <div class="form-group">
             <label for="nit">Número NIT</label>
@@ -126,13 +127,13 @@
           </div>
 
           <div class="form-group">
-            <label for="ubicacion">Ubicación</label>
+            <label for="direccion">Dirección</label>
             <input
               class="input-field"
-              name="ubicacion"
-              id="ubicacion"
+              name="direccion"
+              id="direccion"
               type="text"
-              placeholder="Ubicación"
+              placeholder="Dirección"
               required
             />
           </div>
@@ -211,24 +212,24 @@
 
           <div class="form-group">
             <label for="sector_economico">Sector Económico</label>
-            <input
-              type="hidden"
-              name="sector_economico"
-              id="sector_economico"
-              value=""
-            />
-            <select
-              id="sector_economico_display"
-              class="input-field readonly-field"
-              disabled
-              tabindex="-1"
-            >
-              <option value="Industria">Industria</option>
-              <option value="Servicios">Servicios</option>
-              <option value="Textiles">Textiles</option>
-              <option value="Construccion">Construcción</option>
-              <option value="Electricidad">Electricidad</option>
-            </select>
+          <input
+            type="hidden"
+            name="tipo_empresa"
+            id="tipo_empresa"
+            value=""
+          />
+          <select
+            id="sector_economico_display"
+            class="input-field readonly-field"
+            disabled
+            tabindex="-1"
+          >
+            <option value="Industria">Industria</option>
+            <option value="Servicios">Servicios</option>
+            <option value="Textiles">Textiles</option>
+            <option value="Construccion">Construcción</option>
+            <option value="Electricidad">Electricidad</option>
+          </select>
           </div>
 
           <div class="btn__container">
@@ -393,10 +394,9 @@
         Vichada: ['Puerto Carreño'],
       };
 
-      const departamentoSelect = document.getElementById('departamento');
-      const ciudadSelect = document.getElementById('ciudad');
-
       function actualizarCiudades() {
+        const departamentoSelect = document.getElementById('departamento');
+        const ciudadSelect = document.getElementById('ciudad');
         const depto = departamentoSelect.value;
         ciudadSelect.innerHTML =
           '<option value="" disabled selected>Seleccione una ciudad</option>';
@@ -413,8 +413,6 @@
         }
       }
 
-      departamentoSelect.addEventListener('change', actualizarCiudades);
-
       // Guardar valores originales
       let originalValues = {};
 
@@ -426,11 +424,11 @@
           razon_social: document.getElementById('razon_social').value,
           telefono: document.getElementById('telefono').value,
           correo: document.getElementById('correo').value,
-          ubicacion: document.getElementById('ubicacion').value,
+          direccion: document.getElementById('direccion').value,
           barrio: document.getElementById('barrio').value,
           departamento: document.getElementById('departamento').value,
           ciudad: document.getElementById('ciudad').value,
-          tipo_empresa: document.getElementById('sector_economico').value,
+          tipo_empresa: document.getElementById('tipo_empresa').value,
         };
       }
 
@@ -441,6 +439,9 @@
       }
 
       document.addEventListener('DOMContentLoaded', function () {
+        const departamentoSelect = document.getElementById('departamento');
+        departamentoSelect.addEventListener('change', actualizarCiudades);
+
         const form = document.getElementById('empresaForm');
         form.addEventListener('submit', function (event) {
           const currentValues = getFormValues();
@@ -535,7 +536,7 @@
                   data.razon_social || '';
                 document.getElementById('telefono').value = data.telefono || '';
                 document.getElementById('correo').value = data.correo || '';
-                document.getElementById('ubicacion').value =
+                document.getElementById('direccion').value =
                   data.direccion || '';
                 document.getElementById('barrio').value = data.barrio || '';
                 // Asignar departamento y actualizar ciudades
@@ -546,17 +547,18 @@
                 document.getElementById('ciudad').value = data.ciudad || '';
 
                 // Sector económico: mostrar en select deshabilitado y guardar en hidden
-                document.getElementById('sector_economico').value =
-                  data.tipo_empresa || '';
-                var select = document.getElementById(
-                  'sector_economico_display'
-                );
-                var value = data.tipo_empresa || '';
-                for (var i = 0; i < select.options.length; i++) {
-                  if (select.options[i].value === value) {
-                    select.selectedIndex = i;
-                    break;
-                  }
+                var sectorValue = (data.tipo_empresa || '').toLowerCase();
+                var hiddenInput = document.getElementById('tipo_empresa');
+                var displaySelect = document.getElementById('sector_economico_display');
+                if (sectorValue === 'industria' || sectorValue === 'industrial') {
+                  hiddenInput.value = 'INDUSTRIAL';
+                  displaySelect.value = 'Industria';
+                } else if (sectorValue === 'servicios') {
+                  hiddenInput.value = 'SERVICIOS';
+                  displaySelect.value = 'Servicios';
+                } else {
+                  hiddenInput.value = '';
+                  displaySelect.value = '';
                 }
 
                 originalValues = getFormValues();
