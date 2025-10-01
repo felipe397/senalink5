@@ -18,7 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     $ficha               = $_POST['ficha'] ?? null;
     $nivel_formacion     = $_POST['nivel_formacion'] ?? null;
     $sector_programa     = $_POST['sector_programa'] ?? null;
-    $etapa_ficha         = $_POST['etapa_ficha'] ?? null;
+    // Force etapa_ficha to LECTIVA on creation
+    $etapa_ficha         = 'LECTIVA';
     $sector_economico    = $_POST['sector_economico'] ?? null;
     $duracion_programa   = $_POST['duracion_programa'] ?? null;
     $nombre_ocupacion    = $_POST['nombre_ocupacion'] ?? null;
@@ -29,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     // Validaciones
     $errores = [];
 
-    if (!is_numeric($codigo) || intval($codigo) <= 0) $errores[] = "El código debe ser numérico y positivo.";
-    if (!is_numeric($ficha) || intval($ficha) <= 0) $errores[] = "La ficha debe ser numérica y positiva.";
+if (!preg_match('/^\d{3,}$/', $codigo) || intval($codigo) <= 0) $errores[] = "El código debe ser numérico, positivo y contener al menos 3 dígitos.";
+if (!preg_match('/^\d{3,7}$/', $ficha) || intval($ficha) <= 0) $errores[] = "La ficha debe ser numérica, positiva y contener entre 3 y 7 dígitos.";
     if (!is_numeric($duracion_programa) || intval($duracion_programa) <= 0) $errores[] = "La duración debe ser un número positivo.";
 
     if (!preg_match('/^[\p{L}\s.]+$/u', $nombre_programa)) $errores[] = "El nombre del programa contiene caracteres inválidos.";
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         'ficha',
         'nivel_formacion',
         'sector_programa',
-        'etapa_ficha',
+        //'etapa_ficha', // Removed because etapa_ficha is forced in backend
         'sector_economico',
         'duracion_programa',
         'estado',
@@ -60,6 +61,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         }
     }
 
+
+    // Prevent creation if etapa_ficha is PRACTICA (should not happen due to forced value)
+    if (isset($_POST['etapa_ficha']) && strtoupper($_POST['etapa_ficha']) === 'PRACTICA') {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => 'No está permitido crear programas en etapa PRACTICA.']);
+        exit;
+    }
+
+    // Prevent creation if etapa_ficha is PRACTICA (should not happen due to forced value)
+    if (isset($_POST['etapa_ficha']) && strtoupper($_POST['etapa_ficha']) === 'PRACTICA') {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => 'No está permitido crear programas en etapa PRACTICA.']);
+        exit;
+    }
 
     if (!empty($errores)) {
         header('Content-Type: application/json');

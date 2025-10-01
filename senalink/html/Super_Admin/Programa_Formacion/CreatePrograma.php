@@ -41,14 +41,14 @@
 
                 <div class="form-group">
                     <label for="codigo">Código</label>
-                    <input class="input-field" id="codigo" name="codigo" type="number" min="1" required
-                        title="El código debe ser un número positivo."/>
+                    <input class="input-field" id="codigo" name="codigo" type="text" minlength="3" pattern="\d{3,}" required
+                        title="El código debe ser un número positivo con al menos 3 dígitos."/>
                 </div>
 
                 <div class="form-group">
                     <label for="ficha">Ficha</label>
-                    <input class="input-field" id="ficha" name="ficha" type="number" min="1" required
-                        title="La ficha debe ser un número positivo."/>
+                    <input class="input-field" id="ficha" name="ficha" type="text" minlength="3" maxlength="7" pattern="\d{3,7}" required
+                        title="La ficha debe ser un número positivo con entre 3 y 7 dígitos."/>
                 </div>
 
                 <div class="form-group">
@@ -69,14 +69,7 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="etapa_ficha">Etapa Ficha</label>
-                    <select class="input-field" id="etapa_ficha" name="etapa_ficha" required>
-                        <option selected disabled value="">Etapa Ficha</option>
-                        <option value="Lectiva">LECTIVA</option>
-                        <option value="Practica">PRACTICA</option>
-                    </select>
-                </div>
+                <!-- Removed etapa_ficha select to force default LECTIVA in backend -->
 
                 <div class="form-group">
                     <label for="sector_economico">Sector Económico</label>
@@ -138,7 +131,6 @@
         </main>
     </div>
     <script src="../../../js/backbutton.js"></script>
-    <script src="../../../js/control_inactividad.js"></script>
     <script src="../../../js/alert.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

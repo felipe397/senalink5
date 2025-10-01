@@ -34,9 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $usuarioModel = new UsuarioModel();
 
-    // Validar NIT: exactamente 9 dígitos numéricos
-    if (!preg_match('/^\d{9}$/', $nit)) {
-        $errores[] = 'El NIT debe tener exactamente 9 dígitos numéricos.';
+    // Validar NIT: exactamente 9 o 10 dígitos numéricos
+    if (!preg_match('/^\d{9,10}$/', $nit)) {
+        $errores[] = 'El NIT debe tener 9 o 10 dígitos numéricos.';
     } else {
         // Verificar si el NIT ya existe en otra empresa (excluyendo la actual)
         if ($usuarioModel->existeNIT($nit, $id)) {
@@ -69,6 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Verificar si el correo ya existe en otra empresa (excluyendo la actual)
     if ($usuarioModel->existeCorreo($correo, $id)) {
         $errores[] = 'El correo ya está registrado en otra empresa.';
+    }
+    // Validar teléfono: debe empezar por 3 y tener al menos 10 dígitos
+    if (!preg_match('/^3\d{9,}$/', $telefono)) {
+        $errores[] = 'El número telefónico debe empezar por 3 y contener al menos 10 dígitos.';
     }
     // Verificar si el teléfono ya existe en otra empresa (excluyendo la actual)
     if ($usuarioModel->existeTelefono($telefono, $id)) {
