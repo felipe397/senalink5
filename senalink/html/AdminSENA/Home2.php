@@ -31,7 +31,7 @@
     <a href="#contact">Contactenos</a>
     <a href="../Preguntas_frecuentes.html">Preguntas frecuentes</a>
     <a href="../viewuser.html">Mi perfil</a>
-    <a href="Programas_Formacion/Gestion_Programa.html">Gestion</a>
+    <a href="../AdminSENA/Programa_Formacion/Gestion_Programa.html">Gestion</a>
     <a href="#" id="cerrar-sesion">Cerrar sesion</a>
   </nav>
 </header>
