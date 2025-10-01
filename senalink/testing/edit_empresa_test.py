@@ -46,9 +46,9 @@ try:
                 (By.CLASS_NAME, "alert"), "Datos actualizados correctamente"
             )
         )
-        print("✅ Prueba exitosa: La empresa fue actualizada correctamente.")
+        print(" Prueba exitosa: La empresa fue actualizada correctamente.")
     except:
-        print("❌ Prueba fallida: No se encontró el mensaje de éxito.")
+        print(" Prueba fallida: No se encontró el mensaje de éxito.")
 
     time.sleep(3)
 

@@ -39,9 +39,9 @@ try:
     )
 
     if estado:
-        print("✅ Prueba exitosa: La empresa fue inhabilitada correctamente.")
+        print(" Prueba exitosa: La empresa fue inhabilitada correctamente.")
     else:
-        print("❌ Prueba fallida: No se encontró el cambio de estado.")
+        print(" Prueba fallida: No se encontró el cambio de estado.")
 
     time.sleep(3)
 

@@ -47,9 +47,9 @@ try:
                 (By.CLASS_NAME, "alert"), "¡Programa creado exitosamente!"
             )
         )
-        print("✅ Prueba exitosa: El programa fue creado correctamente.")
+        print(" Prueba exitosa: El programa fue creado correctamente.")
     except:
-        print("❌ Prueba fallida: No se encontró el mensaje de éxito.")
+        print(" Prueba fallida: No se encontró el mensaje de éxito.")
 
     time.sleep(3)
 

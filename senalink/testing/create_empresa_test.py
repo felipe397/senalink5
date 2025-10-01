@@ -56,9 +56,9 @@ try:
                 (By.CLASS_NAME, "alert"), "Empresa creada exitosamente"
             )
         )
-        print("✅ Prueba exitosa: La empresa fue creada correctamente.")
+        print(" Prueba exitosa: La empresa fue creada correctamente.")
     except:
-        print("❌ Prueba fallida: No se encontró el mensaje de éxito.")
+        print(" Prueba fallida: No se encontró el mensaje de éxito.")
 
     time.sleep(3)
 

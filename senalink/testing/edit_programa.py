@@ -20,7 +20,7 @@ try:
         lambda d: d.find_element(By.ID, "codigo").get_attribute("value") != ""
     )
 
-    # ✅ Solo cambiamos los campos editables
+
     # Duración
     duracion = driver.find_element(By.ID, "duracion_programa")
     duracion.clear()
@@ -55,9 +55,9 @@ try:
                 (By.CLASS_NAME, "alert"), "¡Programa actualizado exitosamente!"
             )
         )
-        print("✅ Prueba exitosa: El programa fue actualizado correctamente.")
+        print(" Prueba exitosa: El programa fue actualizado correctamente.")
     except:
-        print("❌ Prueba fallida: No se encontró el mensaje de éxito.")
+        print(" Prueba fallida: No se encontró el mensaje de éxito.")
 
     time.sleep(3)
 
