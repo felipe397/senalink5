@@ -112,7 +112,7 @@
             sessionStorage.clear();
             localStorage.clear();
             // Redirige al login (ajusta la ruta si tu login es diferente)
-            window.location.href = 'index.html';
+            window.location.href = '../index.php';
         });
         // Smooth scrolling para navegación
         document.querySelectorAll('.menu a').forEach(anchor => {

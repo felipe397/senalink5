@@ -2,14 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>SenaLink - Editar Programa de Formación</title>
-
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../../../css/crud.css">
-    <link rel="stylesheet" href="../../../css/alert.css">
-    <link rel="shortcut icon" href="../../../img/Favicon1.png">
+    <link rel="stylesheet" href="../../../css/alert.css" />
+    <link rel="stylesheet" href="../../../css/components/gov.css" />
+    <link rel="stylesheet" href="../../../css/components/buttons.css" />
+    <link rel="stylesheet" href="../../../css/layouts/Form_layout.css" />
+    <link rel="stylesheet" href="../../../css/base.css" />
+    <link rel="shortcut icon" href="../../../img/Favicon1.png" />
 </head>
 
 <body>
@@ -17,19 +19,8 @@
     <header class="gov" id="inicio">
         <div class="gov__container">
             <a href="https://www.gov.co/" target="_blank">
-                <img loading="lazy" src="../../../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
+                <img loading="lazy" src="../../../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img" />
             </a>
-        </div>
-    </header>
-
-    <!-- Header SENA -->
-    <header class="header__login">
-        <div class="header__left">
-            
-        </div>
-        <div class="header__center"></div>
-        <div class="header__right">
-            <img src="../../../img/logo-sena-white0.png" alt="Logo SENA" class="logo__sena">
         </div>
     </header>
 
@@ -38,66 +29,104 @@
         <main class="container__crud">
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"/>
 
-            <form action="../../../controllers/ProgramaController.php" method="POST" id="programaForm">
+            <form action="http://localhost/senalink5/senalink5/senalink/controllers/update_programa.php" 
+                  method="POST" 
+                  id="programaForm" 
+                  class="form-layout validated-form">
+
+                <input type="hidden" id="programa_id" name="id" value="">
+                <input type="hidden" name="action" value="update">
                 <input type="hidden" name="origen" value="Super_Admin">
-                <div class="inputs__container">
 
-                    <!-- Campos ocultos para actualizar -->
-                    <input type="hidden" id="programa_id" name="id" value="">
-                    <input type="hidden" name="accion" value="actualizar">
+                <div class="form-group">
+                    <label for="codigo">Código</label>
+                    <input class="input-field" id="codigo" name="codigo" type="number" required readonly disabled />
+                </div>
 
-                    <input class="input-field" id="codigo" name="codigo" placeholder="Código" type="number" min="1" required readonly disabled 
-                        title="El código debe ser un número positivo."/>
-                    <input class="input-field" id="ficha" name="ficha" placeholder="Ficha" type="number" min="1" required readonly disabled 
-                        title="La ficha debe ser un número positivo."/>
+                <div class="form-group">
+                    <label for="ficha">Ficha</label>
+                    <input class="input-field" id="ficha" name="ficha" type="number" required readonly disabled />
+                </div>
 
-                    <select class="select_container" id="nivel_formacion" name="nivel_formacion" required disabled>
+                <div class="form-group">
+                    <label for="nivel_formacion">Nivel de formación</label>
+                    <select class="input-field" id="nivel_formacion" name="nivel_formacion" required disabled>
                         <option value="" disabled selected>Nivel de formación</option>
                         <option value="TECNICO">Técnico</option>
                         <option value="TECNOLOGO">Tecnólogo</option>
                     </select>
-                    <select class="select_container" id="sector_programa" name="sector_programa" required>
-                        <option selected disabled value="">Sector del programa</option>
-                        <option value="INDUSTRIAL">INDUSTRIA</option>
-                        <option value="SERVICIOS">SERVICIOS</option>
-                    </select>
-                    <select class="select_container" id="etapa_ficha" name="etapa_ficha" required>
-                        <option selected disabled value="">Etapa Ficha</option>
-                        <option value="Lectiva">LECTIVA</option>
-                        <option value="Practica">PRACTICA</option>
-                    </select>
-                    <select class="select_container" id="sector_economico" name="sector_economico" required disabled>
-                        <option selected disabled value="">Sector Económico</option>
-                        <option value="Industria">INDUSTRIA</option>
-                        <option value="Servicios">SERVICIOS</option>
-                        <option value="Textiles">TEXTILES</option>
-                        <option value="Construccion">CONSTRUCCIÓN</option>
-                        <option value="Electricidad">ELECTRICIDAD</option>
-                    </select>        
-
-                    <input class="input-field" id="nombre_ocupacion" name="nombre_ocupacion" placeholder="Nombre de Ocupación" type="text" required 
-                        pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s.]+" 
-                        title="El nombre solo debe contener letras, espacios y puntos." />
-                    <input class="input-field" id="duracion_programa" name="duracion_programa" placeholder="Duración(Horas)" type="number" min="1" required 
-                        title="La duración debe ser un número positivo." />
-                    <input class="input-field" id="nombre_programa" name="nombre_programa" placeholder="Nombre del programa" type="text" required disabled 
-                        pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s.]+" 
-                        title="El nombre solo debe contener letras, espacios y puntos."/>
-                    <select class="select_container" id="estado" name="estado" required>
-                        <option value="" disabled selected>Estado del programa</option>
-                        <option value="En ejecucion">En Ejecución</option>
-                        <option value="Finalizado">Finalizado</option>
-                    </select>
-
-                    <input class="input-field" id="fecha_finalizacion" name="fecha_finalizacion" placeholder="Fecha de finalización" type="date" required 
-                        min="1957-06-21"
-                        title="La fecha no puede ser anterior al 21 de junio de 1957."/>
-
                 </div>
 
-                <div class="buttons__container">
-                    <button type="submit" class="buttons__crud">Actualizar</button>
-                    <button type="button" onclick="goBack()" class="buttons__crud">Volver</button>
+                <div class="form-group">
+                    <label for="sector_programa">Sector del programa</label>
+                    <select class="input-field" id="sector_programa" name="sector_programa" required disabled>
+                        <option selected disabled value="">Sector del programa</option>
+                        <option>INDUSTRIA</option>
+                        <option>SERVICIOS</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="etapa_ficha">Etapa Ficha</label>
+                    <select class="input-field" id="etapa_ficha" name="etapa_ficha" required disabled>
+                        <option selected disabled value="">Etapa Ficha</option>
+                        <option>LECTIVA</option>
+                        <option>PRACTICA</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sector_economico">Sector Económico</label>
+                    <select class="input-field" id="sector_economico" name="sector_economico" required disabled>
+                        <option selected disabled value="">Sector Económico</option>
+                        <option>INDUSTRIA</option>
+                        <option>SERVICIOS</option>
+                        <option>TEXTILES</option>
+                        <option>ELECTRICIDAD</option>
+                        <option>CONSTRUCCIÓN</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre_ocupacion">Nombre de Ocupación</label>
+                    <input class="input-field" id="nombre_ocupacion" name="nombre_ocupacion" 
+                           type="text" placeholder="Nombre de Ocupación" 
+                           required pattern="[\p{L}\s.]+" 
+                           title="El nombre solo debe contener letras, espacios y puntos." />
+                </div>
+
+                <div class="form-group">
+                    <label for="duracion_programa">Duración (Horas)</label>
+                    <input class="input-field" id="duracion_programa" name="duracion_programa" 
+                           type="number" min="1" required 
+                           placeholder="Duración en horas"
+                           title="La duración debe ser un número positivo." />
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre_programa">Nombre del programa</label>
+                    <input class="input-field" id="nombre_programa" name="nombre_programa" 
+                           type="text" required disabled />
+                </div>
+
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <select class="input-field" id="estado" name="estado" required>
+                        <option value="" disabled selected>Estado</option>
+                        <option value="En Ejecucion">En Ejecución</option>
+                        <option value="Finalizado">Finalizado</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha_finalizacion">Fecha de finalización</label>
+                    <input class="input-field" id="fecha_finalizacion" name="fecha_finalizacion" 
+                           type="date" required />
+                </div>
+
+                <div class="btn__container">
+                    <button type="submit" class="btn">Actualizar</button>
+                    <button type="button" onclick="goBack()" class="btn">Volver</button>
                 </div>
             </form>
         </main>
@@ -185,8 +214,8 @@ const form = document.getElementById('programaForm');
 form.addEventListener('submit', function(event) {
     const currentValues = getFormValues();
     if (!valuesChanged(currentValues, originalValues)) {
-        // No hacer nada si no hay cambios
         event.preventDefault();
+        showAlert('No se realizaron cambios en los datos.', 'warning', '.container');
         return;
     }
     event.preventDefault();

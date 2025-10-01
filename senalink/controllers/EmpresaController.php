@@ -168,6 +168,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $data = $_POST;
+
+        // Convertir array de ciudades a string separado por comas si es un array
+        if (isset($data['ciudad']) && is_array($data['ciudad'])) {
+            $data['ciudad'] = implode(',', $data['ciudad']);
+        }
+
         require_once '../models/UsuarioModel.php';
         $model = new UsuarioModel();
         try {
