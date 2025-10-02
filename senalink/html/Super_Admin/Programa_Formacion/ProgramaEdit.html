@@ -40,17 +40,17 @@
 
                 <div class="form-group">
                     <label for="codigo">Código</label>
-                    <input class="input-field" id="codigo" name="codigo" type="number" required readonly disabled />
+                    <input class="input-field" id="codigo" name="codigo" type="number" required readonly />
                 </div>
 
                 <div class="form-group">
                     <label for="ficha">Ficha</label>
-                    <input class="input-field" id="ficha" name="ficha" type="number" required readonly disabled />
+                    <input class="input-field" id="ficha" name="ficha" type="number" required readonly />
                 </div>
 
                 <div class="form-group">
                     <label for="nivel_formacion">Nivel de formación</label>
-                    <select class="input-field" id="nivel_formacion" name="nivel_formacion" required disabled>
+                    <select class="input-field" id="nivel_formacion" name="nivel_formacion" required>
                         <option value="" disabled selected>Nivel de formación</option>
                         <option value="TECNICO">Técnico</option>
                         <option value="TECNOLOGO">Tecnólogo</option>
@@ -59,16 +59,16 @@
 
                 <div class="form-group">
                     <label for="sector_programa">Sector del programa</label>
-                    <select class="input-field" id="sector_programa" name="sector_programa" required disabled>
+                    <select class="input-field" id="sector_programa" name="sector_programa" required>
                         <option selected disabled value="">Sector del programa</option>
-                        <option>INDUSTRIA</option>
+                        <option>INDUSTRIAL</option>
                         <option>SERVICIOS</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="etapa_ficha">Etapa Ficha</label>
-                    <select class="input-field" id="etapa_ficha" name="etapa_ficha" required disabled>
+                    <select class="input-field" id="etapa_ficha" name="etapa_ficha" required>
                         <option selected disabled value="">Etapa Ficha</option>
                         <option>LECTIVA</option>
                         <option>PRACTICA</option>
@@ -77,7 +77,7 @@
 
                 <div class="form-group">
                     <label for="sector_economico">Sector Económico</label>
-                    <select class="input-field" id="sector_economico" name="sector_economico" required disabled>
+                    <select class="input-field" id="sector_economico" name="sector_economico" required>
                         <option selected disabled value="">Sector Económico</option>
                         <option>INDUSTRIA</option>
                         <option>SERVICIOS</option>
@@ -106,7 +106,7 @@
                 <div class="form-group">
                     <label for="nombre_programa">Nombre del programa</label>
                     <input class="input-field" id="nombre_programa" name="nombre_programa" 
-                           type="text" required disabled />
+                           type="text" required/>
                 </div>
 
                 <div class="form-group">
@@ -136,133 +136,136 @@
     <script src="../../../js/formValidation.js"></script>
     <script src="../../../js/control_inactividad.js"></script>
     <script>
-// Guardar valores originales
-let originalValues = {};
+    document.getElementById('nivel_formacion').addEventListener('mousedown', e => e.preventDefault());
+    document.getElementById('sector_economico').addEventListener('mousedown', e => e.preventDefault());
+    document.getElementById('sector_programa').addEventListener('mousedown', e => e.preventDefault());
+    // Guardar valores originales
+    let originalValues = {};
 
-function getFormValues() {
-    return {
-        codigo: document.getElementById('codigo').value,
-        ficha: document.getElementById('ficha').value,
-        nivel_formacion: document.getElementById('nivel_formacion').value,
-        sector_programa: document.getElementById('sector_programa').value,
-        etapa_ficha: document.getElementById('etapa_ficha').value,
-        sector_economico: document.getElementById('sector_economico').value,
-        nombre_ocupacion: document.getElementById('nombre_ocupacion').value,
-        duracion_programa: document.getElementById('duracion_programa').value,
-        nombre_programa: document.getElementById('nombre_programa').value,
-        estado: document.getElementById('estado').value,
-        fecha_finalizacion: document.getElementById('fecha_finalizacion').value
-    };
-}
+    function getFormValues() {
+        return {
+            codigo: document.getElementById('codigo').value,
+            ficha: document.getElementById('ficha').value,
+            nivel_formacion: document.getElementById('nivel_formacion').value,
+            sector_programa: document.getElementById('sector_programa').value,
+            etapa_ficha: document.getElementById('etapa_ficha').value,
+            sector_economico: document.getElementById('sector_economico').value,
+            nombre_ocupacion: document.getElementById('nombre_ocupacion').value,
+            duracion_programa: document.getElementById('duracion_programa').value,
+            nombre_programa: document.getElementById('nombre_programa').value,
+            estado: document.getElementById('estado').value,
+            fecha_finalizacion: document.getElementById('fecha_finalizacion').value
+        };
+    }
 
-function valuesChanged(current, original) {
-    return Object.keys(original).some(key => current[key] != original[key]);
-}
+    function valuesChanged(current, original) {
+        return Object.keys(original).some(key => current[key] != original[key]);
+    }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const programaId = new URLSearchParams(window.location.search).get('id');
-    if (programaId) {
-        fetch(`http://localhost/senalink5/senalink5/senalink/controllers/ProgramaController.php?action=DetallePrograma&id=${programaId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (!data.error) {
-                    document.getElementById('programa_id').value = programaId;
-                    document.getElementById('codigo').value = data.codigo || '';
-                    document.getElementById('ficha').value = data.ficha || '';
-                    setSelectValue('nivel_formacion', data.nivel_formacion);
+    document.addEventListener("DOMContentLoaded", function () {
+        const programaId = new URLSearchParams(window.location.search).get('id');
+        if (programaId) {
+            fetch(`http://localhost/senalink5/senalink5/senalink/controllers/ProgramaController.php?action=DetallePrograma&id=${programaId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.error) {
+                        document.getElementById('programa_id').value = programaId;
+                        document.getElementById('codigo').value = data.codigo || '';
+                        document.getElementById('ficha').value = data.ficha || '';
+                        setSelectValue('nivel_formacion', data.nivel_formacion);
 
-                    // Selección robusta para selects (ignora tildes y mayúsculas)
-                    function setSelectValue(selectId, value) {
-                        const select = document.getElementById(selectId);
-                        if (!select) return;
-                        const normalizar = v => v ? v.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim() : '';
-                        const valorNormalizado = normalizar(value);
-                        let found = false;
-                        for (let opt of select.options) {
-                            if (normalizar(opt.value) === valorNormalizado || normalizar(opt.text) === valorNormalizado) {
-                                select.value = opt.value;
-                                found = true;
-                                break;
+                        // Selección robusta para selects (ignora tildes y mayúsculas)
+                        function setSelectValue(selectId, value) {
+                            const select = document.getElementById(selectId);
+                            if (!select) return;
+                            const normalizar = v => v ? v.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim() : '';
+                            const valorNormalizado = normalizar(value);
+                            let found = false;
+                            for (let opt of select.options) {
+                                if (normalizar(opt.value) === valorNormalizado || normalizar(opt.text) === valorNormalizado) {
+                                    select.value = opt.value;
+                                    found = true;
+                                    break;
+                                }
                             }
+                            if (!found) select.selectedIndex = 0;
                         }
-                        if (!found) select.selectedIndex = 0;
+                        setSelectValue('sector_programa', data.sector_programa);
+                        setSelectValue('etapa_ficha', data.etapa_ficha);
+                        setSelectValue('sector_economico', data.sector_economico);
+                        document.getElementById('nombre_ocupacion').value = data.nombre_ocupacion || '';
+                        document.getElementById('duracion_programa').value = data.duracion_programa || '';
+                        document.getElementById('nombre_programa').value = data.nombre_programa || '';
+                        setSelectValue('estado', data.estado);
+                        document.getElementById('fecha_finalizacion').value = data.fecha_finalizacion || '';
+                        // Guardar valores originales después de cargar los datos
+                        originalValues = getFormValues();
+                    } else {
+                        showAlert('Error al cargar los datos del programa.', 'error');
                     }
-                    setSelectValue('sector_programa', data.sector_programa);
-                    setSelectValue('etapa_ficha', data.etapa_ficha);
-                    setSelectValue('sector_economico', data.sector_economico);
-                    document.getElementById('nombre_ocupacion').value = data.nombre_ocupacion || '';
-                    document.getElementById('duracion_programa').value = data.duracion_programa || '';
-                    document.getElementById('nombre_programa').value = data.nombre_programa || '';
-                    setSelectValue('estado', data.estado);
-                    document.getElementById('fecha_finalizacion').value = data.fecha_finalizacion || '';
-                    // Guardar valores originales después de cargar los datos
-                    originalValues = getFormValues();
-                } else {
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos del programa:', error);
                     showAlert('Error al cargar los datos del programa.', 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Error al cargar los datos del programa:', error);
-                showAlert('Error al cargar los datos del programa.', 'error');
-            });
-    } else {
-        showAlert('No se recibió el ID del programa.', 'error');
-    }
-});
-
-const form = document.getElementById('programaForm');
-form.addEventListener('submit', function(event) {
-    const currentValues = getFormValues();
-    if (!valuesChanged(currentValues, originalValues)) {
-        event.preventDefault();
-        showAlert('No se realizaron cambios en los datos.', 'warning', '.container');
-        return;
-    }
-    event.preventDefault();
-    const formData = new FormData(form);
-    const url = 'http://localhost/senalink5/senalink5/senalink/controllers/update_programa.php';
-    fetch(url, {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-            return response.json();
+                });
         } else {
-            return response.text();
+            showAlert('No se recibió el ID del programa.', 'error');
         }
-    })
-    .then(data => {
-        if (typeof data === 'object' && data !== null && data.success) {
-            showAlert('Datos actualizados correctamente', 'success');
-            setTimeout(() => {
-                if (data.rol === 'super_admin') {
-                    window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/Super_Admin/Programa_Formacion/Gestion_Programa.html';
-                } else if (data.rol === 'AdminSENA') {
-                    window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/AdminSENA/Programa_Formacion/Gestion_Programa.html';
-                } else {
-                    window.location.href = '../html/index.html';
-                }
-            }, 2000);
-        } else if (typeof data === 'string' && data.includes('actualizado')) {
-            showAlert('Datos actualizados correctamente', 'success');
-            setTimeout(() => {
-                window.location.href = 'Gestion_Programa.html';
-            }, 2000);
-        } else if (typeof data === 'object' && data !== null && data.errors) {
-            const mensajes = data.errors.join('<br>');
-            showAlert(mensajes, 'error');
-        } else if (typeof data === 'object' && data !== null && data.error) {
-            showAlert(data.error, 'error');
-        } else {
-            showAlert('Error al actualizar el programa', 'error');
-        }
-    })
-    .catch(() => {
-        showAlert('Error en la comunicación con el servidor', 'error');
     });
-});
+
+    const form = document.getElementById('programaForm');
+    form.addEventListener('submit', function(event) {
+        const currentValues = getFormValues();
+        if (!valuesChanged(currentValues, originalValues)) {
+            event.preventDefault();
+            showAlert('No se realizaron cambios en los datos.', 'warning', '.container');
+            return;
+        }
+        event.preventDefault();
+        const formData = new FormData(form);
+        const url = 'http://localhost/senalink5/senalink5/senalink/controllers/update_programa.php';
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return response.json();
+            } else {
+                return response.text();
+            }
+        })
+        .then(data => {
+            if (typeof data === 'object' && data !== null && data.success) {
+                showAlert('Datos actualizados correctamente', 'success');
+                setTimeout(() => {
+                    if (data.rol === 'super_admin') {
+                        window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/Super_Admin/Programa_Formacion/Gestion_Programa.html';
+                    } else if (data.rol === 'AdminSENA') {
+                        window.location.href = 'http://localhost/senalink5/senalink5/senalink/html/AdminSENA/Programa_Formacion/Gestion_Programa.html';
+                    } else {
+                        window.location.href = '../html/index.html';
+                    }
+                }, 2000);
+            } else if (typeof data === 'string' && data.includes('actualizado')) {
+                showAlert('Datos actualizados correctamente', 'success');
+                setTimeout(() => {
+                    window.location.href = 'Gestion_Programa.html';
+                }, 2000);
+            } else if (typeof data === 'object' && data !== null && data.errors) {
+                const mensajes = data.errors.join('<br>');
+                showAlert(mensajes, 'error');
+            } else if (typeof data === 'object' && data !== null && data.error) {
+                showAlert(data.error, 'error');
+            } else {
+                showAlert('Error al actualizar el programa', 'error');
+            }
+        })
+        .catch(() => {
+            showAlert('Error en la comunicación con el servidor', 'error');
+        });
+    });
 
     </script>
 

@@ -14,71 +14,81 @@ $programa = new ProgramaFormacion();
 
 // 🚀 CREAR PROGRAMA
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'crear') {
-    $codigo              = $_POST['codigo'] ?? null;
-    $ficha               = $_POST['ficha'] ?? null;
-    $nivel_formacion     = $_POST['nivel_formacion'] ?? null;
-    $sector_programa     = $_POST['sector_programa'] ?? null;
+    header('Content-Type: application/json');  // Siempre JSON para compatibilidad con AJAX
+
+    // Log de datos recibidos para depuración
+    error_log("=== INICIO CREACIÓN PROGRAMA ===");
+    error_log("POST['ficha'] recibido: '" . ($_POST['ficha'] ?? 'NULL') . "'");
+
+    // NUEVO: Validación estricta inicial para detectar corrupción (ej. HTML enviado como datos)
+    $fichaRaw = $_POST['ficha'] ?? '';
+    if (empty($fichaRaw) || !preg_match('/^\d{3,7}$/', $fichaRaw) || strlen($fichaRaw) > 10) {
+        error_log("Corrupción detectada en ficha: '" . substr($fichaRaw, 0, 100) . "'");
+        echo json_encode(['success' => false, 'error' => 'Datos del formulario inválidos o corruptos. Verifica y recarga la página.']);
+        exit;
+    }
+
+    // Asignación de variables con trim para limpiar espacios
+    $codigo              = trim($_POST['codigo'] ?? '');
+    $ficha               = trim($_POST['ficha'] ?? '');
+    $nivel_formacion     = $_POST['nivel_formacion'] ?? '';
+    $sector_programa     = $_POST['sector_programa'] ?? '';
     // Force etapa_ficha to LECTIVA on creation
     $etapa_ficha         = 'LECTIVA';
-    $sector_economico    = $_POST['sector_economico'] ?? null;
-    $duracion_programa   = $_POST['duracion_programa'] ?? null;
-    $nombre_ocupacion    = $_POST['nombre_ocupacion'] ?? null;
-    $nombre_programa     = $_POST['nombre_programa'] ?? null;
+    $sector_economico    = $_POST['sector_economico'] ?? '';
+    $duracion_programa   = $_POST['duracion_programa'] ?? '';
+    $nombre_ocupacion    = trim($_POST['nombre_ocupacion'] ?? '');
+    $nombre_programa     = trim($_POST['nombre_programa'] ?? '');
     $estado              = $_POST['estado'] ?? 'En ejecucion';
     $fecha_finalizacion  = date('Y-m-d', strtotime($_POST['fecha_finalizacion'] ?? ''));
 
-    // Validaciones
+    // Validaciones mejoradas
     $errores = [];
 
-if (!preg_match('/^\d{3,}$/', $codigo) || intval($codigo) <= 0) $errores[] = "El código debe ser numérico, positivo y contener al menos 3 dígitos.";
-if (!preg_match('/^\d{3,7}$/', $ficha) || intval($ficha) <= 0) $errores[] = "La ficha debe ser numérica, positiva y contener entre 3 y 7 dígitos.";
-    if (!is_numeric($duracion_programa) || intval($duracion_programa) <= 0) $errores[] = "La duración debe ser un número positivo.";
+    if (!preg_match('/^\d{3,}$/', $codigo) || intval($codigo) <= 0) {
+        $errores[] = "El código debe ser numérico, positivo y contener al menos 3 dígitos.";
+    }
+    if (!preg_match('/^\d{3,7}$/', $ficha) || intval($ficha) <= 0) {
+        $errores[] = "La ficha debe ser numérica, positiva y contener entre 3 y 7 dígitos.";
+    }
+    if (!is_numeric($duracion_programa) || intval($duracion_programa) <= 0) {
+        $errores[] = "La duración debe ser un número positivo.";
+    }
+    if (!preg_match('/^[\p{L}\s.]+$/u', $nombre_programa)) {
+        $errores[] = "El nombre del programa contiene caracteres inválidos.";
+    }
+    if (!preg_match('/^[\p{L}\s.]+$/u', $nombre_ocupacion)) {
+        $errores[] = "El nombre de la ocupación contiene caracteres inválidos.";
+    }
 
-    if (!preg_match('/^[\p{L}\s.]+$/u', $nombre_programa)) $errores[] = "El nombre del programa contiene caracteres inválidos.";
-    if (!preg_match('/^[\p{L}\s.]+$/u', $nombre_ocupacion)) $errores[] = "El nombre de la ocupación contiene caracteres inválidos.";
-
+    // Validación de fecha
     $fechaMinima = '1957-06-21';
     if (!$fecha_finalizacion || strtotime($fecha_finalizacion) < strtotime($fechaMinima)) {
         $errores[] = "La fecha de finalización no puede ser anterior al 21 de junio de 1957.";
     }
+
+    // Validación de campos requeridos (simplificada, ya que validamos arriba con regex)
     $campos_requeridos = [
-        'codigo',
-        'ficha',
         'nivel_formacion',
         'sector_programa',
-        //'etapa_ficha', // Removed because etapa_ficha is forced in backend
         'sector_economico',
-        'duracion_programa',
-        'estado',
-        'fecha_finalizacion',
-        'nombre_ocupacion',
-        'nombre_programa'
+        'estado'
     ];
-
     foreach ($campos_requeridos as $campo) {
-        if (!isset($_POST[$campo]) || trim($_POST[$campo]) === '') {
+        if (empty($_POST[$campo])) {
             $errores[] = "El campo $campo es obligatorio.";
         }
     }
 
-
-    // Prevent creation if etapa_ficha is PRACTICA (should not happen due to forced value)
-    if (isset($_POST['etapa_ficha']) && strtoupper($_POST['etapa_ficha']) === 'PRACTICA') {
-        header('Content-Type: application/json');
-        echo json_encode(['success' => false, 'error' => 'No está permitido crear programas en etapa PRACTICA.']);
-        exit;
-    }
-
-    // Prevent creation if etapa_ficha is PRACTICA (should not happen due to forced value)
-    if (isset($_POST['etapa_ficha']) && strtoupper($_POST['etapa_ficha']) === 'PRACTICA') {
-        header('Content-Type: application/json');
-        echo json_encode(['success' => false, 'error' => 'No está permitido crear programas en etapa PRACTICA.']);
-        exit;
-    }
-
     if (!empty($errores)) {
-        header('Content-Type: application/json');
+        error_log("Errores de validación: " . implode(', ', $errores));
         echo json_encode(['success' => false, 'errors' => $errores]);
+        exit;
+    }
+
+    // Prevent creation if etapa_ficha is PRACTICA (solo una vez, removí duplicado)
+    if (isset($_POST['etapa_ficha']) && strtoupper($_POST['etapa_ficha']) === 'PRACTICA') {
+        echo json_encode(['success' => false, 'error' => 'No está permitido crear programas en etapa PRACTICA.']);
         exit;
     }
 
@@ -88,7 +98,6 @@ if (!preg_match('/^\d{3,7}$/', $ficha) || intval($ficha) <= 0) $errores[] = "La 
     $existeFicha = $programa->existeFicha($fichaInt);
     error_log("existeFicha result: " . ($existeFicha ? "true" : "false"));
     if ($existeFicha) {
-        header('Content-Type: application/json');
         echo json_encode(['success' => false, 'error' => 'No está permitido crear programas de formación si el número de ficha ya existe en otro programa.']);
         exit;
     }
@@ -108,24 +117,25 @@ if (!preg_match('/^\d{3,7}$/', $ficha) || intval($ficha) <= 0) $errores[] = "La 
             'estado' => $estado,
             'fecha_finalizacion' => $fecha_finalizacion
         ]);
+        error_log("Resultado de creación: " . ($resultado ? "true" : "false"));
     } catch (PDOException $e) {
-        header('Content-Type: application/json');
+        error_log("PDOException en creación: " . $e->getMessage());
         echo json_encode(['success' => false, 'error' => 'Error en la base de datos: ' . $e->getMessage()]);
         exit;
     }
 
     if ($resultado) {
+        // Devuelve JSON de éxito (el frontend redirigirá)
         $rol = $_SESSION['rol'] ?? '';
-        if ($rol === 'AdminSENA') {
-            header("Location: ../html/AdminSENA/Programa_Formacion/Gestion_Programa.html");
-        } else {
-            header("Location: ../html/Super_Admin/Programa_Formacion/CreatePrograma.php?success=1");
-        }
-        exit;
+        $redirectUrl = ($rol === 'AdminSENA') 
+            ? '../html/AdminSENA/Programa_Formacion/Gestion_Programa.html'
+            : '../html/Super_Admin/Programa_Formacion/Gestion_Programa.html';  // Ajusta si es necesario
+        echo json_encode(['success' => true, 'redirect' => $redirectUrl, 'message' => 'Programa creado correctamente']);
     } else {
-        header("Location: ../html/Super_Admin/Programa_Formacion/CreatePrograma.php?error=1");
-        exit;
+        echo json_encode(['success' => false, 'error' => 'Error al crear el programa. Verifica los datos.']);
     }
+    error_log("=== FIN CREACIÓN PROGRAMA ===");
+    exit;
 }
 
 // ✏️ ACTUALIZAR PROGRAMA
@@ -140,7 +150,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_PO
     $nombre_programa     = $_POST['nombre_programa'] ?? null;
     $nombre_ocupacion    = $_POST['nombre_ocupacion'] ?? null;
     $duracion_programa   = $_POST['duracion_programa'] ?? null;
-    $estado              = $_POST['estado'] ?? 'Disponible';
+    $estado              = $_POST['estado'] ?? 'En Ejecucion';
     $fecha_finalizacion  = $_POST['fecha_finalizacion'] ?? null;
 
     if (
@@ -242,3 +252,4 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo json_encode(['success' => false, 'message' => 'Acción inválida o ID faltante.']);
     exit;
 }
+?>

@@ -30,7 +30,7 @@
     <a href="#recommendations">Recomendaciones</a>
     <a href="#contact">Contactenos</a>
     <a href="../Preguntas_frecuentes.html">Preguntas frecuentes</a>
-    <a href="../viewuser.html">Mi perfil</a>
+    <a href="../viewuser.php">Mi perfil</a>
     <a href="#" id="cerrar-sesion">Cerrar sesion</a>
   </nav>
 </header>
@@ -121,7 +121,7 @@
                 target.scrollIntoView({ behavior: 'smooth' });
             });
         });
-
+        
         // Animación de entrada para cards en scroll
         const observerOptions = {
             threshold: 0.1,
@@ -184,33 +184,46 @@
                 document.getElementById('contenedor').innerHTML = 'No se encontraron recomendaciones';
             }
         });
+                document.addEventListener('DOMContentLoaded', () => {
+        const recomendaciones = JSON.parse(localStorage.getItem('recomendaciones')) || [];
+        const contenedor = document.getElementById('resultados-home');
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const recomendaciones = JSON.parse(localStorage.getItem('recomendaciones')) || [];
-            const contenedor = document.getElementById('resultados-home');
+        if (recomendaciones.length === 0) {
+            contenedor.innerHTML = '<p>No se encontraron recomendaciones.</p>';
+            return;
+        }
 
-            if (recomendaciones.length === 0) {
-                contenedor.innerHTML = '<p>No se encontraron recomendaciones.</p>';
-                return;
-            }
+        // ✅ Filtrar solo programas con puntaje entre 5 y 10
+        const filtrados = recomendaciones.filter(p => p.score >= 5 && p.score <= 10);
 
-            recomendaciones.forEach(programa => {
-                const card = document.createElement('div');
-                card.className = 'card';
+        if (filtrados.length === 0) {
+            contenedor.innerHTML = '<p>No se encontraron programas con puntaje entre 5 y 10.</p>';
+            return;
+        }
 
-                card.innerHTML = `
-                    <div class="card-content">
-                        <h3 class="card-title">${programa.nombre_programa}</h3>
-                        <p class="card-description">Código: ${programa.codigo}</p>
-                        <a class="card-button" href="Programa de formacion.html?id=${programa.id}">
-                            Más Información
-                        </a>
-                    </div>
-                `;
+        filtrados.forEach(programa => {
+            const card = document.createElement('div');
+            card.className = 'card';
 
-                contenedor.appendChild(card);
-            });
+            card.innerHTML = `
+                <div class="card-content">
+                    <h3 class="card-title">${programa.nombre_programa}</h3>
+                    <p><b>Nivel:</b> ${programa.nivel_formacion}</p>
+                    <p><b>Ocupación:</b> ${programa.nombre_ocupacion}</p>
+                    <p><b>Sector:</b> ${programa.sector_economico}</p>
+                    <p><b>Duración:</b> ${programa.duracion_programa} horas</p>
+                    <p><b>Puntaje:</b> ${programa.score}</p>
+                    <a class="card-button" href="Programa de formacion.html?id=${programa.id}">
+                        Más Información
+                    </a>
+                </div>
+            `;
+
+            contenedor.appendChild(card);
         });
+        
+    });
+    
 
     </script>
     <!-- <script>

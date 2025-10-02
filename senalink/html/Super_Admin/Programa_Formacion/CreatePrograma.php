@@ -30,10 +30,8 @@
         <main class="container__crud">
             <img src="../../../img/logo-proyecto1.png" alt="Logo SenaLink" class="logo__senalink"/>
 
-            <form action="../../../controllers/ProgramaController.php" 
-                  method="POST" 
-                  id="programaForm" 
-                  class="form-layout validated-form">
+            <!-- Removí action y method del form para prevenir submits nativos -->
+            <form id="programaForm" class="form-layout validated-form">
 
                 <input type="hidden" id="programa_id" name="id" value="">
                 <input type="hidden" name="accion" value="crear">
@@ -124,7 +122,7 @@
                 </div>
 
                 <div class="btn__container">
-                    <button type="submit" class="btn">Crear</button>
+                    <button type="button" id="btnCrear" class="btn">Crear</button>  <!-- Cambié a type="button" para prevenir submit nativo -->
                     <button type="button" onclick="goBack()" class="btn">Volver</button>
                 </div>
             </form>
@@ -133,40 +131,128 @@
     <script src="../../../js/backbutton.js"></script>
     <script src="../../../js/alert.js"></script>
     <script>
+        let isSubmitting = false;  // Prevenir doble envío
+
+        // Función para calcular la fecha de finalización automática (sin cambios)
+        function calcularFechaFinalizacion() {
+            const duracionInput = document.getElementById('duracion_programa');
+            const fechaInput = document.getElementById('fecha_finalizacion');
+            const duracion = parseInt(duracionInput.value);
+
+            if (!duracion || duracion < 1) {
+                fechaInput.value = '';
+                return;
+            }
+
+            let fechaInicio = new Date();
+            fechaInicio.setHours(0, 0, 0, 0);
+
+            const horasPorDia = 6;
+            const diasNecesarios = Math.ceil(duracion / horasPorDia);
+
+            let diasContados = 0;
+            let fechaActual = new Date(fechaInicio);
+
+            while (diasContados < diasNecesarios) {
+                fechaActual.setDate(fechaActual.getDate() + 1);
+                const diaSemana = fechaActual.getDay();
+                if (diaSemana !== 0 && diaSemana !== 6) {
+                    diasContados++;
+                }
+            }
+
+            const año = fechaActual.getFullYear();
+            const mes = String(fechaActual.getMonth() + 1).padStart(2, '0');
+            const dia = String(fechaActual.getDate()).padStart(2, '0');
+            fechaInput.value = `${año}-${mes}-${dia}`;
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('programaForm');
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
+            console.log('DOM cargado, adjuntando listeners...');  // Log para confirmar que se ejecuta
+
+            // Listener para fecha (sin cambios)
+            const duracionInput = document.getElementById('duracion_programa');
+            duracionInput.addEventListener('input', calcularFechaFinalizacion);
+            duracionInput.addEventListener('change', calcularFechaFinalizacion);
+
+            // CAMBIO CLAVE: Listener en el BOTÓN (no en el form) para control total
+            const btnCrear = document.getElementById('btnCrear');
+            btnCrear.addEventListener('click', function (event) {
+                console.log('Primer clic detectado en botón Crear - Iniciando envío AJAX');  // Log para confirmar primer clic
+
+                if (isSubmitting) {
+                    console.log('Envío ya en progreso, ignorando.');
+                    return;
+                }
+
+                const form = document.getElementById('programaForm');
                 const formData = new FormData(form);
-                fetch(form.action, {
+
+                // Log de datos (para depurar)
+                console.log('Datos enviados al backend:');
+                for (let [key, value] of formData.entries()) {
+                    console.log(key + ': ' + value);
+                }
+
+                // Chequeo de corrupción (HTML en datos)
+                let hasHtmlCorruption = false;
+                for (let [key, value] of formData.entries()) {
+                    if (typeof value === 'string' && (value.includes('<!DOCTYPE') || value.includes('<html>') || value.length > 1000)) {  // Ajusté para longitudes sospechosas
+                        hasHtmlCorruption = true;
+                        console.error('¡CORRUPCIÓN DETECTADA en campo:', key, 'Valor parcial:', value.substring(0, 200));
+                        showAlert('Error: Datos inválidos detectados. Verifica el formulario.', 'error');
+                        return;
+                    }
+                }
+
+                isSubmitting = true;
+                btnCrear.disabled = true;
+                btnCrear.textContent = 'Creando...';
+
+                // URL del backend (hardcodeada ya que removí action del form)
+                const urlBackend = '../../../controllers/ProgramaController.php';
+
+                fetch(urlBackend, {
                     method: 'POST',
                     body: formData,
                 })
                 .then((response) => {
                     const contentType = response.headers.get('content-type');
+                    console.log('Content-Type de respuesta:', contentType);  // Log para depurar
                     if (contentType && contentType.indexOf('application/json') !== -1) {
                         return response.json();
                     } else {
-                        return response.text();
+                        return response.text().then(text => {
+                            console.error('Respuesta NO JSON (posible HTML):', text.substring(0, 500));
+                            throw new Error('El servidor no devolvió JSON válido. Posible error en backend.');
+                        });
                     }
                 })
                 .then((data) => {
-                    if (typeof data === 'object' && data !== null && data.success) {
+                    console.log('Respuesta procesada:', data);
+                    
+                    if (data.success) {
                         showAlert('Programa creado correctamente', 'success');
                         setTimeout(() => {
                             window.location.href = 'Gestion_Programa.html';
                         }, 2000);
-                    } else if (typeof data === 'object' && data !== null && data.errors) {
+                    } else if (data.errors) {
                         const mensajes = data.errors.join('<br>');
                         showAlert(mensajes, 'error');
-                    } else if (typeof data === 'object' && data !== null && data.error) {
+                    } else if (data.error) {
                         showAlert(data.error, 'error');
                     } else {
-                        showAlert('Error al crear el programa', 'error');
+                        showAlert('Error desconocido al crear el programa', 'error');
                     }
                 })
-                .catch(() => {
-                    showAlert('Error en la comunicación con el servidor', 'error');
+                .catch((error) => {
+                    console.error('Error en fetch:', error);
+                    showAlert('Error en la comunicación: ' + error.message, 'error');
+                })
+                .finally(() => {
+                    isSubmitting = false;
+                    btnCrear.disabled = false;
+                    btnCrear.textContent = 'Crear';
                 });
             });
         });

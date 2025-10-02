@@ -165,29 +165,14 @@
               </option>
             </select>
           </div>
-
           <div class="form-group">
             <label for="contrasena">Contraseña</label>
-            <div class="box__password">
-              <input
-                id="contrasena"
-                name="contrasena"
-                placeholder="Contraseña"
-                type="password"
-                class="input-field"
-                required
-                minlength="12"
-                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}$"
-                title="Mínimo 12 caracteres, una mayúscula, una minúscula, un número y un símbolo."
-              />
-              <button type="button" id="togglePassword">
-                <img
-                  class="icon__pass"
-                  id="viewPassword"
-                  src="../../../img/icons8-invisible-24.png"
-                  alt="Ver contraseña"
-                />
-              </button>
+            <div class="password-box">
+                <input id="contrasena" class="input-field" name="contrasena" type="password" 
+                    pattern=".{12,}" title="La contraseña debe tener al menos 12 caracteres" required />
+                <button type="button" id="togglePassword" class="toggle-btn">
+                <img class="icon__pass" id="viewPassword" src="../../../img/icons8-invisible-24.png" alt="Ver contraseña">
+                </button>
             </div>
           </div>
 

@@ -5,18 +5,103 @@
     <meta charset="UTF-8">
     <title>SenaLink - Diagnóstico Empresarial</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .pregunta { margin-bottom: 20px; }
-        .card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 8px; }
-        .card h3 { margin: 0 0 10px; }
+        body {
+          background: #f5f8fb;
+          font-family: 'Inter', sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        .form-container {
+          max-width: 480px;
+          margin: 3rem auto;
+          background: white;
+          border-radius: 1rem;
+          padding: 2.5rem 3rem 3rem 3rem;
+          box-shadow: 0 4px 30px rgb(0 0 0 / 0.05);
+        }
+
+        .questions {
+          position: relative;
+          min-height: 180px;
+        }
+
+        .question {
+          position: relative;
+          margin-bottom: 1.5rem;
+        }
+
+        legend {
+          color: #1e293b;
+          font-weight: 700;
+          font-size: 1.25rem;
+          margin-bottom: 0.75rem;
+        }
+
+        label {
+          display: block;
+          font-weight: 600;
+          color: #94a3b8;
+          margin: 0.8rem 0 0.25rem 0;
+          cursor: pointer;
+        }
+
+        input[type="number"] {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid #d1d5db;
+          border-radius: 0.5rem;
+          font-size: 1rem;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input[type="number"]:focus {
+          outline: none;
+          border-color: #38bdf8;
+          box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+        }
+
+        .btn-next {
+          margin-top: 2.5rem;
+          background: #38bdf8;
+          color: white;
+          border: none;
+          font-weight: 700;
+          padding: 0.85rem 0;
+          width: 100%;
+          border-radius: 0.5rem;
+          cursor: pointer;
+          font-size: 1rem;
+          transition: background-color 0.3s ease;
+        }
+
+        .btn-next:hover {
+          background: #0ea5e9;
+        }
+
+        .card {
+          background: white;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+          padding: 1.5rem;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          transition: box-shadow 0.2s ease;
+          margin-bottom: 1rem;
+        }
+
+        .card:hover {
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
-    <h1>Diagnóstico Empresarial</h1>
-    <form id="form-diagnostico"></form>
-    <button id="btn-enviar">Enviar respuestas</button>
+    <div class="form-container">
+        <h1>Diagnóstico Empresarial</h1>
+        <form id="form-diagnostico" class="questions"></form>
+        <button id="btn-enviar" class="btn-next">Enviar respuestas</button>
+    </div>
 
-    <h2>Recomendaciones</h2>
+    <h2 style="text-align:center; margin-top:2rem;">Recomendaciones</h2>
     <div id="recomendaciones-container"></div>
 
 <script>
@@ -26,7 +111,10 @@ class DiagnosticoApp {
         this.btnEnviar = document.getElementById("btn-enviar");
         this.recomendacionesContainer = document.getElementById("recomendaciones-container");
 
-        this.btnEnviar.addEventListener("click", () => this.enviarRespuestas());
+        this.btnEnviar.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.enviarRespuestas();
+        });
         this.cargarPreguntas();
     }
 
@@ -40,19 +128,23 @@ class DiagnosticoApp {
 
         if (data.success) {
             this.form.innerHTML = "";
-            data.preguntas.forEach(p => {
+
+            // ✅ Eliminamos las últimas 2 preguntas
+            const preguntas = data.preguntas.slice(0, -2);
+
+            preguntas.forEach(p => {
                 const div = document.createElement("div");
-                div.classList.add("pregunta");
-                div.innerHTML = `<label><b>${p.enunciado}</b></label><br>`;
+                div.classList.add("question");
+                div.innerHTML = `<legend>${p.enunciado}</legend>`;
 
                 if (p.opciones.length > 0) {
-                    const select = document.createElement("select");
-                    select.name = p.id;
-                    select.innerHTML = `<option value="">Seleccione...</option>`;
                     p.opciones.forEach(op => {
-                        select.innerHTML += `<option value="${op}">${op}</option>`;
+                        const label = document.createElement("label");
+                        label.innerHTML = `
+                            <input type="radio" name="${p.id}" value="${op}"><span>${op}</span>
+                        `;
+                        div.appendChild(label);
                     });
-                    div.appendChild(select);
                 } else {
                     const input = document.createElement("input");
                     input.type = "number";
@@ -64,20 +156,26 @@ class DiagnosticoApp {
             });
         }
     }
-
     async enviarRespuestas() {
-        const formData = new FormData(this.form);
-        const respuestas = {};
-        formData.forEach((v, k) => respuestas[k] = v);
+    const formData = new FormData(this.form);
+    const respuestas = {};
+    formData.forEach((v, k) => respuestas[k] = v);
 
-        const res = await fetch("../controllers/DiagnosticoController.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ accion: "procesarRespuestas", respuestas })
-        });
-        const data = await res.json();
-        this.renderRecomendaciones(data.recomendaciones || []);
-    }
+    const res = await fetch("../controllers/DiagnosticoController.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ accion: "procesarRespuestas", respuestas })
+    });
+    const data = await res.json();
+
+    // ✅ Guardar en localStorage
+    localStorage.setItem("recomendaciones", JSON.stringify(data.recomendaciones || []));
+
+    // ✅ Volver a la página anterior y recargarla
+    window.location.href = document.referrer;
+}
+
+
 
     renderRecomendaciones(programas) {
         this.recomendacionesContainer.innerHTML = "";

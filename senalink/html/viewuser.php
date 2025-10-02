@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) {
+    header("Location: index.php"); 
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -21,13 +29,13 @@
       </a>
     </div>
   </header>
+
   <header class="header-main">
     <nav>
-      <a href="../html/Super_Admin/Home2.php">Inicio</a>
-      <a href="#" id="cerrar-sesion">Cerrar sesion</a>
+      <a href="#" id="home-btn">Inicio</a>
+      <a href="#" id="cerrar-sesion">Cerrar sesión</a>
     </nav>
   </header>
-
 
   <main class="container">
     <section class="profile-card">
@@ -59,8 +67,8 @@
       </div>
 
       <div class="actions">
-        <button onclick="window.location.href='../html/EditSuper_Admin.html?id='" class="btn edit">Actualizar</button>
-        <button type="btn-back" onclick="goBack()" class="btn">Volver</button>
+        <button id="edit-btn" class="btn edit">Actualizar</button>
+        <button id="back-btn" class="btn">Volver</button>
       </div>
     </section>
   </main>
@@ -69,19 +77,52 @@
   <script src="../js/viewuser.js"></script>
   <script src="../js/alert.js"></script>
   <script src="../js/backbutton.js"></script>
-  <script>
-        // Función cerrar sesión
-        document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Elimina datos de sesión/localStorage
-            sessionStorage.clear();
-            localStorage.clear();
-            // Redirige al login (ajusta la ruta si tu login es diferente)
-            window.location.href = 'index.php';
-        });
 
+  <script>
+    // Guardar el rol desde PHP en sessionStorage
+    const userRole = '<?php echo $_SESSION['rol'] ?? ''; ?>';
+    if (userRole) {
+      sessionStorage.setItem('userRole', userRole);
+    }
+
+    // Referencias a botones
+    const homeBtn = document.getElementById('home-btn');
+    const backBtn = document.getElementById('back-btn');
+    const editBtn = document.getElementById('edit-btn');
+
+    // Redirigir según rol
+    const role = sessionStorage.getItem('userRole');
+    switch (role) {
+      case 'super_admin':
+        homeBtn.href = '../html/Super_Admin/Home2.php';
+        backBtn.onclick = () => window.location.href = '../html/Super_Admin/Home2.php';
+        editBtn.onclick = () => window.location.href = '../html/EditSuper_Admin.html?id=';
+        break;
+      case 'AdminSENA':
+        homeBtn.href = '../html/AdminSENA/Home2.php';
+        backBtn.onclick = () => window.location.href = '../html/AdminSENA/Home2.php';
+        editBtn.onclick = () => window.location.href = '../html/EditAdminSENA.html?id=';
+        break;
+      case 'empresa':
+        homeBtn.href = '../html/Empresa/Home2.php';
+        backBtn.onclick = () => window.location.href = '../html/Empresa/Home2.php';
+        editBtn.onclick = () => window.location.href = '../html/EditEmpresa.html?id=';
+        break;
+      default:
+        homeBtn.href = 'index.php';
+        backBtn.onclick = () => window.location.href = 'index.php';
+        editBtn.onclick = () => window.location.href = 'index.php';
+        break;
+    }
+
+    // Función cerrar sesión
+    document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
+      e.preventDefault();
+      sessionStorage.clear();
+      localStorage.clear();
+      window.location.href = 'index.php';
+    });
   </script>
 
 </body>
-
 </html>

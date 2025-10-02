@@ -33,7 +33,7 @@
 
             <div class="form-group">
             <label for="nit">Número NIT</label>
-            <input id="nit" class="input-field" name="nit" type="text" required/>
+            <input id="nit" class="input-field" name="nit" type="number" required/>
             </div>
 
             <div class="form-group">
@@ -48,7 +48,7 @@
 
             <div class="form-group">
             <label for="telefono">Número telefónico</label>
-            <input id="telefono" class="input-field" name="telefono" type="text" required/>
+            <input id="telefono" class="input-field" name="telefono" type="number" required/>
             </div>
 
             <div class="form-group">
@@ -59,6 +59,59 @@
             <div class="form-group">
             <label for="direccion">Dirección</label>
             <input id="direccion" class="input-field" name="direccion" type="text" required/>
+            </div>
+
+            <!-- Nuevo campo Barrio -->
+            <div class="form-group">
+            <label for="barrio">Barrio</label>
+            <input id="barrio" class="input-field" name="barrio" type="text" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="departamentos">Departamento(s)</label>
+                <select id="departamento" name="departamento" class="select_container" required>
+                    <option value="Amazonas">Amazonas</option>
+                    <option value="Antioquia">Antioquia</option>
+                    <option value="Arauca">Arauca</option>
+                    <option value="Atlántico">Atlántico</option>
+                    <option value="Bogotá D.C.">Bogotá D.C.</option>
+                    <option value="Bolívar">Bolívar</option>
+                    <option value="Boyacá">Boyacá</option>
+                    <option value="Caldas">Caldas</option>
+                    <option value="Caquetá">Caquetá</option>
+                    <option value="Casanare">Casanare</option>
+                    <option value="Cauca">Cauca</option>
+                    <option value="Cesar">Cesar</option>
+                    <option value="Chocó">Chocó</option>
+                    <option value="Córdoba">Córdoba</option>
+                    <option value="Cundinamarca">Cundinamarca</option>
+                    <option value="Guainía">Guainía</option>
+                    <option value="Guaviare">Guaviare</option>
+                    <option value="Huila">Huila</option>
+                    <option value="La Guajira">La Guajira</option>
+                    <option value="Magdalena">Magdalena</option>
+                    <option value="Meta">Meta</option>
+                    <option value="Nariño">Nariño</option>
+                    <option value="Norte de Santander">Norte de Santander</option>
+                    <option value="Putumayo">Putumayo</option>
+                    <option value="Quindío">Quindío</option>
+                    <option value="Risaralda">Risaralda</option>
+                    <option value="San Andrés y Providencia">San Andrés y Providencia</option>
+                    <option value="Santander">Santander</option>
+                    <option value="Sucre">Sucre</option>
+                    <option value="Tolima">Tolima</option>
+                    <option value="Valle del Cauca">Valle del Cauca</option>
+                    <option value="Vaupés">Vaupés</option>
+                    <option value="Vichada">Vichada</option>
+                    <!-- Agrega más departamentos según necesites -->
+                </select>
+            </div>
+            <!-- Selector múltiple de Ciudades -->
+            <div class="form-group">
+                <label for="ciudades">Ciudad(es)</label>
+                <select id="ciudad" name="ciudad" class="select_container" required>
+                    <!-- Opciones se llenan dinámicamente -->
+                </select>
             </div>
 
             <div class="form-group">
@@ -82,16 +135,16 @@
             </div>
 
             <input type="hidden" name="rol" value="empresa" required/>
-        </form>
-        
             <div class="btn__container">
             <button type="submit" class="btn">Crear</button>
             <button onclick="goBack()" type="button" class="btn">Volver</button>
             </div>
+        </form>
         </main>
 
         </div>
         <script src="../../../js/backbutton.js"></script>
+        <script src="../../../js/control_inactividad.js"></script>
         <script src="../../../js/alert.js"></script>
         <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -124,7 +177,7 @@
                     .then(data => {
                         if (data.success) {
                             showAlert('Empresa creada exitosamente', 'success');
-                            setTimeout(() => { window.location.href = '../index.php'; }, 1500);
+                            setTimeout(() => { window.location.href = 'Gestion_Empresa.html'; }, 1500);
                         } else if (data.errors && data.errors.length) {
                             showAlert(data.errors[0], 'error');
                         } else {
@@ -137,6 +190,84 @@
                 });
             }
         });
-        </script>
+        document.addEventListener("DOMContentLoaded", function () {
+        // Mapa de departamentos y sus ciudades (ejemplo simplificado)
+        const departamentosCiudades = {       
+        "Amazonas": ["Leticia", "Puerto Nariño"],
+        "Antioquia": ["Medellín", "Bello", "Itagüí", "Envigado", "Rionegro", "Turbo", "Apartadó", "La Ceja", "Sabaneta", "Copacabana", "Girardota", "Marinilla"],
+        "Arauca": ["Arauca", "Arauquita", "Saravena", "Tame", "Fortul"],
+        "Atlántico": ["Barranquilla", "Soledad", "Malambo", "Puerto Colombia", "Sabanalarga"],
+        "Bogotá D.C.": ["Bogotá"],
+        "Bolívar": ["Cartagena", "Magangué", "Turbaco", "Arjona", "San Juan Nepomuceno", "El Carmen de Bolívar"],
+        "Boyacá": ["Tunja", "Duitama", "Sogamoso", "Chiquinquirá", "Paipa", "Puerto Boyacá"],
+        "Caldas": ["Manizales", "Villamaría", "Chinchiná", "La Dorada"],
+        "Caquetá": ["Florencia", "San Vicente del Caguán", "Puerto Rico", "El Doncello"],
+        "Casanare": ["Yopal", "Aguazul", "Villanueva", "Monterrey", "Tauramena"],
+        "Cauca": ["Popayán", "Santander de Quilichao", "Puerto Tejada", "Patía", "Miranda"],
+        "Cesar": ["Valledupar", "Aguachica", "Bosconia", "Curumaní", "La Jagua de Ibirico"],
+        "Chocó": ["Quibdó", "Istmina", "Condoto", "Bahía Solano", "Acandí"],
+        "Córdoba": ["Montería", "Cereté", "Lorica", "Sahagún", "Tierralta", "Planeta Rica"],
+        "Cundinamarca": ["Soacha", "Zipaquirá", "Girardot", "Facatativá", "Fusagasugá", "Chía", "Mosquera", "Cajicá", "Funza", "Madrid"],
+        "Guainía": ["Inírida"],
+        "Guaviare": ["San José del Guaviare"],
+        "Huila": ["Neiva", "Pitalito", "Garzón", "La Plata"],
+        "La Guajira": ["Riohacha", "Maicao", "Uribia", "Fonseca", "San Juan del Cesar"],
+        "Magdalena": ["Santa Marta", "Ciénaga", "Fundación", "Plato", "Aracataca"],
+        "Meta": ["Villavicencio", "Acacías", "Granada", "Puerto López", "Cumaral"],
+        "Nariño": ["Pasto", "Ipiales", "Tumaco", "Túquerres"],
+        "Norte de Santander": ["Cúcuta", "Ocaña", "Pamplona", "Villa del Rosario", "Los Patios"],
+        "Putumayo": ["Mocoa", "Puerto Asís", "Orito", "Villagarzón"],
+        "Quindío": ["Armenia", "Calarcá", "La Tebaida", "Montenegro", "Quimbaya"],
+        "Risaralda": ["Pereira", "Dosquebradas", "Santa Rosa de Cabal", "La Virginia"],
+        "San Andrés y Providencia": ["San Andrés", "Providencia"],
+        "Santander": ["Bucaramanga", "Floridablanca", "Giron", "Piedecuesta", "Barrancabermeja", "Socorro", "San Gil"],
+        "Sucre": ["Sincelejo", "Corozal", "Sampués", "Tolú", "San Marcos"],
+        "Tolima": ["Ibagué", "Espinal", "Melgar", "Honda", "Mariquita"],
+        "Valle del Cauca": ["Cali", "Palmira", "Buenaventura", "Tuluá", "Buga", "Cartago", "Jamundí", "Yumbo"],
+        "Vaupés": ["Mitú"],
+        "Vichada": ["Puerto Carreño"]
+
+
+            // Agrega más departamentos y ciudades según necesites
+        };
+
+        const departamentosSelect = document.getElementById("departamento");
+        const ciudadesSelect = document.getElementById("ciudad");
+
+        function actualizarCiudades() {
+            // Obtener departamentos seleccionados
+            const seleccionados = Array.from(departamentosSelect.selectedOptions).map(opt => opt.value);
+
+            // Limpiar opciones actuales de ciudades
+            ciudadesSelect.innerHTML = "";
+
+            // Crear un Set para evitar ciudades duplicadas si hay varios departamentos seleccionados
+            const ciudadesSet = new Set();
+
+            // Agregar ciudades de los departamentos seleccionados
+            seleccionados.forEach(depto => {
+                const ciudades = departamentosCiudades[depto] || [];
+                ciudades.forEach(ciudad => ciudadesSet.add(ciudad));
+            });
+
+            // Agregar opciones al select de ciudades
+            ciudadesSet.forEach(ciudad => {
+                const option = document.createElement("option");
+                option.value = ciudad;
+                option.textContent = ciudad;
+                ciudadesSelect.appendChild(option);
+            });
+
+            // Si no hay departamentos seleccionados, deshabilitar ciudades
+            ciudadesSelect.disabled = seleccionados.length === 0;
+        }
+
+        // Inicializar ciudades deshabilitadas
+        ciudadesSelect.disabled = true;
+
+        // Escuchar cambios en departamentos
+        departamentosSelect.addEventListener("change", actualizarCiudades);
+    });
+    </script>
 </body>
 </html>

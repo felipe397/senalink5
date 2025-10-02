@@ -1,0 +1,3 @@
+- [x] Fix the require path from '../config/conexion.php' to '../Config/conexion.php'
+- [x] Update the router for 'procesarRespuestas' to pass empresaId from request data
+- [x] Modify procesarRespuestas method to check if empresaId is provided before saving to DB

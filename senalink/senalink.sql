@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2025 a las 22:56:33
+-- Tiempo de generación: 02-10-2025 a las 12:10:23
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -259,7 +259,7 @@ CREATE TABLE `programas_formacion` (
 
 INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`, `nivel_formacion`, `estado`, `ficha`, `fecha_finalizacion`, `codigo`, `sector_programa`, `nombre_ocupacion`, `sector_economico`, `etapa_ficha`) VALUES
 (1, 'MARKETING DIGITAL PARA EL SISTEMA MODA', 2208, 'TECNICO', 'En ejecucion', 3158891, '2027-02-28', 135329, 'INDUSTRIA', 'Auxiliares de información y servicio al cliente', 'SERVICIOS', 'LECTIVA'),
-(2, 'MECANICA DE MAQUINARIA INDUSTRIAL', 2208, 'TÉCNICO', 'En ejecucion', 2915418, '2025-05-25', 837101, 'INDUSTRIAL', 'Mecánicos Industriales', 'INDUSTRIAL', 'PRACTICA'),
+(2, '', 2208, NULL, 'En ejecucion', NULL, '2025-05-25', 0, NULL, 'Mecánicos Industriales', NULL, 'LECTIVA'),
 (3, 'MECANICA DE MAQUINARIA INDUSTRIAL', 2208, 'TÉCNICO', 'En ejecucion', 3155930, '2026-06-02', 837101, 'INDUSTRIAL', 'Mecánicos Industriales', 'INDUSTRIAL', 'LECTIVA'),
 (4, 'CONSTRUCCION, MANTENIMIENTO Y REPARACION DE ESTRUC', 2208, 'TÉCNICO', 'En ejecucion', 3077333, '2025-12-15', 836136, 'INDUSTRIAL', 'Oficiales de Construcción', 'CONSTRUCCION', 'LECTIVA'),
 (5, 'CONSTRUCCION DE INFRAESTRUCTURA VIAL', 3984, 'TECNÓLOGO', 'En ejecucion', 2716120, '2025-06-13', 223107, 'INDUSTRIAL', 'Técnicos en Construcción y Arquitectura', 'CONSTRUCCION', 'LECTIVA'),
@@ -389,8 +389,26 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (167, 'Gastronomia', 111, 'TECNOLOGO', 'En ejecucion', 3, '2025-10-19', 3, 'INDUSTRIAL', 'cocinar', 'Textiles', 'LECTIVA'),
 (168, 'Internet ', 111, 'TECNICO', 'En ejecucion', 2896765, '2025-10-07', 223334, 'INDUSTRIAL', 'alquilar pcs', 'Servicios', 'LECTIVA'),
 (169, 'Internet ', 111, 'TECNICO', 'En ejecucion', 285651, '2025-10-07', 223334, 'INDUSTRIAL', 'alquilar pcs', 'Servicios', 'LECTIVA'),
-(170, 'Internet ', 111, 'TECNICO', 'En ejecucion', 2856511, '2025-10-07', 223334, 'INDUSTRIAL', 'alquilar pcs', 'Servicios', 'LECTIVA'),
-(171, 'Astronomia', 111, 'TECNOLOGO', 'En ejecucion', 3997376, '2025-10-14', 223334, 'INDUSTRIAL', 'ir al espacio', 'Servicios', 'LECTIVA');
+(170, '', 111, NULL, 'En ejecucion', NULL, '2025-10-07', 0, NULL, 'alquilar pcs', NULL, 'PRACTICA'),
+(171, 'Astronomia', 111, 'TECNOLOGO', 'En ejecucion', 3997376, '2025-10-14', 223334, 'INDUSTRIAL', 'ir al espacio', 'SERVICIOS', 'PRACTICA'),
+(172, 'TECNICO EN SERVICIOS COMERCIALES', 1400, 'TECNICO', 'En ejecucion', 6983564, '2026-08-26', 567892, 'SERVICIOS', 'Auxiliar en ventas y servicio al cliente', 'Servicios', 'LECTIVA'),
+(173, 'TECNICO EN SERVICIOS COMERCIALES', 1400, 'TECNICO', 'En ejecucion', 4567824, '2026-08-26', 567892, 'SERVICIOS', 'Auxiliar en ventas y servicio al cliente', 'Servicios', 'LECTIVA'),
+(174, 'TECNICO EN SERVICIOS COMERCIALES', 1400, 'TECNICO', 'En ejecucion', 8245218, '2026-08-26', 567892, 'SERVICIOS', 'Auxiliar en ventas y servicio al cliente', 'Servicios', 'LECTIVA'),
+(175, 'ANÁLISIS Y DESARROLLO DE SOFTWARE', 2200, 'TECNOLOGO', 'En ejecucion', 7896541, '2027-03-01', 458721, 'SERVICIOS', 'Técnicos en Tecnologías de la Información', 'Servicios', 'LECTIVA');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recomendaciones`
+--
+
+CREATE TABLE `recomendaciones` (
+  `id_recomendacion` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_programa` int(11) NOT NULL,
+  `puntaje` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -429,8 +447,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `barrio`, `departamento`, `ciudad`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`, `diagnostico_realizado`) VALUES
-(16, 'correodebraulioperra@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Desactivado', '2025-06-13 03:32:23', NULL, '', NULL, NULL, NULL, NULL, 3156907026, NULL, NULL, NULL, 'Breiner', '', 'Chica', 'Alzate', '', 12345678, 0),
-(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, NULL, NULL, NULL, 3001234567, NULL, NULL, NULL, 'Breiner', NULL, 'Chica', 'alzate', 'Cédula de ciudadanía', 3001234567, 0),
+(16, 'correodebraulioperra@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, NULL, NULL, NULL, 3156907026, NULL, NULL, NULL, 'Breiner', '', 'Chica', 'Alzate', '', 12345678, 0),
+(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, NULL, NULL, NULL, 3001234567, NULL, NULL, NULL, 'Breiner', '', 'Chica', 'alzate', 'Cédula de ciudadanía', 1089600215, 0),
 (25, 'osoriolopezjuanfelipe9898@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Desactivado', '2025-07-01 02:13:30', NULL, '', NULL, NULL, NULL, NULL, 322222222, NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', '', 23456789, 0),
 (36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, NULL, NULL, NULL, 3024345634, NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cédula de ciudadanía', 1111111111, 0),
 (37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, NULL, NULL, NULL, 3024345635, NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cédula de ciudadanía', 2222222222, 0),
@@ -453,7 +471,9 @@ INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_cr
 (67, 'edwintrabajemanito@gmail.com', '$2y$10$KCXYhluVmJBP2cFNFRw.7OxlG6/25z78X8eVP6CaI9Eg/zABp6dDi', 'empresa', 'Activo', '2025-08-22 03:28:25', '555333111', 'Calle 12 #11-33', 'Samaria 2', 'Risaralda', 'Pereira', 'Minecraft S.A.S', 3146907027, NULL, 'Braulios', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
 (68, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$33vNfs4A26IFGAmXrPDkg.pBoipDrMp0lZ7vLUHj14zTr0K6lXKB6', 'empresa', 'Activo', '2025-08-28 01:33:26', '999888111', 'Calle 8 #16-18', 'Frailes', 'Risaralda', 'Dosquebradas', 'Bombones ruthsita S.A', 3215554321, NULL, 'Bombones ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
 (69, 'contacto@eltrigal.com', '$2y$10$cMwoEx6uvNP8ugtnnWOm1.qqZxUsmgK8J9rnBwg0hx2fs3k/c/sjO', 'empresa', 'Activo', '2025-09-27 02:36:33', '985426289', 'Carrera 45 #12-30', 'Colinas del triunfo', 'Risaralda', 'Pereira', 'Panaderia el trigal S.A.S', 3224758522, NULL, 'Carlos gomez', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
-(70, 'Juli@gmail.com', '$2y$10$5y7.kmHCLYnnyQrQq63rPeqEtJhSYUn38cbRGPOkebATPYiEV.Xoe', 'AdminSENA', 'Activo', '2025-10-02 01:45:09', NULL, NULL, NULL, NULL, NULL, NULL, 3451112222, NULL, NULL, NULL, 'Julian', '', 'Osorio', 'Gonzalez', 'Cédula de ciudadanía', 1089767819, 0);
+(70, 'Juli@gmail.com', '$2y$10$5y7.kmHCLYnnyQrQq63rPeqEtJhSYUn38cbRGPOkebATPYiEV.Xoe', 'AdminSENA', 'Activo', '2025-10-02 01:45:09', NULL, NULL, NULL, NULL, NULL, NULL, 3451112222, NULL, NULL, NULL, 'Julian', '', 'Osorio', 'Gonzalez', 'Cédula de ciudadanía', 1089767819, 0),
+(71, 'ejemplo123@gmail.com', '$2y$10$d9DmPFyBtw38KRagv0fP.uyYSq5igd6q57O4SHjQzc.TbREnnMEF.', 'empresa', 'Activo', '2025-10-02 14:26:25', '356780424', 'Carrera 1 #61-28', 'Centro', 'Risaralda', 'Pereira', 'ejemplo123 S.A', 1234567891, NULL, 'natalia agudelo', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(72, 'pedritoclavito2222@gmail.com', '$2y$10$Njyx3chLkCvoqn2ZuKZUvuWVa0FZB2zBP4UroinrNAois7zViZPtC', 'empresa', 'Activo', '2025-10-02 15:42:42', '432885624', 'Carrera 1 #61-29', 'Santa maria', 'Risaralda', 'Santa Rosa de Cabal', 'Primos Burguer S.A', 3001234568, NULL, 'Breiner chica alzate', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0);
 
 --
 -- Disparadores `usuarios`
@@ -504,6 +524,14 @@ ALTER TABLE `programas_formacion`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `recomendaciones`
+--
+ALTER TABLE `recomendaciones`
+  ADD PRIMARY KEY (`id_recomendacion`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_programa` (`id_programa`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -547,13 +575,19 @@ ALTER TABLE `preguntas`
 -- AUTO_INCREMENT de la tabla `programas_formacion`
 --
 ALTER TABLE `programas_formacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+
+--
+-- AUTO_INCREMENT de la tabla `recomendaciones`
+--
+ALTER TABLE `recomendaciones`
+  MODIFY `id_recomendacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- Restricciones para tablas volcadas
@@ -564,6 +598,13 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `opciones`
   ADD CONSTRAINT `opciones_ibfk_1` FOREIGN KEY (`id_pregunta`) REFERENCES `preguntas` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `recomendaciones`
+--
+ALTER TABLE `recomendaciones`
+  ADD CONSTRAINT `recomendaciones_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `recomendaciones_ibfk_2` FOREIGN KEY (`id_programa`) REFERENCES `programas_formacion` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
