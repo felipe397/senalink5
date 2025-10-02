@@ -1,5 +1,6 @@
 <?php
-ini_set('display_errors', 1);
+// Deshabilitar la salida de errores HTML para evitar romper JSON
+ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 require_once '../Config/conexion.php';
@@ -102,21 +103,25 @@ public function procesarRespuestas($respuestas, $empresaId) {
 // ✅ Router de acciones
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
-    $controller = new DiagnosticoController();
-    $data = json_decode(file_get_contents("php://input"), true);
+    try {
+        $controller = new DiagnosticoController();
+        $data = json_decode(file_get_contents("php://input"), true);
 
-    switch ($data['accion'] ?? '') {
-        case 'obtenerDiagnosticoCompleto':
-            echo json_encode($controller->obtenerDiagnosticoCompleto());
-            break;
+        switch ($data['accion'] ?? '') {
+            case 'obtenerDiagnosticoCompleto':
+                echo json_encode($controller->obtenerDiagnosticoCompleto());
+                break;
 
-        case 'procesarRespuestas':
-            echo json_encode($controller->procesarRespuestas($data['respuestas'] ?? [], $data['empresaId'] ?? null));
-            break;
+            case 'procesarRespuestas':
+                echo json_encode($controller->procesarRespuestas($data['respuestas'] ?? [], $data['empresaId'] ?? null));
+                break;
 
-        default:
-            echo json_encode(["success" => false, "message" => "Acción no válida"]);
-            break;
+            default:
+                echo json_encode(["success" => false, "message" => "Acción no válida"]);
+                break;
+        }
+    } catch (Exception $e) {
+        echo json_encode(["success" => false, "message" => "Error interno del servidor: " . $e->getMessage()]);
     }
 }
 ?>

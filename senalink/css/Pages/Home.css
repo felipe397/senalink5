@@ -1,4 +1,4 @@
-@import url(variables);  
+@import url(../variables.css);
 html {
     font-size: 62.5%; /* Hack permite trabajar con rem */
     box-sizing: border-box;

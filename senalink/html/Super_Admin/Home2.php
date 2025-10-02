@@ -58,7 +58,7 @@
             <h2 class="section-title">Programas Recomendados</h2>
             <div class="grid">
               <div id="resultados-home" class="cards"></div>
-                <!-- <div class="card">
+                              <!-- <div class="card">
                     <div class="card-content">
                         <h3 class="card-title">Desarrollo Web Full Stack</h3>
                         <p class="card-description">Aprende a construir aplicaciones web completas con HTML, CSS, JavaScript, Node.js y más. Ideal para principiantes y avanzados.</p>
@@ -92,130 +92,84 @@
             <div class="cta-content" id="cta-content">
                 <h2>¿Tienes algún problema?</h2>
                 <p>Comunícate por este medio para resolver cualquier inquietud.</p>
-                <a class="cta-button">Contáctanos</a>
+                <a href="#" class="cta-button">Contáctanos</a>
             </div>
         </section>
     </main>
 
-        <!-- Modal de contacto mejorado -->
+        <!-- Static info container for Contáctanos -->
         <style>
-        @import url(variables.css);    
-
-        #modal-contacto {
+        #contact-info-container {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.7);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-contacto-content {
+            top: 20vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 450px;
             background: #fff;
             color: #000;
-            padding: 2.5rem 3.5rem;
+            padding: 2rem 3rem;
             border-radius: 14px;
-            min-width: 420px;
-            max-width: 600px;
-            min-height: 420px;
-            box-shadow: 0 0 32px #000;
-            position: relative;
+            box-shadow: 0 0 32px rgba(0,0,0,0.3);
+            z-index: 10000;
             font-family: 'Roboto', Arial, sans-serif;
         }
-        .modal-contacto-content form {
-            display: flex;
-            flex-direction: column;
-        }
-        .modal-contacto-content h2 {
+        #contact-info-container h2 {
             margin-top: 0;
-            margin-bottom: 1.7rem;
+            margin-bottom: 1rem;
             font-size: 1.7rem;
             font-weight: 600;
         }
-        .modal-contacto-content label {
-            display: block;
-            margin-bottom: 0.3rem;
-            font-size: 1.15rem;
+        #contact-info-container p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            color: #333;
         }
-        .modal-contacto-content input,
-        .modal-contacto-content textarea {
-            width: 100%;
-            margin-bottom: 1.2rem;
-            padding: 13px 16px;
-            border-radius: 8px;
-            border: none !important;
-            outline: none !important;
-            font-size: 1.15rem;
-            background: #dad5d5d2;
-            color: #000;
-            box-sizing: border-box;
-            box-shadow: none !important;
-        }
-        .modal-contacto-content textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        .modal-contacto-content .modal-contacto-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 0.5rem;
-        }
-        .modal-contacto-content button[type="submit"] {
-            background: var(--primary-950);
-            color: #fff;
-            border: none;
-            padding: 8px 22px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-        .modal-contacto-content button[type="button"] {
-            background: #444;
-            color: #fff;
-            border: none;
-            padding: 8px 22px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-        #cerrar-modal-contacto {
+        #close-contact-info {
             position: absolute;
-            top: 10px; right: 10px;
+            top: 10px;
+            right: 10px;
             background: none;
             border: none;
-            color: #fff;
             font-size: 1.5rem;
             cursor: pointer;
+            color: #333;
         }
-        #contacto-exito {
-            color: #4caf50;
-            margin-top: 10px;
-            text-align: center;
+        .contact-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+        .contact-info-label {
+            font-weight: 600;
+            color: #6200ea;
+        }
+        .contact-info-value {
+            color: #555;
         }
         </style>
-        <div id="modal-contacto">
-            <div class="modal-contacto-content">
-                <button id="cerrar-modal-contacto">&times;</button>
-                <h2>Contáctanos</h2>
-                <form id="form-contacto">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                    <label for="correo">Correo</label>
-                    <input type="email" id="correo" name="correo" required>
-                    <label for="asunto">Asunto</label>
-                    <input type="text" id="asunto" name="asunto" required>
-                    <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" required></textarea>
-                    <div class="modal-contacto-actions">
-                        <button type="button" id="cancelar-contacto">Cancelar</button>
-                        <button type="submit">Enviar</button>
-                    </div>
-                </form>
-                <div id="contacto-exito" style="display:none;">¡Mensaje enviado correctamente!</div>
+        <div id="contact-info-container" role="dialog" aria-modal="true" aria-labelledby="contact-info-title">
+            <button id="close-contact-info" aria-label="Close contact information">&times;</button>
+            <h2 id="contact-info-title">Información de Contacto</h2>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Nombre:</span>
+                <span class="contact-info-value">Juan Pérez</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Teléfono:</span>
+                <span class="contact-info-value">+57 123 456 7890</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Email:</span>
+                <span class="contact-info-value">contacto@senalink.com</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Dirección:</span>
+                <span class="contact-info-value">Calle Falsa 123, Ciudad, País</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Horario de atención:</span>
+                <span class="contact-info-value">Lunes a Viernes, 9am - 6pm</span>
             </div>
         </div>
         <footer id="contact">
@@ -265,56 +219,6 @@
 
         // Tooltip simple para botones
         document.querySelectorAll('.card-button, .cta-button').forEach(btn => {
-        // Abrir modal de contacto al hacer clic en el botón 'Contáctanos'
-        document.querySelectorAll('.cta-button').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('modal-contacto').style.display = 'flex';
-            });
-        });
-
-        // Cerrar modal de contacto
-        document.getElementById('cerrar-modal-contacto').addEventListener('click', function() {
-            document.getElementById('modal-contacto').style.display = 'none';
-        });
-        document.getElementById('cancelar-contacto').addEventListener('click', function() {
-            document.getElementById('modal-contacto').style.display = 'none';
-        });
-
-        // Enviar formulario de contacto por AJAX a send_contact.php
-        document.getElementById('form-contacto').addEventListener('submit', function(e) {
-            e.preventDefault();
-            var form = e.target;
-            var formData = new FormData(form);
-            var exito = document.getElementById('contacto-exito');
-            exito.style.display = 'none';
-            fetch('../../controllers/send_contact.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    exito.textContent = '¡Mensaje enviado correctamente!';
-                    exito.style.color = '#4caf50';
-                    exito.style.display = 'block';
-                    setTimeout(function() {
-                        document.getElementById('modal-contacto').style.display = 'none';
-                        exito.style.display = 'none';
-                        form.reset();
-                    }, 2000);
-                } else {
-                    exito.textContent = data.error || 'Error al enviar el mensaje.';
-                    exito.style.color = '#ff5252';
-                    exito.style.display = 'block';
-                }
-            })
-            .catch(() => {
-                exito.textContent = 'Error de conexión.';
-                exito.style.color = '#ff5252';
-                exito.style.display = 'block';
-            });
-        });
             btn.addEventListener('mouseenter', () => {
                 const tooltip = document.createElement('div');
                 tooltip.textContent = 'Haz clic para más detalles';
@@ -336,27 +240,98 @@
                 }, { once: true });
             });
         });
-        const empresaId = sessionStorage.getItem('empresaId'); // o desde PHP con un `<script>`
 
-        fetch('../../controllers/DiagnosticoController.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                accion: 'obtenerRecomendaciones',
-                empresaId: empresaId
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.length > 0) {
-                mostrarRecomendaciones(data);
-            } else {
-                document.getElementById('contenedor').innerHTML = 'No se encontraron recomendaciones';
+        // Toggle static contact info container on 'Contáctanos' button click
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactBtn = document.querySelector('.cta-button');
+            const contactContainer = document.getElementById('contact-info-container');
+            const closeBtn = document.getElementById('close-contact-info');
+
+            if (contactBtn && contactContainer && closeBtn) {
+                contactBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (contactContainer.style.display === 'block' || contactContainer.style.display === '') {
+                        contactContainer.style.display = 'none';
+                    } else {
+                        contactContainer.style.display = 'block';
+                    }
+                });
+
+                closeBtn.addEventListener('click', function() {
+                    contactContainer.style.display = 'none';
+                });
             }
+        });
+
+
+        // Function to display recommendations
+        function mostrarRecomendaciones(data) {
+            const contenedor = document.getElementById('resultados-home');
+            if (!contenedor) return;
+            contenedor.innerHTML = '';
+            data.forEach(programa => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-content">
+                        <h3 class="card-title">${programa.nombre_programa}</h3>
+                        <p><b>Nivel:</b> ${programa.nivel_formacion}</p>
+                        <p><b>Ocupación:</b> ${programa.nombre_ocupacion}</p>
+                        <p><b>Sector:</b> ${programa.sector_economico}</p>
+                        <p><b>Duración:</b> ${programa.duracion_programa} horas</p>
+                        <p><b>Puntaje:</b> ${programa.score}</p>
+                        <a class="card-button" href="Programa_de_formacion.html?id=${programa.id}">
+                            Más Información
+                        </a>
+                    </div>
+                `;
+                contenedor.appendChild(card);
+            });
+        }
+
+        // Load recommendations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const empresaId = sessionStorage.getItem('empresaId'); // o desde PHP con un `<script>`
+
+            fetch('../../controllers/DiagnosticoController.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    accion: 'obtenerRecomendaciones',
+                    empresaId: empresaId
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.length > 0) {
+                    mostrarRecomendaciones(data);
+                } else {
+                    const contenedor = document.getElementById('resultados-home');
+                    if (contenedor) {
+                        contenedor.innerHTML = 'No se encontraron recomendaciones';
+                    } else {
+                        const contenedorAlt = document.getElementById('contenedor');
+                        if (contenedorAlt) {
+                            contenedorAlt.innerHTML = '<p>No se encontraron recomendaciones.</p>';
+                        }
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching recommendations:', error);
+                const contenedor = document.getElementById('resultados-home');
+                if (contenedor) {
+                    contenedor.innerHTML = 'Error al cargar recomendaciones';
+                } else {
+                    const contenedorAlt = document.getElementById('contenedor');
+                    if (contenedorAlt) contenedorAlt.innerHTML = 'Error al cargar recomendaciones';
+                }
+            });
         });
         document.addEventListener('DOMContentLoaded', () => {
         const recomendaciones = JSON.parse(localStorage.getItem('recomendaciones')) || [];
         const contenedor = document.getElementById('resultados-home');
+        if (!contenedor) return;
 
         if (recomendaciones.length === 0) {
             contenedor.innerHTML = '<p>No se encontraron recomendaciones.</p>';

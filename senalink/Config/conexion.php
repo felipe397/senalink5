@@ -4,7 +4,7 @@ class Conexion {
 
     public static function conectar() {
         if (self::$conn === null) {
-            $host = 'localhost'; // Cambia esto si tu servidor MySQL está en otro host
+            $host = 'localhost:3336'; // Cambia esto si tu servidor MySQL está en otro host
             // $host = 'localhost:3307'; 
             // $host = 'localhost:8111'; 
             $db = 'senalink';
@@ -16,7 +16,7 @@ class Conexion {
                 self::$conn = new PDO("mysql:host=$host;dbname=$db;charset=$charset", $user, $pass);
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
-                die("Error de conexión: " . $e->getMessage());
+                throw new Exception("Error de conexión: " . $e->getMessage());
             }
         }
         return self::$conn;

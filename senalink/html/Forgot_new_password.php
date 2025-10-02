@@ -67,7 +67,7 @@
                   <!-- Botón para confirmar el cambio de contraseña -->
                   <button type="submit" class="btn">Confirmar</button>
                   <!-- Botón para volver al inicio -->
-                  <a href="index.html" class="btn btn-secondary">Volver</a>
+                  <a href="index.php" class="btn btn-secondary">Volver</a>
               </div>
           </form>
       </main>
