@@ -10,7 +10,6 @@ error_reporting(E_ALL);
 
 // Incluir modelo
 require_once '../models/UsuarioModel.php';
-
 // 🟢 POST: Crear usuario (empresa o AdminSENA)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'crearUsuario') {
     $rol = isset($_POST['rol']) ? $_POST['rol'] : '';

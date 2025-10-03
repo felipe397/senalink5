@@ -73,7 +73,7 @@
                     <label for="sector_economico">Sector Económico</label>
                     <select class="input-field" id="sector_economico" name="sector_economico" required>
                         <option selected disabled value="">Sector Económico</option>
-                        <option value="Industria">INDUSTRIA</option>
+                        <option value="Industrial">INDUSTRIAL</option>
                         <option value="Servicios">SERVICIOS</option>
                         <option value="Textiles">TEXTILES</option>
                         <option value="Construccion">CONSTRUCCIÓN</option>

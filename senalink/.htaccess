@@ -1,0 +1,17 @@
+# Enable rewrite engine
+RewriteEngine On
+RewriteBase /senalink5/senalink5/senalink/
+
+# Allow access to existing directories and files
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Allow access to public folders and files needed for the site
+RewriteRule ^(html|css|js|img|fpdf|Helpers|icon|models|PHPMailer|reportes|sql|testing|vendor)/ - [L]
+
+# Allow access to root files like index.php
+RewriteRule ^(index\.php)$ - [L]
+
+# Deny access to any other URL paths (reject arbitrary routes)
+RewriteRule ^.*$ - [R=404,L]

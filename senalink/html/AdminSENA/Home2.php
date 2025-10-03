@@ -30,7 +30,7 @@
     <a href="#recommendations">Recomendaciones</a>
     <a href="#contact">Contactenos</a>
     <a href="../Preguntas_frecuentes.html">Preguntas frecuentes</a>
-    <a href="../viewuser.html">Mi perfil</a>
+    <a href="../viewuser.php">Mi perfil</a>
     <a href="../AdminSENA/Programa_Formacion/Gestion_Programa.html">Gestion</a>
     <a href="#" id="cerrar-sesion">Cerrar sesion</a>
   </nav>
@@ -96,7 +96,34 @@
             </div>
         </section>
     </main>
+            <!-- Static info container for Contáctanos -->
+        <style>
 
+        </style>
+        <div id="contact-info-container" role="dialog" aria-modal="true" aria-labelledby="contact-info-title">
+            <button id="close-contact-info" aria-label="Close contact information">&times;</button>
+            <h2 id="contact-info-title">Información de Contacto</h2>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Nombre:</span>
+                <span class="contact-info-value">Senalink Información</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Teléfono:</span>
+                <span class="contact-info-value">+57 313 691 8283</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Email:</span>
+                <span class="contact-info-value">SenaLink2025@gmail.com</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Dirección:</span>
+                <span class="contact-info-value">Calle Falsa 123, Ciudad, País</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Horario de atención:</span>
+                <span class="contact-info-value">Lunes a Viernes, 9am - 6pm</span>
+            </div>
+        </div>
     <footer id="contact">
         <p>© 2025 SenaLink. Todos los derechos reservados.</p>
         <p>Contáctanos: SenaLink@gmail.com | Teléfono: +57 </p>

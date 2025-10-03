@@ -24,17 +24,17 @@
         </a>
         </div>
     </header>
-<header class="header-main">
-  <nav>
-    <a href="#">Inicio</a>
-    <a href="#recommendations">Recomendaciones</a>
-    <a href="#cta-content">Contáctenos</a>
-    <a href="../Preguntas_frecuentes.html">Preguntas frecuentes</a>
-    <a href="../viewuser.html">Mi perfil</a>
-    <a href="Empresa/Gestion_Empresa.html">Gestión</a>
-    <a href="#" id="cerrar-sesion">Cerrar sesión</a>
-  </nav>
-</header>
+    <header class="header-main">
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#recommendations">Recomendaciones</a>
+        <a href="#contact">Contactenos</a>
+        <a href="../Preguntas_frecuentes.html">Preguntas frecuentes</a>
+        <a href="../viewuser.php">Mi perfil</a>
+        <a href="Empresa/Gestion_Empresa.html">Gestion</a>
+        <a href="#" id="cerrar-sesion">Cerrar sesion</a>
+    </nav>
+    </header>
 
 <main>
   <div class="Diagnostico">
@@ -153,15 +153,15 @@
             <h2 id="contact-info-title">Información de Contacto</h2>
             <div class="contact-info-row">
                 <span class="contact-info-label">Nombre:</span>
-                <span class="contact-info-value">Juan Pérez</span>
+                <span class="contact-info-value">Senalink Información</span>
             </div>
             <div class="contact-info-row">
                 <span class="contact-info-label">Teléfono:</span>
-                <span class="contact-info-value">+57 123 456 7890</span>
+                <span class="contact-info-value">+57 313 691 8283</span>
             </div>
             <div class="contact-info-row">
                 <span class="contact-info-label">Email:</span>
-                <span class="contact-info-value">contacto@senalink.com</span>
+                <span class="contact-info-value">SenaLink2025@gmail.com</span>
             </div>
             <div class="contact-info-row">
                 <span class="contact-info-label">Dirección:</span>
@@ -174,7 +174,6 @@
         </div>
         <footer id="contact">
                 <p>© 2025 SenaLink. Todos los derechos reservados.</p>
-                <p>Contáctanos: SenaLink@gmail.com | Teléfono: +57 </p>
         </footer>
 
         <script>
@@ -338,7 +337,7 @@
             return;
         }
 
-        // ✅ Filtrar solo programas con puntaje entre 5 y 10
+        // Filtrar solo programas con puntaje entre 5 y 10
         const filtrados = recomendaciones.filter(p => p.score >= 5 && p.score <= 10);
 
         if (filtrados.length === 0) {

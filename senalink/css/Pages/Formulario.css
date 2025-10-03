@@ -1,0 +1,116 @@
+@import url(../variables.css);
+
+.form-container {
+  max-width: 480px;
+  margin: 3rem auto;
+  background: white;
+  border-radius: 1rem;
+  padding: 2.5rem 3rem 3rem 3rem;
+  box-shadow: 0 4px 30px rgb(0 0 0 / 0.05);
+}
+
+.questions {
+  position: relative;
+  min-height: 180px;
+}
+
+.question {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+legend {
+  color: var(--black);
+  font-weight: var(--h4-font-weight);
+  font-size: var(--h3-font-size);
+  margin-bottom: 0.75rem;
+}
+
+label {
+  display: block;
+font-weight: var(--h2-font-weight);
+  color: var(--Gray-400);
+  margin: 0.8rem 0 0.25rem 0;
+  cursor: pointer;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--Gray-100);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--Secundary-950-4);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
+.btn-next {
+  margin-top: 2.5rem;
+  background: var(--Secundary-800-2);
+  color: white;
+  border: none;
+  font-weight: 700;
+  padding: 0.85rem 0;
+  width: 100%;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-volver {
+  margin-top: 2.5rem;
+  background: var(--Secundary-800-2);
+  color: var(--white);
+  border: none;
+  font-weight: 700;
+  padding: 0.85rem 0;
+  width: 100%;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-next:hover, .btn-volver:hover {
+  background: var(--Secundary-950-4);
+}
+
+.btn-specific {
+  margin-top: 1rem;
+  background: var(--primary-800);
+  color: var(--white);
+  border: none;
+  font-weight: 700;
+  padding: 0.85rem 0;
+  width: 100%;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: none; /* Inicialmente oculto */
+}
+
+.btn-specific:hover {
+  background: var(--primary-950);
+}
+
+.btn-specific.show {
+  display: block; /* Se muestra solo cuando se cumpla la condición */
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../../../css/Inputs.css">
     <link rel="shortcut icon" href="../../../img/Favicon1.png">
     <link rel="stylesheet" href="../../../css/btn-guardar-pregunta.css">
+    <link rel="stylesheet" href="../../../css/components/buttons.css">
 </head>
 <body>
     <header class="gov" id="inicio">
@@ -35,8 +36,6 @@
         <div class="header__right">
         </div>
         </header>
-    <!-- Línea decorativa -->
-    <div class="linea-verde"></div>
 
     <!-- Contenido principal -->
 
@@ -123,6 +122,24 @@
                 btnGuardar.style.display = 'inline-flex';
             });
             btnGuardar.addEventListener('click', function() {
+                const enunciado = input.value.trim();
+                fetch('../../../controllers/DiagnosticoController.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ accion: 'actualizarEnunciado', idPregunta: pregunta.id, enunciado: enunciado })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        // Optionally show success
+                    } else {
+                        alert('Error al guardar enunciado');
+                    }
+                })
+                .catch(err => {
+                    alert('Error al guardar enunciado');
+                    console.error(err);
+                });
                 btnGuardar.style.display = 'none';
             });
             container.appendChild(preguntaDiv);
@@ -261,7 +278,7 @@
         fetch('../../../controllers/DiagnosticoController.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ accion: 'obtenerDiagnosticoCompleto' })
+            body: JSON.stringify({ accion: 'obtenerPreguntasParaEdicion' })
         })
         .then(res => res.json())
         .then(data => { 

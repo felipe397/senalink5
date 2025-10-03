@@ -95,7 +95,81 @@
             </div>
         </section>
     </main>
-
+            <!-- Static info container for Contáctanos -->
+        <style>
+        #contact-info-container {
+            display: none;
+            position: fixed;
+            top: 20vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 450px;
+            background: #fff;
+            color: #000;
+            padding: 2rem 3rem;
+            border-radius: 14px;
+            box-shadow: 0 0 32px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        #contact-info-container h2 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.7rem;
+            font-weight: 600;
+        }
+        #contact-info-container p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            color: #333;
+        }
+        #close-contact-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+        .contact-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+        .contact-info-label {
+            font-weight: 600;
+            color: #6200ea;
+        }
+        .contact-info-value {
+            color: #555;
+        }
+        </style>
+        <div id="contact-info-container" role="dialog" aria-modal="true" aria-labelledby="contact-info-title">
+            <button id="close-contact-info" aria-label="Close contact information">&times;</button>
+            <h2 id="contact-info-title">Información de Contacto</h2>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Nombre:</span>
+                <span class="contact-info-value">Senalink Información</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Teléfono:</span>
+                <span class="contact-info-value">+57 313 691 8283</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Email:</span>
+                <span class="contact-info-value">SenaLink2025@gmail.com</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Dirección:</span>
+                <span class="contact-info-value">Calle Falsa 123, Ciudad, País</span>
+            </div>
+            <div class="contact-info-row">
+                <span class="contact-info-label">Horario de atención:</span>
+                <span class="contact-info-value">Lunes a Viernes, 9am - 6pm</span>
+            </div>
+        </div>
     <footer id="contact">
         <p>© 2025 SenaLink. Todos los derechos reservados.</p>
         <p>Contáctanos: SenaLink@gmail.com | Teléfono: +57 </p>

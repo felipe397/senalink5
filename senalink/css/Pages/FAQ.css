@@ -1,12 +1,5 @@
 @import url(../variables.css);
 /* Variables base (puedes ajustarlas o importarlas) */
-:root {
-  --color-sena-blue: #004a99;
-  --color-sena-blue-dark: #002f66;
-  --color-gray-light: #e6f0fa;
-  --color-gray-border: #cce0ff;
-}
-
 
 
 /* Título FAQ */
@@ -82,7 +75,7 @@
 .faq-question:focus {
   color: var(--Secundary-950-2);
   outline: none;
-  box-shadow: inset 3px 0 0 var(--color-sena-blue);
+  box-shadow: inset 3px 0 0 var(--Secundary-950-2);
   background-color: #f0f7ff;
   transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }

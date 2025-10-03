@@ -65,7 +65,7 @@ body {
 
 /* Tarjeta de perfil */
 .profile-card {
-  background: #fff;
+  background: var(--white);
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   width: 100%;
@@ -87,7 +87,7 @@ body {
   font-weight: 600;
   font-size: var(--h2-font-size);
   margin-bottom: 1.5rem;
-  color: #0b3d91;
+  color: var(--Secundary-950-2);
 }
 
 /* Secciones de datos */
@@ -98,9 +98,9 @@ body {
 
 .user-details h2 {
   font-size: var(--h2-font-size);
-  color: #0b3d91;
+  color: var(--Secundary-950-2);
   margin-bottom: 1rem;
-  border-bottom: 2px solid #0b3d91;
+  border-bottom: 2px solid var(--Secundary-950-2);
   padding-bottom: 0.25rem;
 }
 
@@ -125,7 +125,7 @@ body {
 
 /* Footer */
 .footer {
-  background-color: #0b3d91;
+  background-color: var(--Secundary-950-2);
   color: white;
   text-align: center;
   padding: 1rem 0;

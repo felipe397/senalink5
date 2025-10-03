@@ -4,6 +4,7 @@ ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 require_once '../Config/conexion.php';
+require_once '../models/Diagnostico.php';
 
 class DiagnosticoController {
     private $db;
@@ -12,40 +13,64 @@ class DiagnosticoController {
         $this->db = Conexion::conectar();
     }
 
-    // ✅ Obtener preguntas dinámicas desde la BD
+    // ✅ Obtener preguntas dinámicas desde la BD o por defecto
     public function obtenerDiagnosticoCompleto() {
         try {
-            $preguntas = [];
+            // Check if there are custom questions in DB
+            $stmt = $this->db->query("SELECT COUNT(*) FROM preguntas");
+            $count = $stmt->fetchColumn();
 
-            // Sector del programa
-            $stmt = $this->db->query("SELECT DISTINCT sector_programa FROM programas_formacion WHERE sector_programa IS NOT NULL");
-            $sectores = $stmt->fetchAll(PDO::FETCH_COLUMN);
-            $preguntas[] = ["enunciado" => "¿En qué sector productivo está interesada tu empresa?", "id" => "pregunta1", "opciones" => $sectores];
+            if ($count > 0) {
+                // Use DB questions
+                $stmt = $this->db->query("SELECT * FROM preguntas ORDER BY id");
+                $preguntasDB = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // Ocupación
-            $stmt = $this->db->query("SELECT DISTINCT nombre_ocupacion FROM programas_formacion WHERE nombre_ocupacion IS NOT NULL");
-            $ocupaciones = $stmt->fetchAll(PDO::FETCH_COLUMN);
-            $preguntas[] = ["enunciado" => "¿Qué ocupación deseas fortalecer?", "id" => "pregunta2", "opciones" => $ocupaciones];
+                $preguntas = [];
+                foreach ($preguntasDB as $index => $p) {
+                    $stmt_op = $this->db->prepare("SELECT texto FROM opciones WHERE id_pregunta = ?");
+                    $stmt_op->execute([$p['id']]);
+                    $opciones = $stmt_op->fetchAll(PDO::FETCH_COLUMN);
+                    $preguntas[] = [
+                        "enunciado" => $p['enunciado'],
+                        "id" => "pregunta" . ($index + 1),
+                        "opciones" => $opciones
+                    ];
+                }
+                return ["success" => true, "preguntas" => $preguntas];
+            } else {
+                // Default hardcoded
+                $preguntas = [];
 
-            // Nivel de formación
-            $stmt = $this->db->query("SELECT DISTINCT nivel_formacion FROM programas_formacion WHERE nivel_formacion IS NOT NULL");
-            $niveles = $stmt->fetchAll(PDO::FETCH_COLUMN);
-            $preguntas[] = ["enunciado" => "¿Qué nivel de formación prefieres?", "id" => "pregunta3", "opciones" => $niveles];
+                // Sector del programa
+                $stmt = $this->db->query("SELECT DISTINCT sector_programa FROM programas_formacion WHERE sector_programa IS NOT NULL");
+                $sectores = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                $preguntas[] = ["enunciado" => "¿En qué sector productivo está interesada tu empresa?", "id" => "pregunta1", "opciones" => $sectores];
 
-            // Sector económico
-            $stmt = $this->db->query("SELECT DISTINCT sector_economico FROM programas_formacion WHERE sector_economico IS NOT NULL");
-            $sectoresEco = $stmt->fetchAll(PDO::FETCH_COLUMN);
-            $preguntas[] = ["enunciado" => "¿En qué sector económico se encuentra tu empresa?", "id" => "pregunta4", "opciones" => $sectoresEco];
+                // Ocupación
+                $stmt = $this->db->query("SELECT DISTINCT nombre_ocupacion FROM programas_formacion WHERE nombre_ocupacion IS NOT NULL");
+                $ocupaciones = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                $preguntas[] = ["enunciado" => "¿Qué ocupación deseas fortalecer?", "id" => "pregunta2", "opciones" => $ocupaciones];
 
-            // Etapa de la ficha
-            $stmt = $this->db->query("SELECT DISTINCT etapa_ficha FROM programas_formacion WHERE etapa_ficha IS NOT NULL");
-            $etapas = $stmt->fetchAll(PDO::FETCH_COLUMN);
-            $preguntas[] = ["enunciado" => "¿Prefieres programas en qué etapa?", "id" => "pregunta5", "opciones" => $etapas];
+                // Nivel de formación
+                $stmt = $this->db->query("SELECT DISTINCT nivel_formacion FROM programas_formacion WHERE nivel_formacion IS NOT NULL");
+                $niveles = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                $preguntas[] = ["enunciado" => "¿Qué nivel de formación prefieres?", "id" => "pregunta3", "opciones" => $niveles];
 
-            // Duración (se define como campo libre)
-            $preguntas[] = ["enunciado" => "¿Duración máxima en meses?", "id" => "pregunta6", "opciones" => []];
+                // Sector económico
+                $stmt = $this->db->query("SELECT DISTINCT sector_economico FROM programas_formacion WHERE sector_economico IS NOT NULL");
+                $sectoresEco = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                $preguntas[] = ["enunciado" => "¿En qué sector económico se encuentra tu empresa?", "id" => "pregunta4", "opciones" => $sectoresEco];
 
-            return ["success" => true, "preguntas" => $preguntas];
+                // Etapa de la ficha
+                $stmt = $this->db->query("SELECT DISTINCT etapa_ficha FROM programas_formacion WHERE etapa_ficha IS NOT NULL");
+                $etapas = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                $preguntas[] = ["enunciado" => "¿Prefieres programas en qué etapa?", "id" => "pregunta5", "opciones" => $etapas];
+
+                // Duración (se define como campo libre)
+                $preguntas[] = ["enunciado" => "¿Duración máxima en meses?", "id" => "pregunta6", "opciones" => []];
+
+                return ["success" => true, "preguntas" => $preguntas];
+            }
         } catch (Exception $e) {
             return ["success" => false, "message" => $e->getMessage()];
         }
@@ -98,6 +123,66 @@ public function procesarRespuestas($respuestas, $empresaId) {
 
     return ["success" => true, "recomendaciones" => array_values($filtrados)];
 }
+
+    // Obtener preguntas para edición
+    public function obtenerPreguntasParaEdicion() {
+        $diagnostico = new Diagnostico();
+        return ["success" => true, "preguntas" => $diagnostico->obtenerPreguntasConOpciones()];
+    }
+
+    // Actualizar enunciado de pregunta
+    public function actualizarEnunciado($id, $enunciado) {
+        $diagnostico = new Diagnostico();
+        return ["success" => $diagnostico->actualizarPregunta($id, $enunciado)];
+    }
+
+    // Eliminar pregunta
+    public function eliminarPregunta($id) {
+        $diagnostico = new Diagnostico();
+        return ["success" => $diagnostico->eliminarPregunta($id)];
+    }
+
+    // Actualizar diagnóstico completo
+    public function actualizarDiagnosticoCompleto($data) {
+        $diagnostico = new Diagnostico();
+        try {
+            // Update existing preguntas
+            if (isset($data['preguntas'])) {
+                foreach ($data['preguntas'] as $id => $enunciado) {
+                    $diagnostico->actualizarPregunta($id, $enunciado);
+                }
+            }
+            // Insert new preguntas
+            if (isset($data['preguntas_nuevas'])) {
+                foreach ($data['preguntas_nuevas'] as $index => $enunciado) {
+                    $id = $diagnostico->insertarPregunta($enunciado);
+                    // Insert opciones for this new pregunta
+                    if (isset($data['nuevas_opciones'][$index])) {
+                        foreach ($data['nuevas_opciones'][$index] as $texto) {
+                            $diagnostico->insertarOpcion($id, $texto);
+                        }
+                    }
+                }
+            }
+            // Insert new opciones for existing preguntas
+            if (isset($data['nuevas_opciones_existentes'])) {
+                foreach ($data['nuevas_opciones_existentes'] as $idPregunta => $opciones) {
+                    foreach ($opciones as $texto) {
+                        $diagnostico->insertarOpcion($idPregunta, $texto);
+                    }
+                }
+            }
+            // Delete opciones
+            if (isset($data['opciones_a_borrar'])) {
+                foreach ($data['opciones_a_borrar'] as $idOpcion) {
+                    $diagnostico->eliminarOpcion($idOpcion);
+                }
+            }
+            return ["success" => true];
+        } catch (Exception $e) {
+            return ["success" => false, "message" => $e->getMessage()];
+        }
+    }
 }
 
 // ✅ Router de acciones
@@ -114,6 +199,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             case 'procesarRespuestas':
                 echo json_encode($controller->procesarRespuestas($data['respuestas'] ?? [], $data['empresaId'] ?? null));
+                break;
+
+            case 'obtenerPreguntasParaEdicion':
+                echo json_encode($controller->obtenerPreguntasParaEdicion());
+                break;
+
+            case 'actualizarEnunciado':
+                echo json_encode($controller->actualizarEnunciado($data['idPregunta'], $data['enunciado']));
+                break;
+
+            case 'eliminarPregunta':
+                echo json_encode($controller->eliminarPregunta($data['idPregunta']));
+                break;
+
+            case 'actualizarDiagnosticoCompleto':
+                echo json_encode($controller->actualizarDiagnosticoCompleto($data));
                 break;
 
             default:

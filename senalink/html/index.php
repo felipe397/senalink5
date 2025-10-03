@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <!-- Página principal de inicio de sesión para SenaLink -->
 <html lang="es">

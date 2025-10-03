@@ -4,118 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <title>SenaLink - Diagnóstico Empresarial</title>
-    <style>
-        body {
-          background: #f5f8fb;
-          font-family: 'Inter', sans-serif;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
-
-        .form-container {
-          max-width: 480px;
-          margin: 3rem auto;
-          background: white;
-          border-radius: 1rem;
-          padding: 2.5rem 3rem 3rem 3rem;
-          box-shadow: 0 4px 30px rgb(0 0 0 / 0.05);
-        }
-
-        .questions {
-          position: relative;
-          min-height: 180px;
-        }
-
-        .question {
-          position: relative;
-          margin-bottom: 1.5rem;
-        }
-
-        legend {
-          color: #1e293b;
-          font-weight: 700;
-          font-size: 1.25rem;
-          margin-bottom: 0.75rem;
-        }
-
-        label {
-          display: block;
-          font-weight: 600;
-          color: #94a3b8;
-          margin: 0.8rem 0 0.25rem 0;
-          cursor: pointer;
-        }
-
-        input[type="number"] {
-          width: 100%;
-          padding: 0.75rem;
-          border: 1px solid #d1d5db;
-          border-radius: 0.5rem;
-          font-size: 1rem;
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        input[type="number"]:focus {
-          outline: none;
-          border-color: #38bdf8;
-          box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
-        }
-
-        .btn-next {
-          margin-top: 2.5rem;
-          background: #38bdf8;
-          color: white;
-          border: none;
-          font-weight: 700;
-          padding: 0.85rem 0;
-          width: 100%;
-          border-radius: 0.5rem;
-          cursor: pointer;
-          font-size: 1rem;
-          transition: background-color 0.3s ease;
-        }
-
-        .btn-next:hover {
-          background: #0ea5e9;
-        }
-
-        .card {
-          background: white;
-          border: 1px solid #e5e7eb;
-          border-radius: 0.5rem;
-          padding: 1.5rem;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-          transition: box-shadow 0.2s ease;
-          margin-bottom: 1rem;
-        }
-
-        .card:hover {
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="../css/components/gov.css">
+    <link rel="stylesheet" href="../css/pages/Formulario.css">
+    <link rel="stylesheet" href="../css/base.css">
 </head>
+    <header class="gov" id="inicio">
+        <div class="gov__container">
+            <a href="https://www.gov.co/" target="_blank">
+                <img loading="lazy" src="../img/gov-logo.svg" alt="Logo de la pagina gov.co" class="gov__img">
+            </a>
+        </div>
+    </header>
 <body>
     <div class="form-container">
         <h1>Diagnóstico Empresarial</h1>
         <form id="form-diagnostico" class="questions"></form>
         <button id="btn-enviar" class="btn-next">Enviar respuestas</button>
+        <!-- Nuevo botón que se muestra solo si la URL tiene ?from=gestion -->
+        <button id="btn-especifico" class="btn-specific">Gestion</button>
+        <button type="btn" onclick="goBack()" class="btn-volver">Volver</button>
     </div>
-
-    <h2 style="text-align:center; margin-top:2rem;">Recomendaciones</h2>
-    <div id="recomendaciones-container"></div>
-
+<script src="../js/backbutton.js"></script>
 <script>
 class DiagnosticoApp {
     constructor() {
         this.form = document.getElementById("form-diagnostico");
         this.btnEnviar = document.getElementById("btn-enviar");
+        this.btnEspecifico = document.getElementById("btn-especifico"); // Referencia al nuevo botón
         this.recomendacionesContainer = document.getElementById("recomendaciones-container");
+
+        // Verificar si la URL tiene el parámetro 'from=gestion' y mostrar el botón
+        this.verificarParametroUrlYMostrarBoton();
 
         this.btnEnviar.addEventListener("click", (e) => {
             e.preventDefault();
             this.enviarRespuestas();
         });
+
+        // Listener para el nuevo botón: redirigir a otra página
+        this.btnEspecifico.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.location.href = 'Super_Admin/Diagnostico/VerDiagnostico.html';
+        });
+
         this.cargarPreguntas();
+    }
+
+    verificarParametroUrlYMostrarBoton() {
+        // Obtener parámetros de la URL actual
+        const urlParams = new URLSearchParams(window.location.search);
+        const fromParam = urlParams.get('from');
+        
+        // Si el parámetro 'from' es 'gestion', mostrar el botón
+        if (fromParam === 'gestion') {
+            this.btnEspecifico.classList.add('show');
+        }
     }
 
     async cargarPreguntas() {
@@ -129,8 +72,7 @@ class DiagnosticoApp {
         if (data.success) {
             this.form.innerHTML = "";
 
-            // ✅ Eliminamos las últimas 2 preguntas
-            const preguntas = data.preguntas.slice(0, -2);
+            const preguntas = data.preguntas.slice(0);
 
             preguntas.forEach(p => {
                 const div = document.createElement("div");
@@ -156,26 +98,25 @@ class DiagnosticoApp {
             });
         }
     }
+
     async enviarRespuestas() {
-    const formData = new FormData(this.form);
-    const respuestas = {};
-    formData.forEach((v, k) => respuestas[k] = v);
+        const formData = new FormData(this.form);
+        const respuestas = {};
+        formData.forEach((v, k) => respuestas[k] = v);
 
-    const res = await fetch("../controllers/DiagnosticoController.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ accion: "procesarRespuestas", respuestas })
-    });
-    const data = await res.json();
+        const res = await fetch("../controllers/DiagnosticoController.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ accion: "procesarRespuestas", respuestas })
+        });
+        const data = await res.json();
 
-    // ✅ Guardar en localStorage
-    localStorage.setItem("recomendaciones", JSON.stringify(data.recomendaciones || []));
+        // ✅ Guardar en localStorage
+        localStorage.setItem("recomendaciones", JSON.stringify(data.recomendaciones || []));
 
-    // ✅ Volver a la página anterior y recargarla
-    window.location.href = document.referrer;
-}
-
-
+        // ✅ Volver a la página anterior y recargarla
+        window.location.href = document.referrer;
+    }
 
     renderRecomendaciones(programas) {
         this.recomendacionesContainer.innerHTML = "";
@@ -197,6 +138,12 @@ class DiagnosticoApp {
             `;
             this.recomendacionesContainer.appendChild(card);
         });
+    }
+
+    // Método opcional para renderizar recomendaciones desde localStorage (útil si el botón lo activa)
+    renderRecomendacionesFromLocalStorage() {
+        const recomendaciones = JSON.parse(localStorage.getItem("recomendaciones") || "[]");
+        this.renderRecomendaciones(recomendaciones);
     }
 }
 

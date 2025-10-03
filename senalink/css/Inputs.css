@@ -135,13 +135,7 @@
   max-width: 100%;
 }
 
-/* Para evitar que el logo de la izquierda empuje al del centro, todos los contenedores tienen el mismo tamaño (flex: 1) */
 
-.linea-verde {
-    background-color: var(--primary-600);
-    height: 1rem;
-    width: 100%;
-}
 
 .container{
   display: flex;
@@ -363,7 +357,7 @@
 @media (max-width: 768px) {
 }
 footer {
-    background-color: var(--Secundary-950);
+    background-color: var(--Secundary-950-2);
     color:var(--white);
     text-align: center;
     width: 100%;
