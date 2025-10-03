@@ -19,14 +19,14 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) >
     // Finalmente destruir la sesión
     session_destroy();
 
-    header("Location: ../html/index.html?timeout=1");
+    header("Location: ../html/index.php?timeout=1");
     exit();
 }
 
 $_SESSION['LAST_ACTIVITY'] = time();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../html/index.html");
+    header("Location: ../html/index.php");
     exit();
 }
 ?>
