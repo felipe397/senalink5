@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3336
--- Tiempo de generación: 03-10-2025 a las 01:24:58
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 03-10-2025 a las 19:01:44
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -208,8 +208,7 @@ CREATE TABLE `password_resets` (
 
 INSERT INTO `password_resets` (`id`, `email`, `token`, `expires_at`, `created_at`) VALUES
 (1, 'chicaalzateb@gmail.com', '50cfa97bcaf605856bf3ceccd6e9cca4a4c86c98d752dda697a0582309050316', '2025-06-17 08:25:49', '2025-06-17 05:25:49'),
-(2, 'chicaalzateb@gmail.com', 'fb1fbc709630882ad640e184d776b8fdc1e2c90d1ca1b413d654ee99d56e6ebe', '2025-06-17 08:26:14', '2025-06-17 05:26:14'),
-(10, 'osoriolopezjuanfelipe98@gmail.com', 'e59abc78bea5ca172ab62f53712463404ca37c649e9a64abedccf3ba61ca2f2d', '2025-10-02 18:33:57', '2025-10-02 22:33:57');
+(2, 'chicaalzateb@gmail.com', 'fb1fbc709630882ad640e184d776b8fdc1e2c90d1ca1b413d654ee99d56e6ebe', '2025-06-17 08:26:14', '2025-06-17 05:26:14');
 
 -- --------------------------------------------------------
 
@@ -259,10 +258,11 @@ CREATE TABLE `programas_formacion` (
 --
 
 INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`, `nivel_formacion`, `estado`, `ficha`, `fecha_finalizacion`, `codigo`, `sector_programa`, `nombre_ocupacion`, `sector_economico`, `etapa_ficha`) VALUES
-(1, 'MARKETING DIGITAL PARA EL SISTEMA MODA', 2208, 'TECNICO', 'En ejecucion', 3158891, '2027-02-28', 135329, 'INDUSTRIAL', 'Auxiliares de información y servicio al cliente', 'SERVICIOS', 'LECTIVA'),
+(1, 'MARKETING DIGITAL PARA EL SISTEMA MODA', 2208, 'TECNICO', 'En ejecucion', 3158891, '2027-02-28', 135329, 'INDUSTRIA', 'Auxiliares de información y servicio al cliente', 'SERVICIOS', 'LECTIVA'),
 (3, 'MECANICA DE MAQUINARIA INDUSTRIAL', 2208, 'TÉCNICO', 'En ejecucion', 3155930, '2026-06-02', 837101, 'INDUSTRIAL', 'Mecánicos Industriales', 'INDUSTRIAL', 'LECTIVA'),
 (4, 'CONSTRUCCION, MANTENIMIENTO Y REPARACION DE ESTRUC', 2208, 'TÉCNICO', 'En ejecucion', 3077333, '2025-12-15', 836136, 'INDUSTRIAL', 'Oficiales de Construcción', 'CONSTRUCCION', 'LECTIVA'),
 (5, 'CONSTRUCCION DE INFRAESTRUCTURA VIAL', 3984, 'TECNÓLOGO', 'En ejecucion', 2716120, '2025-06-13', 223107, 'INDUSTRIAL', 'Técnicos en Construcción y Arquitectura', 'CONSTRUCCION', 'LECTIVA'),
+(6, 'MANTENIMIENTO Y ENSAMBLE DE EQUIPOS ELECTRONICOS.', 2304, 'TECNICO', 'En ejecucion', 3158973, '2027-02-28', 839317, 'INDUSTRIA', 'Auxiliares técnicos en electrónica', 'ELECTRICIDAD', 'LECTIVA'),
 (7, 'DIBUJO DIGITAL DE ARQUITECTURA E INGENIERIA', 2208, 'TÉCNICO', 'En ejecucion', 3146802, '2026-05-09', 225224, 'INDUSTRIAL', 'Dibujantes Técnicos', 'SERVICIOS', 'LECTIVA'),
 (8, 'MANTENIMIENTO DE VEHICULOS LIVIANOS', 2208, 'TÉCNICO', 'En ejecucion', 2917239, '2025-05-26', 838109, 'SERVICIOS', 'Mecánicos de vehículos automotores', 'INDUSTRIAL', 'LECTIVA'),
 (9, 'CONSTRUCCION EN EDIFICACIONES.', 3984, 'TECNÓLOGO', 'En ejecucion', 3097887, '2026-10-06', 223104, 'INDUSTRIAL', 'Técnicos en Construcción y Arquitectura', 'CONSTRUCCION', 'LECTIVA'),
@@ -382,8 +382,17 @@ INSERT INTO `programas_formacion` (`id`, `nombre_programa`, `duracion_programa`,
 (123, 'PATRONAJE INDUSTRIAL DE PRENDAS DE VESTIR', 2208, 'TÉCNICO', 'En ejecucion', 2928915, '2025-07-14', 524500, 'INDUSTRIAL', 'Patronistas de Productos de Tela, Cuero y Piel', 'TEXTILES', 'LECTIVA'),
 (162, 'ANÁLISIS Y DESARROLLO DE SOFTWARE', 3894, 'TECNOLOGO', 'Finalizado', 2899410, '2026-03-12', 228118, 'SERVICIOS', 'Técnicos en Tecnologías de la Información', 'SERVICIOS', 'LECTIVA'),
 (163, 'ANÁLISIS Y DESARROLLO DE SOFTWARE', 3984, 'TECNOLOGO', 'En ejecucion', 3147206, '2027-05-09', 228118, 'SERVICIOS', 'Técnicos en Tecnologías de la Información', 'Servicios', 'LECTIVA'),
+(164, 'Audiovisuales y redes sociales', 20, 'TECNICO', 'Finalizado', 2896476, '2025-07-31', 2899988, 'INDUSTRIA', 'hacer videos de tiktok', 'INDUSTRIA', 'LECTIVA'),
+(165, 'Internet ', 223, 'TECNOLOGO', 'En ejecucion', 3158891, '2025-10-28', 135329, 'SERVICIOS', 'alquilar pc', 'Industria', 'PRACTICA'),
+(166, 'Gastronomia', 111, 'TECNOLOGO', 'En ejecucion', 1, '2025-10-19', 1, 'INDUSTRIAL', 'cocinar', 'Textiles', 'LECTIVA'),
+(167, 'Gastronomia', 111, 'TECNOLOGO', 'En ejecucion', 3, '2025-10-19', 3, 'INDUSTRIAL', 'cocinar', 'Textiles', 'LECTIVA'),
+(168, 'Internet ', 111, 'TECNICO', 'En ejecucion', 2896765, '2025-10-07', 223334, 'INDUSTRIAL', 'alquilar pcs', 'Servicios', 'LECTIVA'),
+(169, 'Internet ', 111, 'TECNICO', 'En ejecucion', 285651, '2025-10-07', 223334, 'INDUSTRIAL', 'alquilar pcs', 'Servicios', 'LECTIVA'),
+(171, 'Astronomia', 111, 'TECNOLOGO', 'En ejecucion', 3997376, '2025-10-14', 223334, 'INDUSTRIAL', 'ir al espacio', 'SERVICIOS', 'PRACTICA'),
 (172, 'TECNICO EN SERVICIOS COMERCIALES', 1400, 'TECNICO', 'En ejecucion', 6983564, '2026-08-26', 567892, 'SERVICIOS', 'Auxiliar en ventas y servicio al cliente', 'Servicios', 'LECTIVA'),
-(176, 'Seguridad Industrial', 1000, 'TECNICO', 'En ejecucion', 9632587, '2026-05-25', 112345, 'SERVICIOS', 'Inspector de seguridad y salud en el trabajo', 'Servicios', 'LECTIVA');
+(173, 'TECNICO EN SERVICIOS COMERCIALES', 1400, 'TECNICO', 'En ejecucion', 4567824, '2026-08-26', 567892, 'SERVICIOS', 'Auxiliar en ventas y servicio al cliente', 'Servicios', 'LECTIVA'),
+(174, 'TECNICO EN SERVICIOS COMERCIALES', 1400, 'TECNICO', 'En ejecucion', 8245218, '2026-08-26', 567892, 'SERVICIOS', 'Auxiliar en ventas y servicio al cliente', 'Servicios', 'LECTIVA'),
+(175, 'ANÁLISIS Y DESARROLLO DE SOFTWARE', 2200, 'TECNOLOGO', 'En ejecucion', 7896541, '2027-03-01', 458721, 'SERVICIOS', 'Técnicos en Tecnologías de la Información', 'Servicios', 'LECTIVA');
 
 -- --------------------------------------------------------
 
@@ -436,9 +445,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_creacion`, `nit`, `direccion`, `barrio`, `departamento`, `ciudad`, `razon_social`, `telefono`, `nickname`, `representante_legal`, `tipo_empresa`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `tipo_documento`, `numero_documento`, `diagnostico_realizado`) VALUES
-(16, 'correodebraulioperra@gmail.com', '$2y$10$GBRcdFQgwR4.fZ06B1K1j.GecKahretHi9Lhl/7diaS8/OMqiqSAK', 'AdminSENA', 'Activo', '2025-06-13 03:32:23', NULL, '', NULL, NULL, NULL, NULL, 3156907026, NULL, NULL, NULL, 'Breiner', '', 'Chica', 'Alzate', '', 12345678, 0),
-(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, NULL, NULL, NULL, 3001234567, NULL, NULL, NULL, 'Breiner', '', 'Chica', 'alzate', 'Cédula de ciudadanía', 1089600215, 0),
-(25, 'osoriolopezjuanfelipe9898@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Activo', '2025-07-01 02:13:30', NULL, '', NULL, NULL, NULL, NULL, 322222222, NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', '', 23456789, 0),
+(17, 'crisberx@gmail.com', '$2y$10$r/BPPtq9.jQ.rPjXYYw19.c.vUemlmOITViw5KsWqhuXTa.oiUeV.', 'super_admin', 'Activo', '2025-06-17 02:34:16', NULL, 'Calle 123', NULL, NULL, NULL, NULL, 3001234567, NULL, NULL, NULL, 'Breiner', '', 'Chica', 'Alzate', 'Cédula de ciudadanía', 1089600215, 0),
+(25, 'osoriolopezjuanfelipe9898@gmail.com', '$2y$10$.2Rlugl6baAoj7qA.nenN.urRMg0lcMjaJluQgxGiPj3vT9wfnMoW', 'AdminSENA', 'Desactivado', '2025-07-01 02:13:30', NULL, '', NULL, NULL, NULL, NULL, 322222222, NULL, NULL, NULL, 'Juan', 'Felipe', 'Osorio', 'Lopez', '', 23456789, 0),
 (36, 'Ruth@gmail.com', '$2y$10$rg0EFfewl18AixhFG5aMiuEiKyOEv6HRWo9lPNKnYcIkoqpqfOz1e', 'super_admin', 'Activo', '2025-07-02 15:48:00', NULL, 'Calle 2488 #49-17', NULL, NULL, NULL, NULL, 3024345634, NULL, NULL, NULL, 'Ruth', NULL, 'Gerrero', 'Figueroa', 'Cédula de ciudadanía', 1111111111, 0),
 (37, 'felipe@gmail.com', '$2y$10$FSZjTGQZPfU72N7q4wHst.yweQCTZE2FiaYMgxsVVl3OjCVIslAOq', 'super_admin', 'Activo', '2025-07-02 15:51:24', NULL, 'Calle 2488 #49-17', NULL, NULL, NULL, NULL, 3024345635, NULL, NULL, NULL, 'Juan', NULL, 'Osorio', 'Lopez', 'Cédula de ciudadanía', 2222222222, 0),
 (38, 'edwin@gmail.com', '$2y$10$CLevKj2BLTZzB2bTTvwZPuYnmRAIsIyOyLzNAdnvpbV9p8bMeTVfS', 'super_admin', 'Activo', '2025-07-02 15:53:46', NULL, 'Calle 2488 #49-17', NULL, NULL, NULL, NULL, 3024345636, NULL, NULL, NULL, 'Edwin', '', 'Banol', 'Cardona', 'Cédula de ciudadanía', 3333333333, 0),
@@ -451,19 +459,15 @@ INSERT INTO `usuarios` (`id`, `correo`, `contrasena`, `rol`, `estado`, `fecha_cr
 (58, 'correo@gmail.com', '$2y$10$QqUK2zUb.g6M4k.2LJd2Ie6JCUPysL4VD4wSSHYJ6bb1F/pbuftFu', 'empresa', 'Activo', '2025-07-28 03:06:26', '567890234', 'Carrera 12 # 5-31', 'El poblado 1', 'Risaralda', 'Pereira', 'Monster S.A', 3104574487, NULL, 'Chocolates Ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
 (59, 'andreshenao@gmail.com', '$2y$10$EhmvIxNOmDXpr/dW/VXDmuVZuFGjUsDd648X4QWIuCDkDp4OJYF6a', 'AdminSENA', 'Activo', '2025-07-28 05:03:06', NULL, NULL, NULL, NULL, NULL, NULL, 3156809028, NULL, NULL, NULL, 'Alfonso', 'Andres', 'Lopez', 'Henao', 'Cédula de ciudadanía', 1099765443, 0),
 (60, 'jj2673782@gmail.com', '$2y$10$sj0gkQC16GTO8PzCkckKlOb9cLvj308yfZAzXNlfSMqtJNhOsmN5K', 'empresa', 'Activo', '2025-08-21 01:41:32', '897654441', 'Carrera 11 #12-12', 'Panorama', 'Risaralda', 'Pereira', 'Senalink S.A', 3151928722, NULL, 'Braulio', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(61, 'dovi7523@hotmail.com', '$2y$10$5Lycsl7Qnq0FiJEuPvpFp.aKcmrOieqU9VA1beBo3mN8TAXHbwOVC', 'empresa', 'Activo', '2025-08-21 01:48:59', '556663332', 'Carrera 1 #20-30', 'Belmonte', 'Risaralda', 'Pereira', 'Headshots S.A.S', 3217774442, NULL, 'Miguel Uribe Turbay', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
-(62, 'edwintrabaje@hotmail.com', '$2y$10$bktMZhSARnUpz72A8Ufg.uXc6DMDpxd1/klvsfnjRANKo4QZPWLAu', 'empresa', 'Activo', '2025-08-21 01:53:13', '444777111', 'Carrera 2 #21-37', 'Maraya', 'Risaralda', 'Pereira', 'Edwin manito trabaje S.A', 3226664441, NULL, 'Edwin trabaje', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
 (63, 'migueelmejor@gmail.com', '$2y$10$NbbqptW8ERfIm5fwNL4ycuzGbCcn1XD6sdFJuWfutUUPWFgmOonri', 'AdminSENA', 'Activo', '2025-08-21 02:16:01', NULL, NULL, NULL, NULL, NULL, NULL, 3334445551, NULL, NULL, NULL, 'Miguel', 'Lopez', 'Marin', 'Perez', 'Cédula de ciudadanía', 1088987654, 0),
 (64, 'edwinadmin123@gmail.com', '$2y$10$TlM5SOPPWX6IBAPhYQeZpu0PVRW8hU61JwUm21W3MpGpNT7zookE6', 'empresa', 'Activo', '2025-08-22 02:58:01', '999666333', 'Calle 8 #12-118', 'Villaverde', 'Risaralda', 'Pereira', 'Juan Valdez S.A', 3112938826, NULL, 'Pele', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(65, 'migueelmejordelmundo@gmail.com', '$2y$10$JzW74fEBosXLrX0nm1aQ2uo///PbjWmVW9La4U3Cc/MxRQvCeV1/u', 'empresa', 'Activo', '2025-08-22 03:25:28', '999777444', 'Calle 9 #12-113', 'La Villa', 'Risaralda', 'Pereira', 'Cocosette S.A', 3128652233, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(66, 'migueelmejordelagalaxia@gmail.com', '$2y$10$AbipquvEj./UHaTPpFfVh.mfQ0cR/gcHkMoldPpJ22CvI43.5IbLi', 'empresa', 'Activo', '2025-08-22 03:27:20', '999777555', 'Calle 9 #12-113', 'Molivento', 'Risaralda', 'Dosquebradas', 'Rolex S.A', 3128652244, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(67, 'edwintrabajemanito@gmail.com', '$2y$10$KCXYhluVmJBP2cFNFRw.7OxlG6/25z78X8eVP6CaI9Eg/zABp6dDi', 'empresa', 'Activo', '2025-08-22 03:28:25', '555333111', 'Calle 12 #11-33', 'Samaria 2', 'Risaralda', 'Pereira', 'Minecraft S.A.S', 3146907027, NULL, 'Braulios', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(68, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$LNZi3/U7l6TFMGznh0i1s.wtL1fq83JCRosmRtNmmIMdCN22uf1Ny', 'empresa', 'Activo', '2025-08-28 01:33:26', '999888111', 'Calle 8 #16-18', 'Frailes', 'Risaralda', 'Dosquebradas', 'Bombones ruthsita S.A', 3215554321, NULL, 'Bombones ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(65, 'cocossete@gmail.com', '$2y$10$JzW74fEBosXLrX0nm1aQ2uo///PbjWmVW9La4U3Cc/MxRQvCeV1/u', 'empresa', 'Activo', '2025-08-22 03:25:28', '999777444', 'Calle 9 #12-113', 'La Villa', 'Risaralda', 'Pereira', 'Cocosette S.A', 3128652233, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(66, 'Rolex@gmail.com', '$2y$10$AbipquvEj./UHaTPpFfVh.mfQ0cR/gcHkMoldPpJ22CvI43.5IbLi', 'empresa', 'Activo', '2025-08-22 03:27:20', '999777555', 'Calle 9 #12-113', 'Molivento', 'Risaralda', 'Dosquebradas', 'Rolex S.A', 3128652244, NULL, 'Grajales', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
+(68, 'osoriolopezjuanfelipe98@gmail.com', '$2y$10$33vNfs4A26IFGAmXrPDkg.pBoipDrMp0lZ7vLUHj14zTr0K6lXKB6', 'empresa', 'Activo', '2025-08-28 01:33:26', '999888111', 'Calle 8 #16-18', 'Frailes', 'Risaralda', 'Dosquebradas', 'Bombones ruthsita S.A', 3215554321, NULL, 'Bombones ruthsita', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
 (69, 'contacto@eltrigal.com', '$2y$10$cMwoEx6uvNP8ugtnnWOm1.qqZxUsmgK8J9rnBwg0hx2fs3k/c/sjO', 'empresa', 'Activo', '2025-09-27 02:36:33', '985426289', 'Carrera 45 #12-30', 'Colinas del triunfo', 'Risaralda', 'Pereira', 'Panaderia el trigal S.A.S', 3224758522, NULL, 'Carlos gomez', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
 (70, 'Juli@gmail.com', '$2y$10$5y7.kmHCLYnnyQrQq63rPeqEtJhSYUn38cbRGPOkebATPYiEV.Xoe', 'AdminSENA', 'Activo', '2025-10-02 01:45:09', NULL, NULL, NULL, NULL, NULL, NULL, 3451112222, NULL, NULL, NULL, 'Julian', '', 'Osorio', 'Gonzalez', 'Cédula de ciudadanía', 1089767819, 0),
 (71, 'ejemplo123@gmail.com', '$2y$10$d9DmPFyBtw38KRagv0fP.uyYSq5igd6q57O4SHjQzc.TbREnnMEF.', 'empresa', 'Activo', '2025-10-02 14:26:25', '356780424', 'Carrera 1 #61-28', 'Centro', 'Risaralda', 'Pereira', 'ejemplo123 S.A', 1234567891, NULL, 'natalia agudelo', 'INDUSTRIAL', '', NULL, '', NULL, NULL, NULL, 0),
-(72, 'pedritoclavito2222@gmail.com', '$2y$10$Njyx3chLkCvoqn2ZuKZUvuWVa0FZB2zBP4UroinrNAois7zViZPtC', 'empresa', 'Activo', '2025-10-02 15:42:42', '432885624', 'Carrera 1 #61-29', 'Santa maria', 'Risaralda', 'Santa Rosa de Cabal', 'Primos Burguer S.A', 3001234568, NULL, 'Breiner chica alzate', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0),
-(73, 'bombonesruth@gmail.com', '$2y$10$N6xJD1U5Cfl26r0KXZXh2OeOoDvxXuDsdzBjoZD9/NOivqjhjQOUC', 'AdminSENA', 'Activo', '2025-10-03 03:12:35', NULL, NULL, NULL, NULL, NULL, NULL, 3451112221, NULL, NULL, NULL, 'Ruth', '', 'Bombones', 'Ruthsita', 'Cédula de ciudadanía', 1141314978, 0);
+(72, 'pedritoclavito2222@gmail.com', '$2y$10$Njyx3chLkCvoqn2ZuKZUvuWVa0FZB2zBP4UroinrNAois7zViZPtC', 'empresa', 'Activo', '2025-10-02 15:42:42', '432885624', 'Carrera 1 #61-29', 'Santa maria', 'Risaralda', 'Santa Rosa de Cabal', 'Primos Burguer S.A', 3001234568, NULL, 'Breiner chica alzate', 'SERVICIOS', '', NULL, '', NULL, NULL, NULL, 0);
 
 --
 -- Disparadores `usuarios`
@@ -547,25 +551,25 @@ ALTER TABLE `diagnosticos_empresariales`
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT de la tabla `password_resets`
 --
 ALTER TABLE `password_resets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `programas_formacion`
 --
 ALTER TABLE `programas_formacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- AUTO_INCREMENT de la tabla `recomendaciones`
@@ -577,7 +581,7 @@ ALTER TABLE `recomendaciones`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- Restricciones para tablas volcadas
