@@ -183,8 +183,8 @@
             // Elimina datos de sesión/localStorage
             sessionStorage.clear();
             localStorage.clear();
-            // Redirige al login (ajusta la ruta si tu login es diferente)
-            window.location.href = '../index.php';
+        // Redirige al login (ajusta la ruta si tu login es diferente)
+        window.location.href = '../../html/index.php';
         });
         // Smooth scrolling para navegación
         document.querySelectorAll('.menu a').forEach(anchor => {
@@ -376,7 +376,7 @@
   let timer;
 
   function logout() {
-    window.location.href = '../index.php?timeout=1'; // Ajusta ruta login
+    window.location.href = '../../html/index.php?timeout=1'; // Ajusta ruta login
   }
 
   function resetTimer() {

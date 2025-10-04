@@ -354,6 +354,7 @@ main {
   padding: 60px 20px;
   text-align: center;
   border-radius: 12px;
+  filter: saturate(0.9);
 }
 .cta-content h2 {
   font-size: 36px;
