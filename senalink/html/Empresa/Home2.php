@@ -324,6 +324,34 @@
   resetTimer(); // Iniciar temporizador al cargar la página
 </script> -->
 
+</script>
+<script>
+    (function(){
+        function initContactToggle(){
+            const contactBtn = document.querySelector('.cta-button');
+            const contactContainer = document.getElementById('contact-info-container');
+            const closeBtn = document.getElementById('close-contact-info');
+
+            if (!contactBtn || !contactContainer || !closeBtn) return;
+
+            contactBtn.addEventListener('click', function(e){
+                e.preventDefault();
+                const isVisible = window.getComputedStyle(contactContainer).display !== 'none';
+                contactContainer.style.display = isVisible ? 'none' : 'block';
+            });
+
+            closeBtn.addEventListener('click', function(){
+                contactContainer.style.display = 'none';
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initContactToggle);
+        } else {
+            initContactToggle();
+        }
+    })();
+</script>
 </body>
 </html>
 </content>

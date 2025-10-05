@@ -69,7 +69,7 @@
                     <div class="card-image">
                         <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fe173fed-b053-4b99-8246-831920b0d302.png" alt="Vista de un gráfico de datos y análisis en una pantalla de computadora, colores vibrantes con gráficos de barras y líneas ascendentes, ambiente de oficina moderna con luz natural" />
                     </div>
-                    <div class="card-content">
+                    <div id="contact-info-container" role="dialog" aria-modal="true" aria-labelledby="contact-info-title">
                         <h3 class="card-title">Ciencia de Datos</h3>
                         <p class="card-description">Domina Python, SQL, machine learning y análisis de datos. Transfórmate en un experto en data science con proyectos reales.</p>
                         <a class="card-button" href="#contact">Más Información</a>
@@ -93,6 +93,24 @@
                 <h2>¿Tienes algun problema?</h2>
                 <p>Comunicate por este medio para resolver cualquier inquietud.</p>
                 <a class="cta-button" href="#contact">Contáctanos</a>
+                    // Toggle static contact info container on 'Contáctanos' button click
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const contactBtn = document.querySelector('.cta-button');
+                        const contactContainer = document.getElementById('contact-info-container');
+                        const closeBtn = document.getElementById('close-contact-info');
+
+                        if (contactBtn && contactContainer && closeBtn) {
+                            contactBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                const isVisible = window.getComputedStyle(contactContainer).display !== 'none';
+                                contactContainer.style.display = isVisible ? 'none' : 'block';
+                            });
+
+                            closeBtn.addEventListener('click', function() {
+                                contactContainer.style.display = 'none';
+                            });
+                        }
+                    });
             </div>
         </section>
     </main>

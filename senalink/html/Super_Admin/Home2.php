@@ -249,11 +249,8 @@
             if (contactBtn && contactContainer && closeBtn) {
                 contactBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    if (contactContainer.style.display === 'block' || contactContainer.style.display === '') {
-                        contactContainer.style.display = 'none';
-                    } else {
-                        contactContainer.style.display = 'block';
-                    }
+                    const isVisible = window.getComputedStyle(contactContainer).display !== 'none';
+                    contactContainer.style.display = isVisible ? 'none' : 'block';
                 });
 
                 closeBtn.addEventListener('click', function() {
